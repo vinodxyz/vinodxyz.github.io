@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Top 5s</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<link rel="script" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.colorbox/1.6.3/jquery.colorbox-min.js">
+	<script src="http://gsgd.co.uk/sandbox/jquery/easing/jquery.easing.1.3.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<style></style>
+</head>
+
+<body>
+	<div>
+		<ul id='my-list'>
+			<li>
+				<a><img src = "https://lh4.googleusercontent.com/--T5mNhpaaSQ/VkhLwvGwIaI/AAAAAAAABFo/QWfgDQ3CiVc/w720-h540-no/1.jpg"/></a>
+				<div class="hidden-desc bg-success">
+					<p>
+						<h3>1. Dogs</h3> 
+						Just love dogs.<br />
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/qBGbVIL_HG8" frameborder="0" allowfullscreen></iframe>
+					</p>
+				</div>
+			</li>
+			<li>
+				<a><img src = "https://lh6.googleusercontent.com/-FqZCgJRd2Og/VkhLxI-4_sI/AAAAAAAABFo/4RbFKQui7PI/w900-h726-no/2.jpg"/></a>
+				<div class="hidden-desc bg-info">
+					<p>
+						<h3>2. Lions</h3>
+						Loooove lions too. <br />
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/r7h4TESJs7M" frameborder="0" allowfullscreen></iframe>
+					</p>
+				</div>
+			</li>
+			<li>
+				<a><img src = "https://lh3.googleusercontent.com/-LZQTHH8C4Ng/VkhLwg2H9wI/AAAAAAAABFo/6zl4mJThY5k/w449-h400-no/3.jpg"/></a>
+				<div class="hidden-desc bg-warning">
+					<h3>3. Tidehunter</h3>
+					<small>Just love tidehunter.</small> <br/>
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/s2OWcmfDpAo" frameborder="0" allowfullscreen></iframe>
+				</div>
+			</li>
+		</ul>
+	</div>
+	
+	<script>
+		$(document).ready(function(){
+			var $list = $('#my-list');
+			$list.css({'list-style':'none'});
+			$list.find('.hidden-desc').css({'display':'none'});
+			
+			var $images = $list.find('img');
+			$images.css({'width' : '560px','height':'315px','padding':'10px 10px 10px 10px', 'position': 'relative', 'z-index': '999'  });
+			
+			var $chosenImage = $list.find('a');				
+			$chosenImage.on('click',function(){
+				$(this).find('img').animate({ 'left': '1000px' , 'width' : '30px', 'opacity' : '0'}, 1500, 'easeOutQuart', function()
+				{	
+					var $anchorStuff = $(this).parent();
+					$anchorStuff.parent().find('.hidden-desc').css({'display':'block', 'position': 'relative','padding':'10px 10px 10px 10px', 'width': '50%','margin':'0 auto'});					
+					$anchorStuff.find('img').remove();					
+				});
+			});			
+		});
+	</script>
+</body>
+</html>
