@@ -55,16 +55,13 @@ var map = new mapboxgl.Map({
     zoom: 10
 });
 
-//set values to opacity: if circle is large then reduce the opacity.
-var opacityValue = marker.properties.voters/
-
 // add markers to map
 geojson.features.forEach(function(marker) {
     // create a DOM element for the marker
     var el = document.createElement('div');
     el.className = 'marker';
     //el.style.backgroundImage = 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'30\' height=\'30\'><circle cx=\'15\' cy=\'15\' r=\'10\' /></svg>")';
-    el.style.backgroundImage = 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'white\' opacity=\'0.5\' width=\''+marker.properties.voters/2000+'\' height=\''+marker.properties.voters/2000+'\'><circle cx=\''+(marker.properties.voters/4000)+'\' cy=\''+(marker.properties.voters/4000)+'\' r=\''+(marker.properties.voters/4000)+'\' /></svg>")';
+    el.style.backgroundImage = 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'white\' opacity=\''+17667/marker.properties.voters+'\' width=\''+marker.properties.voters/2000+'\' height=\''+marker.properties.voters/2000+'\'><circle cx=\''+(marker.properties.voters/4000)+'\' cy=\''+(marker.properties.voters/4000)+'\' r=\''+(marker.properties.voters/4000)+'\' /></svg>")';
     el.style.backgroundRepeat = 'no-repeat';
     el.style.width = ''+marker.properties.voters/2000+'px';
     el.style.height = ''+marker.properties.voters/2000+'px';
