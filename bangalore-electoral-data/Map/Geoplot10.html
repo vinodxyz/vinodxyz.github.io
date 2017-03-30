@@ -34,9 +34,11 @@
             position: absolute;
             top: 0px;
             left: 0px;
-            bottom: 0px;
+            /*bottom: 0px;*/
+            bottom: 680px;
             width: 550px;
-            overflow: auto;
+            /*overflow: auto;*/
+            overflow: hidden;
             background: rgba(0, 0, 0, 1);
             font-family: "Arial";
             padding-left: 0px;
@@ -48,7 +50,7 @@
 
 <div id='map'></div>
 <div id='sidebar'>
-    <div id="tooltip-name"></div>
+    <div id="tooltip-name"><object type="image/svg+xml" data="header.svg"></object></div>
     <div id='tooltip'></div>
     <div id="agegraph" style="margin-top:-870px;margin-left:-15px;"></div>
 </div>
@@ -114,11 +116,18 @@ geojson.features.forEach(function(marker) {
         ward_name = ward_name[ward_name.length-1].textContent.toString().replace('×',"");
         console.log(ward_name);
 
+        $("#sidebar").css( "bottom", "0px" );
+        $("#sidebar").css( "overflow-y", "scroll" );
+        $("#sidebar").css( "box-sizing", "border-box" );
+
         document.getElementById('tooltip-name').innerHTML = "<object type=\"image/svg+xml\" data=\"sidebar.svg?ward="+ward_name+"\"></object>";
         document.getElementById('agegraph').innerHTML = "<object type=\"text/html\" data=\"Agegraph/plotly.html?ward="+ward_name+"\" width=\"640px\" height=\"350px\" style=\"overflow:auto;\"></object>";;
       }
       else {
-        document.getElementById('tooltip-name').innerHTML = "";
+        $("#sidebar").css( "bottom", "680px" );
+        $("#sidebar").css( "overflow", "hidden" );
+        document.getElementById('tooltip-name').innerHTML = "<object type=\"image/svg+xml\" data=\"header.svg\"></object>";
+        document.getElementById('agegraph').innerHTML = "";
       }
   });
 
