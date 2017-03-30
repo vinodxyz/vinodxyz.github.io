@@ -50,7 +50,7 @@
 
 <div id='map'></div>
 <div id='sidebar'>
-    <div id="tooltip-name"><object type="image/svg+xml" data="header.svg"></object></div>
+    <div id="tooltip-name"><img id="imgHeader" src="header.jpg" alt="Voter Doppler"></div>
     <div id='tooltip'></div>
     <div id="agegraph" style="margin-top:-870px;margin-left:-15px;"></div>
 </div>
@@ -126,7 +126,7 @@ geojson.features.forEach(function(marker) {
       else {
         $("#sidebar").css( "bottom", "680px" );
         $("#sidebar").css( "overflow", "hidden" );
-        document.getElementById('tooltip-name').innerHTML = "<object type=\"image/svg+xml\" data=\"header.svg\"></object>";
+        document.getElementById('tooltip-name').innerHTML = "<img id=\"imgHeader\" src=\"header.jpg\" alt=\"Voter Doppler\">";
         document.getElementById('agegraph').innerHTML = "";
       }
   });
