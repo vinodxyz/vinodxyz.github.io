@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Bangalore Voter data</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link rel='shortcut icon' href='Your favicon path goes here' type='image/x-icon'>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.css' rel='stylesheet' />
+    <link href='https://api.mapbox.com/mapbox-assembly/v0.12.0/assembly.min.css' rel='stylesheet'>
+    <script async defer src='https://api.mapbox.com/mapbox-assembly/v0.12.0/assembly.js'></script>
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+
+        .marker {
+            display: block;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .mapboxgl-popup {
+                max-width: 400px;
+                font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+            }
+    </style>
+</head>
+<body>
+
+
+<div id='map'></div>
+
+<script>
+var geojson = (function () {
+    var json = null;
+    $.ajax({
+        'async': false,
+        'global': false,
+        'url': 'https://api.myjson.com/bins/eqmvn',
+        'dataType': "json",
+        'success': function (data) {
+            json = data;
+        }
+    });
+    return json;
+})();
+
+mapboxgl.accessToken = 'pk.eyJ1Ijoidmlub2R4eXoiLCJhIjoiY2owczFscm1hMDAzbDM4bHIzeGZoZXg4cSJ9.OsBqNXFDc4SfyodyrGwHGw';
+
+
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/dark-v9',
+    center: [77.5712556, 12.97],
+    zoom: 12
+});
+
+// add markers to map
+geojson.features.forEach(function(marker) {
+    // create a DOM element for the marker
+    var el = document.createElement('div');
+    el.className = 'marker';
+    //el.style.backgroundImage = 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'30\' height=\'30\'><circle cx=\'15\' cy=\'15\' r=\'10\' /></svg>")';
+    el.style.backgroundImage = 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'white\' opacity=\''+17667/marker.properties.voters+'\' width=\''+marker.properties.voters/2000+'\' height=\''+marker.properties.voters/2000+'\'><circle cx=\''+(marker.properties.voters/4000)+'\' cy=\''+(marker.properties.voters/4000)+'\' r=\''+(marker.properties.voters/4000)+'\' /></svg>")';
+    el.style.backgroundRepeat = 'no-repeat';
+    el.style.width = ''+marker.properties.voters/2000+'px';
+    el.style.height = ''+marker.properties.voters/2000+'px';
+
+    var popupText = "<p><strong><h3>"+marker.properties.ward+"</h3></strong>"+"Female voters# : "+marker.properties.female+"<br>"+
+    "Male voters : "+marker.properties.male+"<br>"+"Other voters : "+marker.properties.trans+"<br>"+
+    "Total voters : "+marker.properties.voters+"<br><br>"+"People with duplicate EPICs : "+marker.properties.EPICdupl+"<br>"+
+    "People with multiple EPICs (in same house) : "+marker.properties.EPICmult+"<br>"+"No. of houses with 10+ voters# : "
+    +marker.properties.tenplus
+
+    var popup = new mapboxgl.Popup({offset: 25}).setHTML(popupText);
+
+    // add marker to map
+    new mapboxgl.Marker(el, {offset: [-10, -10]}).setLngLat(marker.geometry.coordinates).setPopup(popup).addTo(map);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<head>
+  <!-- Plotly.js -->
+   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+</head>
+
+<body>
+  <div id="myDiv" style="width: 540px; height: 330px;">
+    <img id="imgLoad" src="ring.svg" alt="Loading...">
+    <!-- Plotly chart will be drawn inside this DIV -->
+  </div>
+  <script>
+
+      //contains 594 items. i.e., 198(wards) x 3(genders):
+      var population_arrays = ['Kempegowda Ward_Female', 'Kempegowda Ward_Male', 'Kempegowda Ward_Trans', 'Chowdeshwari Ward_Female', 'Chowdeshwari Ward_Male', 'Chowdeshwari Ward_Trans', 'Attur_Female', 'Attur_Male', 'Attur_Trans', 'Yelahanka Satellite Town_Female', 'Yelahanka Satellite Town_Male', 'Yelahanka Satellite Town_Trans', 'Jakkur_Female', 'Jakkur_Male', 'Jakkur_Trans', 'Thanisandra_Female', 'Thanisandra_Male', 'Thanisandra_Trans', 'Bytarayanapura_Female', 'Bytarayanapura_Male', 'Bytarayanapura_Trans', 'Kodigehalli_Female', 'Kodigehalli_Male', 'Kodigehalli_Trans', 'Vidyaranyapura_Female', 'Vidyaranyapura_Male', 'Vidyaranyapura_Trans', 'Doddabommasandra_Female', 'Doddabommasandra_Male', 'Doddabommasandra_Trans', 'Kuvempunagara_Female', 'Kuvempunagara_Male', 'Kuvempunagara_Trans', 'Shettyhalli_Female', 'Shettyhalli_Male', 'Shettyhalli_Trans', 'Mallasandra_Female', 'Mallasandra_Male', 'Mallasandra_Trans', 'Baagalakunte_Female', 'Baagalakunte_Male', 'Baagalakunte_Trans', 'T.Dasarahalli_Female', 'T.Dasarahalli_Male', 'T.Dasarahalli_Trans', 'Chokkasandra_Female', 'Chokkasandra_Male', 'Chokkasandra_Trans', 'Peenya Industrial Area_Female', 'Peenya Industrial Area_Male', 'Peenya Industrial Area_Trans', 'Rajagopalanagar_Female', 'Rajagopalanagar_Male', 'Rajagopalanagar_Trans', 'Heggenahalli_Female', 'Heggenahalli_Male', 'Heggenahalli_Trans', 'Jalahalli_Female', 'Jalahalli_Male', 'Jalahalli_Trans', 'J.P.Park_Female', 'J.P.Park_Male', 'J.P.Park_Trans', 'Yeshwanthpura_Female', 'Yeshwanthpura_Male', 'Yeshwanthpura_Trans', 'H.M.T_Female', 'H.M.T_Male', 'H.M.T_Trans', 'Lakshmidevinagar_Female', 'Lakshmidevinagar_Male', 'Lakshmidevinagar_Trans', 'Laggere_Female', 'Laggere_Male', 'Laggere_Trans', 'Kottegepalya_Female', 'Kottegepalya_Male', 'Kottegepalya_Trans', 'Jnanabharathi_Female', 'Jnanabharathi_Male', 'Jnanabharathi_Trans', 'Rajarajeshwarinagar_Female', 'Rajarajeshwarinagar_Male', 'Rajarajeshwarinagar_Trans', 'Radhakrishna Temple Ward_Female', 'Radhakrishna Temple Ward_Male', 'Radhakrishna Temple Ward_Trans', 'Sanjaynagar_Female', 'Sanjaynagar_Male', 'Sanjaynagar_Trans', 'Ganganagar_Female', 'Ganganagar_Male', 'Ganganagar_Trans', 'Hebbala_Female', 'Hebbala_Male', 'Hebbala_Trans', 'Vishwanath Nagenahalli_Female', 'Vishwanath Nagenahalli_Male', 'Vishwanath Nagenahalli_Trans', 'Manorayanapalya_Female', 'Manorayanapalya_Male', 'Manorayanapalya_Trans', 'Gangenahalli_Female', 'Gangenahalli_Male', 'Gangenahalli_Trans', 'Jayachamarajendra Nagar_Female', 'Jayachamarajendra Nagar_Male', 'Jayachamarajendra Nagar_Trans', 'Nagavara_Female', 'Nagavara_Male', 'Nagavara_Trans', 'H.B.R Layout_Female', 'H.B.R Layout_Male', 'H.B.R Layout_Trans', 'Banaswadi_Female', 'Banaswadi_Male', 'Banaswadi_Trans', 'Kammanahalli_Female', 'Kammanahalli_Male', 'Kammanahalli_Trans', 'Kacharakanahalli_Female', 'Kacharakanahalli_Male', 'Kacharakanahalli_Trans', 'Kadugondanahalli_Female', 'Kadugondanahalli_Male', 'Kadugondanahalli_Trans', 'Lingarajapura_Female', 'Lingarajapura_Male', 'Lingarajapura_Trans', 'Maruthisevanagar_Female', 'Maruthisevanagar_Male', 'Maruthisevanagar_Trans', 'Horamavu_Female', 'Horamavu_Male', 'Horamavu_Trans', 'Rammurthynagar_Female', 'Rammurthynagar_Male', 'Rammurthynagar_Trans', 'Vignananapura_Female', 'Vignananapura_Male', 'Vignananapura_Trans', 'K.R.Puram_Female', 'K.R.Puram_Male', 'K.R.Puram_Trans', 'Basavanapura_Female', 'Basavanapura_Male', 'Basavanapura_Trans', 'Devasandra_Female', 'Devasandra_Male', 'Devasandra_Trans', 'A.Narayanapura_Female', 'A.Narayanapura_Male', 'A.Narayanapura_Trans', 'Vignanannagar_Female', 'Vignanannagar_Male', 'Vignanannagar_Trans', 'HAL Airport_Female', 'HAL Airport_Male', 'HAL Airport_Trans', 'Kushalanagar_Female', 'Kushalanagar_Male', 'Kushalanagar_Trans', 'Kavalbyrasandra_Female', 'Kavalbyrasandra_Male', 'Kavalbyrasandra_Trans', 'Devarajeevanahalli_Female', 'Devarajeevanahalli_Male', 'Devarajeevanahalli_Trans', 'Muneshwaranagar_Female', 'Muneshwaranagar_Male', 'Muneshwaranagar_Trans', 'Sagayapuram_Female', 'Sagayapuram_Male', 'Sagayapuram_Trans', 'S.K.Garden_Female', 'S.K.Garden_Male', 'S.K.Garden_Trans', 'Pulakeshinagar_Female', 'Pulakeshinagar_Male', 'Pulakeshinagar_Trans', 'Palace Nagar_Female', 'Palace Nagar_Male', 'Palace Nagar_Trans', 'Mathikere_Female', 'Mathikere_Male', 'Mathikere_Trans', 'Malleshwaram_Female', 'Malleshwaram_Male', 'Malleshwaram_Trans', 'Rajamahal Guttahalli_Female', 'Rajamahal Guttahalli_Male', 'Rajamahal Guttahalli_Trans', 'Kadu Malleshwaram_Female', 'Kadu Malleshwaram_Male', 'Kadu Malleshwaram_Trans', 'Subramanyanagar_Female', 'Subramanyanagar_Male', 'Subramanyanagar_Trans', 'Gayathrinagar_Female', 'Gayathrinagar_Male', 'Gayathrinagar_Trans', 'Doddabidarakalu_Female', 'Doddabidarakalu_Male', 'Doddabidarakalu_Trans', 'Herohalli_Female', 'Herohalli_Male', 'Herohalli_Trans', 'Ullalu_Female', 'Ullalu_Male', 'Ullalu_Trans', 'Kengeri_Female', 'Kengeri_Male', 'Kengeri_Trans', 'Hemigepura_Female', 'Hemigepura_Male', 'Hemigepura_Trans', 'Nandini Layout_Female', 'Nandini Layout_Male', 'Nandini Layout_Trans', 'Marappanapalya_Female', 'Marappanapalya_Male', 'Marappanapalya_Trans', 'Nagapura_Female', 'Nagapura_Male', 'Nagapura_Trans', 'Mahalakshmipuram_Female', 'Mahalakshmipuram_Male', 'Mahalakshmipuram_Trans', 'Shakti Ganapathiinagar_Female', 'Shakti Ganapathiinagar_Male', 'Shakti Ganapathiinagar_Trans', 'Shankaramatha_Female', 'Shankaramatha_Male', 'Shankaramatha_Trans', 'Vrishabavathinagar_Female', 'Vrishabavathinagar_Male', 'Vrishabavathinagar_Trans', 'Benaganahalli_Female', 'Benaganahalli_Male', 'Benaganahalli_Trans', 'C.V.Ramannagar_Female', 'C.V.Ramannagar_Male', 'C.V.Ramannagar_Trans', 'Hosa Thippasandra_Female', 'Hosa Thippasandra_Male', 'Hosa Thippasandra_Trans', 'Sarvagnanagar_Female', 'Sarvagnanagar_Male', 'Sarvagnanagar_Trans', 'Hoysalanagar_Female', 'Hoysalanagar_Male', 'Hoysalanagar_Trans', 'Jeevanbhimanagar_Female', 'Jeevanbhimanagar_Male', 'Jeevanbhimanagar_Trans', 'Konena Agrahara_Female', 'Konena Agrahara_Male', 'Konena Agrahara_Trans', 'Hoodi_Female', 'Hoodi_Male', 'Hoodi_Trans', 'Garudacharpalya_Female', 'Garudacharpalya_Male', 'Garudacharpalya_Trans', 'Kadugodi_Female', 'Kadugodi_Male', 'Kadugodi_Trans', 'Hagadooru_Female', 'Hagadooru_Male', 'Hagadooru_Trans', 'Dodda Nekkundi_Female', 'Dodda Nekkundi_Male', 'Dodda Nekkundi_Trans', 'Marathhalli_Female', 'Marathhalli_Male', 'Marathhalli_Trans', 'Varthur_Female', 'Varthur_Male', 'Varthur_Trans', 'Bellandur_Female', 'Bellandur_Male', 'Bellandur_Trans', 'Ramaswamy Palya_Female', 'Ramaswamy Palya_Male', 'Ramaswamy Palya_Trans', 'Jayamahal_Female', 'Jayamahal_Male', 'Jayamahal_Trans', 'Halsur_Female', 'Halsur_Male', 'Halsur_Trans', 'Bharathinagar_Female', 'Bharathinagar_Male', 'Bharathinagar_Trans', 'Shivajinagar_Female', 'Shivajinagar_Male', 'Shivajinagar_Trans', 'Vasanthanagar_Female', 'Vasanthanagar_Male', 'Vasanthanagar_Trans', 'Sampangiramanagar_Female', 'Sampangiramanagar_Male', 'Sampangiramanagar_Trans', 'Dattatreya Temple_Female', 'Dattatreya Temple_Male', 'Dattatreya Temple_Trans', 'Gandhinagar_Female', 'Gandhinagar_Male', 'Gandhinagar_Trans', 'Subhashnagar_Female', 'Subhashnagar_Male', 'Subhashnagar_Trans', 'Okalipuram_Female', 'Okalipuram_Male', 'Okalipuram_Trans', 'Chikpet_Female', 'Chikpet_Male', 'Chikpet_Trans', 'Cottonpet_Female', 'Cottonpet_Male', 'Cottonpet_Trans', 'Binnypet_Female', 'Binnypet_Male', 'Binnypet_Trans', 'Jogupalya_Female', 'Jogupalya_Male', 'Jogupalya_Trans', 'Shantalanagar_Female', 'Shantalanagar_Male', 'Shantalanagar_Trans', 'Domlur_Female', 'Domlur_Male', 'Domlur_Trans', 'Agara_Female', 'Agara_Male', 'Agara_Trans', 'Vanarpete_Female', 'Vanarpete_Male', 'Vanarpete_Trans', 'Neelasandra_Female', 'Neelasandra_Male', 'Neelasandra_Trans', 'Shanthinagar_Female', 'Shanthinagar_Male', 'Shanthinagar_Trans', 'Dayanandanagar_Female', 'Dayanandanagar_Male', 'Dayanandanagar_Trans', 'Prakashnagar_Female', 'Prakashnagar_Male', 'Prakashnagar_Trans', 'Rajajinagar_Female', 'Rajajinagar_Male', 'Rajajinagar_Trans', 'Basaveshwarnagar_Female', 'Basaveshwarnagar_Male', 'Basaveshwarnagar_Trans', 'Kamakshipalya_Female', 'Kamakshipalya_Male', 'Kamakshipalya_Trans', 'Shivanagar_Female', 'Shivanagar_Male', 'Shivanagar_Trans', 'Sri Rama Mandir_Female', 'Sri Rama Mandir_Male', 'Sri Rama Mandir_Trans', 'Kaveripura_Female', 'Kaveripura_Male', 'Kaveripura_Trans', 'Govindarajanagar_Female', 'Govindarajanagar_Male', 'Govindarajanagar_Trans', 'Agrahara Dasarahalli_Female', 'Agrahara Dasarahalli_Male', 'Agrahara Dasarahalli_Trans', 'Dr.Rajkumar Ward_Female', 'Dr.Rajkumar Ward_Male', 'Dr.Rajkumar Ward_Trans', 'Marenahalli_Female', 'Marenahalli_Male', 'Marenahalli_Trans', 'Maruthi Mandira Ward_Female', 'Maruthi Mandira Ward_Male', 'Maruthi Mandira Ward_Trans', 'Moodalapalya_Female', 'Moodalapalya_Male', 'Moodalapalya_Trans', 'Nagarabhavi_Female', 'Nagarabhavi_Male', 'Nagarabhavi_Trans', 'Nayandahalli_Female', 'Nayandahalli_Male', 'Nayandahalli_Trans', 'Sudhamanagar_Female', 'Sudhamanagar_Male', 'Sudhamanagar_Trans', 'Dharmarayaswamy Temple_Female', 'Dharmarayaswamy Temple_Male', 'Dharmarayaswamy Temple_Trans', 'Sukenahalli_Female', 'Sukenahalli_Male', 'Sukenahalli_Trans', 'Vishveshwarapuram_Female', 'Vishveshwarapuram_Male', 'Vishveshwarapuram_Trans', 'Siddapura_Female', 'Siddapura_Male', 'Siddapura_Trans', 'Hombegowdanagar_Female', 'Hombegowdanagar_Male', 'Hombegowdanagar_Trans', 'Jayanagar_Female', 'Jayanagar_Male', 'Jayanagar_Trans', 'Kempapura Agrahara_Female', 'Kempapura Agrahara_Male', 'Kempapura Agrahara_Trans', 'Vijayanagar_Female', 'Vijayanagar_Male', 'Vijayanagar_Trans', 'Hosahalli_Female', 'Hosahalli_Male', 'Hosahalli_Trans', 'Athiguppe_Female', 'Athiguppe_Male', 'Athiguppe_Trans', 'Hampinagar_Female', 'Hampinagar_Male', 'Hampinagar_Trans', 'Bapujinagar_Female', 'Bapujinagar_Male', 'Bapujinagar_Trans', 'Gali Anjaneya Temple_Female', 'Gali Anjaneya Temple_Male', 'Gali Anjaneya Temple_Trans', 'Deepanjalinagar_Female', 'Deepanjalinagar_Male', 'Deepanjalinagar_Trans', 'Padarayanapura_Female', 'Padarayanapura_Male', 'Padarayanapura_Trans', 'Jagajeevanramnagar_Female', 'Jagajeevanramnagar_Male', 'Jagajeevanramnagar_Trans', 'Rayapuram_Female', 'Rayapuram_Male', 'Rayapuram_Trans', 'Balavadhinagar_Female', 'Balavadhinagar_Male', 'Balavadhinagar_Trans', 'K.R.Market_Female', 'K.R.Market_Male', 'K.R.Market_Trans', 'Chamajpet_Female', 'Chamajpet_Male', 'Chamajpet_Trans', 'Azadnagar_Female', 'Azadnagar_Male', 'Azadnagar_Trans', 'Lakkasandra_Female', 'Lakkasandra_Male', 'Lakkasandra_Trans', 'Adugodi_Female', 'Adugodi_Male', 'Adugodi_Trans', 'Ejipura_Female', 'Ejipura_Male', 'Ejipura_Trans', 'Koramangala_Female', 'Koramangala_Male', 'Koramangala_Trans', 'Sudduguntepalya_Female', 'Sudduguntepalya_Male', 'Sudduguntepalya_Trans', 'Madivala_Female', 'Madivala_Male', 'Madivala_Trans', 'Jakkasandra_Female', 'Jakkasandra_Male', 'Jakkasandra_Trans', 'B.T.M Layout_Female', 'B.T.M Layout_Male', 'B.T.M Layout_Trans', 'Basavanagudi_Female', 'Basavanagudi_Male', 'Basavanagudi_Trans', 'Hanumanthanagar_Female', 'Hanumanthanagar_Male', 'Hanumanthanagar_Trans', 'Sriinagar_Female', 'Sriinagar_Male', 'Sriinagar_Trans', 'Girinagar_Female', 'Girinagar_Male', 'Girinagar_Trans', 'Kathriguppe_Female', 'Kathriguppe_Male', 'Kathriguppe_Trans', 'Vidyapeeta Ward_Female', 'Vidyapeeta Ward_Male', 'Vidyapeeta Ward_Trans', 'Hosakerehalli_Female', 'Hosakerehalli_Male', 'Hosakerehalli_Trans', 'Ganesha Temple Ward_Female', 'Ganesha Temple Ward_Male', 'Ganesha Temple Ward_Trans', 'Karisandra_Female', 'Karisandra_Male', 'Karisandra_Trans', 'Yediyur_Female', 'Yediyur_Male', 'Yediyur_Trans', 'Banashankari Temple Ward_Female', 'Banashankari Temple Ward_Male', 'Banashankari Temple Ward_Trans', 'Kumaraswamy Layout_Female', 'Kumaraswamy Layout_Male', 'Kumaraswamy Layout_Trans', 'Padmanabhanagar_Female', 'Padmanabhanagar_Male', 'Padmanabhanagar_Trans', 'Chikkalasandra_Female', 'Chikkalasandra_Male', 'Chikkalasandra_Trans', 'Patttabiramannagar_Female', 'Patttabiramannagar_Male', 'Patttabiramannagar_Trans', 'Byrasandra_Female', 'Byrasandra_Male', 'Byrasandra_Trans', 'Jayanagar East_Female', 'Jayanagar East_Male', 'Jayanagar East_Trans', 'Gurappanapalya_Female', 'Gurappanapalya_Male', 'Gurappanapalya_Trans', 'J.P.Nagar_Female', 'J.P.Nagar_Male', 'J.P.Nagar_Trans', 'Sarakki_Female', 'Sarakki_Male', 'Sarakki_Trans', 'Shakambarinagar_Female', 'Shakambarinagar_Male', 'Shakambarinagar_Trans', 'H.S.R.Layout_Female', 'H.S.R.Layout_Male', 'H.S.R.Layout_Trans', 'Bommanahalli_Female', 'Bommanahalli_Male', 'Bommanahalli_Trans', 'Jaraganahalli_Female', 'Jaraganahalli_Male', 'Jaraganahalli_Trans', 'Puttenahalli_Female', 'Puttenahalli_Male', 'Puttenahalli_Trans', 'Bilekahalli_Female', 'Bilekahalli_Male', 'Bilekahalli_Trans', 'Hongasandra_Female', 'Hongasandra_Male', 'Hongasandra_Trans', 'Mangamanapalya_Female', 'Mangamanapalya_Male', 'Mangamanapalya_Trans', 'Arakere_Female', 'Arakere_Male', 'Arakere_Trans', 'Uttarahalli_Female', 'Uttarahalli_Male', 'Uttarahalli_Trans', 'Yelachenahalli_Female', 'Yelachenahalli_Male', 'Yelachenahalli_Trans', 'Singasandra_Female', 'Singasandra_Male', 'Singasandra_Trans', 'Begur_Female', 'Begur_Male', 'Begur_Trans', 'Gottigere_Female', 'Gottigere_Male', 'Gottigere_Trans', 'Konanakunte_Female', 'Konanakunte_Male', 'Konanakunte_Trans', 'Anjanapura_Female', 'Anjanapura_Male', 'Anjanapura_Trans', 'Vasanthapura_Female', 'Vasanthapura_Male', 'Vasanthapura_Trans'];
+
+      var ward;
+      var popJson;
+      var query = window.location.search.substring(1);
+	    var vars = query.split("&amp;");
+
+	    for (var i=0;i<vars.length;i++) {
+          var pair = vars[i].split("=");
+  	      if (pair[0] == "ward") {
+  	      var ward = pair[1];
+        }
+      }
+
+      ward = ward.replace("%20"," ");
+      var n0 = ward.concat("_Female");
+      var n1 = ward.concat("_Male");
+      var n2 = ward.concat("_Trans");
+
+      var i0 = population_arrays.indexOf(n0);
+      var i1 = population_arrays.indexOf(n1);
+      var i2 = population_arrays.indexOf(n2);
+
+      // var popjson = localStorage.getItem('popjson');
+      // popjson = JSON.parse(popjson);
+      // alert(popjson);
+      $.getJSON("population.js", function(popjson) {
+      //$.getJSON("https://raw.githubusercontent.com/HTMLdotafreak/Largefiles/master/population.js", function(popjson) {
+      //$.getJSON(JSON.parse(window.popjson), function(popjson) {
+      //popjson = JSON.parse(window.popjson);
+        x1 = popjson.populations[i0][n0];
+        x2 = popjson.populations[i1][n1];
+        x3 = popjson.populations[i2][n2];
+
+      var data = [
+        {
+          name : "Females",
+          x: x1,
+          type: 'histogram',
+          marker: {
+            color: 'rgba(243,144,143,1)',
+          },
+        },
+        {
+          name : "Males",
+          x: x2,
+          type: 'histogram',
+          marker: {
+            color: 'rgba(103,200,202,1)',
+          },
+        },
+        {
+          name : "Others",
+          x: x3,
+          type: 'histogram',
+          marker: {
+            color: 'rgba(250,173,114,1)',
+          },
+        }
+      ];
+
+      var layout = {
+        // bargap: 0.05,
+        // bargroupgap: 0.2,
+        // barmode: "overlay",
+        title: "Age & Gender distribution in "+ward,
+        xaxis: {title: "Ages"},
+        yaxis: {title: "Population"}
+      };
+      $("#imgLoad").hide();
+      Plotly.newPlot('myDiv', data, layout);
+
+      });
+  </script>
+</body>
