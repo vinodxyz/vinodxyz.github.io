@@ -2,6 +2,13 @@
   <!-- Plotly.js -->
    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+
+   <style>
+    #imgLoad{
+      margin-top: 100px;
+      margin-left: 200px;
+    }
+   </style>
 </head>
 
 <body>
@@ -79,7 +86,7 @@
         // barmode: "overlay",
         //title: "Age & Gender distribution in "+ward,
         xaxis: {title: "Ages"},
-        yaxis: {title: "Population"},
+        yaxis: {title: "Population", linecolor: 'rgba(24,24,24,0)'},
         paper_bgcolor: 'rgba(24,24,24,0)',
         plot_bgcolor: 'rgba(24,24,24,0)'
       };
@@ -87,5 +94,7 @@
       Plotly.newPlot('myDiv', data, layout);
 
       });
+
+      $('.crisp').remove();
   </script>
 </body>
