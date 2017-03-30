@@ -34,29 +34,42 @@
             position: absolute;
             top: 0px;
             left: 0px;
-            /*bottom: 0px;*/
-            bottom: 680px;
+            bottom: 0px;
             width: 550px;
-            /*overflow: auto;*/
-            overflow: hidden;
             background: rgba(0, 0, 0, 1);
             font-family: "Arial";
             padding-left: 0px;
+            overflow-y: scroll;
+        }
+
+        #header{
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          width: 530px;
+          padding-left: 0px;
+          z-index: 999999;
         }
     </style>
 </head>
 <body>
 
-
+<div id="header"><object type="image/svg+xml" data="header.svg"></object></div>
 <div id='map'></div>
 <div id='sidebar'>
-    <div id="tooltip-name"><img id="imgHeader" src="header.jpg" alt="Voter Doppler"></div>
+    <div id="tooltip-name"></div>
     <div id='tooltip'></div>
     <div id="agegraph" style="margin-top:-870px;margin-left:-15px;"></div>
 </div>
 
 
 <script>
+$(document).ready(
+  function()
+  {
+    $('#sidebar').hide();
+  }
+);
 
 var geojson = (function () {
     var json = null;
@@ -109,6 +122,7 @@ geojson.features.forEach(function(marker) {
 });
 
   map.on('click', function(e){
+      $('#header').show();
       var ward_name = document.getElementsByClassName("mapboxgl-popup-content");
 
       if((ward_name.length-1) >= 0)
@@ -116,17 +130,16 @@ geojson.features.forEach(function(marker) {
         ward_name = ward_name[ward_name.length-1].textContent.toString().replace('×',"");
         console.log(ward_name);
 
-        $("#sidebar").css( "bottom", "0px" );
-        $("#sidebar").css( "overflow-y", "scroll" );
-        $("#sidebar").css( "box-sizing", "border-box" );
-
+        $('#sidebar').show();
         document.getElementById('tooltip-name').innerHTML = "<object type=\"image/svg+xml\" data=\"sidebar.svg?ward="+ward_name+"\"></object>";
-        document.getElementById('agegraph').innerHTML = "<object type=\"text/html\" data=\"Agegraph/plotly.html?ward="+ward_name+"\" width=\"640px\" height=\"350px\" style=\"overflow:auto;\"></object>";;
+        document.getElementById('agegraph').innerHTML = "<object type=\"text/html\" data=\"Agegraph/plotly.html?ward="+ward_name+"\" width=\"640px\" height=\"350px\" style=\"overflow:auto;\"></object>";
+        setTimeout(function(){$('#header').hide();}, 2000);
+
       }
       else {
-        $("#sidebar").css( "bottom", "680px" );
-        $("#sidebar").css( "overflow", "hidden" );
-        document.getElementById('tooltip-name').innerHTML = "<img id=\"imgHeader\" src=\"header.jpg\" alt=\"Voter Doppler\">";
+        $('#sidebar').hide();
+        $('#header').show();
+        document.getElementById('tooltip-name').innerHTML = "";
         document.getElementById('agegraph').innerHTML = "";
       }
   });
