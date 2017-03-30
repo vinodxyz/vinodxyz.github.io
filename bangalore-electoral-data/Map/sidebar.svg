@@ -330,7 +330,7 @@
 			</g>
 		</g>
 	</g>
-	<text transform="matrix(1 0 0 1 347.5237 293.9255)"><tspan x="0" y="0" class="st30 st8 st9">X axis: age group</tspan><tspan x="0" y="10.4" class="st30 st8 st9">Y axis: Population</tspan></text>
+	<!-- <text transform="matrix(1 0 0 1 347.5237 293.9255)"><tspan x="0" y="0" class="st30 st8 st9">X axis: age group</tspan><tspan x="0" y="10.4" class="st30 st8 st9">Y axis: Population</tspan></text> -->
 	<g>
 		<circle class="st31" cx="117.1" cy="601.8" r="25.8"/>
 		<g>
@@ -449,12 +449,12 @@
 	<polygon class="st39" points="222.4,225.4 222.4,225.3 222.3,225.4 	"/>
 	<g>
 		<!-- Plot.ly's graph -->
-		<foreignObject id="foGraph" x="20" y="90" style="z-index: 999;">
+		<!-- <foreignObject id="foGraph" x="20" y="90" style="z-index: 999;">
 			<body id="plotly" xmlns="http://www.w3.org/1999/xhtml">
-				<!-- <div id="plotly">
-				</div> -->
+				<div id="plotly">
+				</div>
 			</body>
-		</foreignObject>
+		</foreignObject> -->
 	</g>
 	<g>
 		<circle class="st31" cx="49.1" cy="776" r="25.8"/>
@@ -781,7 +781,7 @@
 				console.log(marker.properties.EPICdupl);
 				console.log(marker.properties.EPICmult);
 
-				document.getElementById('plotly').innerHTML = "<object type=\"text/html\" data=\"Agegraph/plotly.html?ward="+ward+"\" width=\"540px\" height=\"400px\" style=\"overflow: hidden;margin-top:250px; margin-left:-40px;\"></object>";
+				//document.getElementById('plotly').innerHTML = "<object type=\"text/html\" data=\"Agegraph/plotly.html?ward="+ward+"\" width=\"540px\" height=\"400px\" style=\"overflow: hidden;margin-top:250px; margin-left:-40px;\"></object>";
 				//console.log(document.getElementById('plotly').innerHTML);
 			}
 	});
