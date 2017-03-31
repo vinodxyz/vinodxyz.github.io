@@ -2,11 +2,8 @@
 <!-- Generator: Adobe Illustrator 19.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 429.2 970.5" style="enable-background:new 0 0 429.2 970.5;" xml:space="preserve">
-	 <script xlink:href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
 <style type="text/css">
-	.st0{opacity:0.6;fill:#282828;}
+	.st0{opacity:0.6;fill:#282828;enable-background:new    ;}
 	.st1{fill:#FFFFFF;}
 	.st2{font-family:'MyriadPro-Bold';}
 	.st3{font-size:23.0722px;}
@@ -25,99 +22,99 @@
 	.st16{fill:#232323;}
 	.st17{fill:#DDDDDD;}
 	.st18{fill:none;stroke:#DDDDDD;stroke-width:0.5293;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-
-		.st19{opacity:0.3;fill:#FFFFFF;stroke:#40403F;stroke-width:0.2462;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	
+		.st19{opacity:0.3;fill:#FFFFFF;stroke:#40403F;stroke-width:0.2462;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;enable-background:new    ;}
 	.st20{fill:none;stroke:#40403F;stroke-width:0.2462;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
 	.st21{opacity:0.3;}
 	.st22{fill:none;stroke:#232323;stroke-width:0.4576;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
 	.st23{fill:none;stroke:#DDDDDD;stroke-width:0.4193;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-
-		.st24{opacity:0.3;fill:#FFFFFF;stroke:#40403F;stroke-width:0.1951;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	
+		.st24{opacity:0.3;fill:#FFFFFF;stroke:#40403F;stroke-width:0.1951;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;enable-background:new    ;}
 	.st25{fill:none;stroke:#40403F;stroke-width:0.1951;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
 	.st26{fill:none;stroke:#232323;stroke-width:0.7081;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
 	.st27{fill:none;stroke:#DDDDDD;stroke-width:0.6489;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-
-		.st28{opacity:0.3;fill:#FFFFFF;stroke:#40403F;stroke-width:0.3019;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	
+		.st28{opacity:0.3;fill:#FFFFFF;stroke:#40403F;stroke-width:0.3019;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;enable-background:new    ;}
 	.st29{fill:none;stroke:#40403F;stroke-width:0.3019;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-	.st30{fill:#999999;}
-	.st31{fill:#444545;}
-	.st32{opacity:0.5;clip-path:url(#SVGID_2_);fill:#282828;}
-	.st33{fill:#B3B3B3;}
-	.st34{fill:#F0EFEF;}
-
-		.st35{display:none;fill:none;stroke:#282828;stroke-width:1.6176;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-	.st36{fill:none;stroke:#282828;stroke-width:0.5863;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-	.st37{fill:#606161;}
-	.st38{fill:#707071;}
-	.st39{fill:#D6D6D6;}
-
-		.st40{opacity:0.7;fill:none;stroke:#282828;stroke-width:1.1375;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-
-		.st41{display:none;fill:none;stroke:#282828;stroke-width:0.5863;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-	.st42{opacity:0.5;clip-path:url(#SVGID_4_);fill:#282828;}
-
-		.st43{opacity:0.35;fill:none;stroke:#282828;stroke-width:0.5863;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-	.st44{fill:#F0A445;}
-	.st45{fill:#8C8C8C;}
-	.st46{fill:#666766;}
-	.st47{fill:#C2C1C0;}
-	.st48{fill:#E0E0E0;}
-	.st49{fill:#4E4E4E;}
-	.st50{fill:#DCC7AA;}
-	.st51{fill:#1B1B1B;}
-	.st52{fill:none;stroke:#818181;stroke-width:0.546;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-	.st53{fill:none;stroke:#818181;stroke-width:0.273;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-	.st54{fill:#2B2B2B;}
-	.st55{fill:none;}
-	.st56{fill:#757576;}
-	.st57{font-size:10.8151px;}
-	.st58{fill:none;stroke:#606161;stroke-width:0.6835;stroke-miterlimit:10;}
-	.st59{opacity:0.5;clip-path:url(#SVGID_6_);fill:#282828;}
-	.st60{clip-path:url(#SVGID_6_);fill:#686868;}
-	.st61{clip-path:url(#SVGID_6_);}
-	.st62{opacity:0.6;clip-path:url(#SVGID_8_);}
-	.st63{opacity:0.2;fill:none;stroke:#FFFFFF;stroke-width:3.4827;stroke-miterlimit:10;}
-	.st64{opacity:0.2;fill:none;stroke:#FFFFFF;stroke-width:1.1726;stroke-miterlimit:10;}
-	.st65{opacity:0.3;fill:none;stroke:#FFFFFF;stroke-width:3.5179;stroke-miterlimit:10;}
-	.st66{opacity:0.3;fill:none;stroke:#FFFFFF;stroke-width:6.1859;stroke-miterlimit:10;}
-	.st67{opacity:0.2;fill:none;stroke:#FFFFFF;stroke-width:6.1859;stroke-miterlimit:10;}
-	.st68{opacity:0.7;clip-path:url(#SVGID_6_);}
-	.st69{opacity:0.5;fill:#282828;}
-
-		.st70{display:none;fill:none;stroke:#282828;stroke-width:1.2361;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-	.st71{fill:none;stroke:#282828;stroke-width:0.4481;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-
-		.st72{display:none;fill:none;stroke:#282828;stroke-width:0.4481;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-	.st73{display:none;fill:#282828;}
-	.st74{opacity:0.5;clip-path:url(#SVGID_10_);fill:#282828;}
-	.st75{clip-path:url(#SVGID_10_);fill:#686868;}
-	.st76{opacity:0.3;clip-path:url(#SVGID_10_);fill:#282828;}
-	.st77{clip-path:url(#SVGID_10_);}
-	.st78{display:none;opacity:0.3;}
-
-		.st79{display:inline;fill:none;stroke:#282828;stroke-width:0.4481;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-	.st80{opacity:0.45;}
-	.st81{fill:none;stroke:#282828;stroke-width:0.4481;stroke-linecap:round;stroke-linejoin:round;}
-	.st82{fill:none;stroke:#282828;stroke-width:0.4481;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1.1384,1.423;}
-	.st83{fill:none;stroke:#282828;stroke-width:0.4481;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1.3128,1.6411;}
-	.st84{opacity:0.5;clip-path:url(#SVGID_12_);fill:#282828;}
-	.st85{fill:none;stroke:#959696;stroke-width:1.759;stroke-miterlimit:10;}
-	.st86{fill:#727373;}
-	.st87{display:none;opacity:0.2;}
-	.st88{display:inline;fill:none;stroke:#282828;stroke-width:2.2891;stroke-miterlimit:10;}
-	.st89{display:inline;fill:none;stroke:#282828;stroke-width:2.3453;stroke-miterlimit:10;}
-	.st90{opacity:0.5;clip-path:url(#SVGID_14_);fill:#282828;}
-	.st91{opacity:0.5;clip-path:url(#SVGID_16_);fill:#282828;}
-	.st92{font-size:17.3041px;}
-	.st93{font-size:32.218px;}
+	.st30{fill:#444545;}
+	.st31{opacity:0.5;clip-path:url(#SVGID_2_);fill:#282828;enable-background:new    ;}
+	.st32{fill:#B3B3B3;}
+	.st33{fill:#F0EFEF;}
+	
+		.st34{display:none;fill:none;stroke:#282828;stroke-width:1.6176;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st35{fill:none;stroke:#282828;stroke-width:0.5863;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st36{fill:#606161;}
+	.st37{fill:#707071;}
+	.st38{fill:#D6D6D6;}
+	
+		.st39{opacity:0.7;fill:none;stroke:#282828;stroke-width:1.1375;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;enable-background:new    ;}
+	
+		.st40{display:none;fill:none;stroke:#282828;stroke-width:0.5863;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st41{opacity:0.5;clip-path:url(#SVGID_4_);fill:#282828;enable-background:new    ;}
+	
+		.st42{opacity:0.35;fill:none;stroke:#282828;stroke-width:0.5863;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;enable-background:new    ;}
+	.st43{fill:#F0A445;}
+	.st44{fill:#8C8C8C;}
+	.st45{fill:#666766;}
+	.st46{fill:#C2C1C0;}
+	.st47{fill:#E0E0E0;}
+	.st48{fill:#4E4E4E;}
+	.st49{fill:#DCC7AA;}
+	.st50{fill:#1B1B1B;}
+	.st51{fill:none;stroke:#818181;stroke-width:0.546;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st52{fill:none;stroke:#818181;stroke-width:0.273;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st53{fill:#2B2B2B;}
+	.st54{fill:none;}
+	.st55{fill:#757576;}
+	.st56{font-size:10.8151px;}
+	.st57{opacity:0.5;clip-path:url(#SVGID_6_);fill:#282828;enable-background:new    ;}
+	.st58{clip-path:url(#SVGID_8_);fill:#686868;}
+	.st59{clip-path:url(#SVGID_10_);}
+	.st60{opacity:0.6;clip-path:url(#SVGID_12_);}
+	.st61{opacity:0.2;fill:none;stroke:#FFFFFF;stroke-width:3.4827;stroke-miterlimit:10;enable-background:new    ;}
+	.st62{opacity:0.2;fill:none;stroke:#FFFFFF;stroke-width:1.1726;stroke-miterlimit:10;enable-background:new    ;}
+	.st63{opacity:0.3;fill:none;stroke:#FFFFFF;stroke-width:3.5179;stroke-miterlimit:10;enable-background:new    ;}
+	.st64{opacity:0.3;fill:none;stroke:#FFFFFF;stroke-width:6.1859;stroke-miterlimit:10;enable-background:new    ;}
+	.st65{opacity:0.2;fill:none;stroke:#FFFFFF;stroke-width:6.1859;stroke-miterlimit:10;enable-background:new    ;}
+	.st66{opacity:0.7;clip-path:url(#SVGID_14_);}
+	.st67{opacity:0.5;fill:#282828;enable-background:new    ;}
+	
+		.st68{display:none;fill:none;stroke:#282828;stroke-width:1.2361;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st69{fill:none;stroke:#282828;stroke-width:0.4481;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	
+		.st70{display:none;fill:none;stroke:#282828;stroke-width:0.4481;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st71{display:none;fill:#282828;}
+	.st72{opacity:0.5;clip-path:url(#SVGID_16_);fill:#282828;enable-background:new    ;}
+	.st73{clip-path:url(#SVGID_18_);fill:#686868;}
+	.st74{opacity:0.3;clip-path:url(#SVGID_20_);fill:#282828;enable-background:new    ;}
+	.st75{clip-path:url(#SVGID_22_);}
+	.st76{display:none;opacity:0.3;}
+	
+		.st77{display:inline;fill:none;stroke:#282828;stroke-width:0.4481;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st78{clip-path:url(#SVGID_24_);}
+	.st79{opacity:0.45;}
+	.st80{fill:none;stroke:#282828;stroke-width:0.4481;stroke-linecap:round;stroke-linejoin:round;}
+	.st81{fill:none;stroke:#282828;stroke-width:0.4481;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1.1384,1.423;}
+	.st82{fill:none;stroke:#282828;stroke-width:0.4481;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1.3128,1.6411;}
+	.st83{opacity:0.5;clip-path:url(#SVGID_26_);fill:#282828;enable-background:new    ;}
+	.st84{fill:none;stroke:#959696;stroke-width:1.759;stroke-miterlimit:10;}
+	.st85{fill:#727373;}
+	.st86{display:none;opacity:0.2;}
+	.st87{display:inline;fill:none;stroke:#282828;stroke-width:2.2891;stroke-miterlimit:10;}
+	.st88{display:inline;fill:none;stroke:#282828;stroke-width:2.3453;stroke-miterlimit:10;}
+	.st89{opacity:0.5;clip-path:url(#SVGID_28_);fill:#282828;enable-background:new    ;}
+	.st90{opacity:0.5;clip-path:url(#SVGID_30_);fill:#282828;enable-background:new    ;}
+	.st91{font-size:17.3041px;}
+	.st92{font-size:32.218px;}
 </style>
-<g id="background_1_">
+<script  xlink:href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<g>
 	<rect y="0.1" width="429.2" height="970.3"/>
 	<rect y="279.5" class="st0" width="429.2" height="267.5"/>
 	<rect y="0.1" class="st0" width="429.2" height="141.8"/>
 	<rect width="429.2" height="108.2"/>
 	<text transform="matrix(1 0 0 1 17.5042 42.7087)" class="st1 st2 st3">Voter Doppler</text>
-	<text transform="matrix(0.92 0 0 1 17.5042 61.4548)" class="st4 st5 st6">Analysis of Bangalore Electoral data</text>
+	<text transform="matrix(0.92 0 0 1 17.5039 61.4546)" class="st4 st5 st6">Analysis of Bangalore Electoral data</text>
 	<text transform="matrix(1 0 0 1 17.5042 297.614)" class="st1 st5 st7">Age based population distribution</text>
 	<g>
 		<text transform="matrix(1 0 0 1 73.3899 645.7761)" class="st1 st8 st7">Original records</text>
@@ -330,419 +327,480 @@
 			</g>
 		</g>
 	</g>
-	<!-- <text transform="matrix(1 0 0 1 347.5237 293.9255)"><tspan x="0" y="0" class="st30 st8 st9">X axis: age group</tspan><tspan x="0" y="10.4" class="st30 st8 st9">Y axis: Population</tspan></text> -->
 	<g>
-		<circle class="st31" cx="117.1" cy="601.8" r="25.8"/>
+		<circle class="st30" cx="117.1" cy="601.8" r="25.8"/>
 		<g>
-			<defs>
-				<circle id="SVGID_1_" cx="117.1" cy="601.8" r="25.8"/>
-			</defs>
-			<clipPath id="SVGID_2_">
-				<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
-			</clipPath>
-			<polygon class="st32" points="104.9,586 86.3,604.7 86.3,637.2 104.9,637.2 109.6,637.2 129.3,617.5 			"/>
+			<g>
+				<defs>
+					<circle id="SVGID_1_" cx="117.1" cy="601.8" r="25.8"/>
+				</defs>
+				<clipPath id="SVGID_2_">
+					<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+				</clipPath>
+				<polygon class="st31" points="104.9,586 86.3,604.7 86.3,637.2 104.9,637.2 109.6,637.2 129.3,617.5 				"/>
+			</g>
 		</g>
-		<polygon class="st33" points="123.3,586 104.9,586 104.9,617.5 129.4,617.5 129.4,592.1 		"/>
-		<polygon class="st34" points="123.2,587.1 123.2,592.1 129.3,592.1 123.2,586 		"/>
-		<path class="st35" d="M108.4,556.6c0.4-1.1,1.4-2,2.7-2c1.3,0,2.3,0.8,2.7,2"/>
+		<polygon class="st32" points="123.3,586 104.9,586 104.9,617.5 129.4,617.5 129.4,592.1 		"/>
+		<polygon class="st33" points="123.2,587.1 123.2,592.1 129.3,592.1 123.2,586 		"/>
+		<path class="st34" d="M108.4,556.6c0.4-1.1,1.4-2,2.7-2c1.3,0,2.3,0.8,2.7,2"/>
 		<g class="st21">
-			<line class="st36" x1="107.2" y1="598.2" x2="127.2" y2="598.2"/>
-			<line class="st36" x1="107.2" y1="594.7" x2="127.2" y2="594.7"/>
-			<line class="st36" x1="107.2" y1="601.7" x2="127.2" y2="601.7"/>
-			<line class="st36" x1="107.2" y1="605.2" x2="127.2" y2="605.2"/>
-			<line class="st36" x1="107.2" y1="608.7" x2="117.2" y2="608.7"/>
-			<line class="st36" x1="107.2" y1="612.3" x2="117.2" y2="612.3"/>
+			<line class="st35" x1="107.2" y1="598.2" x2="127.2" y2="598.2"/>
+			<line class="st35" x1="107.2" y1="594.7" x2="127.2" y2="594.7"/>
+			<line class="st35" x1="107.2" y1="601.7" x2="127.2" y2="601.7"/>
+			<line class="st35" x1="107.2" y1="605.2" x2="127.2" y2="605.2"/>
+			<line class="st35" x1="107.2" y1="608.7" x2="117.2" y2="608.7"/>
+			<line class="st35" x1="107.2" y1="612.3" x2="117.2" y2="612.3"/>
 		</g>
 		<g>
-			<circle class="st37" cx="123.4" cy="611.8" r="4.9"/>
-			<circle class="st38" cx="123.7" cy="611.6" r="4.9"/>
-			<circle class="st39" cx="123.7" cy="611.6" r="3.9"/>
-			<circle class="st34" cx="123.6" cy="611.6" r="3.8"/>
-			<polyline class="st40" points="121.7,611.7 123,613.1 125.7,610.4 			"/>
+			<circle class="st36" cx="123.4" cy="611.8" r="4.9"/>
+			<circle class="st37" cx="123.7" cy="611.6" r="4.9"/>
+			<circle class="st38" cx="123.7" cy="611.6" r="3.9"/>
+			<circle class="st33" cx="123.6" cy="611.6" r="3.8"/>
+			<polyline class="st39" points="121.7,611.7 123,613.1 125.7,610.4 			"/>
 		</g>
-		<path class="st41" d="M108.3,557.1c0,0-0.8-0.1-1.1-0.7"/>
+		<path class="st40" d="M108.3,557.1c0,0-0.8-0.1-1.1-0.7"/>
 	</g>
 	<g>
-		<circle class="st31" cx="311" cy="602.1" r="25.8"/>
+		<circle class="st30" cx="311" cy="602.1" r="25.8"/>
 		<g>
-			<defs>
-				<circle id="SVGID_3_" cx="311.4" cy="602.4" r="25.8"/>
-			</defs>
-			<clipPath id="SVGID_4_">
-				<use xlink:href="#SVGID_3_"  style="overflow:visible;"/>
-			</clipPath>
-			<polygon class="st42" points="299.2,586.6 280.5,605.3 280.5,637.8 299.2,637.8 303.9,637.8 323.6,618.1 			"/>
+			<g>
+				<defs>
+					<circle id="SVGID_3_" cx="311.4" cy="602.4" r="25.8"/>
+				</defs>
+				<clipPath id="SVGID_4_">
+					<use xlink:href="#SVGID_3_"  style="overflow:visible;"/>
+				</clipPath>
+				<polygon class="st41" points="299.2,586.6 280.5,605.3 280.5,637.8 299.2,637.8 303.9,637.8 323.6,618.1 				"/>
+			</g>
 		</g>
-		<polygon class="st33" points="317.6,586.6 299.2,586.6 299.2,618.1 323.7,618.1 323.7,592.7 		"/>
-		<polygon class="st34" points="317.5,587.7 317.5,592.7 323.6,592.7 317.5,586.6 		"/>
+		<polygon class="st32" points="317.6,586.6 299.2,586.6 299.2,618.1 323.7,618.1 323.7,592.7 		"/>
+		<polygon class="st33" points="317.5,587.7 317.5,592.7 323.6,592.7 317.5,586.6 		"/>
 		<g class="st21">
-			<line class="st36" x1="301.5" y1="598.8" x2="321.5" y2="598.8"/>
-			<line class="st36" x1="301.5" y1="595.3" x2="321.5" y2="595.3"/>
-			<line class="st36" x1="301.5" y1="602.3" x2="321.5" y2="602.3"/>
-			<line class="st36" x1="301.5" y1="605.8" x2="321.5" y2="605.8"/>
-			<line class="st36" x1="301.5" y1="609.4" x2="321.5" y2="609.4"/>
-			<line class="st43" x1="301.5" y1="612.9" x2="314.2" y2="612.9"/>
+			<line class="st35" x1="301.5" y1="598.8" x2="321.5" y2="598.8"/>
+			<line class="st35" x1="301.5" y1="595.3" x2="321.5" y2="595.3"/>
+			<line class="st35" x1="301.5" y1="602.3" x2="321.5" y2="602.3"/>
+			<line class="st35" x1="301.5" y1="605.8" x2="321.5" y2="605.8"/>
+			<line class="st35" x1="301.5" y1="609.4" x2="321.5" y2="609.4"/>
+			<line class="st42" x1="301.5" y1="612.9" x2="314.2" y2="612.9"/>
 		</g>
 		<g>
-
-				<rect x="315.5" y="604.2" transform="matrix(0.6811 -0.7322 0.7322 0.6811 -341.2318 427.9493)" class="st44" width="10.4" height="3.1"/>
-			<path class="st1" d="M312.9,613.5c-0.5-0.4-0.5-1.2-0.1-1.6l1.3-1.4l2.2,2.1l-1.3,1.4c-0.4,0.5-1.2,0.5-1.6,0.1L312.9,613.5z"/>
+			
+				<rect x="315.5" y="604.2" transform="matrix(0.6811 -0.7322 0.7322 0.6811 -341.2157 427.9983)" class="st43" width="10.4" height="3.1"/>
+			<path class="st1" d="M312.9,613.5c-0.5-0.4-0.5-1.2-0.1-1.6l1.3-1.4l2.2,2.1L315,614c-0.4,0.5-1.2,0.5-1.6,0.1L312.9,613.5z"/>
 			<g>
 				<path class="st1" d="M312.9,611.9c-0.4,0.5-0.4,1.2,0.1,1.6l0.3,0.3c-0.3-0.3,0.2-1,0.2-1l1.6-1.7l-0.7-0.7L312.9,611.9z"/>
 			</g>
-
-				<rect x="314.9" y="608.9" transform="matrix(0.6811 -0.7322 0.7322 0.6811 -346.0909 426.2384)" class="st45" width="2.7" height="3.1"/>
-
-				<rect x="316.5" y="605.8" transform="matrix(0.6811 -0.7322 0.7322 0.6811 -341.3421 428.7772)" class="st46" width="10.2" height="1"/>
-
-				<rect x="315.7" y="605.1" transform="matrix(0.6811 -0.7322 0.7322 0.6811 -341.0706 428.0061)" class="st47" width="10.2" height="1"/>
-
-				<rect x="315" y="604.4" transform="matrix(0.6811 -0.7322 0.7322 0.6811 -340.7991 427.235)" class="st46" width="10.2" height="1"/>
-			<path class="st48" d="M324.7,602.2l0.3,0.3c0,0,0.1-0.1,0.1-0.2c1.9-2.3,2.9-4.1,2.9-4.1c0.2-0.3,0.1-0.4-0.2-0.2
+			
+				<rect x="314.9" y="608.9" transform="matrix(0.6811 -0.7322 0.7322 0.6811 -346.1112 426.2553)" class="st44" width="2.7" height="3.1"/>
+			
+				<rect x="316.5" y="605.8" transform="matrix(0.6811 -0.7322 0.7322 0.6811 -341.3249 428.8345)" class="st45" width="10.2" height="1"/>
+			
+				<rect x="315.7" y="605.1" transform="matrix(0.6811 -0.7322 0.7322 0.6811 -341.0907 428.0479)" class="st46" width="10.2" height="1"/>
+			
+				<rect x="315" y="604.4" transform="matrix(0.6811 -0.7322 0.7322 0.6811 -340.7812 427.2879)" class="st45" width="10.2" height="1"/>
+			<path class="st47" d="M324.7,602.2l0.3,0.3c0,0,0.1-0.1,0.1-0.2c1.9-2.3,2.9-4.1,2.9-4.1c0.2-0.3,0.1-0.4-0.2-0.2
 				c0,0-1.8,1.1-3.9,3.2c-0.1,0.1-0.1,0.1-0.2,0.2l0.3,0.3c-0.2,0.2-0.2,0.5,0,0.7S324.5,602.4,324.7,602.2z"/>
-			<path class="st48" d="M324,601.5L324,601.5l3.2-2.8c0,0,0-0.1,0-0.1c0,0,0-0.1,0-0.1c0-0.1-0.2,0-0.3-0.1c0,0-0.1-0.1-0.1-0.1
-				c-0.9,0.6-2,1.2-3.4,2.4c-0.1,0.1-0.2,0.1-0.2,0.2l0,0c-0.2,0.2-0.2,0.5,0,0.7S323.8,601.7,324,601.5z"/>
-			<path class="st48" d="M325.4,602.9L325.4,602.9c0,0,0.1-0.1,0.2-0.2c1.7-2.4,2.2-3.6,2.2-3.6c-0.2,0-0.4,0-0.4-0.1
-				c0-0.1,0-0.1,0-0.2l-2.7,3.4l0,0c-0.2,0.2-0.2,0.5,0,0.7C324.9,603.1,325.3,603.1,325.4,602.9z"/>
+			<path class="st47" d="M324,601.5L324,601.5l3.2-2.8v-0.1v-0.1c0-0.1-0.2,0-0.3-0.1l-0.1-0.1c-0.9,0.6-2,1.2-3.4,2.4
+				c-0.1,0.1-0.2,0.1-0.2,0.2l0,0c-0.2,0.2-0.2,0.5,0,0.7S323.8,601.7,324,601.5z"/>
+			<path class="st47" d="M325.4,602.9L325.4,602.9c0,0,0.1-0.1,0.2-0.2c1.7-2.4,2.2-3.6,2.2-3.6c-0.2,0-0.4,0-0.4-0.1s0-0.1,0-0.2
+				l-2.7,3.4l0,0c-0.2,0.2-0.2,0.5,0,0.7C324.9,603.1,325.3,603.1,325.4,602.9z"/>
 			<g>
-				<path class="st49" d="M327.8,599c0.4-0.7,0.6-1.1,0.6-1.1c0.1-0.2,0.1-0.3,0-0.4c0,0,0,0,0,0l0,0c0,0,0,0,0,0
-					c-0.1-0.1-0.2-0.1-0.4,0c0,0-0.5,0.2-1.2,0.7c0,0,0,0,0,0c0,0,0,0.1,0.1,0.1c0.1,0,0.2,0,0.2,0.1c0,0.1,0,0.1,0,0.2c0,0,0,0,0,0
-					c0.1,0.1,0.2,0.1,0.3,0c0,0,0,0.1-0.1,0.1c0,0.1,0,0.1,0,0.2C327.5,599.1,327.6,599.1,327.8,599z"/>
-				<polygon class="st50" points="328.5,598.1 328.5,598.1 328.5,598.1 				"/>
+				<path class="st48" d="M327.8,599c0.4-0.7,0.6-1.1,0.6-1.1c0.1-0.2,0.1-0.3,0-0.4l0,0l0,0l0,0c-0.1-0.1-0.2-0.1-0.4,0
+					c0,0-0.5,0.2-1.2,0.7l0,0c0,0,0,0.1,0.1,0.1s0.2,0,0.2,0.1s0,0.1,0,0.2l0,0c0.1,0.1,0.2,0.1,0.3,0c0,0,0,0.1-0.1,0.1
+					c0,0.1,0,0.1,0,0.2C327.5,599.1,327.6,599.1,327.8,599z"/>
+				<path class="st49" d="M328.5,598.1L328.5,598.1L328.5,598.1z"/>
 				<g>
 					<g>
 						<g>
-							<path class="st51" d="M328.4,597.5C328.4,597.5,328.4,597.5,328.4,597.5l-1.2,1.1c0.1,0.1,0.2,0.1,0.3,0c0,0,0,0.1-0.1,0.1
-								L328.4,597.5z"/>
+							<path class="st50" d="M328.4,597.5L328.4,597.5l-1.2,1.1c0.1,0.1,0.2,0.1,0.3,0c0,0,0,0.1-0.1,0.1L328.4,597.5z"/>
 						</g>
 						<g>
-							<path class="st51" d="M327.4,598.9c0.1,0.1,0.2,0.1,0.4,0.1c0.4-0.7,0.6-1.1,0.6-1.1c0.1-0.2,0.1-0.3,0-0.4l-1,1.3
+							<path class="st50" d="M327.4,598.9c0.1,0.1,0.2,0.1,0.4,0.1c0.4-0.7,0.6-1.1,0.6-1.1c0.1-0.2,0.1-0.3,0-0.4l-1,1.3
 								C327.3,598.8,327.3,598.9,327.4,598.9z"/>
 						</g>
 						<g>
-							<path class="st51" d="M327.1,598.6C327.1,598.6,327.1,598.6,327.1,598.6l1.3-1.1c0,0,0,0,0,0c-0.1-0.1-0.2-0.1-0.4,0
-								c0,0-0.5,0.2-1.2,0.7c0,0,0,0,0,0c0,0,0,0.1,0.1,0.1c0.1,0,0.2,0,0.2,0.1C327.1,598.5,327.1,598.6,327.1,598.6z"/>
+							<path class="st50" d="M327.1,598.6L327.1,598.6l1.3-1.1l0,0c-0.1-0.1-0.2-0.1-0.4,0c0,0-0.5,0.2-1.2,0.7l0,0
+								c0,0,0,0.1,0.1,0.1s0.2,0,0.2,0.1C327.1,598.5,327.1,598.6,327.1,598.6z"/>
 						</g>
 					</g>
 				</g>
 			</g>
-			<line class="st52" x1="318.3" y1="610.4" x2="316.2" y2="608.5"/>
-			<line class="st52" x1="316.4" y1="612.4" x2="314.3" y2="610.5"/>
-			<line class="st53" x1="317.8" y1="611.1" x2="315.6" y2="609"/>
-			<line class="st53" x1="317" y1="611.9" x2="314.8" y2="609.8"/>
+			<line class="st51" x1="318.3" y1="610.4" x2="316.2" y2="608.5"/>
+			<line class="st51" x1="316.4" y1="612.4" x2="314.3" y2="610.5"/>
+			<line class="st52" x1="317.8" y1="611.1" x2="315.6" y2="609"/>
+			<line class="st52" x1="317" y1="611.9" x2="314.8" y2="609.8"/>
 		</g>
 	</g>
 	<polygon class="st0" points="0,695.7 0,724.6 0,836.4 0,865.2 429.2,865.2 429.2,836.4 429.2,724.6 429.2,695.7 	"/>
-	<rect y="865.2" class="st54" width="429.2" height="105.3"/>
+	<rect y="865.2" class="st53" width="429.2" height="105.3"/>
 	<g>
 		<text transform="matrix(1 0 0 1 18.2259 713.5291)" class="st1 st5 st7">Anomalous records</text>
 	</g>
-	<text transform="matrix(1 0 0 1 61.7581 915.4099)"><tspan x="0" y="0" class="st1 st8 st7">Duplicated</tspan><tspan x="0" y="15.6" class="st1 st8 st7">EPIC numbers</tspan></text>
-	<text transform="matrix(1 0 0 1 261.8763 915.4099)"><tspan x="0" y="0" class="st1 st8 st7">Suspected</tspan><tspan x="0" y="15.6" class="st1 st8 st7">duplicate entries</tspan></text>
-	<rect x="214.4" y="25.7" class="st55" width="196.7" height="75"/>
-	<text transform="matrix(0.93 0 0 1 214.4261 33.3933)" class="st56 st8 st57">Bangalore consists of 27 constituencies, and </text>
-	<text transform="matrix(1 0 0 1 214.4261 45.6501)" class="st56 st8 st57">each constituency has the following wards </text>
-	<text transform="matrix(1 0 0 1 214.4261 57.907)" class="st56 st8 st57">that are visualized in the map. The purpose </text>
-	<text transform="matrix(0.96 0 0 1 214.4261 70.1648)" class="st56 st8 st57">of this visualization is to analyze the electoral </text>
-	<text transform="matrix(0.96 0 0 1 214.4261 82.4216)" class="st56 st8 st57">rolls in each ward across Bangalore.</text>
+	<text transform="matrix(1 0 0 1 61.7581 915.4099)" class="st1 st8 st7">Duplicated</text>
+	<text transform="matrix(1 0 0 1 61.7581 931.0099)" class="st1 st8 st7">EPIC numbers</text>
+	<text transform="matrix(1 0 0 1 269.8763 915.4099)" class="st1 st8 st7">Suspected</text>
+	<text transform="matrix(1 0 0 1 269.8763 931.0099)" class="st1 st8 st7">duplicate entries</text>
+	<rect x="214.4" y="25.7" class="st54" width="196.7" height="75"/>
+	<text transform="matrix(0.93 0 0 1 214.4263 33.3936)" class="st55 st8 st56">Bangalore consists of 27 constituencies, and </text>
+	<text transform="matrix(1 0 0 1 214.4261 45.6501)" class="st55 st8 st56">each constituency has the following wards </text>
+	<text transform="matrix(1 0 0 1 214.4261 57.907)" class="st55 st8 st56">that are visualized in the map. The purpose </text>
+	<text transform="matrix(0.96 0 0 1 214.4263 70.165)" class="st55 st8 st56">of this visualization is to analyze the electoral </text>
+	<text transform="matrix(0.96 0 0 1 214.4263 82.4214)" class="st55 st8 st56">rolls in each ward across Bangalore.</text>
 	<polygon class="st1" points="222.2,225.4 222.3,225.4 222.2,225.3 	"/>
-	<polygon class="st39" points="222.4,225.4 222.4,225.3 222.3,225.4 	"/>
+	<polygon class="st38" points="222.4,225.4 222.4,225.3 222.3,225.4 	"/>
 	<g>
-		<!-- Plot.ly's graph -->
-		<!-- <foreignObject id="foGraph" x="20" y="90" style="z-index: 999;">
-			<body id="plotly" xmlns="http://www.w3.org/1999/xhtml">
-				<div id="plotly">
-				</div>
-			</body>
-		</foreignObject> -->
-	</g>
-	<g>
-		<circle class="st31" cx="49.1" cy="776" r="25.8"/>
-		<g>
-			<defs>
-				<circle id="SVGID_5_" cx="49.1" cy="776" r="25.8"/>
-			</defs>
-			<clipPath id="SVGID_6_">
-				<use xlink:href="#SVGID_5_"  style="overflow:visible;"/>
-			</clipPath>
-			<polygon class="st59" points="28.7,763.8 14.5,778.1 14.5,802.9 28.7,802.9 32.3,802.9 47.4,787.9 			"/>
-			<rect x="50.3" y="747.5" class="st60" width="28.7" height="58.5"/>
-			<g class="st61">
+		<circle class="st30" cx="49.1" cy="776" r="25.8"/>
+		<g id="background_1_">
+			<g>
 				<defs>
-					<rect id="SVGID_7_" x="50.3" y="747.5" width="28.7" height="58.5"/>
+					<circle id="SVGID_5_" cx="49.1" cy="776" r="25.8"/>
+				</defs>
+				<clipPath id="SVGID_6_">
+					<use xlink:href="#SVGID_5_"  style="overflow:visible;"/>
+				</clipPath>
+				<polygon class="st57" points="28.7,763.8 14.5,778.1 14.5,802.9 28.7,802.9 32.3,802.9 47.4,787.9 				"/>
+			</g>
+			<g>
+				<defs>
+					<circle id="SVGID_7_" cx="49.1" cy="776" r="25.8"/>
 				</defs>
 				<clipPath id="SVGID_8_">
 					<use xlink:href="#SVGID_7_"  style="overflow:visible;"/>
 				</clipPath>
-				<g class="st62">
-					<line class="st63" x1="47.6" y1="788.2" x2="64.3" y2="804.9"/>
-					<line class="st64" x1="47.6" y1="785.9" x2="64.3" y2="802.5"/>
-					<line class="st65" x1="49.3" y1="761.4" x2="75.4" y2="787.6"/>
-					<line class="st66" x1="49.1" y1="749.7" x2="79.8" y2="780.4"/>
-					<line class="st67" x1="49.1" y1="739.8" x2="79.8" y2="770.4"/>
+				<rect x="50.3" y="747.5" class="st58" width="28.7" height="58.5"/>
+			</g>
+			<g>
+				<defs>
+					<circle id="SVGID_9_" cx="49.1" cy="776" r="25.8"/>
+				</defs>
+				<clipPath id="SVGID_10_">
+					<use xlink:href="#SVGID_9_"  style="overflow:visible;"/>
+				</clipPath>
+				<g class="st59">
+					<g>
+						<defs>
+							<rect id="SVGID_11_" x="50.3" y="747.5" width="28.7" height="58.5"/>
+						</defs>
+						<clipPath id="SVGID_12_">
+							<use xlink:href="#SVGID_11_"  style="overflow:visible;"/>
+						</clipPath>
+						<g class="st60">
+							<line class="st61" x1="47.6" y1="788.2" x2="64.3" y2="804.9"/>
+							<line class="st62" x1="47.6" y1="785.9" x2="64.3" y2="802.5"/>
+							<line class="st63" x1="49.3" y1="761.4" x2="75.4" y2="787.6"/>
+							<line class="st64" x1="49.1" y1="749.7" x2="79.8" y2="780.4"/>
+							<line class="st65" x1="49.1" y1="739.8" x2="79.8" y2="770.4"/>
+						</g>
+					</g>
+					<g>
+						<defs>
+							<circle id="SVGID_13_" cx="49.1" cy="776" r="25.8"/>
+						</defs>
+						<clipPath id="SVGID_14_">
+							<use xlink:href="#SVGID_13_"  style="overflow:visible;"/>
+						</clipPath>
+						<g class="st66">
+							<polygon class="st67" points="71.9,763.8 86.1,778.1 86.1,802.9 71.9,802.9 68.3,802.9 53.2,787.9 							"/>
+							<g>
+								<g>
+									<polygon class="st32" points="57.8,763.8 71.9,763.8 71.9,787.9 53.1,787.9 53.1,768.5 									"/>
+									<polygon class="st33" points="57.9,764.6 57.9,768.5 53.2,768.5 57.9,763.8 									"/>
+									<path class="st68" d="M69.2,704c-0.3-0.9-1.1-1.5-2-1.5c-0.7,0-1.3,0.3-1.7,0.8"/>
+									<g class="st21">
+										<line class="st69" x1="70.1" y1="773.1" x2="54.8" y2="773.1"/>
+										<line class="st69" x1="70.1" y1="770.5" x2="54.8" y2="770.5"/>
+										<line class="st69" x1="70.1" y1="775.8" x2="54.8" y2="775.8"/>
+										<line class="st69" x1="70.1" y1="778.5" x2="54.8" y2="778.5"/>
+										<line class="st69" x1="70.1" y1="781.2" x2="54.8" y2="781.2"/>
+										<line class="st69" x1="70.1" y1="783.9" x2="62.4" y2="783.9"/>
+									</g>
+									<path class="st70" d="M69.2,704.4c0,0,0.6-0.1,0.9-0.6"/>
+								</g>
+								<circle class="st71" cx="65.9" cy="703.9" r="1.2"/>
+							</g>
+						</g>
+					</g>
+				</g>
+				<g class="st59">
+					<g>
+						<polygon class="st32" points="42.8,763.8 28.7,763.8 28.7,787.9 47.4,787.9 47.4,768.5 						"/>
+						<polygon class="st33" points="42.7,764.6 42.7,768.5 47.4,768.5 42.7,763.8 						"/>
+						<path class="st68" d="M31.4,704c0.3-0.9,1.1-1.5,2-1.5c0.7,0,1.3,0.3,1.7,0.8"/>
+						<g class="st21">
+							<line class="st69" x1="30.5" y1="773.1" x2="45.7" y2="773.1"/>
+							<line class="st69" x1="30.5" y1="770.5" x2="45.7" y2="770.5"/>
+							<line class="st69" x1="30.5" y1="775.8" x2="45.7" y2="775.8"/>
+							<line class="st69" x1="30.5" y1="778.5" x2="45.7" y2="778.5"/>
+							<line class="st69" x1="30.5" y1="781.2" x2="45.7" y2="781.2"/>
+							<line class="st69" x1="30.5" y1="783.9" x2="38.1" y2="783.9"/>
+						</g>
+						<path class="st70" d="M31.3,704.4c0,0-0.6-0.1-0.9-0.6"/>
+					</g>
+					<circle class="st71" cx="34.7" cy="703.9" r="1.2"/>
 				</g>
 			</g>
-			<g class="st68">
-				<polygon class="st69" points="71.9,763.8 86.1,778.1 86.1,802.9 71.9,802.9 68.3,802.9 53.2,787.9 				"/>
+			<g>
+				<text transform="matrix(1 0 0 1 17.1497 819.7439)" class="st1 st8 st7">Repeated(R)</text>
+			</g>
+			<g>
+				<circle class="st30" cx="130.6" cy="776" r="25.8"/>
 				<g>
 					<g>
-						<polygon class="st33" points="57.8,763.8 71.9,763.8 71.9,787.9 53.1,787.9 53.1,768.5 						"/>
-						<polygon class="st34" points="57.9,764.6 57.9,768.5 53.2,768.5 57.9,763.8 						"/>
-						<path class="st70" d="M69.2,704c-0.3-0.9-1.1-1.5-2-1.5c-0.7,0-1.3,0.3-1.7,0.8"/>
-						<g class="st21">
-							<line class="st71" x1="70.1" y1="773.1" x2="54.8" y2="773.1"/>
-							<line class="st71" x1="70.1" y1="770.5" x2="54.8" y2="770.5"/>
-							<line class="st71" x1="70.1" y1="775.8" x2="54.8" y2="775.8"/>
-							<line class="st71" x1="70.1" y1="778.5" x2="54.8" y2="778.5"/>
-							<line class="st71" x1="70.1" y1="781.2" x2="54.8" y2="781.2"/>
-							<line class="st71" x1="70.1" y1="783.9" x2="62.4" y2="783.9"/>
-						</g>
-						<path class="st72" d="M69.2,704.4c0,0,0.6-0.1,0.9-0.6"/>
+						<defs>
+							<circle id="SVGID_15_" cx="130.6" cy="776" r="25.8"/>
+						</defs>
+						<clipPath id="SVGID_16_">
+							<use xlink:href="#SVGID_15_"  style="overflow:visible;"/>
+						</clipPath>
+						<polygon class="st72" points="110.3,763.8 96.1,778.1 96.1,802.9 110.3,802.9 113.9,802.9 129,787.9 						"/>
 					</g>
-					<circle class="st73" cx="65.9" cy="703.9" r="1.2"/>
+					<g>
+						<defs>
+							<circle id="SVGID_17_" cx="130.6" cy="776" r="25.8"/>
+						</defs>
+						<clipPath id="SVGID_18_">
+							<use xlink:href="#SVGID_17_"  style="overflow:visible;"/>
+						</clipPath>
+						<rect x="131.7" y="747.5" class="st73" width="28.7" height="58.5"/>
+					</g>
+					<g>
+						<defs>
+							<circle id="SVGID_19_" cx="130.6" cy="776" r="25.8"/>
+						</defs>
+						<clipPath id="SVGID_20_">
+							<use xlink:href="#SVGID_19_"  style="overflow:visible;"/>
+						</clipPath>
+						<polygon class="st74" points="134.4,763.8 131.7,766.5 131.6,802.9 134.4,802.9 138,802.9 153.1,787.9 						"/>
+					</g>
+					<g>
+						<defs>
+							<circle id="SVGID_21_" cx="130.6" cy="776" r="25.8"/>
+						</defs>
+						<clipPath id="SVGID_22_">
+							<use xlink:href="#SVGID_21_"  style="overflow:visible;"/>
+						</clipPath>
+						<g class="st75">
+							<polygon class="st32" points="148.1,763.8 134,763.8 134,787.9 152.7,787.9 152.7,768.5 							"/>
+							<polygon class="st33" points="148,764.6 148,768.5 152.7,768.5 148,763.8 							"/>
+							<path class="st68" d="M136.7,704c0.3-0.9,1.1-1.5,2-1.5c0.7,0,1.3,0.3,1.7,0.8"/>
+							<g class="st76">
+								<line class="st77" x1="135.8" y1="708.2" x2="151.1" y2="708.2"/>
+								<line class="st77" x1="135.8" y1="710.9" x2="151.1" y2="710.9"/>
+								<line class="st77" x1="135.8" y1="713.6" x2="151.1" y2="713.6"/>
+								<line class="st77" x1="135.8" y1="716.3" x2="151.1" y2="716.3"/>
+								<line class="st77" x1="135.8" y1="719" x2="143.4" y2="719"/>
+							</g>
+							<path class="st70" d="M136.7,704.4c0,0-0.6-0.1-0.9-0.6"/>
+							<circle class="st71" cx="138.8" cy="703.7" r="1"/>
+						</g>
+					</g>
+					<g>
+						<defs>
+							<circle id="SVGID_23_" cx="130.6" cy="776" r="25.8"/>
+						</defs>
+						<clipPath id="SVGID_24_">
+							<use xlink:href="#SVGID_23_"  style="overflow:visible;"/>
+						</clipPath>
+						<g class="st78">
+							<g>
+								<polygon class="st32" points="124.4,763.8 110.3,763.8 110.3,787.9 129.1,787.9 129.1,768.5 								"/>
+								<polygon class="st33" points="124.3,764.6 124.3,768.5 129,768.5 124.3,763.8 								"/>
+								<path class="st68" d="M113,704c0.3-0.9,1.1-1.5,2-1.5c0.7,0,1.3,0.3,1.7,0.8"/>
+								<g class="st79">
+									<line class="st69" x1="135.9" y1="773.1" x2="151.1" y2="773.1"/>
+									<line class="st69" x1="135.9" y1="775.8" x2="151.1" y2="775.8"/>
+									<g>
+										<g>
+											<line class="st80" x1="112" y1="775.8" x2="112.6" y2="775.8"/>
+											<line class="st81" x1="114" y1="775.8" x2="133.8" y2="775.8"/>
+											<line class="st80" x1="134.5" y1="775.8" x2="135.1" y2="775.8"/>
+										</g>
+									</g>
+									<g>
+										<g>
+											<line class="st80" x1="112" y1="778.5" x2="112.6" y2="778.5"/>
+											<line class="st82" x1="114.2" y1="778.5" x2="119.3" y2="778.5"/>
+											<line class="st80" x1="120.2" y1="778.5" x2="120.7" y2="778.5"/>
+										</g>
+									</g>
+									<g>
+										<g>
+											<line class="st80" x1="112" y1="781.2" x2="112.6" y2="781.2"/>
+											<line class="st80" x1="114.2" y1="781.2" x2="114.8" y2="781.2"/>
+										</g>
+									</g>
+									<g>
+										<g>
+											<line class="st80" x1="112" y1="773.2" x2="112.6" y2="773.2"/>
+											<line class="st81" x1="114" y1="773.2" x2="133.8" y2="773.2"/>
+											<line class="st80" x1="134.5" y1="773.2" x2="135.1" y2="773.2"/>
+										</g>
+									</g>
+									<line class="st69" x1="135.9" y1="770.6" x2="151.1" y2="770.6"/>
+									<g>
+										<g>
+											<line class="st80" x1="112" y1="770.6" x2="112.6" y2="770.6"/>
+											<line class="st81" x1="114" y1="770.6" x2="133.8" y2="770.6"/>
+											<line class="st80" x1="134.5" y1="770.6" x2="135.1" y2="770.6"/>
+										</g>
+									</g>
+									<line class="st69" x1="121.5" y1="778.5" x2="136.7" y2="778.5"/>
+									<line class="st69" x1="115.5" y1="781.2" x2="130.8" y2="781.2"/>
+									<line class="st69" x1="112" y1="783.9" x2="119.7" y2="783.9"/>
+								</g>
+								<path class="st70" d="M113,704.4c0,0-0.6-0.1-0.9-0.6"/>
+							</g>
+							<circle class="st71" cx="115.2" cy="703.7" r="1.1"/>
+						</g>
+					</g>
 				</g>
 			</g>
-		</g>
-		<g>
 			<g>
-				<polygon class="st33" points="42.8,763.8 28.7,763.8 28.7,787.9 47.4,787.9 47.4,768.5 				"/>
-				<polygon class="st34" points="42.7,764.6 42.7,768.5 47.4,768.5 42.7,763.8 				"/>
-				<path class="st70" d="M31.4,704c0.3-0.9,1.1-1.5,2-1.5c0.7,0,1.3,0.3,1.7,0.8"/>
-				<g class="st21">
-					<line class="st71" x1="30.5" y1="773.1" x2="45.7" y2="773.1"/>
-					<line class="st71" x1="30.5" y1="770.5" x2="45.7" y2="770.5"/>
-					<line class="st71" x1="30.5" y1="775.8" x2="45.7" y2="775.8"/>
-					<line class="st71" x1="30.5" y1="778.5" x2="45.7" y2="778.5"/>
-					<line class="st71" x1="30.5" y1="781.2" x2="45.7" y2="781.2"/>
-					<line class="st71" x1="30.5" y1="783.9" x2="38.1" y2="783.9"/>
-				</g>
-				<path class="st72" d="M31.3,704.4c0,0-0.6-0.1-0.9-0.6"/>
+				<text transform="matrix(1 0 0 1 105.7425 819.7439)" class="st1 st8 st7">Shifted(S)</text>
 			</g>
-			<circle class="st73" cx="34.7" cy="703.9" r="1.2"/>
-		</g>
-	</g>
-	<g>
-		<text transform="matrix(1 0 0 1 17.1497 819.7439)" class="st1 st8 st7">Repeated(R)</text>
-	</g>
-	<g>
-		<circle class="st31" cx="130.6" cy="776" r="25.8"/>
-		<g>
-			<defs>
-				<circle id="SVGID_9_" cx="130.6" cy="776" r="25.8"/>
-			</defs>
-			<clipPath id="SVGID_10_">
-				<use xlink:href="#SVGID_9_"  style="overflow:visible;"/>
-			</clipPath>
-			<polygon class="st74" points="110.3,763.8 96.1,778.1 96.1,802.9 110.3,802.9 113.9,802.9 129,787.9 			"/>
-			<rect x="131.7" y="747.5" class="st75" width="28.7" height="58.5"/>
-			<polygon class="st76" points="134.4,763.8 131.7,766.5 131.6,802.9 134.4,802.9 138,802.9 153.1,787.9 			"/>
-			<g class="st77">
-				<polygon class="st33" points="148.1,763.8 134,763.8 134,787.9 152.7,787.9 152.7,768.5 				"/>
-				<polygon class="st34" points="148,764.6 148,768.5 152.7,768.5 148,763.8 				"/>
-				<path class="st70" d="M136.7,704c0.3-0.9,1.1-1.5,2-1.5c0.7,0,1.3,0.3,1.7,0.8"/>
-				<g class="st78">
-					<line class="st79" x1="135.8" y1="708.2" x2="151.1" y2="708.2"/>
-					<line class="st79" x1="135.8" y1="710.9" x2="151.1" y2="710.9"/>
-					<line class="st79" x1="135.8" y1="713.6" x2="151.1" y2="713.6"/>
-					<line class="st79" x1="135.8" y1="716.3" x2="151.1" y2="716.3"/>
-					<line class="st79" x1="135.8" y1="719" x2="143.4" y2="719"/>
-				</g>
-				<path class="st72" d="M136.7,704.4c0,0-0.6-0.1-0.9-0.6"/>
-				<circle class="st73" cx="138.8" cy="703.7" r="1"/>
-			</g>
-			<g class="st77">
+			<g>
+				<circle class="st30" cx="211.6" cy="776" r="25.8"/>
 				<g>
-					<polygon class="st33" points="124.4,763.8 110.3,763.8 110.3,787.9 129.1,787.9 129.1,768.5 					"/>
-					<polygon class="st34" points="124.3,764.6 124.3,768.5 129,768.5 124.3,763.8 					"/>
-					<path class="st70" d="M113,704c0.3-0.9,1.1-1.5,2-1.5c0.7,0,1.3,0.3,1.7,0.8"/>
-					<g class="st80">
-						<line class="st71" x1="135.9" y1="773.1" x2="151.1" y2="773.1"/>
-						<line class="st71" x1="135.9" y1="775.8" x2="151.1" y2="775.8"/>
-						<g>
-							<g>
-								<line class="st81" x1="112" y1="775.8" x2="112.6" y2="775.8"/>
-								<line class="st82" x1="114" y1="775.8" x2="133.8" y2="775.8"/>
-								<line class="st81" x1="134.5" y1="775.8" x2="135.1" y2="775.8"/>
-							</g>
-						</g>
-						<g>
-							<g>
-								<line class="st81" x1="112" y1="778.5" x2="112.6" y2="778.5"/>
-								<line class="st83" x1="114.2" y1="778.5" x2="119.3" y2="778.5"/>
-								<line class="st81" x1="120.2" y1="778.5" x2="120.7" y2="778.5"/>
-							</g>
-						</g>
-						<g>
-							<g>
-								<line class="st81" x1="112" y1="781.2" x2="112.6" y2="781.2"/>
-								<line class="st81" x1="114.2" y1="781.2" x2="114.8" y2="781.2"/>
-							</g>
-						</g>
-						<g>
-							<g>
-								<line class="st81" x1="112" y1="773.2" x2="112.6" y2="773.2"/>
-								<line class="st82" x1="114" y1="773.2" x2="133.8" y2="773.2"/>
-								<line class="st81" x1="134.5" y1="773.2" x2="135.1" y2="773.2"/>
-							</g>
-						</g>
-						<line class="st71" x1="135.9" y1="770.6" x2="151.1" y2="770.6"/>
-						<g>
-							<g>
-								<line class="st81" x1="112" y1="770.6" x2="112.6" y2="770.6"/>
-								<line class="st82" x1="114" y1="770.6" x2="133.8" y2="770.6"/>
-								<line class="st81" x1="134.5" y1="770.6" x2="135.1" y2="770.6"/>
-							</g>
-						</g>
-						<line class="st71" x1="121.5" y1="778.5" x2="136.7" y2="778.5"/>
-						<line class="st71" x1="115.5" y1="781.2" x2="130.8" y2="781.2"/>
-						<line class="st71" x1="112" y1="783.9" x2="119.7" y2="783.9"/>
+					<g>
+						<defs>
+							<circle id="SVGID_25_" cx="211.6" cy="776" r="25.8"/>
+						</defs>
+						<clipPath id="SVGID_26_">
+							<use xlink:href="#SVGID_25_"  style="overflow:visible;"/>
+						</clipPath>
+						<polygon class="st83" points="199.4,760.2 180.8,778.9 180.8,811.3 199.4,811.3 204.1,811.3 223.8,791.6 223.1,788.9 
+							225.8,785.6 222.6,786.1 						"/>
 					</g>
-					<path class="st72" d="M113,704.4c0,0-0.6-0.1-0.9-0.6"/>
 				</g>
-				<circle class="st73" cx="115.2" cy="703.7" r="1.1"/>
+				<g>
+					<path class="st84" d="M201,786.1c0,0,0.5,4.6,0,5.9"/>
+					<line class="st84" x1="207.3" y1="785.1" x2="207.3" y2="792"/>
+					<path class="st84" d="M204.2,785.8c0,0,0.6,5,0,6.2"/>
+					<line class="st84" x1="210.5" y1="785.7" x2="210.5" y2="792"/>
+					<path class="st84" d="M222.4,785.1c0,0-0.3,4.8,0.9,6.4"/>
+					<path class="st84" d="M219.2,785.1c0,0-0.2,5.6,0.4,6.4"/>
+					<line class="st84" x1="216.4" y1="785.7" x2="216.4" y2="792"/>
+					<line class="st84" x1="213.4" y1="785.7" x2="213.4" y2="792"/>
+				</g>
+				<path class="st85" d="M224,786.7h-24.8c-1.1,0-2-0.9-2-2v-2.5c0-1.1,0.9-2,2-2H224c1.1,0,2,0.9,2,2v2.5
+					C226,785.8,225.1,786.7,224,786.7z"/>
+				<path class="st14" d="M223.5,784.1h-23.7c-1.4,0-2.5-1.1-2.5-2.5l0,0c0-1.4,1.1-2.5,2.5-2.5h23.7c1.4,0,2.5,1.1,2.5,2.5l0,0
+					C226,783,224.9,784.1,223.5,784.1z"/>
+				<path class="st30" d="M223.8,782.1h-24.5c-0.2,0-0.3-0.1-0.3-0.3l0,0c0-0.2,0.1-0.3,0.3-0.3h24.5c0.2,0,0.3,0.1,0.3,0.3l0,0
+					C224.1,781.9,224,782.1,223.8,782.1z"/>
+				<polygon class="st32" points="217.8,760.2 199.4,760.2 199.4,781.8 223.9,781.8 223.9,766.3 				"/>
+				<polygon class="st33" points="217.7,761.2 217.7,766.3 223.9,766.3 217.7,760.2 				"/>
+				<g class="st21">
+					<line class="st35" x1="201.8" y1="768.9" x2="221.7" y2="768.9"/>
+					<line class="st35" x1="201.8" y1="772.4" x2="221.7" y2="772.4"/>
+					<line class="st35" x1="201.8" y1="775.9" x2="221.7" y2="775.9"/>
+					<line class="st35" x1="201.8" y1="779.4" x2="211.7" y2="779.4"/>
+				</g>
+				<g class="st86">
+					<line class="st87" x1="202.2" y1="704" x2="221.2" y2="704"/>
+					<line class="st87" x1="202.2" y1="707.5" x2="221.2" y2="707.5"/>
+					<line class="st87" x1="202.2" y1="711" x2="221.2" y2="711"/>
+					<line class="st88" x1="202.2" y1="714.5" x2="210.8" y2="714.5"/>
+				</g>
+			</g>
+			<g>
+				<text transform="matrix(1 0 0 1 184.5638 819.7439)" class="st1 st8 st7">Expired(E)</text>
+			</g>
+			<g>
+				<circle class="st30" cx="293.1" cy="776" r="25.8"/>
+				<g>
+					<g>
+						<defs>
+							<circle id="SVGID_27_" cx="293.1" cy="776" r="25.8"/>
+						</defs>
+						<clipPath id="SVGID_28_">
+							<use xlink:href="#SVGID_27_"  style="overflow:visible;"/>
+						</clipPath>
+						<polygon class="st89" points="280.9,760.3 262.3,778.9 262.3,811.4 280.9,811.4 285.6,811.4 305.3,791.7 						"/>
+					</g>
+				</g>
+				<polygon class="st32" points="299.3,760.3 280.9,760.3 280.9,791.8 305.4,791.8 305.4,766.4 				"/>
+				<polygon class="st33" points="299.2,761.3 299.2,766.4 305.3,766.4 299.2,760.3 				"/>
+				<path class="st34" d="M284.4,702.1c0.4-1.1,1.4-2,2.7-2c1.3,0,2.3,0.8,2.7,2"/>
+				<g class="st21">
+					<line class="st35" x1="283.2" y1="772.5" x2="303.2" y2="772.5"/>
+					<line class="st35" x1="283.2" y1="768.9" x2="303.2" y2="768.9"/>
+					<line class="st35" x1="283.2" y1="776" x2="303.2" y2="776"/>
+					<line class="st35" x1="283.2" y1="779.5" x2="303.2" y2="779.5"/>
+					<line class="st35" x1="283.2" y1="783" x2="293.2" y2="783"/>
+					<line class="st35" x1="283.2" y1="786.5" x2="293.2" y2="786.5"/>
+				</g>
+				<g>
+					<circle class="st36" cx="299.4" cy="786.1" r="4.9"/>
+					<circle class="st37" cx="299.7" cy="785.8" r="4.9"/>
+					<circle class="st38" cx="299.7" cy="785.8" r="3.9"/>
+					<circle class="st33" cx="299.6" cy="785.9" r="3.8"/>
+					<line class="st39" x1="299.7" y1="788.1" x2="299.7" y2="783.7"/>
+					<line class="st39" x1="297.5" y1="785.9" x2="301.9" y2="785.9"/>
+				</g>
+				<path class="st40" d="M284.3,702.6c0,0-0.8-0.1-1.1-0.7"/>
+			</g>
+			<g>
+				<text transform="matrix(1 0 0 1 267.2102 819.7439)" class="st1 st8 st7">Added(A)</text>
+			</g>
+			<g>
+				<circle class="st30" cx="374.1" cy="775.7" r="25.8"/>
+				<g>
+					<g>
+						<defs>
+							<circle id="SVGID_29_" cx="374.5" cy="776" r="25.8"/>
+						</defs>
+						<clipPath id="SVGID_30_">
+							<use xlink:href="#SVGID_29_"  style="overflow:visible;"/>
+						</clipPath>
+						<polygon class="st90" points="362.3,760.3 343.6,778.9 343.6,811.4 362.3,811.4 367,811.4 386.7,791.7 						"/>
+					</g>
+				</g>
+				<polygon class="st32" points="380.6,760.3 362.3,760.3 362.3,791.8 386.7,791.8 386.7,766.4 				"/>
+				<polygon class="st33" points="380.6,761.3 380.6,766.4 386.7,766.4 380.6,760.3 				"/>
+				<g class="st21">
+					<line class="st35" x1="364.6" y1="772.5" x2="384.5" y2="772.5"/>
+					<line class="st35" x1="364.6" y1="768.9" x2="384.5" y2="768.9"/>
+					<line class="st35" x1="364.6" y1="776" x2="384.5" y2="776"/>
+					<line class="st35" x1="364.6" y1="779.5" x2="384.5" y2="779.5"/>
+					<line class="st35" x1="364.6" y1="783" x2="384.5" y2="783"/>
+					<line class="st35" x1="364.6" y1="786.5" x2="374.6" y2="786.5"/>
+				</g>
+				<line class="st39" x1="364.9" y1="787.7" x2="384.4" y2="768.2"/>
+			</g>
+			<g>
+				<text transform="matrix(0.91 0 0 1 337.6353 819.7441)" class="st1 st8 st7">Disqualified(Q)</text>
 			</g>
 		</g>
-	</g>
-	<g>
-		<text transform="matrix(1 0 0 1 105.7425 819.7439)" class="st1 st8 st7">Shifted(S)</text>
-	</g>
-	<g>
-		<circle class="st31" cx="211.6" cy="776" r="25.8"/>
-		<g>
-			<defs>
-				<circle id="SVGID_11_" cx="211.6" cy="776" r="25.8"/>
-			</defs>
-			<clipPath id="SVGID_12_">
-				<use xlink:href="#SVGID_11_"  style="overflow:visible;"/>
-			</clipPath>
-			<polygon class="st84" points="199.4,760.2 180.8,778.9 180.8,811.3 199.4,811.3 204.1,811.3 223.8,791.6 223.1,788.9
-				225.8,785.6 222.6,786.1 			"/>
+		<g id="edit_1_">
+			<text id="uniquevoters" transform="matrix(1 0 0 1 39.1751 243.5564)" class="st1 st2 st7">85345 voters</text>
+			<g>
+				<text id="wardname" transform="matrix(1 0 0 1 17.5042 133.2253)" class="st1 st2 st91">Ward name</text>
+			</g>
+			<text id="duplicatedEPIC" transform="matrix(1 0 0 1 15.7415 929.6638)" class="st1 st2 st92">26</text>
+			<text id="suspected" transform="matrix(1 0 0 1 187.7307 929.6638)" class="st1 st2 st92">5558</text>
+			<text id="male" transform="matrix(1 0 0 1 193.4925 243.5564)" class="st1 st2 st7">44939</text>
+			<text id="female" transform="matrix(1 0 0 1 275.2727 243.5564)" class="st1 st2 st7">40369</text>
+			<text id="trans" transform="matrix(1 0 0 1 364.0266 243.5564)" class="st1 st2 st7">37</text>
+			<text id="original" transform="matrix(1 0 0 1 91.1399 663.4441)" class="st1 st2 st7">2456678</text>
+			<text id="modified" transform="matrix(1 0 0 1 301.7718 663.4441)" class="st1 st2 st7">245</text>
+			<text id="repeated" transform="matrix(1 0 0 1 43.0257 837.8074)" class="st1 st2 st7">56</text>
+			<text id="shifted" transform="matrix(1 0 0 1 124.6966 837.8074)" class="st1 st2 st7">56</text>
+			<text id="expired" transform="matrix(1 0 0 1 204.679 837.8074)" class="st1 st2 st7">56</text>
+			<text id="added" transform="matrix(1 0 0 1 285.8655 837.8074)" class="st1 st2 st7">56</text>
+			<text id="disqualified" transform="matrix(1 0 0 1 367.0843 837.8074)" class="st1 st2 st7">56</text>
+			<circle id="cmale" class="st1" cx="210.1" cy="203.6" r="24.9"/>
+			<circle id="cfemale" class="st10" cx="293.8" cy="203.6" r="24.9"/>
+			<circle id="ctrans" class="st11" cx="370.7" cy="211.6" r="16.8"/>
 		</g>
-		<g>
-			<path class="st85" d="M201,786.1c0,0,0.5,4.6,0,5.9"/>
-			<line class="st85" x1="207.3" y1="785.1" x2="207.3" y2="792"/>
-			<path class="st85" d="M204.2,785.8c0,0,0.6,5,0,6.2"/>
-			<line class="st85" x1="210.5" y1="785.7" x2="210.5" y2="792"/>
-			<path class="st85" d="M222.4,785.1c0,0-0.3,4.8,0.9,6.4"/>
-			<path class="st85" d="M219.2,785.1c0,0-0.2,5.6,0.4,6.4"/>
-			<line class="st85" x1="216.4" y1="785.7" x2="216.4" y2="792"/>
-			<line class="st85" x1="213.4" y1="785.7" x2="213.4" y2="792"/>
-		</g>
-		<path class="st86" d="M224,786.7h-24.8c-1.1,0-2-0.9-2-2v-2.5c0-1.1,0.9-2,2-2H224c1.1,0,2,0.9,2,2v2.5
-			C226,785.8,225.1,786.7,224,786.7z"/>
-		<path class="st14" d="M223.5,784.1h-23.7c-1.4,0-2.5-1.1-2.5-2.5l0,0c0-1.4,1.1-2.5,2.5-2.5h23.7c1.4,0,2.5,1.1,2.5,2.5l0,0
-			C226,783,224.9,784.1,223.5,784.1z"/>
-		<path class="st31" d="M223.8,782.1h-24.5c-0.2,0-0.3-0.1-0.3-0.3l0,0c0-0.2,0.1-0.3,0.3-0.3h24.5c0.2,0,0.3,0.1,0.3,0.3l0,0
-			C224.1,781.9,224,782.1,223.8,782.1z"/>
-		<polygon class="st33" points="217.8,760.2 199.4,760.2 199.4,781.8 223.9,781.8 223.9,766.3 		"/>
-		<polygon class="st34" points="217.7,761.2 217.7,766.3 223.9,766.3 217.7,760.2 		"/>
-		<g class="st21">
-			<line class="st36" x1="201.8" y1="768.9" x2="221.7" y2="768.9"/>
-			<line class="st36" x1="201.8" y1="772.4" x2="221.7" y2="772.4"/>
-			<line class="st36" x1="201.8" y1="775.9" x2="221.7" y2="775.9"/>
-			<line class="st36" x1="201.8" y1="779.4" x2="211.7" y2="779.4"/>
-		</g>
-		<g class="st87">
-			<line class="st88" x1="202.2" y1="704" x2="221.2" y2="704"/>
-			<line class="st88" x1="202.2" y1="707.5" x2="221.2" y2="707.5"/>
-			<line class="st88" x1="202.2" y1="711" x2="221.2" y2="711"/>
-			<line class="st89" x1="202.2" y1="714.5" x2="210.8" y2="714.5"/>
-		</g>
-	</g>
-	<g>
-		<text transform="matrix(1 0 0 1 184.5638 819.7439)" class="st1 st8 st7">Expired(E)</text>
-	</g>
-	<g>
-		<circle class="st31" cx="293.1" cy="776" r="25.8"/>
-		<g>
-			<defs>
-				<circle id="SVGID_13_" cx="293.1" cy="776" r="25.8"/>
-			</defs>
-			<clipPath id="SVGID_14_">
-				<use xlink:href="#SVGID_13_"  style="overflow:visible;"/>
-			</clipPath>
-			<polygon class="st90" points="280.9,760.3 262.3,778.9 262.3,811.4 280.9,811.4 285.6,811.4 305.3,791.7 			"/>
-		</g>
-		<polygon class="st33" points="299.3,760.3 280.9,760.3 280.9,791.8 305.4,791.8 305.4,766.4 		"/>
-		<polygon class="st34" points="299.2,761.3 299.2,766.4 305.3,766.4 299.2,760.3 		"/>
-		<path class="st35" d="M284.4,702.1c0.4-1.1,1.4-2,2.7-2c1.3,0,2.3,0.8,2.7,2"/>
-		<g class="st21">
-			<line class="st36" x1="283.2" y1="772.5" x2="303.2" y2="772.5"/>
-			<line class="st36" x1="283.2" y1="768.9" x2="303.2" y2="768.9"/>
-			<line class="st36" x1="283.2" y1="776" x2="303.2" y2="776"/>
-			<line class="st36" x1="283.2" y1="779.5" x2="303.2" y2="779.5"/>
-			<line class="st36" x1="283.2" y1="783" x2="293.2" y2="783"/>
-			<line class="st36" x1="283.2" y1="786.5" x2="293.2" y2="786.5"/>
-		</g>
-		<g>
-			<circle class="st37" cx="299.4" cy="786.1" r="4.9"/>
-			<circle class="st38" cx="299.7" cy="785.8" r="4.9"/>
-			<circle class="st39" cx="299.7" cy="785.8" r="3.9"/>
-			<circle class="st34" cx="299.6" cy="785.9" r="3.8"/>
-			<line class="st40" x1="299.7" y1="788.1" x2="299.7" y2="783.7"/>
-			<line class="st40" x1="297.5" y1="785.9" x2="301.9" y2="785.9"/>
-		</g>
-		<path class="st41" d="M284.3,702.6c0,0-0.8-0.1-1.1-0.7"/>
-	</g>
-	<g>
-		<text transform="matrix(1 0 0 1 267.2102 819.7439)" class="st1 st8 st7">Added(A)</text>
-	</g>
-	<g>
-		<circle class="st31" cx="374.1" cy="775.7" r="25.8"/>
-		<g>
-			<defs>
-				<circle id="SVGID_15_" cx="374.5" cy="776" r="25.8"/>
-			</defs>
-			<clipPath id="SVGID_16_">
-				<use xlink:href="#SVGID_15_"  style="overflow:visible;"/>
-			</clipPath>
-			<polygon class="st91" points="362.3,760.3 343.6,778.9 343.6,811.4 362.3,811.4 367,811.4 386.7,791.7 			"/>
-		</g>
-		<polygon class="st33" points="380.6,760.3 362.3,760.3 362.3,791.8 386.7,791.8 386.7,766.4 		"/>
-		<polygon class="st34" points="380.6,761.3 380.6,766.4 386.7,766.4 380.6,760.3 		"/>
-		<g class="st21">
-			<line class="st36" x1="364.6" y1="772.5" x2="384.5" y2="772.5"/>
-			<line class="st36" x1="364.6" y1="768.9" x2="384.5" y2="768.9"/>
-			<line class="st36" x1="364.6" y1="776" x2="384.5" y2="776"/>
-			<line class="st36" x1="364.6" y1="779.5" x2="384.5" y2="779.5"/>
-			<line class="st36" x1="364.6" y1="783" x2="384.5" y2="783"/>
-			<line class="st36" x1="364.6" y1="786.5" x2="374.6" y2="786.5"/>
-		</g>
-		<line class="st40" x1="364.9" y1="787.7" x2="384.4" y2="768.2"/>
-	</g>
-	<g>
-		<text transform="matrix(0.91 0 0 1 337.635 819.7439)" class="st1 st8 st7">Disqualified(Q)</text>
-	</g>
-</g>
-<g id="edit_1_">
-	<text transform="matrix(1 0 0 1 39.1751 243.5564)" id="uniquevoters" class="st1 st2 st7">85345 voters</text>
-	<g>
-		<text transform="matrix(1 0 0 1 17.5042 133.2253)" id="wardname" class="st1 st2 st92">Ward name</text>
-	</g>
-	<text transform="matrix(1 0 0 1 15.7415 929.6638)" class="st1 st2 st93">26</text>
-	<text transform="matrix(1 0 0 1 213.7307 929.6638)" class="st1 st2 st93">58</text>
-	<text transform="matrix(1 0 0 1 193.4925 243.5564)" id="male" class="st1 st2 st7">44939</text>
-	<text transform="matrix(1 0 0 1 275.2727 243.5564)" id="female" class="st1 st2 st7">40369</text>
-	<text transform="matrix(1 0 0 1 364.0266 243.5564)" id="trans" class="st1 st2 st7">37</text>
-	<text transform="matrix(1 0 0 1 91.1399 663.4441)" class="st1 st2 st7">2456678</text>
-	<text transform="matrix(1 0 0 1 301.7718 663.4441)" class="st1 st2 st7">245</text>
-	<text transform="matrix(1 0 0 1 43.0257 837.8074)" class="st1 st2 st7">56</text>
-	<text transform="matrix(1 0 0 1 124.6966 837.8074)" class="st1 st2 st7">56</text>
-	<text transform="matrix(1 0 0 1 204.679 837.8074)" class="st1 st2 st7">56</text>
-	<text transform="matrix(1 0 0 1 285.8655 837.8074)" class="st1 st2 st7">56</text>
-	<text transform="matrix(1 0 0 1 367.0843 837.8074)" class="st1 st2 st7">56</text>
-	<circle class="st1" id="cmale" cx="210.1" cy="203.6" r="24.9"/>
-	<circle class="st10" id="cfemale" cx="293.8" cy="203.6" r="24.9"/>
-	<circle class="st11" id="ctrans" cx="370.7" cy="211.6" r="16.8"/>
-</g>
-
-<script type="text/javascript"><![CDATA[
+		<script  type="text/javascript">
+			<![CDATA[
  var geojson = (function () {
 			var json = null;
 			$.ajax({
 					'async': false,
 					'global': false,
-					'url': 'https://api.myjson.com/bins/eqmvn',
+					'url': 'https://api.myjson.com/bins/i2tcf',
 					'dataType': "json",
 					'success': function (data) {
 							json = data;
@@ -762,7 +820,11 @@
 		}
 	}
 
-	ward = ward.replace("%20"," ");
+	String.prototype.replaceAll = function(target, replacement) {
+		return this.split(target).join(replacement);
+	};
+
+	ward = ward.replaceAll("%20"," ");
 
 	geojson.features.forEach(function(marker) {
 			if(marker.properties.ward == ward)
@@ -778,13 +840,24 @@
 				var transRadius = marker.properties.trans/1800;
 				transRadius = (transRadius < 1) ? 2 : marker.properties.trans;
 				$("#ctrans").attr("r", transRadius);
-				console.log(marker.properties.EPICdupl);
-				console.log(marker.properties.EPICmult);
+
+				$("#duplicatedEPIC").text(marker.properties.EPICdupl);
+				$("#suspected").text(marker.properties.EPICmult);
+				$("#original").text(marker.properties.original);
+				$("#modified").text(marker.properties.modified);
+				$("#repeated").text(marker.properties.repeated);
+				$("#shifted").text(marker.properties.shifted);
+				$("#expired").text(marker.properties.expired);
+				$("#added").text(marker.properties.added);
+				$("#disqualified").text(marker.properties.disqualified);
 
 				//document.getElementById('plotly').innerHTML = "<object type=\"text/html\" data=\"Agegraph/plotly.html?ward="+ward+"\" width=\"540px\" height=\"400px\" style=\"overflow: hidden;margin-top:250px; margin-left:-40px;\"></object>";
 				//console.log(document.getElementById('plotly').innerHTML);
 			}
 	});
-]]></script>
 
+				]]>
+		</script>
+	</g>
+</g>
 </svg>
