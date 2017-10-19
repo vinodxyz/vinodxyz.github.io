@@ -1,0 +1,86 @@
+.bar{
+    display: inline-block;
+    width: 20px;
+    height: 75px;
+    background-color: teal;
+}
+
+.axis text{
+    fill: #894C79;
+    font-family: "Lato";
+    font-size: 12;
+}
+
+.axis path,.axis line{
+    stroke: #894C79;
+    shape-rendering: crispEdges;
+}
+
+#tooltip{
+    position: absolute;
+/*  border-radius: 5px;*/
+    width: 100px;
+    height: auto;
+    box-shadow: 4px 4px 10px rgba(0,0,0,0.05);
+    background-color: #F7F7F7;
+    padding: 10px;
+    pointer-events: none;
+}
+
+#tooltip p{
+    font-family: "Lato";
+    font-size: 9;
+    margin: 0px;
+    line-height: 20px;
+}
+
+#tooltip.hidden{
+    display:none;
+}
+
+.line {
+    fill: none;
+    stroke: teal;
+    stroke-width: 0.5;
+}
+
+.safeLevel {
+    stroke: red;
+    stroke-dasharray: 2, 3;
+}
+
+.danger-line {
+    fill: none;
+    stroke: red;
+    stroke-width: 0.5;
+}
+
+.area {
+    fill: teal;
+    stroke: none;
+}
+
+.danger-area {
+    fill: #F1487F;
+    stroke: none;
+}
+
+.safelevel-text{
+    font-family: "Lato";
+    fill: #F1487F;
+}
+
+
+.pan rect {
+    fill: black;
+    opacity: 0.2;
+}
+.pan text {
+    fill: black;
+    font-size: 18px;
+    text-anchor: middle;
+}
+.pan:hover rect,
+.pan:hover text {
+    fill: blue;
+}
