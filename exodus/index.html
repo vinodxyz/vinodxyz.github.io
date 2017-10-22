@@ -10,7 +10,7 @@
     
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700,700i" rel="stylesheet">
     
     <script src="csv/sankey-flow-story.js"></script>
     
@@ -25,10 +25,11 @@
         <div class="col-lg-8">
 <!--            <h3>Refugees are often the first victims of Terrorism</h3>-->
             <h3>
-                Birth of Refugees
+                <span class="title">Birth of Refugees</span>
                 <button id="btnPause" class="btn btn-default btn-xs">
                     <span id="spanPause" class="glyphicon glyphicon-pause"></span>
                 </button>
+<!--                <input type=slider>-->
 <!--                <input type="button" class="btn btn-default btn-xs" id="btnPause" value="Pause">-->
             </h3>
             <span>
@@ -70,14 +71,19 @@
     <div class="container-fluid">
         <div class="col-lg-12">
             <div id="flow-area-chart"></div>
+            <div id="slidecontainer">
+                <input type="range" min="1961" max="2016" step="1" value="1961" class="slider" id="yearSlider">
+            </div>
         </div>
     </div>
     
+<!--
     <div id="slidecontainer" class="container-fluid">
         <div class="col-lg-12">
             <input type="range" min="1961" max="2016" step="1" value="1961" class="slider" id="yearSlider">
         </div>
     </div>
+-->
 
 
     <script>
@@ -286,6 +292,9 @@
                     })
                     .on("mouseover", function(d) {
                         let thisName = d.name;
+                        
+                        d3.selectAll(".area").attr("opacity",0.2);
+                        d3.selectAll(".area."+thisName.replace(/ /g,'').replace(/\./g,'')).attr("opacity",1);
 
                         node.selectAll("rect")
                             .style("opacity", function(d) {
@@ -319,6 +328,8 @@
 
                     })
                     .on("mouseout", function(d) {
+                        
+                        d3.selectAll(".area").attr("opacity",0.7);
                         d3.selectAll(".origin").style("opacity", 1);
                         d3.selectAll(".destination").style("opacity", 0.5);
                         d3.selectAll(".sankey-link").style("opacity", 0.7);
@@ -330,7 +341,6 @@
                             else if(+d.value < 200000){
                                 var currYear = $("#yearSlider").val();
                                 if((+currYear == 1994) || (+currYear >= 2000)){
-                                    console.log("YES");
                                     return "#FFFFFF";
                                 }
                             }
@@ -354,7 +364,7 @@
                         return (d.y0 + d.y1) / 2;
                     })
                     .attr("dy", "0.35em")
-                    //.attr("text-align", "right")
+                    .attr("class", "flow-sankey-text")
                     .style("cursor", "pointer")
                     .attr("fill", function(d) {
                         //return "#949494";
@@ -365,7 +375,6 @@
                         else if(+d.value < 200000){
                             var currYear = $("#yearSlider").val();
                             if((+currYear == 1994) || (+currYear >= 2000)){
-                                console.log("YES");
                                 return "#FFFFFF";
                             }
                         }
@@ -389,7 +398,9 @@
                     })
                     .on("mouseover", function(d) {
                         var theName = d.name;
-                        console.log(d);
+                    
+                        d3.selectAll(".area").attr("opacity",0.2);
+                        d3.selectAll(".area."+theName.replace(/ /g,'').replace(/\./g,'')).attr("opacity",1);
 
                         node.selectAll("rect")
                             .style("opacity", function(d) {
@@ -419,6 +430,8 @@
                             })
                     })
                     .on("mouseout", function(d) {
+                        
+                        d3.selectAll(".area").attr("opacity",0.7);
                         d3.selectAll("rect").style("opacity", 0.5);
                         d3.selectAll(".sankey-link").style("opacity", 0.7);
                         d3.selectAll("text").style("opacity", 1).attr("fill", function(d) {
@@ -429,7 +442,6 @@
                             else if(+d.value < 200000){
                                 var currYear = $("#yearSlider").val();
                                 if((+currYear == 1994) || (+currYear >= 2000)){
-                                    console.log("YES");
                                     return "#FFFFFF";
                                 }
                             }
@@ -640,6 +652,19 @@
 								.range([h,0])
 								.nice();
                 
+                var nodeColour = 
+                    d3.scaleOrdinal()
+                    .domain(d3.range(dataset.keys.length))
+                    .range(['#E01A25','#2074A0','#C20049','#10A66E','#991C71','#7EB852','#EFB605','#AAA9AA','#5CEAEA','#E58903','#66489F']);
+                
+				xAxis = d3.axisBottom()
+						   .scale(xScale)
+						   .ticks(10);
+                
+				yAxis = d3.axisRight()
+						   .scale(yScale)
+						   .ticks(3);
+                
                 var area = d3.area()
                             .x(function(d) { return xScale(d.data.year); })
 							.y0(function(d) { return yScale(d[0]); })
@@ -649,15 +674,23 @@
 					.data(series)
 					.enter()
 					.append("path")
-					.attr("class", "area")
+                    .attr("class", function(d){
+                        return "area"+" "+d.key.replace(/ /g,'').replace(/\./g,'');
+                    })
 					.attr("d", area)
 					.attr("fill", function(d, i) {
-						return d3.schemeCategory20[i];
-					})
+						//return d3.schemeCategory20[i];
+						return nodeColour(i);
+					}).attr("opacity","0.7")
 					.append("title")
 					.text(function(d) {
 						return d.key;
 					});
+                
+                svg.append("g")
+					.attr("class", "xaxis")
+					.attr("transform", "translate(0," + (60) + ")")
+					.call(xAxis);
                 
             });
             
