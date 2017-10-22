@@ -5,9 +5,9 @@
     <script src="js/d3.js"></script>
     <script src="js/d3-sankey-circular.js"></script>
     <script src="js/d3-scale-chromatic.v1.min.js"></script>
-    <script src="csv/sankey-flow-story.js"></script>
+    <script src="js/backups/2002-data.js"></script>
+    <script src="csv/sankey-flow-data.js"></script>
     <script src="js/jquery.min.js"></script>
-<!--    <script src="js/sankey-json-script.js"></script>-->
 
   <link href="https://fonts.googleapis.com/css?family=Roboto:100i" rel="stylesheet">
 
@@ -77,62 +77,50 @@
 <body>
 
   <h1>Sankey with circular links (>20,000 refugees)</h1>
-    
+    <div id="yearLabel"></div>
     <div id="chart"></div>
-    <div id="year-label"></div>
-    <div id=story-section>
-        <div id="story-Afghanistan"></div>
-        <div id="story-Syria"></div>
-        <div id="story-Iraq"></div>
-        <div id="story-Congo"></div>
-        <div id="story-Rwanda"></div>
-        <div id="story-Ethiopia"></div>
-        <div id="story-Somalia"></div>
-        <div id="story-Sudan"></div>
-        <div id="story-Vietnam"></div>
-        <div id="story-Myanmmar"></div>
-        <div id="story-Burundi"></div>
-    </div>
-    <input type="button" id="btnPause" value="Pause">
+    
     <div id="slidecontainer">
         <input type="range" min="1961" max="2016" step="1" value="1961" class="slider" id="yearSlider">
     </div>
-    
+
     
   <script>
-    
-  
-    var slider = d3.select('#yearSlider').on("change",function(){renderChart();});
+    var slider = d3.select('#yearSlider').on("mousedown",function(){renderChart();});
     
      
     var margin = { top: 150, right: 100, bottom: 130, left: 120 };
     var width = 1000;
     var height = 1000;
 
-    const nodePadding = 20;
+    const nodePadding = 40;
+
     const circularLinkGap = 2;
 
     var sankey = d3.sankey()
       .nodeWidth(10)
       .nodePadding(nodePadding)
       .nodePaddingRatio(0.5)
-      .scale(0.1)
+      .scale(0.3)
       .size([width, height])
       .nodeId(function (d) {
         return d.name;
       })
       .nodeAlign(d3.sankeyJustify)
       .iterations(32);
+
       
     var renderChart = function(){
         d3.select("svg").remove();
         
       var year = $("#yearSlider").val();
-    d3.select("#year-label").text(year);
+    d3.select("#yearLabel").text(year);
       let data = sankeyData[year];
       
       var generateSankeyFlow = function(){
-          
+          console.log("works");
+            
+
             var svg = d3.select("#chart").append("svg")
               .attr("width", width + margin.left + margin.right)
               .attr("height", height + margin.top + margin.bottom);
@@ -172,28 +160,6 @@
 
             //Set colors of countries other than the ones we are investigating to grey, to avoid fruit-salads.
             var countries = ['Rwanda','Syrian Arab Rep.','Afghanistan','Dem. Rep. of the Congo','Iraq','Viet Nam','Burundi','Ethiopia','Myanmar','Somalia','Sudan'];
-                
-//            var storyYear="";
-//              for(var u=0;u<countries.length;u++){
-//                  if((data.story[0])&&(data.story[0][""+countries[u]+""])){
-//                      //storyYear = storyYear + (data.story[0]? data.story[0][""+countries[u]+""]: "");
-//                      storyYear = storyYear +"\n"+ data.story[0][""+countries[u]+""];
-//                 }
-//              }
-          
-            if(data.story){
-                d3.select("#story-Afghanistan").text(data.story.Afghanistan);
-                d3.select("#story-Syria").text(data.story["Syrian Arab Rep."]);
-                d3.select("#story-Iraq").text(data.story["Iraq"]);
-                d3.select("#story-Congo").text(data.story["Dem. Rep. of the Congo"]);
-                d3.select("#story-Rwanda").text(data.story["Rwanda"]);
-                d3.select("#story-Ethiopia").text(data.story["Ethiopia"]);
-                d3.select("#story-Somalia").text(data.story["Somalia"]);
-                d3.select("#story-Sudan").text(data.story["Sudan"]);
-                d3.select("#story-Vietnam").text(data.story["Viet Nam"]);
-                d3.select("#story-Myanmmar").text(data.story["Myanmar"]);
-                d3.select("#story-Burundi").text(data.story["Burundi"]);
-            }
 
             node.append("rect")
               .attr("x", function (d) { return d.x0; })
@@ -210,7 +176,6 @@
                     else
                         return "#333333";
                 })
-                .style("cursor","pointer")
               .attr("class",function(d){
                 var isDestination = $.inArray(d.name, countries);
 
@@ -267,7 +232,6 @@
               .attr("y", function (d) { return d.y0 - 8; })
               .attr("dy", "0.35em")
               .attr("text-anchor", "middle")
-                .style("cursor","pointer")
               .attr("fill",function (d) { return "#949494"; })
               .text(function (d) { return d.name; })
               .on("mouseover",function(d){
@@ -312,7 +276,6 @@
               .attr("d", sankeyPath)
               .style("stroke-width", function (d) { return Math.max(1, d.width); })
               .style("opacity", 0.7)
-                .style("cursor","pointer")
               .style("stroke", function (link, i) {
                 return link.circular ? "red" : "black";
                 //return nodeColour(link.source.name);
@@ -336,7 +299,7 @@
 
             arrowsG.selectAll("path")
               .style("stroke-width", "2")
-              .style("stroke-dasharray", "5,5")
+              //.style("stroke-dasharray", "5,5")
 
               arrowsG.selectAll(".arrow-head").remove()
 
@@ -382,36 +345,7 @@
 
       generateSankeyFlow();
     };
-      
-       $('#yearSlider').val(1961);
-      renderChart();
-      //animate the playback
-    var timer = 1000;
-    var refreshIntervalId = setInterval(function(){
-        var currValue = $('#yearSlider').val();
-        $('#yearSlider').val(parseInt(currValue)+1);
-        renderChart();
-    }, timer);
-      
-      var clicked = false;
-      
-      $("#btnPause").on("click",function(){
-          
-          if(clicked){
-              refreshIntervalId = setInterval(function(){
-                    var currValue = $('#yearSlider').val();
-                    $('#yearSlider').val(parseInt(currValue)+1);
-                    renderChart();
-                }, timer);
-              $("#btnPause").val("Pause");
-              clicked = false;
-          }
-          else{
-              clearInterval(refreshIntervalId);
-              $("#btnPause").val("Resume");
-              clicked = true;
-          }
-      });
+
     
   </script>
 </body>

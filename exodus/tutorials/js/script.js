@@ -456,122 +456,122 @@
 //        });
 
 
-//Example 9: Bar-graphs with a new bar,added on every click. A looooong example.
-//var dataset=[1,2,37,4,20,3,27,38,14,2,26,8,4,3,11,3,34,17,24];
-//var dataset = [ { key: 0, value: 5 },		//dataset is now an array of objects.
-//                { key: 1, value: 10 },		//Each object has a 'key' and a 'value'.
-//                { key: 2, value: 13 },
-//                { key: 3, value: 19 },
-//                { key: 4, value: 21 },
-//                { key: 5, value: 25 },
-//                { key: 6, value: 22 },
-//                { key: 7, value: 18 },
-//                { key: 8, value: 15 },
-//                { key: 9, value: 13 },
-//                { key: 10, value: 11 },
-//                { key: 11, value: 12 },
-//                { key: 12, value: 15 },
-//                { key: 13, value: 20 },
-//                { key: 14, value: 18 },
-//                { key: 15, value: 17 },
-//                { key: 16, value: 16 },
-//                { key: 17, value: 18 },
-//                { key: 18, value: 23 },
-//                { key: 19, value: 25 } ];
-//
-//var w=600;
-//var h=200;
-//var padding=20;
-//var sorted = false;
-//
-//var svg = d3.select("body").append("svg").attr("width",w).attr("height",h);
-//
-//var xScale = d3.scaleBand().domain(d3.range(dataset.length)).range([padding,w-padding]).paddingInner(0.06);
-//var yScale = d3.scaleLinear().domain([0,d3.max(dataset,function(d){return d.value;})]).range([padding,h-padding]);
-//var key = function(d){return d.key};
-//
-//svg.selectAll("rect").data(dataset,key).enter().append("rect").attr("x",function(d,i){return xScale(i);}).attr("y",function(d){ return h-yScale(d.value);}).attr("width",xScale.bandwidth()).attr("height",function(d){ return yScale(d.value);}).attr("fill",function(d){return "rgb(0,0,"+d.value*10+")";});
-//
-//svg.selectAll("text").data(dataset,key).enter().append("text").text(function(d){return d.value;}).attr("x",function(d,i){return xScale(i)+xScale.bandwidth()/2;}).attr("y",function(d){ return h-yScale(d.value)+14;}).attr("text-anchor","middle").attr("fill","white").style("font-family","Lato").style("font-size","12");
-//
-//barEvents();
-//
-//d3.selectAll("p").on("click",function(d){
-//    var clickType = d3.select(this).attr("id");
-//    
-//    if(clickType == "add-bar"){
-//        var minValue = 2;
-//        var maxValue = 25 - minValue;
-//        var newNumber = Math.floor(Math.random() * maxValue) + minValue;
-//        var lastKeyValue = dataset[dataset.length - 1].key;
-//        dataset.push({
-//            key: lastKeyValue + 1,
-//            value: newNumber
-//        });
-//    }
-//    else{
-//        dataset.shift();
-//    }
-//    
-//    xScale.domain(d3.range(dataset.length));
-//    yScale.domain([0,d3.max(dataset,function(d){return d.value;})]);
-//    
-//    var bars = svg.selectAll("rect").data(dataset,key);
-//    bars.enter().append("rect").attr("x",w).attr("y",function(d){return h-yScale(d.value);}).attr("width",xScale.bandwidth()).attr("height",function(d){ return yScale(d.value);}).attr("fill",function(d){return "rgb(0,0,"+d.value*10+")";}).merge(bars).transition().duration(500).attr("x",function(d,i){return xScale(i)}).attr("y",function(d){return h-yScale(d.value);}).attr("width",xScale.bandwidth()).attr("height",function(d){ return yScale(d.value);}).attr("fill",function(d){return "rgb(0,0,"+d.value*10+")";});
-//    bars.exit().transition().duration(500).attr("x",-xScale.bandwidth()).remove();
-//    
-//    var texts = svg.selectAll("text").data(dataset,key);
-//    texts.enter().append("text").text(function(d){return d.value;}).attr("x",w).attr("y",function(d){ return h-yScale(d.value)+14;}).attr("text-anchor","middle").attr("fill","white").style("font-family","Lato").style("font-size","12").merge(texts).transition().duration(500).attr("x",function(d,i){return xScale(i)+xScale.bandwidth()/2;}).attr("y",function(d){ return h-yScale(d.value)+14;}).attr("text-anchor","middle").attr("fill","white").style("font-family","Lato").style("font-size","12");
-//    texts.exit().transition().duration(500).attr("x",-xScale.bandwidth()).remove();
-//    
-//    barEvents();
-//
-//});
-//
-////Fantastic! I can't believe that I wrote nearly 90% of all this code, without any reference. 
-////Now, will I remember all this? 
-////Will a crash-course of d3.js (2-day spree: lol) be a problem, in the long run ?
-////Definitely, d3 has improved my perspective of looking at dataviz. It all seems to be coming together now.
-//
-//function barEvents(){
-//    svg.selectAll("rect")
-//    .on("mouseover",function(d){
-//        d3.select(this).transition("restoreBarColor").duration(200).attr("fill","#F1487F");
-//        
-//        var xPosition = parseFloat(d3.select(this).attr("x"))+xScale.bandwidth()/2;
-//        var yPosition = parseFloat(d3.select(this).attr("y"))/2 + h/2;
-//        
-//        d3.select("#tooltip").style("left",xPosition+"px").style("top",yPosition+"px").classed("hidden",false).select("#value").text(d.value);
-//        
-//    })
-//    .on("mouseout",function(d){
-//        d3.select(this).transition("restoreBarColor").duration(200).attr("fill",function(d){return "rgb(0,0,"+(d.value*10)+")";});
-//        d3.select("#tooltip").classed("hidden",true);
-//    })
-//    .on("click", function(){
-//        sortBars();
-//    })
-//}
-//
-//
-//
-//function sortBars(){
-//    sorted = !sorted;
-//    
-//    svg.selectAll("rect")
-//        .sort(function(a,b){if(sorted){return d3.ascending(a.value,b.value);} else{return d3.descending(a.value,b.value);}})
-//        .transition()
-//        .delay(function(d,i){return i*50;})
-//        .duration(1000)
-//        .attr("x",function(d,i){return xScale(i);});
-//    
-//    svg.selectAll("text")
-//        .sort(function(a,b){if(sorted){return d3.ascending(a.value,b.value);} else{return d3.descending(a.value,b.value);}})
-//        .transition()
-//        .delay(function(d,i){return i*50;})
-//        .duration(1000)
-//        .attr("x",function(d,i){return xScale(i)+xScale.bandwidth()/2;});
-//}
+////Example 9: Bar-graphs with a new bar,added on every click. A looooong example.
+////var dataset=[1,2,37,4,20,3,27,38,14,2,26,8,4,3,11,3,34,17,24];
+var dataset = [ { key: 0, value: 5 },		//dataset is now an array of objects.
+                { key: 1, value: 10 },		//Each object has a 'key' and a 'value'.
+                { key: 2, value: 13 },
+                { key: 3, value: 19 },
+                { key: 4, value: 21 },
+                { key: 5, value: 25 },
+                { key: 6, value: 22 },
+                { key: 7, value: 18 },
+                { key: 8, value: 15 },
+                { key: 9, value: 13 },
+                { key: 10, value: 11 },
+                { key: 11, value: 12 },
+                { key: 12, value: 15 },
+                { key: 13, value: 20 },
+                { key: 14, value: 18 },
+                { key: 15, value: 17 },
+                { key: 16, value: 16 },
+                { key: 17, value: 18 },
+                { key: 18, value: 23 },
+                { key: 19, value: 25 } ];
+
+var w=600;
+var h=200;
+var padding=20;
+var sorted = false;
+
+var svg = d3.select("body").append("svg").attr("width",w).attr("height",h);
+
+var xScale = d3.scaleBand().domain(d3.range(dataset.length)).range([padding,w-padding]).paddingInner(0.06);
+var yScale = d3.scaleLinear().domain([0,d3.max(dataset,function(d){return d.value;})]).range([padding,h-padding]);
+var key = function(d){return d.key};
+
+svg.selectAll("rect").data(dataset,key).enter().append("rect").attr("x",function(d,i){return xScale(i);}).attr("y",function(d){ return h-yScale(d.value);}).attr("width",xScale.bandwidth()).attr("height",function(d){ return yScale(d.value);}).attr("fill",function(d){return "rgb(0,0,"+d.value*10+")";});
+
+svg.selectAll("text").data(dataset,key).enter().append("text").text(function(d){return d.value;}).attr("x",function(d,i){return xScale(i)+xScale.bandwidth()/2;}).attr("y",function(d){ return h-yScale(d.value)+14;}).attr("text-anchor","middle").attr("fill","white").style("font-family","Lato").style("font-size","12");
+
+barEvents();
+
+d3.selectAll("p").on("click",function(d){
+    var clickType = d3.select(this).attr("id");
+    
+    if(clickType == "add-bar"){
+        var minValue = 2;
+        var maxValue = 25 - minValue;
+        var newNumber = Math.floor(Math.random() * maxValue) + minValue;
+        var lastKeyValue = dataset[dataset.length - 1].key;
+        dataset.push({
+            key: lastKeyValue + 1,
+            value: newNumber
+        });
+    }
+    else{
+        dataset.shift();
+    }
+    
+    xScale.domain(d3.range(dataset.length));
+    yScale.domain([0,d3.max(dataset,function(d){return d.value;})]);
+    
+    var bars = svg.selectAll("rect").data(dataset,key);
+    bars.enter().append("rect").attr("x",w).attr("y",function(d){return h-yScale(d.value);}).attr("width",xScale.bandwidth()).attr("height",function(d){ return yScale(d.value);}).attr("fill",function(d){return "rgb(0,0,"+d.value*10+")";}).merge(bars).transition().duration(500).attr("x",function(d,i){return xScale(i)}).attr("y",function(d){return h-yScale(d.value);}).attr("width",xScale.bandwidth()).attr("height",function(d){ return yScale(d.value);}).attr("fill",function(d){return "rgb(0,0,"+d.value*10+")";});
+    bars.exit().transition().duration(500).attr("x",-xScale.bandwidth()).remove();
+    
+    var texts = svg.selectAll("text").data(dataset,key);
+    texts.enter().append("text").text(function(d){return d.value;}).attr("x",w).attr("y",function(d){ return h-yScale(d.value)+14;}).attr("text-anchor","middle").attr("fill","white").style("font-family","Lato").style("font-size","12").merge(texts).transition().duration(500).attr("x",function(d,i){return xScale(i)+xScale.bandwidth()/2;}).attr("y",function(d){ return h-yScale(d.value)+14;}).attr("text-anchor","middle").attr("fill","white").style("font-family","Lato").style("font-size","12");
+    texts.exit().transition().duration(500).attr("x",-xScale.bandwidth()).remove();
+    
+    barEvents();
+
+});
+
+//Fantastic! I can't believe that I wrote nearly 90% of all this code, without any reference. 
+//Now, will I remember all this? 
+//Will a crash-course of d3.js (2-day spree: lol) be a problem, in the long run ?
+//Definitely, d3 has improved my perspective of looking at dataviz. It all seems to be coming together now.
+
+function barEvents(){
+    svg.selectAll("rect")
+    .on("mouseover",function(d){
+        d3.select(this).transition("restoreBarColor").duration(200).attr("fill","#F1487F");
+        
+        var xPosition = parseFloat(d3.select(this).attr("x"))+xScale.bandwidth()/2;
+        var yPosition = parseFloat(d3.select(this).attr("y"))/2 + h/2;
+        
+        d3.select("#tooltip").style("left",xPosition+"px").style("top",yPosition+"px").classed("hidden",false).select("#value").text(d.value);
+        
+    })
+    .on("mouseout",function(d){
+        d3.select(this).transition("restoreBarColor").duration(200).attr("fill",function(d){return "rgb(0,0,"+(d.value*10)+")";});
+        d3.select("#tooltip").classed("hidden",true);
+    })
+    .on("click", function(){
+        sortBars();
+    })
+}
+
+
+
+function sortBars(){
+    sorted = !sorted;
+    
+    svg.selectAll("rect")
+        .sort(function(a,b){if(sorted){return d3.ascending(a.value,b.value);} else{return d3.descending(a.value,b.value);}})
+        .transition()
+        .delay(function(d,i){return i*50;})
+        .duration(1000)
+        .attr("x",function(d,i){return xScale(i);});
+    
+    svg.selectAll("text")
+        .sort(function(a,b){if(sorted){return d3.ascending(a.value,b.value);} else{return d3.descending(a.value,b.value);}})
+        .transition()
+        .delay(function(d,i){return i*50;})
+        .duration(1000)
+        .attr("x",function(d,i){return xScale(i)+xScale.bandwidth()/2;});
+}
 
 //Example i-lost-count: Now, trying to make a line-chart by leveraging the "paths" in svg:
 //var w=800, h=400, padding=40;
@@ -732,54 +732,54 @@
 
 //So, I skipped stacked area-chart and a flow-diagram. Will do it post-lunch.
 // Now, it's time for the complex - map visualizations.
-
-var w=800;
-var h=600;
-
-var svg = d3.select("body").append("svg").attr("width",w).attr("height",h);
-
-d3.json("us-states.json",function(json){
-    var projection = d3.geoAlbersUsa().translate([w/2,h/2]).scale([750]);
-    var path = d3.geoPath().projection(projection);
-    
-    var color = d3.scaleQuantize().range(["rgb(237,248,233)","rgb(186,228,179)","rgb(116,196,118)","rgb(49,163,84)","rgb(0,109,44)"]);
-    
-    d3.csv("us-ag-productivity.csv",function(data){
-        
-        color.domain([d3.min(data,function(d){ return d.value;}),d3.max(data,function(d){ return d.value;})]);
-        
-        for(var i=0;i<data.length;i++){
-            var state = data[i].state;
-            var dataValue = parseFloat(data[i].value);
-
-            for(var j=0;j<json.features.length;j++){
-                if(json.features[j].properties.name == state){
-                    json.features[j].properties.value = dataValue;
-                    break;
-                    }
-                }
-            }
-
-        svg.selectAll("path")
-            .data(json.features)
-            .enter()
-            .append("path")
-            .attr("d",path)
-            .style("fill",function(d){
-                var dValue = d.properties.value;
-            
-                if(dValue){
-                    return color(dValue);
-                }
-                else{
-                    return "#ccc";
-                }   
-            });
-    
-        }); //end of us-ag-productivity.csv. Lesson-learnt: While SVG is being drawn, it must be in  same "context" aka function, as that of the csv read
-    
-    d3.csv("us-cities.csv",function(data){
-        svg.selectAll("circle").data(data).enter().append("circle").attr("cx",function(d){return projection([d.lon,d.lat])[0]}).attr("cy",function(d){return projection([d.lon,d.lat])[1]}).attr("r",function(d){return Math.sqrt(parseInt(d.population)*0.00004);}).style("fill","yellow").style("stroke","gray").style("stroke-width",0.25).style("opacity",0.75).append("title").text(function(d){return d.place+": Pop."+d.population;});
-    });
-});
-
+//
+//var w=800;
+//var h=600;
+//
+//var svg = d3.select("body").append("svg").attr("width",w).attr("height",h);
+//
+//d3.json("us-states.json",function(json){
+//    var projection = d3.geoAlbersUsa().translate([w/2,h/2]).scale([750]);
+//    var path = d3.geoPath().projection(projection);
+//    
+//    var color = d3.scaleQuantize().range(["rgb(237,248,233)","rgb(186,228,179)","rgb(116,196,118)","rgb(49,163,84)","rgb(0,109,44)"]);
+//    
+//    d3.csv("us-ag-productivity.csv",function(data){
+//        
+//        color.domain([d3.min(data,function(d){ return d.value;}),d3.max(data,function(d){ return d.value;})]);
+//        
+//        for(var i=0;i<data.length;i++){
+//            var state = data[i].state;
+//            var dataValue = parseFloat(data[i].value);
+//
+//            for(var j=0;j<json.features.length;j++){
+//                if(json.features[j].properties.name == state){
+//                    json.features[j].properties.value = dataValue;
+//                    break;
+//                    }
+//                }
+//            }
+//
+//        svg.selectAll("path")
+//            .data(json.features)
+//            .enter()
+//            .append("path")
+//            .attr("d",path)
+//            .style("fill",function(d){
+//                var dValue = d.properties.value;
+//            
+//                if(dValue){
+//                    return color(dValue);
+//                }
+//                else{
+//                    return "#ccc";
+//                }   
+//            });
+//    
+//        }); //end of us-ag-productivity.csv. Lesson-learnt: While SVG is being drawn, it must be in  same "context" aka function, as that of the csv read
+//    
+//    d3.csv("us-cities.csv",function(data){
+//        svg.selectAll("circle").data(data).enter().append("circle").attr("cx",function(d){return projection([d.lon,d.lat])[0]}).attr("cy",function(d){return projection([d.lon,d.lat])[1]}).attr("r",function(d){return Math.sqrt(parseInt(d.population)*0.00004);}).style("fill","yellow").style("stroke","gray").style("stroke-width",0.25).style("opacity",0.75).append("title").text(function(d){return d.place+": Pop."+d.population;});
+//    });
+//});
+//
