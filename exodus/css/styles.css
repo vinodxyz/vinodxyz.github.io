@@ -1,74 +1,170 @@
 	body {
-		  font-family: 'Open Sans', sans-serif;
-		  font-size: 12px;
-		  font-weight: 400;
-		  color: #525252;
-		  text-align: center;
-		}	
-		
-		.axis path,
-		.axis line {
-			fill: none;
-			stroke: #B3B3B3;
-			shape-rendering: crispEdges;
-		}
-		.axis text {
-			font-size: 10px;
-			fill: #6B6B6B;
-		}
+	    font-family: 'PT Serif', serif;
+/*
+	    font-size: 12px;
+	    font-weight: 400;
+	    color: #525252;
+	    text-align: center;
+*/
+	}
+	.axis path,
+	.axis line {
+	    fill: none;
+	    stroke: #B3B3B3;
+	    shape-rendering: crispEdges;
+	}
+	.axis text {
+	    font-size: 10px;
+	    fill: #6B6B6B;
+	}
+	.countries {
+	    pointer-events: none;
+	}
+	.guide {
+	    pointer-events: none;
+	    font-size: 14px;
+	    font-weight: 600;
+	}
+	.popover {
+	    pointer-events: none;
+	}
+	.legendCircle {
+	    stroke-width: 1;
+	    stroke: #999;
+	    stroke-dasharray: 2 2;
+	    fill: none;
+	}
+	.legendLine {
+	    stroke-width: 1;
+	    stroke: #D1D1D1;
+	    shape-rendering: crispEdges;
+	}
+	.legendTitle {
+	    fill: #1A1A1A;
+	    color: #1A1A1A;
+	    text-anchor: middle;
+	    font-size: 10px;
+	}
+	.legendText {
+	    fill: #949494;
+	    text-anchor: start;
+	    font-size: 9px;
+	}
+	.voronoi--show path {
+	    stroke: #242424";
 
-		.countries {
-			pointer-events: none;
-		}
+	}
+	#slidecontainer {
+	    width: 100%;
+	}
+	.slider {
+	    -webkit-appearance: none;
+	    appearance: none;
+	    width: 100%;
+	    height: 10px;
+	    background: #d3d3d3;
+	    outline: none;
+	    opacity: 0.7;
+	    -webkit-transition: .2s;
+	    transition: opacity .2s;
+	}
+	.slider:hover {
+	    opacity: 1;
+	}
+	.slider::-webkit-slider-thumb {
+	    -webkit-appearance: none;
+	    appearance: none;
+	    width: 25px;
+	    height: 25px;
+	    background: #4CAF50;
+	    cursor: pointer;
+	}
+	.slider::-moz-range-thumb {
+	    width: 25px;
+	    height: 25px;
+	    background: #4CAF50;
+	    cursor: pointer;
+	}
+	rect {
+	    shape-rendering: crispEdges;
+	}
+	text {
+	    font-size: 10px;
+	}
+	.link {
+	    fill: none;
+	}
 
-		.guide {
-			pointer-events: none;
-			font-size: 14px;
-			font-weight: 600;
-		}
-		
-		.popover {
-			pointer-events: none;
-		}
-		
-		.legendCircle {
-			stroke-width:1;
-			stroke:#999;
-			stroke-dasharray:2 2;
-			fill:none;
-		}
+#year-label{
+    font-size: 80px;
+    text-align: left;
+    color: #D4D2D4;
+}
 
-		.legendLine {
-			stroke-width: 1;
-			stroke: #D1D1D1;
-			shape-rendering: crispEdges;
-		}
+.highlight-Afghan{
+    background-color: #E01A25;
+    color: white;
+}
 
-		.legendTitle {
-			fill: #1A1A1A;
-			color: #1A1A1A;
-			text-anchor: middle;
-			font-size: 10px;
-		}
+.highlight-Syria{
+    background-color: #E58903;
+    color: white;
+}
 
-		.legendText {
-			fill: #949494;
-			text-anchor: start;
-			font-size: 9px;
-		}
+.highlight-Iraq{
+    background-color: #991C71;
+    color: white;
+}
 
-    .voronoi--show path{
-        stroke: #242424";
-    }
-		
-		@media (min-width: 500px) {
-		  .col-sm-3, .col-sm-9 {
-			float: left;
-		  }
-		  .col-sm-9 {
-			width: 75%;
-		  }
-		  .col-sm-3 {
-			width: 25%;
-		  }
-		}
+
+.highlight-Congo{
+    background-color: #C20049;
+    color: white;
+}
+
+
+.highlight-Rwanda{
+    background-color: #EFB605;
+    color: white;
+}
+
+
+.highlight-Ethiopia{
+    background-color: #10A66E;
+    color: white;
+}
+
+
+.highlight-Somalia{
+    background-color: #AAA9AA;
+    color: white;
+}
+
+
+.highlight-Sudan{
+    background-color: #5CEAEA;
+    color: white;
+}
+
+
+.highlight-Vietnam{
+    background-color: #66489F;
+    color: white;
+}
+
+
+.highlight-Myanmmar{
+    background-color: #7EB852;
+    color: white;
+}
+
+
+.highlight-Burundi{
+    background-color: #2074A0;
+    color: white;
+}
+
+.disclaimer{
+    font-size: 10px;
+    color: #D4D2D4;
+}

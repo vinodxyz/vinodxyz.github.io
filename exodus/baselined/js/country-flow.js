@@ -1,89 +1,4 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-    <script src="js/d3.js"></script>
-    <script src="js/d3-sankey-circular.js"></script>
-    <script src="js/d3-scale-chromatic.v1.min.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.js"></script>
-    
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
-    
-    <script src="csv/sankey-flow-story.js"></script>
-    
-    <!--    <script src="js/sankey-json-script.js"></script>-->
-
-    <title>Exodus</title>
-</head>
-
-<body>
-    
-    <div class="container-fluid">
-        <div class="col-lg-8">
-<!--            <h3>Refugees are often the first victims of Terrorism</h3>-->
-            <h3>
-                Birth of Refugees
-                <button id="btnPause" class="btn btn-default btn-xs">
-                    <span id="spanPause" class="glyphicon glyphicon-pause"></span>
-                </button>
-<!--                <input type="button" class="btn btn-default btn-xs" id="btnPause" value="Pause">-->
-            </h3>
-            <span>
-                Witness the movement of people across countries. 
-                A country's story cannot be viewed in isolation.<br>
-                Events that transpired across the world helps put things in perspective.<br>
-            </span>
-            <span class="disclaimer">
-                <span class="glyphicon glyphicon-asterisk"></span>
-                Only showing countries with more than 20,000 refugees in a given year.
-            </span>
-        </div>
-        <div class="col-lg-4">
-            <div id="year-label"></div>
-        </div>
-    </div>
-    
-    <div class="container-fluid">
-        <div class="col-lg-8">
-            <div id="flow-story-chart"></div>
-        </div>
-        <div class="col-lg-4">
-            <div id=story-section>
-                <div id="story-Afghanistan"></div>
-                <div id="story-Syria"></div>
-                <div id="story-Iraq"></div>
-                <div id="story-Congo"></div>
-                <div id="story-Rwanda"></div>
-                <div id="story-Ethiopia"></div>
-                <div id="story-Somalia"></div>
-                <div id="story-Sudan"></div>
-                <div id="story-Vietnam"></div>
-                <div id="story-Myanmmar"></div>
-                <div id="story-Burundi"></div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="container-fluid">
-        <div class="col-lg-12">
-            <div id="flow-area-chart"></div>
-        </div>
-    </div>
-    
-    <div id="slidecontainer" class="container-fluid">
-        <div class="col-lg-12">
-            <input type="range" min="1961" max="2016" step="1" value="1961" class="slider" id="yearSlider">
-        </div>
-    </div>
-
-
-    <script>
-        
-        
-        
         var slider = d3.select('#yearSlider').on("change", function() {
             renderChart();
         });
@@ -127,11 +42,15 @@
 
             var year = $("#yearSlider").val();
             d3.select("#year-label").text(year);
-            let data = sankeyData[year];
+            let data;// = sankeyData[year];
+            
+            d3.json("../csv/sankey-flow-story.json", function(json){
+                data = json[year];
+            });
 
             var generateSankeyFlow = function() {
 
-                var svg = d3.select("#flow-story-chart").append("svg")
+                var svg = d3.select("#chart").append("svg")
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom);
 
@@ -161,9 +80,8 @@
 
                 //    var nodeColour = d3.scaleSequential(d3.interpolateCool)
                 //    .domain([0,width]);
-                var nodeColour = d3.scaleOrdinal()
-                .range(["#EFB605", "#E58903", "#E01A25", "#C20049", "#991C71", "#66489F", "#2074A0", "#10A66E", "#7EB852", "#AAA9AA", "#5CEAEA"])
-                .domain(['Rwanda', 'Syrian Arab Rep.', 'Afghanistan', 'Dem. Rep. of the Congo', 'Iraq', 'Viet Nam', 'Burundi', 'Ethiopia', 'Myanmar', 'Somalia', 'Sudan']);
+                var nodeColour = d3.scaleOrdinal().range(["#EFB605", "#E58903", "#E01A25", "#C20049", "#991C71", "#66489F", "#2074A0", "#10A66E", "#7EB852", "#AAA9AA", "#5CEAEA"]).domain(['Rwanda', 'Syrian Arab Rep.', 'Afghanistan', 'Dem. Rep. of the Congo', 'Iraq', 'Viet Nam', 'Burundi', 'Ethiopia', 'Myanmar', 'Somalia', 'Sudan']);
+
 
                 //Adjust link Y coordinates based on target/source Y positions
                 var node = nodeG.data(sankeyNodes)
@@ -172,77 +90,19 @@
 
                 //Set colors of countries other than the ones we are investigating to grey, to avoid fruit-salads.
                 var countries = ['Rwanda', 'Syrian Arab Rep.', 'Afghanistan', 'Dem. Rep. of the Congo', 'Iraq', 'Viet Nam', 'Burundi', 'Ethiopia', 'Myanmar', 'Somalia', 'Sudan'];
-                
-                //Publishing the stories
+
                 if (data.story) {
-                    var afghanLabel = "<span class=\"highlight-Afghan\">&nbsp;Afghanistan&nbsp;</span><br>";
-                    var syriaLabel = "<span class=\"highlight-Syria\">&nbsp;Syria&nbsp;</span><br>";
-                    var iraqLabel = "<span class=\"highlight-Iraq\">&nbsp;Iraq&nbsp;</span><br>";
-                    var congoLabel = "<span class=\"highlight-Congo\">&nbsp;Congo&nbsp;</span><br>";
-                    var rwandaLabel = "<span class=\"highlight-Rwanda\">&nbsp;Rwanda&nbsp;</span><br>";
-                    var ethiopiaLabel = "<span class=\"highlight-Ethiopia\">&nbsp;Ethiopia&nbsp;</span><br>";
-                    var somaliaLabel = "<span class=\"highlight-Somalia\">&nbsp;Somalia&nbsp;</span><br>";
-                    var sudanLabel = "<span class=\"highlight-Sudan\">&nbsp;Sudan&nbsp;</span><br>";
-                    var vietnamLabel = "<span class=\"highlight-Vietnam\">&nbsp;Vietnam&nbsp;</span><br>";
-                    var myanmarLabel = "<span class=\"highlight-Myanmmar\">&nbsp;Myanmmar&nbsp;</span><br>";
-                    var burundiLabel = "<span class=\"highlight-Burundi\">&nbsp;Burundi&nbsp;</span><br>";
-                    
-                    
-                    (data.story.Afghanistan)
-                        ? d3.select("#story-Afghanistan").html(afghanLabel).append("span").text(data.story.Afghanistan)
-                        : d3.select("#story-Afghanistan").html("");
-                    
-                    (data.story["Syrian Arab Rep."])
-                        ? d3.select("#story-Syria").html(syriaLabel).append("span").text(data.story["Syrian Arab Rep."])
-                        : d3.select("#story-Syria").html("");
-                    
-                    (data.story["Iraq"])
-                        ? d3.select("#story-Iraq").html(iraqLabel).append("span").text(data.story["Iraq"])
-                        : d3.select("#story-Iraq").html("");
-                    
-                    (data.story["Dem. Rep. of the Congo"])
-                        ? d3.select("#story-Congo").html(congoLabel).append("span").text(data.story["Dem. Rep. of the Congo"])
-                        : d3.select("#story-Congo").html("");
-                    
-                    (data.story["Rwanda"])
-                        ? d3.select("#story-Rwanda").html(rwandaLabel).append("span").text (data.story["Rwanda"])
-                        : d3.select("#story-Rwanda").html("");
-                    
-                    (data.story["Ethiopia"])
-                        ? d3.select("#story-Ethiopia").html(ethiopiaLabel).append("span").text(data.story["Ethiopia"])
-                        : d3.select("#story-Ethiopia").html("");
-                    
-                    (data.story["Somalia"])
-                        ? d3.select("#story-Somalia").html(somaliaLabel).append("span").text(data.story["Somalia"])
-                        : d3.select("#story-Somalia").html("");
-                    
-                    (data.story["Sudan"])
-                        ? d3.select("#story-Sudan").html(sudanLabel).append("span").text(data.story["Sudan"])
-                        : d3.select("#story-Sudan").html("");
-                    
-                    (data.story["Viet Nam"])
-                        ? d3.select("#story-Vietnam").html(vietnamLabel).append("span").text(data.story["Viet Nam"])
-                        : d3.select("#story-Vietnam").html("");
-                    
-                    (data.story["Myanmar"])
-                        ? d3.select("#story-Myanmmar").html(myanmarLabel).append("span").text(data.story["Myanmar"])
-                        : d3.select("#story-Myanmmar").html("");
-                    
-                    (data.story["Burundi"])
-                        ? d3.select("#story-Burundi").html(burundiLabel).append("span").text(data.story["Burundi"])
-                        : d3.select("#story-Burundi").html("");
-                    
-                    
-//                    d3.select("#story-Syria").text(data.story["Syrian Arab Rep."]);
-//                    d3.select("#story-Iraq").text(data.story["Iraq"]);
-//                    d3.select("#story-Congo").text(data.story["Dem. Rep. of the Congo"]);
-//                    d3.select("#story-Rwanda").text(data.story["Rwanda"]);
-//                    d3.select("#story-Ethiopia").text(data.story["Ethiopia"]);
-//                    d3.select("#story-Somalia").text(data.story["Somalia"]);
-//                    d3.select("#story-Sudan").text(data.story["Sudan"]);
-//                    d3.select("#story-Vietnam").text(data.story["Viet Nam"]);
-//                    d3.select("#story-Myanmmar").text(data.story["Myanmar"]);
-//                    d3.select("#story-Burundi").text(data.story["Burundi"]);
+                    d3.select("#story-Afghanistan").text(data.story.Afghanistan);
+                    d3.select("#story-Syria").text(data.story["Syrian Arab Rep."]);
+                    d3.select("#story-Iraq").text(data.story["Iraq"]);
+                    d3.select("#story-Congo").text(data.story["Dem. Rep. of the Congo"]);
+                    d3.select("#story-Rwanda").text(data.story["Rwanda"]);
+                    d3.select("#story-Ethiopia").text(data.story["Ethiopia"]);
+                    d3.select("#story-Somalia").text(data.story["Somalia"]);
+                    d3.select("#story-Sudan").text(data.story["Sudan"]);
+                    d3.select("#story-Vietnam").text(data.story["Viet Nam"]);
+                    d3.select("#story-Myanmmar").text(data.story["Myanmar"]);
+                    d3.select("#story-Burundi").text(data.story["Burundi"]);
                 }
 
                 node.append("rect")
@@ -471,7 +331,7 @@
                     .text(function(d) {
                         var val = d.value.toString();
                         val = val.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        return d.source.name + " to " + d.target.name + "\n" + (val) + " refugees";
+                        return d.source.name + " → " + d.target.name + "\n" + (val) + " refugees";
                     });
 
 
@@ -538,13 +398,11 @@
         var refreshIntervalId = setInterval(function() {
             var currValue = $('#yearSlider').val();
             if (currValue < 2016) {
+                console.log("ETF");
                 $('#yearSlider').val(parseInt(currValue) + 1);
                 renderChart();
             } else {
-                $("#spanPause").removeClass("glyphicon-pause");
-                $("#spanPause").addClass("glyphicon-play");
                 clearInterval(refreshIntervalId);
-                clicked = true;
             }
 
         }, timer);
@@ -552,121 +410,18 @@
         var clicked = false;
 
         $("#btnPause").on("click", function() {
+
             if (clicked) {
-                
-                var currValue = $('#yearSlider').val();
-                (parseInt(currValue) == 2016) ? $('#yearSlider').val(1961) : "";
-                
                 refreshIntervalId = setInterval(function() {
-                    currValue = $('#yearSlider').val();
-                    
-                    if(currValue == 2016){
-                        $("#spanPause").removeClass("glyphicon-pause");
-                        $("#spanPause").addClass("glyphicon-play");
-                        clicked = true;
-                    }
-                    
+                    var currValue = $('#yearSlider').val();
                     $('#yearSlider').val(parseInt(currValue) + 1);
                     renderChart();
                 }, timer);
-                
-                //$("#btnPause").val("Pause");
-                $("#spanPause").removeClass("glyphicon-play");
-                $("#spanPause").addClass("glyphicon-pause");
+                $("#btnPause").val("Pause");
                 clicked = false;
             } else {
                 clearInterval(refreshIntervalId);
-                //$("#btnPause").val("Resume");
-                $("#spanPause").removeClass("glyphicon-pause");
-                $("#spanPause").addClass("glyphicon-play");
+                $("#btnPause").val("Resume");
                 clicked = true;
             }
         });
-        
-        var renderAreaChart = function(){
-            
-            var rowConverter = function(d,i,cols){
-				var row = {
-					year: new Date(d.Year),
-				};
-
-				for (var i = 1; i < cols.length; i++) {
-					var col = cols[i];
-                    
-					if (d[cols[i]]) {
-						row[cols[i]] = +d[cols[i]];
-					} else {
-						row[cols[i]] = 0;
-					}
-				}
-
-				return row;
-            };
-            
-            var stack = d3.stack().order(d3.stackOrderDescending);
-            
-            d3.csv("csv/flow-area-chart.csv", rowConverter, function(data2){
-                
-                var h = 80;
-                var w = 1365;
-                var svg = d3.select("#flow-area-chart").append("svg").attr("width",w).attr("height",h);
-            
-                var dataset = data2;
-                
-                var keys = dataset.columns;
-				keys.shift();
-				stack.keys(keys);
-                
-                var series = stack(dataset);
-                
-                var xScale = d3.scaleTime()
-							   .domain([
-									d3.min(dataset, function(d) { return d.year; }),
-									d3.max(dataset, function(d) { return d.year; })
-								])
-							   .range([0, w]);
-
-				var yScale = d3.scaleLinear()
-								.domain([0,
-									d3.max(dataset, function(d) {
-										var sum = 0;
-										for (var i = 0; i < keys.length; i++) {
-											sum += d[keys[i]];
-										};
-
-										return sum;
-									})
-								])
-								.range([h,0])
-								.nice();
-                
-                var area = d3.area()
-                            .x(function(d) { return xScale(d.data.year); })
-							.y0(function(d) { return yScale(d[0]); })
-							.y1(function(d) { return yScale(d[1]); });
-                
-                svg.selectAll("path")
-					.data(series)
-					.enter()
-					.append("path")
-					.attr("class", "area")
-					.attr("d", area)
-					.attr("fill", function(d, i) {
-						return d3.schemeCategory20[i];
-					})
-					.append("title")
-					.text(function(d) {
-						return d.key;
-					});
-                
-            });
-            
-        };
-        
-        renderAreaChart();
-        
-    </script>
-
-</body>
-
-</html>

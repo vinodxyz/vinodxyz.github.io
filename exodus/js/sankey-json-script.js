@@ -92,7 +92,7 @@ for(var z=1961; z<2017; z++){
     years.push(z);
 }
 
-d3.csv("../csv/viz1-flow-all.csv",function(data){
+d3.csv("../csv/viz1-filtered.csv",function(data){
     initialData = data;
     getStories();
 });

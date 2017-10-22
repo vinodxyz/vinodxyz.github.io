@@ -67,7 +67,7 @@
       }
     }
   }
-
+ 
   function value (d) {
     return d.value
   }
@@ -635,7 +635,6 @@
     links.sort(sortLinkDepthAscending)
     links.forEach(function (link, i) {
       let buffer = 0
-
       let j = 0
       for (j; j < i; j++) {
         if (circularLinksCross(links[i], links[j])) {
@@ -683,7 +682,6 @@
     // add the base data for each link
     graph.links.forEach(function (link) {
       if (link.circular) {
-
         link.circularPathData.arcRadius = link.width + baseRadius
         link.circularPathData.leftNodeBuffer = buffer;
         link.circularPathData.rightNodeBuffer = buffer;
