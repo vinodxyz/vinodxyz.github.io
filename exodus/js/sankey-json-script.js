@@ -92,7 +92,7 @@ for(var z=1961; z<2017; z++){
     years.push(z);
 }
 
-d3.csv("../csv/viz1-filtered.csv",function(data){
+d3.csv("../csv/viz1-filtered-2.csv",function(data){
     initialData = data;
     getStories();
 });
@@ -141,9 +141,11 @@ var generateNodes = function(){
                 name: arrCountries[a]
             };
             
-            yearlyNodeArray.push(nodeObj);
-            
+            if(arrCountries[a]){
+               yearlyNodeArray.push(nodeObj);
+           }
         }
+        
         
         var storyObj = {};
         

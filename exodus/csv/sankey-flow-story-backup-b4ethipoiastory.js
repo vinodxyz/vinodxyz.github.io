@@ -36,10 +36,9 @@ let sankeyData =
          }
       ],
       "story":{
+         "Afghanistan":"Afghanistan, a landlocked and almost inhospitable country was inhabited by mixed groups of people.\rBritish wanted to seize Afghanistan to strategically acquire a central part of the world.",
          "Somalia":"Somalia had an ongoing civil war.  Ethiopia and Somalia fought over Ogaden plateau. Somalia lost.",
-         "Rwanda":"A referendum was held to establish whether Rwanda should become a republic or remain a kingdom. Citizens voted overwhelmingly for a republic. The tutsis and hutus were fighting for several years and this was further worsened by the Colonization",
-         "Dem. Rep. of the Congo":"Under Belgian rule, the colonizers wanted to Westernize the Congolese people. After an uprising by the Congolese people, Belgium surrendered to the independence of the Congo. However, Congo was left unstable because tribal leaders had more power than the central government. ",
-         "Myanmar":"Burma was taken over by the military in a coup and got rid of the constitution. They practised strict Buddhist nationalism and only target was singled out: Rohingyas"
+         "Rwanda":"The tutsis and hutus were fighting for several years and this was further worsened by the Colonization"
       }
    },
    "1962":{
@@ -78,8 +77,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Rwanda":"Tutsi guerrilla groups staged attacks into Rwanda from neighboring countries. Rwandan Hutu-based troops responded, and thousands more were killed in the clashes.",
-         "Dem. Rep. of the Congo":"Prime Minister Lumumba turned to the USSR for assistance who agreed to help, offering advanced weaponry and technical advisors. During the cold war, the US viewed the Soviet presence as an attempt to gain a proxy state in sub-Saharan Africa. "
+         "Afghanistan":"During the cold-war between USA & Soviet Russia, Afghanistan was a piece of interest for both countries"
       }
    },
    "1963":{
@@ -118,9 +116,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Rwanda":"A Tutsi guerrilla invasion into Rwanda from Burundi unleashed another anti-Tutsi backlash by the Hutu government; their forces killed an estimated 14,000 people. The economic union between Rwanda and Burundi was dissolved and tensions between the two countries worsened. Rwanda became a Hutu-dominated one-party state.",
-         "Dem. Rep. of the Congo":"The U.S. sent weapons and CIA personnel to aid forces allied with the rebels and combat the Soviet presence. A coup led by Colonel Joseph Mobutu, backed by the US & CIA, ultimately overthrew the government.",
-         "Viet Nam":"Vietnam was fighting the french colonizers. The french were supported by US, who feared the domino effect, i.e., the spread of communism to Vietnam would spiral all Asian countries into communism. Vietnam later divided into Northern communist vietnam and Southern non-communist vietnam, which was supported by the US."
+
       }
    },
    "1964":{
@@ -165,9 +161,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Rwanda":"The government suppressed political opposition. It banned the political parties UNAR and RADER and executed Tutsi members. ",
-         "Dem. Rep. of the Congo":"A new crisis erupted in the Simba Rebellion which saw half the country taken by the rebels. ",
-         "Viet Nam":"North Vietnam fired torpedos on patrolling US ships. US decided to deploy military forces on Vietnam."
+
       }
    },
    "1965":{
@@ -221,9 +215,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Rwanda":"Hutu militants used the term inyenzi (cockroaches) as a pejorative to describe Tutsi rebels for what was perceived as infiltrating the country. Hundreds of thousands of refugees moved to neighbouring countries.",
-         "Dem. Rep. of the Congo":"European mercenaries, US, and Belgian troops were called in by the Congolese government to defeat the rebellion.",
-         "Viet Nam":"Vietnam used guerilla warfare and ambush tactics in the dense jungles and held an advantage over the advanced US military."
+
       }
    },
    "1966":{
@@ -298,9 +290,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Rwanda":"Ngendandumwe was elected Prime Minister. He was immediately assassinated by a Tutsi extremist and he was succeeded by another Hutu, Joseph Bamina. ",
-         "Dem. Rep. of the Congo":"Unrest and rebellion plagued the government until General Mobutu, seized control of the country and declared himself president. ",
-         "Viet Nam":"The US military was reduced to more than half during the Vietnam war."
+
       }
    },
    "1967":{
@@ -384,10 +374,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Ethiopia":"Italy had always wanted to capture Ethiopia but had failed once. It had captured Erithrea, Somalia, South sudan and a lot of  East africa. During the second Italo-Ethiopian war, Mussolini had captured a lot of Ethiopia, as revenge for losing the previous wars.",
-         "Rwanda":"Bamina was soon also assassinated and the Tutsi monarch installed his own personal secretary, Leopold Biha, as the Prime Minister in his place. This led to a Hutu coup from which the Mwami fled the country and Biha was shot (but not killed).",
-         "Dem. Rep. of the Congo":"The new president had the support of the US because of his staunch opposition to Communism, believing that his administration would serve as an effective counter to communist movements in Africa.",
-         "Viet Nam":"Protests started in US to stop the Vietnam War. Richard Nixon became President and promised to end the war."
+
       }
    },
    "1968":{
@@ -468,9 +455,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Ethiopia":"The 30-year Eritrean Struggle for Independence began, following the Ethiopian Emperor Haile Selassie I's dissolution of the federation and shutting down the Eritrean parliament.",
-         "Rwanda":" The Tutsi-dominated army, led by Michel Micombero brutally responded: almost all Hutu politicians were killed",
-         "Dem. Rep. of the Congo":"The country was run as a one-party state with his Popular Movement of the Revolution as the sole legal party. Mobutu declared himself head of state."
+
       }
    },
    "1969":{
@@ -551,10 +536,8 @@ let sankeyData =
          }
       ],
       "story":{
-         "Ethiopia":"The Eritrean independence struggle was led by the Eritrean Liberation Front (ELF). The independence struggle was the resistance to the annexation of Eritrea by Ethiopia long after the Italians left the territory.",
-         "Iraq":"Saudi Arabia and Iran fight a lot of proxy wars in Syria, Iraq, Libya and Yemen (which are labelled the \"failing states\"). Shiites and Sunnis have had a conflict of power. Although they peacefully exist in UAE, in the middle east there are crises.",
-         "Somalia":"President was shot by his own bodyguard, followed by a coup. He threw out constitution and became a one party system. Communism came in and modernization set in.",
-         "Dem. Rep. of the Congo":"Although relative peace and stability were achieved, Mobutu's government was guilty of severe human rights violations, political repression, a cult of personality and corruption."
+         "Iraq":"Saudi Arabia (Sunnis) and Iran (Shiites) are against each other and fight a lot of proxy wars in Syria, Iraq, Libya and Yemen (which are labelled the \"failing states\"). Shiites and Sunnis have had a conflict of power. Although they peacefully exist in UAE, in the middle east there are crises.",
+         "Somalia":"President was shot by his own bodyguard, followed by a coup. He threw out constitution and became a one party system. Communism came in and modernization set in."
       }
    },
    "1970":{
@@ -638,9 +621,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Ethiopia":"The Emperor declared Eritrea the fourteenth province of Ethiopia",
-         "Iraq":"\rAn Iranian revolution occurred against the Shah's regime and Ayatollah came to power. Saudi Arabia was worried that this type of revolt could occur in their country too. Iran was helping other countries with Shia population to overthrow their governments. Saudi Arabia leveraged it's partnership with USA.",
-         "Rwanda":" Seven years of sporadic violence in Burundi existed between the Hutus and Tutsis. In 1970, another purge of Hutus by the Tutsi military occurred."
+         "Iraq":"\rAn Iranian revolution occurred against the Shah�s regime and Ayatollah came to power. Saudi Arabia was worried that this type of revolt could occur in their country too. Iran was helping other countries with Shia population to overthrow their governments. Saudi Arabia leveraged it's partnership with USA."
       }
    },
    "1971":{
@@ -724,9 +705,8 @@ let sankeyData =
          }
       ],
       "story":{
-         "Ethiopia":"Emperor Haile Selassie's advanced age was becoming apparent. Most Ethiopians thought in terms of personalities, not ideology, and out of long habit still looked to Haile Selassie as the initiator of change.",
-         "Somalia":"Egypt and Soviet union supported Somalia. Egypt wanted to secure Nile resources by destabilizing Ethiopia and Soviet union wanted a counter measure against the pro-american Ethiopia",
-         "Dem. Rep. of the Congo":"The president renamed the country to the Republic of Zaire and required citizens to adopt African names as well as drop their French-language ones."
+         "Ethiopia":"Italy had always wanted to capture Ethiopia but had failed once. It had captured Erithrea, Somalia, South sudan and a lot of  East africa. During the second Italo-Ethiopian war, Mussolini had captured a lot of Ethiopia, as revenge for losing the previous wars.",
+         "Somalia":"Egypt and Soviet union supported Somalia. Egypt wanted to secure Nile resources by destabilizing Ethiopia and Soviet union wanted a counter measure against the pro-american Ethiopia"
       }
    },
    "1972":{
@@ -810,10 +790,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Ethiopia":"The nature of the succession, and of the desirability of the Imperial monarchy in general, were in dispute amongst the Ethiopian people. Perceptions of this war as imperialist were among the primary causes of the growing Ethiopian Marxist movement.",
-         "Rwanda":"A localized Hutu uprising in 1972 was fiercely answered by the Tutsi-dominated Burundi army in the largest Burundi genocide of Hutus, with a death toll nearing 200,000.",
-         "Dem. Rep. of the Congo":"Corruption became so prevalent that \"Zairean Sickness\", meaning gross corruption, theft and mismanagement spread across the country.",
-         "Burundi":"1972 genocide - There was an outbreak of violence in the south of the country, where bands of roving Hutu committed innumerable atrocities against Tutsi civilians. All civilian and military authorities in the city of Bururi were killed and the insurgents then seized the armories."
+
       }
    },
    "1973":{
@@ -885,9 +862,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Ethiopia":"The Ethiopian Communists received the support of the Soviet Union under the leadership of Leonid Brezhnev. This help led to the 1974 marxist coup of Mengistu.",
-         "Rwanda":"Rwanda's defence minister suspended the constitution, dissolved the National Assembly and imposed a strict ban on all political activity. Initially, Habyarimana abolished the quota system, winning him favour among Tutsi.",
-         "Burundi":"An estimated 200,000 to 300,000 Hutu were killed. About 125,000 people became refugees, with most fleeing to Tanzania. "
+         "Afghanistan":"A coup occurred in Afghanistan against the pashtun-nationalism resulted in a crackdown and restriction of civil liberties"
       }
    },
    "1974":{
@@ -965,10 +940,8 @@ let sankeyData =
          }
       ],
       "story":{
-         "Ethiopia":"Derg, a Soviet-backed Marxist Leninist military dictatorship overthrew the Ethiopian govt",
-         "Somalia":"Ethiopia was overthrown and Derg came over. Followed by a great famine. Somalia was now favored.",
-         "Rwanda":"A public outcry developed over Tutsi over-representation in professional fields such as medicine and education.",
-         "Burundi":"In an effort to attract sympathy from the United States, the Tutsi-dominated government accused the Hutu rebels of having Communist leanings, although there is no credible evidence that this was actually the case."
+         "Ethiopia":"Derg, a Soviet-backed�Marxist�Leninist�military dictatorship overthrew the Ethiopian govt",
+         "Somalia":"Ethiopia was overthrown and Derg came over. Followed by a great famine. Somalia was now favored."
       }
    },
    "1975":{
@@ -1046,11 +1019,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"Afghanistan, a landlocked and almost inhospitable country was inhabited by mixed groups of people. British wanted to seize Afghanistan to strategically acquire a central part of the world.",
-         "Ethiopia":"The ensuing regime suffered several coups, uprisings, wide-scale drought, and a huge refugee problem",
-         "Rwanda":"Thousands of Tutsi were forced to resign from such positions, and many were forced into exile. In associated violence, several hundred Tutsi were killed.",
-         "Burundi":"The genocide of 1972 left a permanent mark in the collective memory of the Hutu population, both in Burundi and in neighbouring countries.The increased tensions in Burundi and Rwanda sparked episodes of civil and cross-border violence in Burundi.",
-         "Viet Nam":"The Vietnam war had lasted for 10 years and communism spread to all of Vietnam. "
+         "Ethiopia":"The ensuing regime suffered several coups, uprisings, wide-scale drought, and a huge refugee problem"
       }
    },
    "1976":{
@@ -1122,11 +1091,8 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"During the cold-war between USA & Soviet Russia, Afghanistan was a piece of interest for both countries",
          "Ethiopia":"This new regime turned against USA and terminated American aid program, expelled Americans",
-         "Somalia":"Somalia saw an opportunity and had an advanced military. Launched massive operations in Ethiopia and took over 90% of Ogaden.",
-         "Rwanda":"President Habyarimana formed the National Revolutionary Movement for Development (MRND) whose goals were to promote peace, unity, and national development.",
-         "Burundi":"These precipitated large-scale killings by both sides of the conflict. These episodes further radicalized elements of the Hutu population in Rwanda, who also faced pressure from a militant Tutsi opposition, Rwandan Patriotic Front."
+         "Somalia":"Somalia saw an opportunity and had an advanced military. Launched massive operations in Ethiopia and took over 90% of Ogaden."
       }
    },
    "1977":{
@@ -1210,12 +1176,8 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"A coup occurred in Afghanistan against the pashtun-nationalism resulted in a crackdown and restriction of civil liberties",
          "Ethiopia":"Somalia, who always had territorial and historical disputes with Ethiopia, had been receiving assistance and arms from the USSR, invaded Ethiopia in the Ogaden War. Somalia, however, started becoming anti Soviet and USSR switched sides",
-         "Somalia":"Ethiopian derg reached out to Soviets. Soviets called for a peace offering between the 2 countries which was rejected by Somalia. ",
-         "Rwanda":"The movement was organized from the \"hillside\" to the national level and included elected and appointed officials.",
-         "Dem. Rep. of the Congo":"Katangan rebels, based in Angola, launched a series of invasions (Shaba I and II) into the Shaba (Katanga) region. The rebels were driven out with the aid of Belgian paratroopers.",
-         "Burundi":"Colonel Jean-Baptiste Bagaza took power in a bloodless coup. "
+         "Somalia":"Ethiopian derg reached out to Soviets. Soviets called for a peace offering between the 2 countries which was rejected by Somalia. "
       }
    },
    "1978":{
@@ -1340,11 +1302,7 @@ let sankeyData =
       "story":{
          "Afghanistan":"A revolution against the government for the communist PDPA that was elected\r",
          "Ethiopia":"Ethiopia received massive military aid from the USSR including 15,000 Cuban combat troops, led by Fidel Castro and drove Somalis back.",
-         "Somalia":"Soviet switched sides to Ethiopia and provided massive resources and a cuban army. Somalia had to retreat. ",
-         "Dem. Rep. of the Congo":"Following the dissolution of the Soviet Union U.S. relations with PM Mobutu cooled, as he was no longer deemed necessary as a Cold War ally. Opponents within Zaire stepped up demands for reform.",
-         "Burundi":"Although Bagaza led a Tutsi-dominated military regime, he encouraged land reform, electoral reform, and national reconciliation.",
-         "Myanmar":"Operation Dragon King forced Rohingyas to flee. Military used violence and rape to drive them out.",
-         "Viet Nam":"The capture of Saigon by the North Vietnamese Army marked the end of the war, and North and South Vietnam were reunified the following year. The war exacted a huge human cost in terms of fatalities"
+         "Somalia":"Soviet switched sides to Ethiopia and provided massive resources and a cuban army. Somalia had to retreat. "
       }
    },
    "1979":{
@@ -1523,8 +1481,8 @@ let sankeyData =
       "story":{
          "Afghanistan":"PM Amin radically pushed communist policies including execution and imprisonment otherwise. President turned to Soviet Russia to overthrow the PM. \rAmin killed the president also designated as the president, further weakening the govt. Soviet union intervened as it was already weary of the Iranian revolution that had turned Iran Islamic and could spread to Afghanistan and other muslim countries. USSR invaded, Red army executed PM and replaced him. Disputes internationally arose saying this was an invasion and not an intervention.",
          "Ethiopia":"Up to 500,000 opposers were killed as a result of the Red Terror, from forced deportations, or from the use of hunger as a weapon. Red terror was a violent political campaign against competing Marxist-Leninist groups in Ethiopia and Eritrea.",
-         "Iraq":"Iran seemed to be an easy target after Iranian revolution and Iraqi Sunni govt wanted to seize the Irani Shiites and the crucial Shatt al-Arab waterway. This led to the Iran-Iraq war.",
-         "Somalia":"Ogaden war took a toll on Somalia's army. 1/3 of army had died. Economy collapsed and refugee crisis took over. Ethnic Somalis from Ogaden fled to Somalia."
+         "Iraq":"Iran seemed to easy target after Iranian revolution and Iraqi Sunni govt wanted to seize the Irani Shiates and the crucial Shatt al-Arab waterway. This led to the Iran-Iraq war.",
+         "Somalia":"Ogaden war took a toll on Somalia�s army. 1/3 of army had died. Economy collapsed and refugee crisis took over. Ethnic Somalis from Ogaden fled to Somalia."
       }
    },
    "1980":{
@@ -1685,9 +1643,8 @@ let sankeyData =
       "story":{
          "Afghanistan":"Rebel forces and war-lords were pushed to the mountains. This started a Jihad (holy war)",
          "Ethiopia":"To make matters worse, Ethiopia was also constantly at war with the neighboring Eritrea, from 30 yrs.",
-         "Iraq":"War on Iran was declared. Armies marched along the border of Iraq to Iran. However, Iraq hadn't considered Iran's defenses.",
-         "Somalia":"A famine struck across the horn of Africa. ",
-         "Viet Nam":"Many mixed-blood Amerasian children were left behind when their American fathers returned to the United States after their tour of duty in South Vietnam. 26,000 of them were permitted to immigrate to the United States"
+         "Iraq":"War on Iran was declared. Armies marched along the border of Iraq to Iran. However, Iraq hadn�t considered Iran�s defenses.",
+         "Somalia":"A famine struck across the horn of Africa. "
       }
    },
    "1981":{
@@ -1823,8 +1780,7 @@ let sankeyData =
       ],
       "story":{
          "Afghanistan":"Warlords united as Mujahideen to combat the Soviets.",
-         "Ethiopia":"During the revolution the Derg redistributed land to the peasants. Mismanagement, corruption and general hostility to the Derg's violent rule was coupled with the draining effects of constant warfare and the separatist guerrilla movements in Eritrea, resulting in a drastic decline in general productivity of food and cash crops.",
-         "Iraq":"Iran's forced unified and Iraq had to retreat. Unilateral cease fire was rejected by Iran. However, Saudi Arabia came to help Iraq against Iran.",
+         "Iraq":"Iran�s forced unified and Iraq had to retreat. Unilateral cease fire was rejected by Iran. However, Saudi Arabia came to help Iraq against Iran.",
          "Somalia":"A civil war started to take form over the lack of resources against the Barre govt."
       }
    },
@@ -1963,10 +1919,8 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"USA funneled equipment via Pakistan to Mujahideen. They wanted to stop communism.",
-         "Ethiopia":"Ethiopian'Somali Border War occurred when the Ethiopian military, supported by SSDF rebels invaded central Somalia and captured several towns. The became a catalyst for US military assistance in Somalia, which brought a halt any further clashes.",
-         "Iraq":"Iran launched Operation Ramadan and continuously caused a menace to Iraq's oil shipments. Many countries backed Iraq against this menace.",
-         "Myanmar":"Citizenship act was passed. However, Rohingyas were not included."
+         "Afghanistan":"USA funneled equipment via Pak to Mujahideen. They wanted to stop communism.",
+         "Iraq":"Iran launched Operation Ramadan and continuously caused a menace to Iraq�s oil shipments. Many countries backed Iraq against this menace."
       }
    },
    "1983":{
@@ -2111,9 +2065,8 @@ let sankeyData =
       ],
       "story":{
          "Afghanistan":"Soviet still held an upper hand",
-         "Ethiopia":"Derg allotted 46% of the GNP to the Army instead of agriculture, droughts, confiscation of lands of farmers, indiscriminate violence against civilians resulted in a Famine. Food was extracted from rural peasantry at low rates to placate the urban populations which were converting to insurgents and ultimately killed 1,000,000 people ",
-         "Iraq":"Iran launched several attacks and was even started chemical warfare. Iran's resources were nearly spent in warfare.",
-         "Sudan":"The Second Sudanese Civil War was a conflict from 1983 to 2005 between the central Sudanese government and the Sudan People's Liberation Army (SPLA). It was largely a continuation of the First Sudanese Civil War of 1955 to 1972."
+         "Ethiopia":"Derg allotted 46% of the GNP to the Army instead of agriculture, droughts, confiscation of lands of farmers, �indiscriminate violence against civilians resulted in a Famine. Food was extracted from rural peasantry at low rates to placate the urban populations which were converting to insurgents and ultimately killed 1,000,000 people ",
+         "Iraq":"Iran launched several attacks and was even started chemical warfare. Iran�s resources were nearly spent in warfare."
       }
    },
    "1984":{
@@ -2239,10 +2192,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"Mujahideen's Masood started guerrilla warfare. However, the more the red army killed members of Mujahideen, more fighters joined them, eager to be a martyr.",
-         "Ethiopia":"Although Ethiopia is prone to chronic droughts, no one was prepared for the scale of drought and famine that struck the country",
-         "Iraq":"Previously, the Iranians had outnumbered the Iraqis on the battlefield, but Iraq expanded their military draft (pursuing a policy of total war), and by 1984, the armies were equal in size.",
-         "Sudan":"The violation of the Addis Ababa Accords led to the second civil war. The first violations occurred when President Gaafar Nimeiry attempted to take control of oil fields straddling the north-south border. Access to the oil fields meant significant economic benefit to whoever controlled them."
+         "Afghanistan":"Mujahideen�s Masood started guerrilla warfare. However, the more the red army killed members of Mujahideen, more fighters joined them, eager to be a martyr."
       }
    },
    "1985":{
@@ -2380,10 +2330,8 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"Soviet union started to tire and crumble it's control on Afghanistan. Mujahideen got advanced artillery such as: missiles, which downed the Soviet helicopters",
-         "Ethiopia":"Insurrections against Communist rule sprang up in Eritrea. Ethiopian People's Revolutionary Democratic Front (EPRDF) and Tigrayan People's Liberation Front (TPLF) were born",
-         "Iraq":"Iraqi armed forces were receiving financial support from Saudi Arabia, Kuwait, and other Persian Gulf states, and were making substantial arms purchases from the Soviet Union, China, and France. For the first time since early 1980, Saddam launched new offensives.",
-         "Sudan":"A coup mounted against the government resulting in a civil war."
+         "Afghanistan":"Soviet union started to tire and crumble it�s control on Afghanistan. Mujahideen got advanced artillery such as: missiles, which downed the Soviet helicopters",
+         "Ethiopia":"Insurrections against Communist rule sprang up in Eritrea.�Ethiopian People's Revolutionary Democratic Front�(EPRDF) was created"
       }
    },
    "1986":{
@@ -2521,10 +2469,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"The govt. negotiated with disillusioned Mujahideen commanders who agreed to cooperate as government militia. ",
-         "Ethiopia":"TPLF entered the final period of the war against the Derg which was weakened by the famine. TPLF and peasants were united in struggle, and with the passing of the famine, many peasants were able to resume their livelihoods and continue their support of the guerrilla fighters in their midst.",
-         "Iraq":"Through the eyes of international observers, Iran was prevailing in the war by the end of 1986. In the northern front, the Iranians began launching attacks toward the city of Suleimaniya with the help of Kurdish fighters, taking the Iraqis by surprise.",
-         "Sudan":"SPLA and the govt agreed on a peace plan calling for the abolition of military pacts with Egypt and Libya and a cease-fire. "
+
       }
    },
    "1987":{
@@ -2653,10 +2598,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"Govt's concrete achievements were the consolidation of armed forces, the expansion of co-opted militia forces and the acceptance by urban population. As a propaganda ploy \"National Reconciliation\" was a means of gaining time to prepare for civil war after the Soviet departure.",
-         "Ethiopia":"TPLF leadership had reached the conclusion that its forces and those of the Derg were roughly in balance and that a stalemate existed.",
-         "Iraq":"Saddam also ordered several chemical attacks on civilian targets in Iran, such as the town of Sardasht. Iranian public had become increasingly war-weary and disillusioned with the fighting, and relatively few volunteers joined the fight. Because the Iranian war effort relied on popular mobilization, their military strength actually declined, and Iran was unable to launch any major offensives",
-         "Sudan":"However, during this period the second civil war intensified in lethality, and the national economy continued to deteriorate. When prices of basic goods were increased, riots ensued, and the price increases were cancelled."
+
       }
    },
    "1988":{
@@ -2800,8 +2742,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"Withdrawal after signing Geneva accords, no intervention was to be made in Afghanistan by any country of power",
-         "Ethiopia":"The Derg's most heinous inflictions of atrocities on the Tigrayan civilian population took place which the foreign observers were unable to witnes. In particular, an all-day attack by helicopter gunships and MiGs produced 1,800 civilian deaths, the worst single atrocity of the entire war from the start of the ELF insurrection.",
+         "Afghanistan":"Withdrawal after signing Geneva accords, no intervention in Afghanistan by any power",
          "Iraq":"Iraq was heavily armed and launched a final attack. Iran had to call for a ceasefire.",
          "Somalia":"The govt bombed 3 cities of their major rival: Ishaaq clan. 50,000-100,000 people died. It was a massacre."
       }
@@ -2971,10 +2912,9 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"Soviet Russia's Red army officially left Afghanistan. The Soviet Union left Afghanistan deep in winter with intimations of panic among Kabul officials. Hard experience had convinced Soviet officials that the government was too factionalized to survive. Pakistani and United States officials expected a quick mujahedin victory. The resistance was poised to attack provincial towns and cities and eventually Kabul, if necessary. The first one to fall might produce a ripple effect that would unravel the government.",
-         "Ethiopia":"The autumn of nations, resulted in end of communist rule and removal of aid from USSR and in an economic failure in Ethiopia.",
-         "Iraq":"Meanwhile, Kuwait constantly demanded money and drove Iraq out of market preventing Iraq from rebuilding themselves, after the war. Kuwait even drilled in to the Southern Iraqs rumaila oil field. ",
-         "Dem. Rep. of the Congo":"As the Cold War came to a close, internal and external pressures on PM Mobutu increased and was weakened by a series of domestic protests."
+         "Afghanistan":"Red army officially left Afghanistan",
+         "Ethiopia":"The autumn of nations, resulted in end of communist rule and removal of aid from USSR and in an economic failure",
+         "Iraq":"Kuwait constantly demanded money and drove Iraq out of market preventing Iraq from rebuilding themselves, after the war. Kuwait even drilled in to the Southern Iraq�s rumaila oil field. "
       }
    },
    "1990":{
@@ -3139,10 +3079,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"An initial assault penetrated the city's defenses and reached its airport. A counterattack, supported by effective artillery and air power, drove the mujahedin back. Mujahedin were traumatized by this failure and inability to coordinate tactical movements or logistics or to maintain political cohesion.",
-         "Ethiopia":"EPLF forces conducted a surprise attack stunning the Ethiopian military, at Massawa. However, an aerial bombardment of the city by the military, soon followed. The civilian population was hit the hardest.",
-         "Iraq":"Gulf war: US demanded that Kuwait pay Iraq. Kuwait failed to pay this and Iraq declared war. Iraq conquered Kuwait in 2 days.",
-         "Somalia":"The Somali Armed Forces began engaging various armed rebel groups. The clan-based armed opposition groups eventually managed to overthrow the Barre government"
+         "Iraq":"Gulf war: US demanded that Kuwait pay Iraq. Kuwait failed to pay this and Iraq declared war. Iraq conquered Kuwait in 2 days."
       }
    },
    "1991":{
@@ -3355,11 +3292,10 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"Mujahideen kept opposing their current govt, deadly exchange of medium-range rockets became the principal form of combat, embittering the urban population and the govt was disbanded.",
+         "Afghanistan":"Mujahideen opposed their current govt and the govt was disbanded. Mujahideen surrendered Kabul.",
          "Ethiopia":"EPRDF advanced on Addis Ababa and the Soviet Union did not intervene to save the government side",
          "Iraq":"Operation desert shield - Iraq placed armies in Kuwait, to the north of Saudi arabia. Both Iraq and US allies with Saudi arabia started gathering forces.  UN security council ordered the use of all forces against Iraq if they declined to withdraw from Kuwait.",
-         "Somalia":"As other clans rebelled and the government dissolved. Barre fled. ",
-         "Myanmar":"Operation Clean and Beautiful Nation was launched by the military. More Rohingyas fled."
+         "Somalia":"Other clans rebelled and the government dissolved. Barre fled."
       }
    },
    "1992":{
@@ -3566,11 +3502,8 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"Civil war : Masood's islamic coalition govt was opposed by the sole rule of Gulbuddin's Pakistan backed army.",
-         "Iraq":"Massive US air forces hit Iraqs defenses. (Operation Desert Storm) followed by Operation desert sabre, of land army pushing Iraqi forces back to Iraq.",
-         "Somalia":"This precipitated the arrival of UNOSOM I UN military observers in July 1992, followed by larger peacekeeping forces. Factional fighting continued in the south. In the absence of a central government, Somalia became a \"failed state\".",
-         "Burundi":"The Hutu Party FRODEBU won the election and formed the first Hutu government in the country. ",
-         "Sudan":"Internal dissension among the rebels led opponents of the SPLA to form the so-called Nasir faction of the SPLA rebel army, who carried out the Bor massacre, killing an estimated 2000 civilians."
+         "Afghanistan":"Civil war : Masood�s islamic coalition govt was opposed by the sole rule of Gulbuddin�s Pakistan backed army.",
+         "Iraq":"Massive US air forces hit Iraq�s defenses. (Operation Desert Storm) followed by Operation desert sabre, of land army pushing Iraqi forces back to Iraq."
       }
    },
    "1993":{
@@ -3819,11 +3752,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"The Durand line Treaty is expired and all Afghans lands are supposed to be returned but Pakistan refuses to.",
-         "Iraq":"The Clinton administration judged an alleged assassination attempt on former President George H. W. Bush by Iraqi secret agents to be worthy of a military response. The Iraqi Intelligence Headquarters in Baghdad was targeted by Tomahawk cruise missiles.",
-         "Somalia":"Educated people fled while Somalia lacked a central govt and it evolved into a Jihadist battle space. ",
-         "Burundi":"A second Genocide - Tensions began to escalate almost immediately. Small bands of Hutu and Tutsi gangs consistently fought in large groups, armed with machetes and killing each other.",
-         "Sudan":"The Sudanese government supported Saddam Hussein in the Gulf War. This changed American attitudes toward the country. Bill Clinton's administration prohibited American investment in the country and supplied money to neighbouring countries to repel Sudanese incursions. "
+         "Somalia":"Educated people fled while Somalia lacked a central govt and it evolved into a Jihadist battle space. "
       }
    },
    "1994":{
@@ -4060,11 +3989,8 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"Masood had bested Gulbuddin. However, a Pak-backed terrorist-group: Taliban arose and Afghans again fled to neighboring countries.",
-         "Iraq":"An outbreak of violence occurred between the Iraqis and Kurds resulting in a Iraqi Kurdish Civil war",
-         "Rwanda":"Hutu presidents were killed in aircrafts. Local radio stations called out their Hutu brethren to wipe out all Tutsis. The Rwandan genocide, also known as the genocide against the Tutsi, was a genocidal mass slaughter of Tutsi in Rwanda by members of the Hutu majority government.",
-         "Burundi":"The Hutus led a genocide against the Tutsi in Rwanda. Thousands of Tutsi refugees sought safety in Burundi.",
-         "Sudan":"The US also began attempts to \"isolate\" Sudan and began referring to it as a rogue state."
+         "Afghanistan":"Masood had bested Gulbuddin. However, Taliban arose (again, pak backed)  Afghans again fled to neighboring countries.",
+         "Rwanda":"Hutu presidents were killed in aircrafts. Local radio stations called out their Hutu brethren to wipe out all Tutsis."
       }
    },
    "1995":{
@@ -4290,10 +4216,7 @@ let sankeyData =
       ],
       "story":{
          "Afghanistan":"A total of 6 million Afghan refugees were hosted in Pakistan and Iran, making Afghanistan the largest refugee-producing country in the world, a title held for 32 years.",
-         "Iraq":"CIA partnered with Kurds to plan assasination of Saddam Hussein",
-         "Somalia":"The UN withdrew in 1995, having incurred significant casualties, but no central authority had yet been reestablished.",
-         "Rwanda":"Massacre was a systematic campaign of killings directed by political leaders and backed by military",
-         "Sudan":"Eritrea, Ethiopia and Uganda stepped up their military assistance to the SPLA to the point of sending active troops into Sudan"
+         "Rwanda":"Massacre was a systematic campaign of killings directed by political leaders and backed by military"
       }
    },
    "1996":{
@@ -4530,10 +4453,9 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"The forces of the Islamic State retreated to northern Afghanistan.",
-         "Iraq":"US realized that invading Iraq and removing Saddam Hussain's rule would result in an instability and therefore signed a ceasefire with Iraq. Where in, Iraq was stripped weapons of mass destruction.",
-         "Rwanda":"During the first six weeks, up to 800,000 Rwandans may have been murdered, representing a rate five times higher than during the Holocaust of Nazi Germany",
-         "Sudan":"The government signed the'Nuba Mountains, and'Fashoda'agreements with rebel factions. These included the Khartoum agreements that ended military conflict between the government and significant rebel factions."
+         "Afghanistan":"Taliban took control of majority of Afghanistan and Kabul, thus becoming an Islamic Emirate. ",
+         "Iraq":"US realized that invading Iraq and removing Saddam Hussain�s rule would result in an instability and therefore signed a ceasefire with Iraq. Where in, Iraq was stripped weapons of mass destruction.",
+         "Rwanda":"During the first six weeks, up to 800,000 Rwandans may have been murdered, representing a rate five times higher than during the Holocaust of Nazi Germany"
       }
    },
    "1997":{
@@ -4770,10 +4692,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"The Taliban conquered Kabul and declared the establishment of the Islamic Emirate of Afghanistan. Former President Mohammad Najibullah, who had been living under United Nations protection in Kabul, was tortured, castrated and executed by Taliban forces.",
-         "Iraq":"US however, encourages kurds and Shiates to rise up against the Suns govt regime of Saddam.",
-         "Burundi":"Burundian Civil war - The Hutu presidency and Tutsi military operated under a power-sharing political system until 1996, when Tutsi Pierre Buyoya replaced the Hutu president in a coup.",
-         "Sudan":"Many of the govt leaders  moved to Khartoum where they assumed marginal roles in the central government, or collaborated with the government in military engagements against the SPLA.'"
+         "Iraq":"US however, encourages kurds and Shiates to rise up against the Suns govt regime of Saddam."
       }
    },
    "1998":{
@@ -5010,9 +4929,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"Operation Infinite Reach - Cruise missiles were fired by the United States Navy into four militant training camps in the Islamic Emirate of Afghanistan.",
-         "Iraq":"Iraq had been deeply scared by 2 big conflicts and had several failed coups. ",
-         "Burundi":"Buyoya and the opposition-led Hutu parliament reached an agreement to sign a transitional constitution, and Buyoya was sworn in as president."
+         "Iraq":"Iraq had been deeply scared by 2 big conflicts and had several failed coups. "
       }
    },
    "1999":{
@@ -5273,9 +5190,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"US imposes financial and commercial sanctions on Afghanistan's ruling Taliban movement because of its support of Saudi terrorism suspect Osama Bin Laden.",
-         "Iraq":"The 1999 Shia uprising in Iraq refers to a short period of unrest in Iraq in early 1999 following the killing of Mohammad Mohammad Sadeq al-Sadr by the then Ba'athist government of Iraq",
-         "Burundi":"The civil war, however, continued, despite the efforts of the international community to create a peace process. "
+
       }
    },
    "2000":{
@@ -5545,11 +5460,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"In addition to the terrorism, severe droughts affects Afghanistan. The UN calls for immediate international drought relief to aid over 10 million people across Afghanistan.",
-         "Iraq":"Multiple air-centric military operations were conducted by US on Iraq",
-         "Burundi":"Ceasefire talks were held in Tanzania, facilitated by Nelson Mandela.",
-         "Myanmar":"The government of Myanmar has been accused of using \"scorched earth\" tactics against civilians, most notably in Kayin State. The accusations included burning down entire villages, planting landmines, using civilians as slave labour, using civilians as minesweepers and the rape and murder of Karen women.",
-         "Viet Nam":"After'President'Bill Clinton'visited Vietnam in 2000, it virtually marked the new era of Vietnam. Vietnam has become an increasingly attractive destination of economic development. Its economic reforms successfully changed Vietnam and making Vietnam more relevant in the'Asean'and international stage."
+
       }
    },
    "2001":{
@@ -5807,9 +5718,8 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"Masood fought from Northern Afghanistan but was finally assassinated. Al qaeda attacked World trade center in USA. Osama bin laden was sheltered in Taliban. USA had aided Mujahideen which had split to form Taliban and Al Qaeda. A war was declared on Taliban, by the USA.",
-         "Iraq":"World trade center was destroyed during 9-11 and Saddam applauded the attack",
-         "Burundi":"An attempted coup failed. The transitional government was implemented. "
+         "Afghanistan":"Masood fought till 2001 from Northern Afghanistan. But, was finally assassinated. Sep 11, 2001 - Al qaeda attacked World trade center in USA.  Al Qaeda claimed responsibility for the attacks. Osama bin laden was sheltered in Taliban. USA had aided Mujahideen which had split to form Taliban and Al Qaeda. USA, thus, declared a war on Taliban.",
+         "Iraq":"World trade center was attacked and Saddam applauded this"
       }
    },
    "2002":{
@@ -6100,9 +6010,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"The US was supported by a coalition of over 40 countries to invade Afghanistan. The war's public aims were to dismantle al-Qaeda and to deny it a safe base of operations by removing the Taliban from power. The War in Afghanistan is the longest war in US history.",
-         "Iraq":"UN passed resolution charging Iraq  of violating past resolutions. Iraq war ",
-         "Burundi":"The Itaba massacre left hundreds of unarmed civilians dead."
+         "Iraq":"UN passed resolution charging Iraq  of violating past resolutions. Iraq war "
       }
    },
    "2003":{
@@ -6387,9 +6295,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"Pamphlets turned up strewn in towns and countryside, by Taliban and other groups, urging Islamic faithful to rise up against US forces and other foreign soldiers in holy war.",
-         "Iraq":"Iraqi army was defeated by the coalition army of US, UK, Poland and Australia via Kuwait. Saddam was captured.  Iraq was a Sunni govt (20%) that was suppressing the Shiate rebels (63% majority) and Kurdish (17%). Once Sadam was removed, Iraq got unstable and Shias came to power. who suppressed Sunnis now. A lot of Sunni terrorist groups  such as: Al Qaeda trickled down to Iraq",
-         "Burundi":"Refugees from Burundi continued to move to Tanzania."
+         "Iraq":"Iraqi army was defeated by the coalition army of US, UK, Poland and Australia via Kuwait. Saddam was captured.  Iraq was a Sunni govt (20%) that was suppressing the Shiate rebels (63% majority) and Kurdish (17%). Once Sadam was removed, Iraq got unstable and Shias came to power. who suppressed Sunnis now. A lot of Sunni terrorist groups  such as: Al Qaeda trickled down to Iraq"
       }
    },
    "2004":{
@@ -6653,9 +6559,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"Taliban attacks gradually increased in frequency. Dozens of Afghan government soldiers, NGO humanitarian workers, and several US. soldiers died in the raids, ambushes and rocket attacks. Besides guerrilla attacks, Taliban fighters began building up forces in the district of Dai Chopan in Zabul Province.",
-         "Iraq":"A lot of fighters reach Iraq seeing this as a deja vu of the Soviet's invasion of Afghanistan, including the Sunni Iraqi soldiers and form Al Qaeda in Iraq (AQI). They were against Shias and USA. ",
-         "Burundi":"Burundi is one of the few countries in Africa, along with its closely linked neighbour Rwanda among others, to be a direct territorial continuation of a pre-colonial era African state. "
+         "Iraq":"A lot of fighters reach Iraq seeing this as a deja vu of the Soviet�s invasion of Afghanistan, including the Sunni Iraqi soldiers and form Al Qaeda in Iraq (AQI). They were against Shias and USA. "
       }
    },
    "2005":{
@@ -6940,10 +6844,8 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"An insurgency began after Pakistan's decision to station around 80,000 soldiers next to the porous Durand Line border with Afghanistan.",
-         "Iraq":"A civil war broke out. USA had no plans of setting up a govt in Iraq after Saddam's capture. Saudi Arabia and Iran had Iraq as a buffer between them until now. Lot of Shia and Sunni radical militia sprang up all over the country, who were proxies and funded from Saudi Arabia and Iran. ",
-         "Burundi":"The president signed a law in January 2005 to initiate a new national army, consisting of Tutsi military forces and one of the Hutu rebel groups. The Constitution was approved by voters in a referendum - marking the first time Burundians had voted since 1994. ",
-         "Sudan":"Peace talks between the southern rebels and the government made substantial progress in 2003 and early 2004, although skirmishes in parts of the south continued. A Comprehensive Peace Agreement was signed in Nairobi."
+         "Afghanistan":"An insurgency began after a�Pakistani�decision to station around 80,000 soldiers next to the porous�Durand Line�border with Afghanistan.",
+         "Iraq":"A civil war broke out. USA had no plans of setting up a govt in Iraq after Saddam�s capture. Saudi Arabia and Iran had Iraq as a buffer between them until now. Lot of Shia and Sunni radical militia sprang up all over the country, who were proxies and funded from Saudi Arabia and Iran. "
       }
    },
    "2006":{
@@ -7261,9 +7163,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"A multinational International Security Assistance Force contingent started to replace U.S. troops in southern Afghanistan. Its primary objective was to quell the ongoing Taliban insurgency.",
-         "Iraq":"Saddam Hussein was captured and executed in December 2006.",
-         "Burundi":"However, unrest between the Tutsis and Hutus still continues to this day, making several destitutes and in search of a new place to live."
+
       }
    },
    "2007":{
@@ -7554,9 +7454,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"Skirmishes began with Pakistan.",
-         "Iraq":"There were government creation talks, growing sectarian violence, and continuous anti-coalition attacks. Sectarian violence expanded to a new level of intensity following the al-Askari Mosque bombing in the Iraqi city of Samarra",
-         "Myanmar":"Civilians have allegedly been removed from their homes and have had their land confiscated by the government to be used in industrial projects. Civilians have also been removed from their homes by the central government, and their land confiscated, in order for development projects and resource exploitation."
+
       }
    },
    "2008":{
@@ -7844,9 +7742,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"Indian Embassy was bombed by Taliban as India had previously supported the coalition forces and to threaten India's growing influence in Afghanistan.",
-         "Iraq":"US forces continued to patrol and fight in Iraq.",
-         "Myanmar":"Karen refugees fled to nine refugee camps along the Thai-Myanmar border and the Thai border provinces of Chiang Mai and Ratchaburi."
+
       }
    },
    "2009":{
@@ -8143,9 +8039,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"Taliban suicide bomber detonated himself outside the NATO headquarters in Kabul",
-         "Iraq":"US handed control of the Green Zone and Saddam Hussein's presidential palace to the Iraqi government",
-         "Syrian Arab Rep.":"Syria was led by Al-Assad family's dictatorship, since the 1960s."
+         "Syrian Arab Rep.":"Syria was led by Al-Assad family�s dictatorship, since the 1960s."
       }
    },
    "2010":{
@@ -8416,7 +8310,6 @@ let sankeyData =
       ],
       "story":{
          "Afghanistan":"U.S. President Barack Obama sent additional 33,000 U.S. soldiers to Afghanistan, with the total international troops reaching 150,000.",
-         "Iraq":"Insurgents conducted a major attack with at least 12 car bombs simultaneously detonating from Mosul to Basra. These attacks coincided with the US plans for a withdrawal of combat troops.",
          "Syrian Arab Rep.":"After the Arab-spring that overthrew many Authoritarian govts, protestors and rebels start rising in Syria who are cracked down by the Shiate dictator, Assad and his regime. This leads to a civil war."
       }
    },
@@ -8675,10 +8568,9 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"After the death of Osama bin Laden in Pakistan, many high-profile Afghan officials were assassinated",
+         "Afghanistan":"After the�death of Osama bin Laden�in Pakistan, many high-profile Afghan officials were assassinated",
          "Iraq":"USA withdraws from Iraq after several air strikes killing key leaders of Al Qaeda. Arab spring spreads over middle east",
-         "Syrian Arab Rep.":"ISI is formed in Iraq and Al qaeda move to Syria.  Syria becomes the grounds for a proxy war. Iran sends arms to Syrian govt while Gulf states send arms to rebels in Syria, to counter Iran's influence. Sunni (Saudi arabia, Jordan, Turkey, terror groups) support the rebels while Shiates (Iran,) support Assad's govt.",
-         "Myanmar":"Myanmmar's Armed forces launched a military offensive named Operation Perseverance against insurgents in Shan State and  was in response to the insurgents' rejections of the junta's \"One Nation, One Army\" policy."
+         "Syrian Arab Rep.":"ISI is formed in Iraq and Al qaeda move to Syria.  Syria becomes the grounds for a proxy war. Iran sends arms to Syrian govt while Gulf states send arms to rebels in Syria, to counter Iran�s influence. Sunni (Saudi arabia, Jordan, Turkey, terror groups) support the rebels while Shiates (Iran,) support Assad�s govt."
       }
    },
    "2012":{
@@ -8969,10 +8861,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"Heavily armed Taliban insurgents and suicide bombers launched multiple coordinated attacks throughout Afghanistan. Insurgents launched the 2012 spring offensive on multiple locations, including government buildings, military bases, and embassies.",
-         "Iraq":"Asa'ib Ahl al-Haq, the Iranian-backed Shiite militia that carried out deadly attacks on U.S. troops agrees to lay down its arms and join the political process in Iraq.",
-         "Syrian Arab Rep.":"Chemical weapons, mass executions, torture and drone attacks on civilians are rising. Syrian population is trapped between the regime, rebel groups and religious extremists. They have to flee.",
-         "Myanmar":"Accusations spread of an incident involving muslim men and a buddhist woman. Buddhist nationalists backed by security forces attacked muslim neighborhoods burned homes, displacing Rohingyas."
+         "Syrian Arab Rep.":"Chemical weapons, mass executions, torture and drone attacks on civilians are rising. Syrian population is trapped between the regime, rebel groups and religious extremists. They have to flee."
       }
    },
    "2013":{
@@ -9287,10 +9176,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"US started to withdraw its forces and urged Afghan forces to provide for the Afghan people's security and protection",
-         "Iraq":"The Iraqi government launches Operation al-Shabah (Phantom), with the stated aim of severing contact between al-Qaeda in Iraq and the Syrian al-Nusra Front by clearing militants from the border area with Syria and Jordan.",
-         "Syrian Arab Rep.":"Hezbollah , a lebanese militia joins the Syrian army. Assad uses chemical weapons on civilians. USA intervenes to stop Assad while Russia backs Assad. USA has a CIA program to train & equip rebels against Assad.",
-         "Myanmar":"Rohingyas were persecuted, disinfranchised and stateless"
+         "Syrian Arab Rep.":"Hezbollah , a lebanese militia joins the Syrian army. Assad uses chemical weapons on civilians. USA intervenes to stop Assad while Russia backs Assad. USA has a CIA program to train & equip rebels against Assad."
       }
    },
    "2014":{
@@ -9608,8 +9494,6 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"As the forces started to withdraw, the killings in Afghanistan started to rise. Insurgency increased and a large number of bombings started to occur.",
-         "Iraq":"The Islamic State of Iraq and the Levant (ISIL) launched a military offensive in Northern Iraq and declared a worldwide Islamic caliphate, eliciting another military response from the United States and its allies.",
          "Syrian Arab Rep.":"ISIS sets up a military style attack in Iraq and Syria and takes control of a large part of both. ISIS reveals its plan of forming a totalitarian islamic caliphate. They are not fighting Assad but rebels and Kurds. Many fighters from all over the world join this cause. ISIS invades Kurdish territory in Syria sparking a counter attack causing a genocide and even the murder of the American journalist: James Fowley. American air strike causes ISIS to lose 1/5th of its territory. USA trains rebels that fight ISIS and now no longer care about Assad."
       }
    },
@@ -9949,10 +9833,7 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"Taliban began to resurgent. Countless suicide bombings and attacks occurred in Afghanistan followed by multiple drone strikes.",
-         "Iraq":"ISIL starts a series of violent terror-attacks including the destruction of 2 major cities and Mosul Museum, the 2nd largest in Iraq.",
-         "Syrian Arab Rep.":"Russia bombs anti-Assad rebels (vs USA). ISIS launches terrorist attacks in Tunisia, Paris, Kuwait. Europe experiences highest influx of refugees, since WWII.",
-         "Myanmar":"The Rohingya people have been described as \"amongst the world's least wanted\" and \"one of the world's most persecuted minorities.\" They are deprived of the right to free movement and of higher education, denied Burmese citizenship and are described as illegal immigrants from Bangladesh."
+         "Syrian Arab Rep.":"Russia bombs anti-Assad rebels (vs USA). ISIS launches terrorist attacks in Tunisia, Paris, Kuwait. Europe experiences highest influx of refugees, since WWII."
       }
    },
    "2016":{
@@ -10312,10 +10193,9 @@ let sankeyData =
          }
       ],
       "story":{
-         "Afghanistan":"Afghans are currently the second largest refugee group after Syrian refugees. A war torn Afghanistan has created millions of grief-struck people in search for a new home.",
-         "Iraq":"Iraq's sunni population is caught between Shia majority that oppresses them to hold on to power and a theocratic militia: ISIS which will kill them",
-         "Syrian Arab Rep.":"Assad retakes Allepo knocking rebels out, with help from Russia. He uses chemical weapons against his own people. Tomahawk missiles from US are launched and strike air base in Syria, directly attacking Assad's regime. Syria is in ruins and is a base of Proxy wars from all other countries",
-         "Myanmar":"Ethnic cleansing of Rohingyas started. A Rohingya militant group coordinated small-scale attacks on border police stations. This was met by a brutal retaliation by the state security forces and led to 400 deaths and mass exodus of Rohingyas to Bangladesh. This was labelled as the fastest growing humanitarian crisis in recent years."
+         "Afghanistan":"Millions of afghans are refugees",
+         "Iraq":"Iraq�s sunni population is caught between Shia majority that oppresses them to hold on to power and a theocratic militia: ISIS which will kill them",
+         "Syrian Arab Rep.":"Assad retakes Allepo knocking rebels out, with help from Russia. He uses chemical weapons against his own people. Tomahawk missiles from US are launched and strike air base in Syria, directly attacking Assad�s regime. Syria is in ruins and is a base of Proxy wars from all other countries"
       }
    }
 }

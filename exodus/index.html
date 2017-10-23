@@ -13,24 +13,23 @@
     <link href="https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700,700i" rel="stylesheet">
     
     <script src="csv/sankey-flow-story.js"></script>
-    
-    <!--    <script src="js/sankey-json-script.js"></script>-->
 
     <title>Exodus</title>
 </head>
 
 <body>
-    
     <div class="container-fluid">
         <div class="col-lg-8">
-<!--            <h3>Refugees are often the first victims of Terrorism</h3>-->
             <h3>
                 <span class="title">Birth of Refugees</span>
                 <button id="btnPause" class="btn btn-default btn-xs">
                     <span id="spanPause" class="glyphicon glyphicon-pause"></span>
                 </button>
-<!--                <input type=slider>-->
-<!--                <input type="button" class="btn btn-default btn-xs" id="btnPause" value="Pause">-->
+<!--
+                <div class="speed-slider">
+                    <input type="range" class="slider-speed" min="1000" max="10000" step="1000" value="4000" id="speedSlider">
+                </div><br>
+-->
             </h3>
             <span>
                 Witness the movement of people across countries. 
@@ -294,7 +293,7 @@
                         let thisName = d.name;
                         
                         d3.selectAll(".area").attr("opacity",0.2);
-                        d3.selectAll(".area."+thisName.replace(/ /g,'').replace(/\./g,'')).attr("opacity",1);
+                        d3.selectAll(".area."+thisName.replace(/ /g,'').replace(/\./g,'').replace(/["'()]/g,"")).attr("opacity",1);
 
                         node.selectAll("rect")
                             .style("opacity", function(d) {
@@ -367,20 +366,21 @@
                     .attr("class", "flow-sankey-text")
                     .style("cursor", "pointer")
                     .attr("fill", function(d) {
-                        //return "#949494";
+                    
                         var isDestination = $.inArray(d.name, countries);
 
-                        if (+isDestination != -1)
+                        if (+isDestination != -1){
                             return nodeColour(d.name);
-                        else if(+d.value < 200000){
-                            var currYear = $("#yearSlider").val();
-                            if((+currYear == 1994) || (+currYear >= 2000)){
-                                return "#FFFFFF";
-                            }
-                        }
+                        }  
                         else{
-                            return "#EAEAEA";
-                        }
+                            if(+d.value < 200000){
+                                var currYear = $("#yearSlider").val();
+                                if((+currYear == 1994) || (+currYear >= 2000)){
+                                    return "#FFFFFF";
+                                }
+                            } 
+                            return "#D4D2D4";
+                        }  
                     })
                     .text(function(d) {
                         if(d.name == "Viet Nam"){
@@ -400,7 +400,7 @@
                         var theName = d.name;
                     
                         d3.selectAll(".area").attr("opacity",0.2);
-                        d3.selectAll(".area."+theName.replace(/ /g,'').replace(/\./g,'')).attr("opacity",1);
+                        d3.selectAll(".area."+theName.replace(/ /g,'').replace(/\./g,'').replace(/["'()]/g,"")).attr("opacity",1);
 
                         node.selectAll("rect")
                             .style("opacity", function(d) {
@@ -456,7 +456,7 @@
                     .text(function(d) {
                         var val = d.value.toString();
                         val = val.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                        return d.name + "\n" + (val);
+                        return d.name + "\n" + (val)+ " refugees";
                     });
 
                 var link = linkG.data(sankeyLinks)
@@ -546,7 +546,8 @@
         $('#yearSlider').val(1961);
         renderChart();
         //animate the playback
-        var timer = 1000;
+        var timer = 5000;
+        //var timer = $("#speedSlider").val();
         var refreshIntervalId = setInterval(function() {
             var currValue = $('#yearSlider').val();
             if (currValue < 2016) {
@@ -578,7 +579,7 @@
                         clicked = true;
                     }
                     
-                    $('#yearSlider').val(parseInt(currValue) + 1);
+                    (parseInt(currValue) == 2016) ? $('#yearSlider').val(1961) : $('#yearSlider').val(parseInt(currValue) + 1);
                     renderChart();
                 }, timer);
                 
@@ -594,6 +595,23 @@
                 clicked = true;
             }
         });
+        
+//        $("#speedSlider").on("change",function(){
+//            clearInterval(refreshIntervalId);
+//            refreshIntervalId = setInterval(function() {
+//                var currValue = $('#yearSlider').val();
+//                if (currValue < 2016) {
+//                    $('#yearSlider').val(parseInt(currValue) + 1);
+//                    renderChart();
+//                } else {
+//                    $("#spanPause").removeClass("glyphicon-pause");
+//                    $("#spanPause").addClass("glyphicon-play");
+//                    clearInterval(refreshIntervalId);
+//                    clicked = true;
+//                }
+//            }, $("#speedSlider").val());
+//        });
+        
         
         var renderAreaChart = function(){
             

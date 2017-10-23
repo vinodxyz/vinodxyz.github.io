@@ -196,3 +196,28 @@
     font-family: 'PT Serif', serif;
     font-weight: bold;
 }
+
+.speed-slider{
+    display: inline-block;
+}
+
+.slider-speed {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 10rem;
+  height: 0.25rem;
+  outline: none;
+  border-radius: 0.25rem;
+}
+
+.slider-speed::-webkit-slider-thumb {
+  -webkit-appearance: none;
+          appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: #333333;
+  border: 0.25rem solid #D4D2D4;
+  border-radius: 1rem;
+  cursor: pointer;
+}
