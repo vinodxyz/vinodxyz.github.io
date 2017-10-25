@@ -12,30 +12,31 @@ var mobileScreen = ($( window ).innerWidth() < 500 ? true : false);
 d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
     
     var padding=50;
-    var margin = {left: 60, top: 20, right: 20, bottom: 60};
-    var w = Math.min($("#chart").width(), 840) - margin.left - margin.right;
+    var margin = {left: 10, top: 0, right: 20, bottom: 60};
+    var w = Math.min($("#bubble-line-chart").width(), 840) - margin.left - margin.right;
 	var h = w*2/3;
     
     var opacityCircles = 0.7,
         opacityLines = 0.2,
 	    maxDistanceFromPoint = 30;
     
-    var svg = d3.select("#chart").append("svg").attr("width",w).attr("height",h);
+    var svg = d3.select("#bubble-line-chart").append("svg").attr("width",w).attr("height",h);
     var wrapper = svg.append("g").attr("class", "chordWrapper").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
-    var xScale = d3.scaleTime().domain([d3.min(data,function(d){return d.date;}),d3.max(data,function(d){return d.date;})]).range([padding,w-padding]);
+    var xScale = d3.scaleTime().domain([d3.min(data,function(d){return d.date;}),d3.max(data,function(d){return d.date;})]).range([0,w-padding]);
+    //var xScale = d3.scaleTime().domain([1961,d3.max(data,function(d){return d.date;})]).range([0,w-padding]);
     var yScale = d3.scaleLinear().domain([0,d3.max(data,function(d){return d.refugees;})]).range([h-padding,padding]);
     var color = d3.scaleOrdinal().range(["#EFB605", "#E58903", "#E01A25", "#C20049", "#991C71", "#66489F", "#2074A0", "#10A66E", "#7EB852","#AAA9AA","#5CEAEA"]).domain(['Rwanda','Syrian Arab Rep.','Afghanistan','Dem. Rep. of the Congo','Iraq','Viet Nam','Burundi','Ethiopia','Myanmar','Somalia','Sudan']);
     var rScale = d3.scaleSqrt().range([mobileScreen ? 1 : 2, mobileScreen ? 10 : 16]).domain(d3.extent(data, function(d) { return d.dead; }));
     
     //Set up X axis label
-    wrapper.append("g")
-        .append("text")
-        .attr("class", "x title")
-        .attr("text-anchor", "end")
-        .style("font-size", (mobileScreen ? 8 : 12) + "px")
-        .attr("transform", "translate(" + w + "," + (h - 10) + ")")
-        .text("Years");
+//    wrapper.append("g")
+//        .append("text")
+//        .attr("class", "x title")
+//        .attr("text-anchor", "end")
+//        .style("font-size", (mobileScreen ? 8 : 12) + "px")
+//        .attr("transform", "translate(" + w + "," + (h - 10) + ")")
+//        .text("Years");
 
     //Set up y axis label
     wrapper.append("g")
@@ -43,7 +44,7 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
         .attr("class", "y title")
         .attr("text-anchor", "end")
         .style("font-size", (mobileScreen ? 8 : 12) + "px")
-        .attr("transform", "translate(70, 0) rotate(-90)")
+        .attr("transform", "translate(70,60) rotate(-90)")
         .text("# of Refugees");
     
     //a line chart connecting trends
@@ -102,13 +103,15 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
         .data(data.filter(function(d){return d.refugees > 450000;}))
         .enter().append("circle")
         .attr("class", function(d,i) {
+            var deathclass = (d.dead==0)?"unknown":"known";
             var country = (d.origin).replace(/\s+/g, '').replace(/\./g,'');
-            return "countries "+country+" "+country+formatTime(d.date);
+            return "countries "+country+" "+country+formatTime(d.date)+" "+deathclass;
         })
         .attr("cx",function(d){return xScale(d.date);})
         .attr("cy",function(d){return yScale(d.refugees);})
         .attr("r", function(d) {return rScale(d.dead);})
-        .attr("fill",function(d){ return color(d.origin);});
+        .attr("fill",function(d){ return color(d.origin);})
+        .attr("opacity",opacityCircles);
     
     var xAxis = d3.axisBottom().scale(xScale);
     var yAxis = d3.axisLeft().scale(yScale).ticks(5);
@@ -153,7 +156,7 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
         //Define and show the tooltip
         $(el).popover({
             placement: 'auto top',
-            container: '#chart',
+            container: '#bubble-line-chart',
             trigger: 'manual',
             html : true,
             content: function() { 
@@ -226,7 +229,7 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
         wrapper
             .append("text")
             .attr("class", "guide")
-            .attr("x", padding-10)
+            .attr("x", padding+3)
             .attr("y", y-(padding)/3)
             .attr("dy", "0.35em")
             .style("fill", color)
@@ -276,14 +279,18 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
     }
     
     if (!mobileScreen) {
+        
+        var chartHeight = d3.select("#bubble-line-chart").select("svg").attr("height");
+        
         //Legend			
-        var	legendMargin = {left: 5, top: 10, right: 5, bottom: 10},
+        var	legendMargin = {left: 5, top: 150, right: 5, bottom: 10},
             legendWidth = 145,
-            legendHeight = 270;
-
+            legendHeight = +chartHeight;//270;
+        
         var svgLegend = d3.select("#legend").append("svg")
                     .attr("width", (legendWidth + legendMargin.left + legendMargin.right))
-                    .attr("height", (legendHeight + legendMargin.top + legendMargin.bottom));			
+                    //.attr("height", (legendHeight + legendMargin.top + legendMargin.bottom));			
+                    .attr("height",legendHeight);			
 
         var legendWrapper = svgLegend.append("g").attr("class", "legendWrapper")
                         .attr("transform", "translate(" + legendMargin.left + "," + legendMargin.top +")");
@@ -318,7 +325,17 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
               .attr("class", "legendText")
               .style("font-size", "10px")
               .attr("dy", ".35em")		  
-              .text(function(d,i) { return color.domain()[i]; });  
+              .text(function(d,i) {
+            
+                if(color.domain()[i] == "Syrian Arab Rep.")
+                    return "Syria";
+                if(color.domain()[i] == "Dem. Rep. of the Congo")
+                    return "Congo";
+                if(color.domain()[i] == "Viet Nam")
+                    return "Vietnam";
+            
+                    return color.domain()[i]; 
+                });  
 
         //Create g element for bubble size legend
         var bubbleSizeLegend = legendWrapper.append("g")

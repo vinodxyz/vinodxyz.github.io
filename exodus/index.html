@@ -683,7 +683,7 @@
 						   .scale(yScale)
 						   .ticks(3);
                 
-                var area = d3.area()
+                var area = d3.area().curve(d3.curveNatural)
                             .x(function(d) { return xScale(d.data.year); })
 							.y0(function(d) { return yScale(d[0]); })
 							.y1(function(d) { return yScale(d[1]); });

@@ -1,0 +1,142 @@
+Event,Involved,Type,Orientation
+Soviet war in Afghanistan,Soviet Union,Country,For
+Soviet war in Afghanistan,US,Country,Against
+Soviet war in Afghanistan,Mujahideen,Terrorist-group,Against
+Soviet war in Afghanistan,Afghanistan,Country,For
+Civil war in Afghanistan,Mujahideen,Terrorist-group,Against
+Civil war in Afghanistan,Taliban,Terrorist-group,Against
+Civil war in Afghanistan,Al-Qaeda,Terrorist-group,Against
+Civil war in Afghanistan,Pakistan,Country,Against
+Civil war in Afghanistan,Afghanistan,Country,For
+War in Afghanistan,Afghanistan,Country,For
+War in Afghanistan,US,Country,For
+War in Afghanistan,UK,Country,For
+War in Afghanistan,Germany,Country,For
+War in Afghanistan,Italy,Country,For
+War in Afghanistan,Taliban,Terrorist-group,Against
+War in Afghanistan,Al-Qaeda,Terrorist-group,Against
+Burundian Civil War,Burundi,Country,For
+Burundian Civil War,National Liberation Front,Rebels,Against
+Congo Crisis,Dem. Rep. of the Congo,Country,For
+Congo Crisis,Ireland,Country,For
+Congo Crisis,Sweden,Country,For
+Congo Crisis,India,Country,For
+Congo Crisis,Katanga,Country,Against
+Congo Crisis,South Kasai,Country,Against
+Shaba I & II,Dem. Rep. of the Congo,Country,For
+Shaba I & II,Morocco,Country,For
+Shaba I & II,France,Country,For
+Shaba I & II,FNLC,Rebels,Against
+First Congo War,Dem. Rep. of the Congo,Country,For
+First Congo War,Rwanda,Country,Against
+Second Congo War,Dem. Rep. of the Congo,Country,For
+Second Congo War,Angola,Country,For
+Second Congo War,Chad,Country,For
+Second Congo War,RCD,Rebels,Against
+Second Congo War,Uganda,Country,Against
+Kivu Conflict,Dem. Rep. of the Congo,Country,For
+Kivu Conflict,CNDP,Rebels,Against
+Rebellions & Insurgencies,Dem. Rep. of the Congo,Country,For
+Rebellions & Insurgencies,Uganda,Country,For
+Rebellions & Insurgencies,Rwanda,Country,For
+Rebellions & Insurgencies,South Africa,Country,For
+Rebellions & Insurgencies,RPD,Rebels,Against
+Rebellions & Insurgencies,M23,Rebels,Against
+Rebellions & Insurgencies,ADF,Rebels,Against
+Ogaden War,Ethiopia,Country,For
+Ogaden War,Somalia,Country,Against
+Ethiopian - Somali Border War,Ethiopia,Country,For
+Ethiopian - Somali Border War,Somalia,Country,Against
+Ethiopian Civil War,Ethiopia,Country,For
+Ethiopian Civil War,EPRP,Rebels,Against
+Ethiopian Civil War,TPLF,Rebels,Against
+Ethiopian Civil War,EDP,Rebels,Against
+First Iraqi - Kurdish War,Iraq,Country,For
+First Iraqi - Kurdish War,Syrian Arab Rep.,Country,For
+First Iraqi - Kurdish War,KDP,Rebels,Against
+Six-Day War,Iraq,Country,For
+Six-Day War,Israel,Country,Against
+Six-Day War,Egypt,Country,For
+Six-Day War,Syrian Arab Rep.,Country,For
+Six-Day War,Jordan,Country,For
+Second Iraqi-Kurdish War,Iraq,Country,For
+Second Iraqi-Kurdish War,Iran,Country,Against
+Iran-Iraq War,Iraq,Country,For
+Iran-Iraq War,Sudan,Country,For
+Iran-Iraq War,Iran,Country,Against
+Gulf War,Iraq,Country,For
+Gulf War,Kuwait,Country,Against
+Gulf War,US,Country,Against
+Gulf War,UK,Country,Against
+Gulf War,Saudi Arabia,Country,Against
+Gulf War,France,Country,Against
+Gulf War,Syrian Arab Rep.,Country,Against
+Iraqi Kurdish Civil War,Iraq,Country,For
+Iraqi Kurdish Civil War,US,Country,Against
+Iraq War,Iraq,Country,For
+Iraq War,ISIS,Terrorist-group,Against
+Iraq War,Al-Qaeda,Terrorist-group,Against
+Iraq War,Hezbollah,Terrorist-group,Against
+Iraq War,US,Country,For
+Iraq War,UK,Country,For
+Iraq War,Italy,Country,For
+Iraq War,Poland,Country,For
+Iraqi Civil War,Iraq,Country,For
+Iraqi Civil War,US,Country,For
+Iraqi Civil War,UK,Country,For
+Iraqi Civil War,Canada,Country,For
+Iraqi Civil War,France,Country,For
+Iraqi Civil War,Germany,Country,For
+Iraqi Civil War,ISIS,Terrorist-group,Against
+Iraqi Civil War,Mujahideen,Terrorist-group,Against
+Internal conflict in Myanmar,Myanmar,Country,For
+Internal conflict in Myanmar,Mujahideen,Terrorist-group,Against
+Internal conflict in Myanmar,ABSDF,Rebels,Against
+Internal conflict in Myanmar,Arakan Army,Rebels,Against
+Rwandan Civil War,Rwanda,Country,For
+Rwandan Civil War,FPR,Rebels,Against
+Rwandan Civil War,France,Country,For
+Eastern Congo Offensive,Rwanda,Country,For
+Eastern Congo Offensive,FDLR,Rebels,Against
+Eastern Congo Offensive,Dem. Rep. of the Congo,Country,For
+Dongo Rebellion,Rwanda,Country,For
+Dongo Rebellion,Dem. Rep. of the Congo,Country,For
+Dongo Rebellion,RPD,Rebels,Against
+Shifta War,Somalia,Country,For
+Shifta War,Kenya,Country,Against
+Somali Civil War,Somalia,Country,For
+Somali Civil War,US,Country,For
+Somali Civil War,Ethiopia,Country,For
+Somali Civil War,al-Shabaab,Terrorist-group,Against
+Somali Civil War,Burundi,Country,For
+First Sudanese Civil War,Sudan,Country,For
+First Sudanese Civil War,Anyanya,Country,Against
+Second Sudanese Civil War,Sudan,Country,For
+Second Sudanese Civil War,Ethiopia,Country,Against
+Second Sudanese Civil War,SPLA,Rebels,Against
+Islamist uprising in Syria,Syrian Arab Rep.,Country,For
+Islamist uprising in Syria,Muslim Brotherhood,Rebels,Against
+Syrian Civil War,Syrian Arab Rep.,Country,For
+Syrian Civil War,Hezbollah,Terrorist-group,For
+Syrian Civil War,Iran,Country,For
+Syrian Civil War,Soviet Union,Country,For
+Syrian Civil War,US,Country,Against
+Syrian Civil War,Canada,Country,Against
+Syrian Civil War,UK,Country,Against
+Syrian Civil War,France,Country,Against
+Syrian Civil War,Germany,Country,Against
+Syrian Civil War,Turkey,Country,Against
+Syrian Civil War,Saudi Arabia,Country,Against
+Syrian Civil War,Qatar,Country,Against
+Syrian Civil War,Jordan,Country,Against
+Syrian Civil War,ISIS,Terrorist-group,Against
+Vietnam War,North Vietnam,Country,For
+Vietnam War,South Vietnam,Country,Against
+Vietnam War,US,Country,Against
+Cambodian-Vietnamese War,Viet Nam,Country,For
+Cambodian-Vietnamese War,Cambodia,Country,Against
+Sino-Vietnamese War,Viet Nam,Country,For
+Sino-Vietnamese War,China,Country,Against
+Thai-Laotian Border War,Viet Nam,Country,For
+Thai-Laotian Border War,Thailand,Country,Against
+Thai-Laotian Border War,Laos,Country,For

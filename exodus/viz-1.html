@@ -11,26 +11,56 @@
         <script src="js/jquery.min.js"></script>
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <script src="js/bootstrap.min.js"></script>
-        <link href='//fonts.googleapis.com/css?family=Open+Sans:700,400,300' rel='stylesheet' type='text/css'>
+<!--        <link href='//fonts.googleapis.com/css?family=Open+Sans:700,400,300' rel='stylesheet' type='text/css'>-->
 
     </head>
     <body>
-        <div id="cont" class="container-fluid text-center">
-		<div class="row scatter">
-			<h5 style="color: #3B3B3B;">Exodus - Viz1</h5>
-			<div class="col-sm-9">
-				<div id="chart"></div>
-			</div>
-			<div id = "legend" class="col-sm-3" style="padding-right: 0px; padding-left: 0px;">
+        
+        <div class="container-fluid">
+            <div class="col-lg-6 graph-fixed">
+                <div id="bubble-line-chart"></div>
+            </div>
+            <div class="col-lg-1 graph-fixed">
+                <div id = "legend">
+                    <div class="legendTitle"></div>
+                    <div id="legend"></div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <h3>
+                    <span class="title">Battles and Victims</span>
+                </h3>
+                <span>
+                Refugees are not terrorists. 
+                They are often the first victims of terrorism.
+                </span>
                 <label id="form" for="show-voronoi">
-                  Show Voronoi
-                  <input type="checkbox" id="show-voronoi" disabled>
+                      <span class="disclaimer">Show Voronoi</span>
+                      <input type="checkbox" id="show-voronoi" disabled>
                 </label>
-				<div class="legendTitle" style="font-size: 12px;">Country</div>
-				<div id="legend"></div>
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+        
+        <div class="container-fluid">
+            <div class="col-lg-6 graph-fixed">
+                <div id="war-chart"><div id="wartooltip"></div></div>
+            </div>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-3"></div>
+<!--
+            <div class="col-lg-5">
+                <span class="thinbar">4 {4,0,0,0,6,29,70} 70</span>
+                <span class="narrowbar">4 {4,0,0,0,6,29,70} 70</span>
+                <span class="mediumbar">4 {4,0,0,0,6,29,70} 70</span>
+                <span class="smalldot">4 {4,0,0,0,6,29,70} 70</span>
+                <span class="mediumdot">4 {4,0,0,0,6,29,70} 70</span>
+                <span class="dotline">4 {4,0,0,0,6,29,70} 70</span>
+            </div>
+-->
+        </div>
+        
+        
         <script type="text/javascript" src="js/viz1-scatter.js"></script>
+        <script type="text/javascript" src="js/viz1-war-chart.js"></script>
     </body>
 </html>

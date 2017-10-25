@@ -221,3 +221,91 @@
   border-radius: 1rem;
   cursor: pointer;
 }
+
+.y.title{
+    fill: #949494;
+    font-family: "Helvetica Neue",sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+@font-face {
+  font-family: spark-bar-thin;
+  src: url(../fonts/spark/spark-bar-thin.woff);
+}
+
+@font-face {
+  font-family: spark-bar-narrow;
+  src: url(../fonts/spark/spark-bar-narrow.woff);
+}
+
+@font-face {
+  font-family: spark-bar-medium;
+  src: url(../fonts/spark/spark-bar-medium.woff);
+}
+
+@font-face {
+  font-family: spark-dot-small;
+  src: url(../fonts/spark/spark-dot-small.woff);
+}
+
+@font-face {
+  font-family: spark-dot-medium;
+  src: url(../fonts/spark/spark-dot-medium.woff);
+}
+
+@font-face {
+  font-family: spark-dotline-medium;
+  src: url(../fonts/spark/spark-dotline-medium.woff);
+}
+
+
+span.thinbar {
+    font-family: spark-bar-thin;
+    font-size: 24px;
+    color: orange;
+}
+
+span.narrowbar {
+    font-family: spark-bar-narrow;
+    font-size: 24px;
+    color: blue;
+}
+
+span.mediumbar {
+    font-family: spark-bar-medium;
+    font-size: 24px;
+    color: green;
+}
+
+span.smalldot {
+    font-family: spark-dot-small;
+    font-size: 24px;
+    color: red;
+}
+
+span.mediumdot {
+    font-family: spark-dot-medium;
+    font-size: 24px;
+    color: yellow;
+}
+
+span.dotline {
+    font-family: spark-dotline-medium;
+    font-size: 12px;
+    color: violet;
+}
+
+.wartooltip-title{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.wartooltip-desc{
+    font-size: 12px;
+    color: #9B9B9B;
+}
+
+.graph-fixed{
+    position: fixed;
+}
