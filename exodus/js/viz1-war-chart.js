@@ -20,20 +20,20 @@ var warConverter = function(d){
 var warsvg = d3.select("#war-chart").append("svg").attr("width",w).attr("height",h);
 var warwrapper = warsvg.append("g").attr("class", "warWrapper").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv("../csv/flag-data.csv",function(data){
+d3.csv("../exodus/csv/flag-data.csv",function(data){
     flagdata = data;    
     getCountryData();
 });
 
 var getCountryData = function(){
-  d3.csv("../csv/countries-involved.csv",function(data){
+  d3.csv("../exodus/csv/countries-involved.csv",function(data){
         countryData = data;
         generateWarChart();
     });  
 };
 
 var generateWarChart = function(){
-  d3.csv("../csv/war-data.csv",warConverter,function(data){
+  d3.csv("../exodus/csv/war-data.csv",warConverter,function(data){
     
     var xScale = d3.scaleTime().domain([d3.min(data,function(d){ return d.Startdate;}),d3.max(data,function(d){ return d.Enddate;})]).range([0,w-padding]);
     var yScale = d3.scaleBand().domain(d3.range(data.length)).range([h-padding,0]);
@@ -102,7 +102,7 @@ var generateWarChart = function(){
                         
                         for(var i=0; i<againstCountries.length; i++){
                             var againstFlags = flagdata.filter(function(d){ return (d.Group == againstCountries[i].Involved);});
-                            var flagPath = "../images/Flags/"+againstFlags[0].Flag;
+                            var flagPath = "../exodus/images/Flags/"+againstFlags[0].Flag;
                             againstFlagImgs = againstFlagImgs+"<img title=\""+againstCountries[i].Involved+"\" src=\""+flagPath+"\" height=\"15\" width=\"30\" style=\"padding-right:5px;\">";
                         }
                         
