@@ -94,7 +94,7 @@ var generateWarChart = function(){
                         
                         for(var i=0; i<forCountries.length; i++){
                             var forFlags = flagdata.filter(function(d){ return (d.Group == forCountries[i].Involved);});
-                            var flagPath = "../images/Flags/"+forFlags[0].Flag;
+                            var flagPath = "../exodus/images/Flags/"+forFlags[0].Flag;
                             forFlagImgs = forFlagImgs+"<img title=\""+forCountries[i].Involved+"\" src=\""+flagPath+"\" height=\"15\" width=\"30\" style=\"padding-right:5px;\">";
                         }
                         
