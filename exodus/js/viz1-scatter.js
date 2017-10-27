@@ -12,19 +12,23 @@ var mobileScreen = ($( window ).innerWidth() < 500 ? true : false);
 d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
     
     var padding=50;
-    var margin = {left: 10, top: 0, right: 20, bottom: 60};
+    var margin = {left: 10, top: 30, right: 20, bottom: 0};
     var w = Math.min($("#bubble-line-chart").width(), 840) - margin.left - margin.right;
-	var h = w*2/3;
+    var w = Math.min($("#timeline2-div").width(), 840) - margin.left - margin.right;
+	//var h = w*2/3;
+    var h = 400;
     
     var opacityCircles = 0.7,
         opacityLines = 0.2,
 	    maxDistanceFromPoint = 30;
     
     var svg = d3.select("#bubble-line-chart").append("svg").attr("width",w).attr("height",h);
+    //var wrapper = svg.append("g").attr("class", "chordWrapper").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     var wrapper = svg.append("g").attr("class", "chordWrapper").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
-    var xScale = d3.scaleTime().domain([d3.min(data,function(d){return d.date;}),d3.max(data,function(d){return d.date;})]).range([0,w-padding]);
-    //var xScale = d3.scaleTime().domain([1961,d3.max(data,function(d){return d.date;})]).range([0,w-padding]);
+
+    //var xScale = d3.scaleTime().domain([1940,d3.max(data,function(d){return d.date;})]).range([0,w-padding]);
+    var xScale = d3.scaleTime().domain([new Date("1945"),new Date("2016")]).range([0,w-padding*1.5]);
     var yScale = d3.scaleLinear().domain([0,d3.max(data,function(d){return d.refugees;})]).range([h-padding,padding]);
     var color = d3.scaleOrdinal().range(["#EFB605", "#E58903", "#E01A25", "#C20049", "#991C71", "#66489F", "#2074A0", "#10A66E", "#7EB852","#AAA9AA","#5CEAEA"]).domain(['Rwanda','Syrian Arab Rep.','Afghanistan','Dem. Rep. of the Congo','Iraq','Viet Nam','Burundi','Ethiopia','Myanmar','Somalia','Sudan']);
     var rScale = d3.scaleSqrt().range([mobileScreen ? 1 : 2, mobileScreen ? 10 : 16]).domain(d3.extent(data, function(d) { return d.dead; }));
@@ -37,7 +41,9 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
 //        .style("font-size", (mobileScreen ? 8 : 12) + "px")
 //        .attr("transform", "translate(" + w + "," + (h - 10) + ")")
 //        .text("Years");
-
+    
+    var refugeeFilter = 450000;
+    
     //Set up y axis label
     wrapper.append("g")
         .append("text")
@@ -52,7 +58,7 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
     var line = d3.line().x(function(d){return xScale(d.date);}).y(function(d){ return yScale(d.refugees);});
     var lineGroup = wrapper.append("g").attr("class", "lineWrapper"); 
     
-    var dataNest = d3.nest().key(function(d) {return d.origin;}).entries(data.filter(function(d){return d.refugees > 450000;}));
+    var dataNest = d3.nest().key(function(d) {return d.origin;}).entries(data.filter(function(d){return d.refugees > refugeeFilter;}));
      dataNest.forEach(function(d) { 
         lineGroup.append("path")
             .attr("class", "line "+d.key.replace(/\s+/g, '').replace(/\./g,''))
@@ -74,7 +80,7 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
         svg._voronoi = d3.voronoi()
           .x(function(d) { return xScale(d.date); })
           .y(function(d) { return yScale(d.refugees); })
-        (data.filter(function(d){return d.refugees > 450000;}));
+        (data.filter(function(d){return d.refugees > refugeeFilter;}));
           
       }
         
@@ -100,7 +106,7 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
     var formatTime = d3.timeFormat("%Y");
     
     circleGroup.selectAll("circle")
-        .data(data.filter(function(d){return d.refugees > 450000;}))
+        .data(data.filter(function(d){return d.refugees > refugeeFilter;}))
         .enter().append("circle")
         .attr("class", function(d,i) {
             var deathclass = (d.dead==0)?"unknown":"known";
@@ -117,7 +123,7 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
     var yAxis = d3.axisLeft().scale(yScale).ticks(5);
     
     wrapper.append("g").attr("class","x axis").attr("transform","translate(0,"+(h-padding)+")").call(xAxis);
-    wrapper.append("g").attr("class","y axis").attr("transform","translate("+padding+",0)").call(yAxis);
+    //wrapper.append("g").attr("class","y axis").attr("transform","translate("+padding+",0)").call(yAxis);
     
     //Hide the tooltip when the mouse moves away
     function removeTooltip (d, i) {
@@ -283,7 +289,7 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
         var chartHeight = d3.select("#bubble-line-chart").select("svg").attr("height");
         
         //Legend			
-        var	legendMargin = {left: 5, top: 150, right: 5, bottom: 10},
+        var	legendMargin = {left: 5, top: 0, right: 5, bottom: 10},
             legendWidth = 145,
             legendHeight = +chartHeight;//270;
         

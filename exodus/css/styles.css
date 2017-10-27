@@ -15,6 +15,7 @@
 	}
 	.axis text {
 	    font-size: 10px;
+        font-family: 'Work Sans', sans-serif;
 	    fill: #6B6B6B;
 	}
 	.countries {
@@ -306,6 +307,50 @@ span.dotline {
     color: #9B9B9B;
 }
 
+.wartooltip-flags{
+    font-size: 14px;
+    color: #9B9B9B;
+}
+
 .graph-fixed{
+/*
     position: fixed;
+    top: 0;
+*/
+}
+
+.graph-not-fixed{
+    opacity: 0;
+}
+
+.t2axis path,
+.t2axis line{
+    fill: none;
+    stroke: #E9EBEB;
+    shape-rendering: crispEdges;
+}
+
+.t2axis text{
+    fill: #242424;
+    font-family: 'Work Sans', sans-serif;
+}
+
+.gaxis path,
+.gaxis line {
+    fill: none;
+    stroke: #E9EBEB;
+    shape-rendering: crispEdges;
+}
+.gaxis text {
+    fill: #6B6B6B;
+    font-family: 'Work Sans', sans-serif;
+}
+
+.hidden-controls{
+    display:none;
+}
+
+.t2text{
+    font-family: 'Work Sans', sans-serif;
+    font-size: 11px;
 }

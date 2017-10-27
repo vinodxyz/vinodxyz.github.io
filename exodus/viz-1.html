@@ -9,26 +9,40 @@
         <script src="js/d3-voronoi.js"></script>
         
         <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.waypoints.js"></script>
+        
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <script src="js/bootstrap.min.js"></script>
-<!--        <link href='//fonts.googleapis.com/css?family=Open+Sans:700,400,300' rel='stylesheet' type='text/css'>-->
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:700,400,300' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
 
     </head>
     <body>
         
         <div class="container-fluid">
-            <div class="col-lg-6 graph-fixed">
-                <div id="bubble-line-chart"></div>
-            </div>
-            <div class="col-lg-1 graph-fixed">
-                <div id = "legend">
-                    <div class="legendTitle"></div>
-                    <div id="legend"></div>
+            <div class="col-lg-7">
+                <div id="warchart-wrapper">
+                    
+                    <div id="bubble-line-chart"></div>
+                    
+                    <div id="timeline2-div">
+                        <div id="timeline2"></div>
+                    </div>
+                    <div class="hidden-controls">
+                        <p id="coldwar-p"></p>
+                        <p id="middleeast-p"></p>
+                        <p id="terrorism-p"></p>
+                    </div>
+                    <div id="war-chart"><div id="wartooltip"></div></div> 
+                    <div id = "legend2">
+                        <div class="legendTitle"></div>
+                        <div id="legend"></div>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-5">
                 <h3>
-                    <span class="title">Battles and Victims</span>
+                    <span id="wc-text-title" class="title">Battles and Victims</span>
                 </h3>
                 <span>
                 Refugees are not terrorists. 
@@ -38,15 +52,46 @@
                       <span class="disclaimer">Show Voronoi</span>
                       <input type="checkbox" id="show-voronoi" disabled>
                 </label>
+                <span>
+                <h4 id="start-para">Cold war</h4>
+                    <span>
+                    Cold war is an era that lasted between 1945-1990. After WWII, there remained 2 powerful nations: US and USSR. US had an advantage as it had more money, power and nuclear arsenal and was helping rebuild Europe. While USSR had to rebuild itself after WWII.<br>
+
+                    US wanted a free-market oriented Europe and started expanding it’s markets in France and Japan. Soviets saw this growth of Capitalism as a threat to their Communist rule. <br>
+
+                    Germany was the first battleground of the cold war. USSR wanted to prevent Germany from invading Russia so they invaded eastern European countries to create a communist buffer between USSR and Germany.<br>
+
+                    US started with Containment which was to stop the spread of communism. The Marshall-plan helped rebuild Europe and in return Europe started spending on American consumer goods. Thus, propagating Capitalism.<br>
+
+                    Nuclear arms race
+                    Both US and USSR developed nuclear arsenals. The arsenal were so big that US and USSR adopted a strategy termed “MAD” (Mutually Assured Destruction). Both nations were capable of mutually assured destruction and the extinction of our species. The cuban missile crisis was as close as possible that both nations came to the brink of a nuclear war. As a result, this situation prevented directed conflicts between US and USSR and instead led to Proxy wars. Both groups could not directly declare war on each other but clashed in Proxy wars, by supporting dictators, rebel-groups and intervened in civil wars, to contain the other.<br>
+
+                    <h5 class="trigger-vietnam-war">For instance, the Vietnam-war:</h5>
+                    After Korea and China became communist, the US feared the domino effect, of more countries adopting communism. Vietnam turning communist would be a threat to Japan, which US had helped turn into a Capitalist ally. Soviets assisted the North Vietnamese communist army while US backed South Vietnam during the Vietnam-war.<br>
+
+
+                    <h5 class="trigger-afghan-war">Middle-east</h5>
+                    Similarly, USSR invaded Afghanistan and US backed the terrorist-group known as the Mujahideen. However, after the Soviets withdrew, Mujahideen morphed into other terrorist-groups such as: Al-Qaeda and Taliban.<br>
+
+                    US executed several operations to prevent communism from spreading in addition to gain oil reserves in the Middle-east. For example: CIA engineered a coup to overthrow Iran’s democratically elected PM after he’d tried to nationalize Iran’s oil industry. <br>
+
+                    This led to the birth of the 3 worlds:<br>
+                    First world: US, western Europe and places that embraced Capitalism and democratic govt.<br>
+                    Second world: Soviet union and other warsaw pact nations (such as: China, Cuba)<br>
+                    Third world: Everyone else<br>
+
+                    Every third world country was forced to pick sides and not stay neutral. However, Soviet Socialism did not finally prove to be a viable alternative to Industrial Capitalism as state-run economies did not fare well as private enterprises.<br>
+
+                    Soviet policies such as: collectivized agriculture hindered production and led to famine, suppression of traditional cultures and dissent made the people angry. Eventually, Glasnost’s openness and liberalization of Soviet policies such as less censorship and more openness to the west led to the end of cold-war in the 1980s. As people realized how poorer the 2nd country was from the 1st, communism started to collapse. 
+                    </span>
+                   
+                    <h5 id="last-para">Finally.</h5>
+                    
+                    
+                </span>
             </div>
         </div>
         
-        <div class="container-fluid">
-            <div class="col-lg-6 graph-fixed">
-                <div id="war-chart"><div id="wartooltip"></div></div>
-            </div>
-            <div class="col-lg-1"></div>
-            <div class="col-lg-3"></div>
 <!--
             <div class="col-lg-5">
                 <span class="thinbar">4 {4,0,0,0,6,29,70} 70</span>
@@ -57,10 +102,10 @@
                 <span class="dotline">4 {4,0,0,0,6,29,70} 70</span>
             </div>
 -->
-        </div>
         
         
         <script type="text/javascript" src="js/viz1-scatter.js"></script>
         <script type="text/javascript" src="js/viz1-war-chart.js"></script>
+        <script type="text/javascript" src="js/viz1-timeline2.js"></script>
     </body>
 </html>

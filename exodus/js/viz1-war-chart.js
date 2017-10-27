@@ -2,13 +2,16 @@ var flagdata;
 var countryData;
 
 var padding=50;
-var margin = {left: 10, top: 0, right: 20, bottom: 160};
+var margin = {left: 10, top: 0, right: 20, bottom: -100};
 
-var w = Math.min($("#bubble-line-chart").width(), 840) - margin.left - margin.right;
-var h = w*0.65;
+//var w = Math.min($("#bubble-line-chart").width(), 840) - margin.left - margin.right;
+var w = Math.min($("#timeline2-div").width(), 840) - margin.left - margin.right;
+//var h = w*0.75;
+var h= 500;
 
 var warConverter = function(d){
     return {
+        Index: +d.Index,
         Origin: d.Origin,
         Event: d.Event,
         Startdate: new Date(d.Startdate),
@@ -17,8 +20,9 @@ var warConverter = function(d){
     };
 };
 
-var warsvg = d3.select("#war-chart").append("svg").attr("width",w).attr("height",h);
-var warwrapper = warsvg.append("g").attr("class", "warWrapper").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+var warsvg = d3.select("#war-chart").append("svg").attr("width",w).attr("height",300);
+//var warwrapper = warsvg.append("g").attr("class", "warWrapper").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+var warwrapper = warsvg.append("g").attr("class", "warWrapper").attr("transform", "translate(" + margin.left + ",-300)");
 
 d3.csv("../csv/flag-data.csv",function(data){
     flagdata = data;    
@@ -35,7 +39,9 @@ var getCountryData = function(){
 var generateWarChart = function(){
   d3.csv("../csv/war-data.csv",warConverter,function(data){
     
-    var xScale = d3.scaleTime().domain([d3.min(data,function(d){ return d.Startdate;}),d3.max(data,function(d){ return d.Enddate;})]).range([0,w-padding]);
+//    var xScale = d3.scaleTime().domain([d3.min(data,function(d){ return d.Startdate;}),d3.max(data,function(d){ return d.Enddate;})]).range([0,w-padding*1.5]);
+      
+    var xScale = d3.scaleTime().domain([new Date("1945"),d3.max(data,function(d){ return d.Enddate;})]).range([0,w-padding*1.5]);
     var yScale = d3.scaleBand().domain(d3.range(data.length)).range([h-padding,0]);
     var colorScale = d3.scaleOrdinal()
                 .range(["#EFB605", "#E58903", "#E01A25", "#C20049", "#991C71", "#66489F", "#2074A0", "#10A66E", "#7EB852", "#AAA9AA", "#5CEAEA"])
@@ -51,11 +57,13 @@ var generateWarChart = function(){
                     .enter()
                     .append("rect")
                     .attr("x",0)
-                    .attr("y",function(d,i){return yScale(i);})
-                    .attr("width",620)
-                    .attr("height",barHeight*2)
-                    .attr("fill",function(d){return colorScale(d.Origin);})
-                    .attr("opacity",0.1)
+                    //.attr("y",function(d,i){return yScale(i);})
+                    .attr("y",function(d){ return yScale(+d.Index);})
+                    .attr("width",680)
+                    .attr("height",barHeight)
+                    //.attr("fill",function(d){return colorScale(d.Origin);})
+                    .attr("fill","#F5F5F5")
+                    //.attr("opacity",0.5)
                     .style("cursor","pointer")
                     .attr("class",function(d){ return d.Event.split(' ').join('').replace("&","")+"-parent";})
                     .on("mouseover",function(d){
@@ -73,7 +81,8 @@ var generateWarChart = function(){
                     .enter()
                     .append("rect")
                     .attr("x",function(d){ return xScale(d.Startdate);})
-                    .attr("y",function(d,i){return yScale(i);})
+                    //.attr("y",function(d,i){return yScale(i);})
+                    .attr("y",function(d){ return yScale(+d.Index);})
                     .attr("width",function(d){ return xScale(d.Enddate)-xScale(d.Startdate);})
                     .attr("height",barHeight)
                     .attr("fill",function(d){return colorScale(d.Origin);})
@@ -106,8 +115,6 @@ var generateWarChart = function(){
                             againstFlagImgs = againstFlagImgs+"<img title=\""+againstCountries[i].Involved+"\" src=\""+flagPath+"\" height=\"15\" width=\"30\" style=\"padding-right:5px;\">";
                         }
                         
-                        
-                        
                         var warWidth = d3.select(this).attr("width");
                         
                         var warDetailColor = colorScale(warData[0].Origin);
@@ -115,29 +122,35 @@ var generateWarChart = function(){
                         
                         var warToolTip = d3.select("#wartooltip").style("padding",warDetailPadding+"px");
                         
-                        var warHTML = "<div class=\"container-fluid\"><div class=\"col-lg-12\"><span class=\"wartooltip-title\" style=\"color: "+warDetailColor+";\">"+warData[0].Event+"</span><br><span>"+forFlagImgs+""+againstFlagImgs+"</span><br><span class=\"wartooltip-desc\">"+warData[0].Description+"</span><br></div></div>";
+                        var warHTML = "<div class=\"container-fluid\"><div class=\"col-lg-12\"><span class=\"wartooltip-title\" style=\"color: "+warDetailColor+";\">"+warData[0].Event+"</span><br><span class=\"wartooltip-flags\">"+forFlagImgs+"v/s&nbsp;"+againstFlagImgs+"</span><br><span class=\"wartooltip-desc\">"+warData[0].Description+"</span><br></div></div>";
                         
                         var warDetailX = ((w-warX-(warDetailPadding*2)) < 250) ? (warX-300) : warX;
                         var warDetailY = ((h-warY-(warDetailPadding*2)) < 80) ? (warY-100) : warY;
-                            
-                        var warDetails = warToolTip.html(warHTML).style("position","absolute").style("top",warY+"px").style("left",warDetailX+"px").style("pointer-events","none").style("opacity",0);
+                        warDetailY = warDetailY + $("#bubble-line-chart").height();
+                        
+                        var warDetails = warToolTip.html(warHTML)
+                                                    .style("position","absolute")
+                                                    .style("top",warDetailY+"px")
+                                                    .style("left",warDetailX+"px")
+                                                    .style("pointer-events","none")
+                                                    .style("opacity",0);
                         
                         var warDetailHeight = +(warDetails.style("height").replace("px",""));
                         var warDetailWidth = +(warDetails.style("width").replace("px",""));
                         
                         d3.select("."+warClass)
-                            
                             .transition()
                             .duration(1000)
-                        .attr("x",warDetailX)
+                            .attr("x",warDetailX)
                             //.attr("y",warDetailY)
                             .attr("width",warDetailWidth)
                             .attr("fill",function(d){return "#242424";})
                             .attr("opacity",1)
-                            
                             .attr("height",warDetailHeight);
                         
-                        warDetails.transition().duration(1500).style("opacity",1);
+                        warDetails.transition()
+                                    .duration(1500)
+                                    .style("opacity",1);
                         
                     })
                     .on("mouseout",function(d){
@@ -154,14 +167,72 @@ var generateWarChart = function(){
                         
                         d3.select("#wartooltip")
                             .transition()
-                            .duration(500)
+                            .duration(1000)
                             .style("opacity",0);
-                    })
+                    });
     
     
-//    warwrapper.append("g").attr("class","gaxis").attr("transform","translate(0,50)").call(xAxis);
+    warwrapper.append("g").attr("class","gaxis").attr("transform","translate(0,460)").call(xAxis);
 //    warwrapper.append("g").attr("class","gaxis").attr("transform","translate(100,-10)").call(yAxis);
+      
+      var wartextwrapper = warwrapper.append("g");
+      var wartext = wartextwrapper.selectAll("text")
+                    .data(data)
+                    .enter()
+                    .append("text")
+                    .text(function(d){
+                        if(d.Origin == "Syrian Arab Rep.")
+                            return "Syria";
+                        if(d.Origin == "Dem. Rep. of the Congo")
+                            return "Congo";
+                        if(d.Origin == "Viet Nam")
+                            return "Vietnam";
+                        return d.Origin;
+                    })
+                    .attr("x",0)
+                    .attr("y",function(d){ return yScale(+d.Index)+5;})
+                    .attr("fill",function(d){return colorScale(d.Origin);})
+                    .style("pointer-events","none")
+                    .style("text-anchor","start")
     
     
 });  
 };
+
+//Scrollytelling xD 
+var waypoint = new Waypoint({
+  element: document.getElementById('wc-text-title'),
+  handler: function(direction) {
+      if (direction === 'down') {
+          $('#warchart-wrapper').addClass('graph-fixed');
+      }
+      else{
+          $('#warchart-wrapper').removeClass('graph-fixed');
+      }
+  },
+    offset: "2%"
+});
+
+var waypoint = new Waypoint({
+  element: document.getElementById('afghan-war'),
+  handler: function(direction) {
+      if (direction === 'down') {
+          d3.selectAll(".WarinAfghanistan").dispatch("mouseover");
+      }
+      else{
+          d3.selectAll(".WarinAfghanistan").dispatch("mouseout");
+      }
+  }
+});
+
+var waypoint = new Waypoint({
+  element: document.getElementById('last-para'),
+  handler: function(direction) {
+      if (direction === 'down') {
+        $('#warchart-wrapper').addClass('graph-not-fixed');
+      }
+      else{
+          $('#warchart-wrapper').removeClass('graph-not-fixed');
+      }
+  }
+});
