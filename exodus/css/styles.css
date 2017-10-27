@@ -302,6 +302,11 @@ span.dotline {
     font-weight: bold;
 }
 
+.wartooltip-date{
+    font-size: 12px;
+    font-weight: regular;
+}
+
 .wartooltip-desc{
     font-size: 12px;
     color: #9B9B9B;
@@ -313,10 +318,8 @@ span.dotline {
 }
 
 .graph-fixed{
-/*
     position: fixed;
     top: 0;
-*/
 }
 
 .graph-not-fixed{

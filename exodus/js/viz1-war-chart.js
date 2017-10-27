@@ -2,7 +2,7 @@ var flagdata;
 var countryData;
 
 var padding=50;
-var margin = {left: 10, top: 0, right: 20, bottom: -100};
+var margin = {left: 10, top: 0, right: 20, bottom: -200};
 
 //var w = Math.min($("#bubble-line-chart").width(), 840) - margin.left - margin.right;
 var w = Math.min($("#timeline2-div").width(), 840) - margin.left - margin.right;
@@ -22,22 +22,22 @@ var warConverter = function(d){
 
 var warsvg = d3.select("#war-chart").append("svg").attr("width",w).attr("height",300);
 //var warwrapper = warsvg.append("g").attr("class", "warWrapper").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-var warwrapper = warsvg.append("g").attr("class", "warWrapper").attr("transform", "translate(" + margin.left + ",-300)");
+var warwrapper = warsvg.append("g").attr("class", "warWrapper").attr("transform", "translate(" + margin.left + ",-260)");
 
-d3.csv("../exodus/csv/flag-data.csv",function(data){
+d3.csv("../csv/flag-data.csv",function(data){
     flagdata = data;    
     getCountryData();
 });
 
 var getCountryData = function(){
-  d3.csv("../exodus/csv/countries-involved.csv",function(data){
+  d3.csv("../csv/countries-involved.csv",function(data){
         countryData = data;
         generateWarChart();
     });  
 };
 
 var generateWarChart = function(){
-  d3.csv("../exodus/csv/war-data.csv",warConverter,function(data){
+  d3.csv("../csv/war-data.csv",warConverter,function(data){
     
 //    var xScale = d3.scaleTime().domain([d3.min(data,function(d){ return d.Startdate;}),d3.max(data,function(d){ return d.Enddate;})]).range([0,w-padding*1.5]);
       
@@ -66,15 +66,18 @@ var generateWarChart = function(){
                     //.attr("opacity",0.5)
                     .style("cursor","pointer")
                     .attr("class",function(d){ return d.Event.split(' ').join('').replace("&","")+"-parent";})
-                    .on("mouseover",function(d){
-                        var warClass = $(this).attr('class').replace("-parent","");
-                        d3.selectAll("."+warClass).dispatch("mouseover");
-                    })
-                    .on("mouseout",function(d){
-                        var warClass = $(this).attr('class').replace("-parent","");
-                        d3.selectAll("."+warClass).dispatch("mouseout");
-                    })
+//                    .on("mouseover",function(d){
+//                        var warClass = $(this).attr('class').replace("-parent","");
+//                        d3.selectAll("."+warClass).dispatch("mouseover");
+//                    })
+//                    .on("mouseout",function(d){
+//                        var warClass = $(this).attr('class').replace("-parent","");
+//                        d3.selectAll("."+warClass).dispatch("mouseout");
+//                    })
     
+    warwrapper.append("g").attr("class","gaxis").attr("transform","translate(0,460)").call(xAxis);
+    //warwrapper.append("g").attr("class","gaxis").attr("transform","translate(100,-10)").call(yAxis);
+      
     var warfrontwrapper = warwrapper.append("g");
     var warchart = warfrontwrapper.selectAll("rect")
                     .data(data)
@@ -98,12 +101,11 @@ var generateWarChart = function(){
                         var eventCountryData = countryData.filter(function(d){ return (d.Event.split(' ').join('').replace("&","") == warClass);})
                         var forCountries = eventCountryData.filter(function(d){ return (d.Orientation == "For");})
                         var againstCountries = eventCountryData.filter(function(d){ return (d.Orientation == "Against");})
-                        
                         var forFlagImgs = "";
                         
                         for(var i=0; i<forCountries.length; i++){
                             var forFlags = flagdata.filter(function(d){ return (d.Group == forCountries[i].Involved);});
-                            var flagPath = "../exodus/images/Flags/"+forFlags[0].Flag;
+                            var flagPath = "../images/Flags/"+forFlags[0].Flag;
                             forFlagImgs = forFlagImgs+"<img title=\""+forCountries[i].Involved+"\" src=\""+flagPath+"\" height=\"15\" width=\"30\" style=\"padding-right:5px;\">";
                         }
                         
@@ -111,7 +113,7 @@ var generateWarChart = function(){
                         
                         for(var i=0; i<againstCountries.length; i++){
                             var againstFlags = flagdata.filter(function(d){ return (d.Group == againstCountries[i].Involved);});
-                            var flagPath = "../exodus/images/Flags/"+againstFlags[0].Flag;
+                            var flagPath = "../images/Flags/"+againstFlags[0].Flag;
                             againstFlagImgs = againstFlagImgs+"<img title=\""+againstCountries[i].Involved+"\" src=\""+flagPath+"\" height=\"15\" width=\"30\" style=\"padding-right:5px;\">";
                         }
                         
@@ -121,12 +123,17 @@ var generateWarChart = function(){
                         var warDetailPadding = 20;
                         
                         var warToolTip = d3.select("#wartooltip").style("padding",warDetailPadding+"px");
-                        
-                        var warHTML = "<div class=\"container-fluid\"><div class=\"col-lg-12\"><span class=\"wartooltip-title\" style=\"color: "+warDetailColor+";\">"+warData[0].Event+"</span><br><span class=\"wartooltip-flags\">"+forFlagImgs+"v/s&nbsp;"+againstFlagImgs+"</span><br><span class=\"wartooltip-desc\">"+warData[0].Description+"</span><br></div></div>";
+                        var warStartDate = warData[0].Startdate.getFullYear();
+                        var warEndDate = warData[0].Enddate.getFullYear();
+                            
+                        var warHTML = "<div class=\"container-fluid\"><div class=\"col-lg-11\"><span class=\"wartooltip-title\" style=\"color: "+warDetailColor+";\">"+warData[0].Event+"<span class=\"wartooltip-date\">&nbsp;("+warStartDate+" - "+warEndDate+")</span>"+"</span><br><span class=\"wartooltip-flags\">"+forFlagImgs+"vs&nbsp;"+againstFlagImgs+"</span><br><span class=\"wartooltip-desc\">"+warData[0].Description+"</span><br></div></div>";
                         
                         var warDetailX = ((w-warX-(warDetailPadding*2)) < 250) ? (warX-300) : warX;
                         var warDetailY = ((h-warY-(warDetailPadding*2)) < 80) ? (warY-100) : warY;
-                        warDetailY = warDetailY + $("#bubble-line-chart").height();
+                        warDetailY = warY+190;// + $("#bubble-line-chart").height();
+                        
+//                        var warDetailX = warX;
+//                        var warDetailY = warY+150;
                         
                         var warDetails = warToolTip.html(warHTML)
                                                     .style("position","absolute")
@@ -147,6 +154,8 @@ var generateWarChart = function(){
                             .attr("fill",function(d){return "#242424";})
                             .attr("opacity",1)
                             .attr("height",warDetailHeight);
+                        
+                        d3.select("."+warClass).raise();
                         
                         warDetails.transition()
                                     .duration(1500)
@@ -172,9 +181,7 @@ var generateWarChart = function(){
                     });
     
     
-    warwrapper.append("g").attr("class","gaxis").attr("transform","translate(0,460)").call(xAxis);
-//    warwrapper.append("g").attr("class","gaxis").attr("transform","translate(100,-10)").call(yAxis);
-      
+
       var wartextwrapper = warwrapper.append("g");
       var wartext = wartextwrapper.selectAll("text")
                     .data(data)
@@ -198,7 +205,6 @@ var generateWarChart = function(){
     
 });  
 };
-<<<<<<< HEAD
 
 //Scrollytelling xD 
 var waypoint = new Waypoint({
@@ -237,5 +243,3 @@ var waypoint = new Waypoint({
       }
   }
 });
-=======
->>>>>>> 410fd6e9d3436f2077024aa0768d483d2c2b4306

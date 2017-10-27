@@ -9,7 +9,7 @@ var rowConverter = function(d){
 
 var mobileScreen = ($( window ).innerWidth() < 500 ? true : false);
 
-d3.csv("../exodus/csv/viz1-scatter-death.csv",rowConverter, function(data){
+d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
     
     var padding=50;
     var margin = {left: 10, top: 30, right: 20, bottom: 0};
@@ -290,7 +290,8 @@ d3.csv("../exodus/csv/viz1-scatter-death.csv",rowConverter, function(data){
         
         //Legend			
         var	legendMargin = {left: 5, top: 0, right: 5, bottom: 10},
-            legendWidth = 145,
+            //legendWidth = 145,
+            legendWidth = 800,
             legendHeight = +chartHeight;//270;
         
         var svgLegend = d3.select("#legend").append("svg")
@@ -303,14 +304,16 @@ d3.csv("../exodus/csv/viz1-scatter-death.csv",rowConverter, function(data){
 
         var rectSize = 15, //dimensions of the colored square
             rowHeight = 20, //height of a row in the legend
-            maxWidth = 144; //widht of each row
+            maxWidth = 600,
+            colHeight = 63; //width of each row
 
         //Create container per rect/text pair  
         var legend = legendWrapper.selectAll('.legendSquare')  	
                   .data(color.range())                              
                   .enter().append('g')   
                   .attr('class', 'legendSquare') 
-                  .attr("transform", function(d,i) { return "translate(" + 0 + "," + (i * rowHeight) + ")"; })
+                  //.attr("transform", function(d,i) { return "translate(" + 0 + "," + (i * rowHeight) + ")"; })
+                  .attr("transform", function(d,i) { return "translate("+(i * colHeight)+",0)"; })
                   .style("cursor", "pointer")
                   .on("mouseover", selectLegend(0))
                   .on("mouseout", selectLegend(1));
@@ -327,7 +330,7 @@ d3.csv("../exodus/csv/viz1-scatter-death.csv",rowConverter, function(data){
               .style('fill', function(d) {return d;});                                 
         //Append text to Legend
         legend.append('text')                                     
-              .attr('transform', 'translate(' + 22 + ',' + (rectSize/2) + ')')
+              .attr('transform', 'translate(' + 18 + ',' + (rectSize/2) + ')')
               .attr("class", "legendText")
               .style("font-size", "10px")
               .attr("dy", ".35em")		  
@@ -339,6 +342,8 @@ d3.csv("../exodus/csv/viz1-scatter-death.csv",rowConverter, function(data){
                     return "Congo";
                 if(color.domain()[i] == "Viet Nam")
                     return "Vietnam";
+                if(color.domain()[i] == "Afghanistan")
+                    return "Afghan";
             
                     return color.domain()[i]; 
                 });  
