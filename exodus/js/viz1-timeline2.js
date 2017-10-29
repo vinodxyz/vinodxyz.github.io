@@ -48,7 +48,7 @@ d3.csv("../csv/timeline-2.csv",warConverter2,function(data){
                     .append("rect")
                     .attr("x",0)
                     .attr("y",0)
-                    .attr("width",680)
+                    .attr("width",690)
                     .attr("height",markheight)
                     .attr("fill","#F5F5F5");
     

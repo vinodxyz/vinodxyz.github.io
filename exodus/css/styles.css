@@ -15,7 +15,7 @@
 	}
 	.axis text {
 	    font-size: 10px;
-        font-family: 'Work Sans', sans-serif;
+        font-family: 'Inconsolata', monospace;
 	    fill: #6B6B6B;
 	}
 	.countries {
@@ -47,6 +47,7 @@
 	    font-size: 10px;
 	}
 	.legendText {
+        font-family: 'Inconsolata', monospace;
 	    fill: #949494;
 	    text-anchor: start;
 	    font-size: 9px;
@@ -185,6 +186,7 @@
 }
 .xaxis text {
     font-size: 10px;
+    font-family: 'Inconsolata', monospace;
     fill: #333333;
     opacity: 0.3;
 }
@@ -263,38 +265,36 @@
 
 span.thinbar {
     font-family: spark-bar-thin;
-    font-size: 24px;
-    color: orange;
+    font-size: 18px;
 }
 
 span.narrowbar {
     font-family: spark-bar-narrow;
-    font-size: 24px;
-    color: blue;
+    font-size: 18px;
 }
 
 span.mediumbar {
     font-family: spark-bar-medium;
-    font-size: 24px;
-    color: green;
+    font-size: 18px;
 }
 
 span.smalldot {
     font-family: spark-dot-small;
-    font-size: 24px;
-    color: red;
+    font-size: 16px;
 }
 
 span.mediumdot {
     font-family: spark-dot-medium;
-    font-size: 24px;
-    color: yellow;
+    font-size: 16px;
 }
 
 span.dotline {
     font-family: spark-dotline-medium;
-    font-size: 12px;
-    color: violet;
+    font-size: 16px;
+}
+
+#wartooltip{
+/*    font-family: 'Inconsolata', monospace; */
 }
 
 .wartooltip-title{
@@ -335,7 +335,7 @@ span.dotline {
 
 .t2axis text{
     fill: #242424;
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Inconsolata', monospace;
 }
 
 .gaxis path,
@@ -346,7 +346,7 @@ span.dotline {
 }
 .gaxis text {
     fill: #6B6B6B;
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Inconsolata', monospace;
 }
 
 .hidden-controls{
@@ -354,6 +354,75 @@ span.dotline {
 }
 
 .t2text{
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Inconsolata', monospace;
     font-size: 11px;
+}
+
+.legend-label{
+    font-size: 11px;
+    font-family: 'Inconsolata', monospace;
+    color: #949494;
+}
+
+#war-timeline{
+    font-family: 'Inconsolata', monospace;
+    font-size: 11px;
+    position: absolute;
+    top: 530px;
+    left: -40px;
+    transform: rotate(-90deg);
+    color: #949494;
+}
+
+#refugee-years{
+    font-family: 'Inconsolata', monospace;
+    font-size: 11px;
+    position: absolute;
+    top: 220px;
+    left: -100px;
+    transform: rotate(-90deg);
+    color: #949494;
+}
+
+.nodataline {
+    stroke: #D4D2D4;
+    stroke-dasharray: 2, 3;
+}
+
+.nodatatext,.wartextbar,.guidetext{
+    font-family: 'Inconsolata', monospace;
+}
+
+.atf-syria{
+    color: #E58903;
+}
+
+.main-body{
+    font-family: 'Open Sans', sans-serif;
+    color: #242424;
+    font-size: 14px;
+}
+
+.main-subtitle{
+    font-family: 'PT Serif', serif;
+    font-size: 16px;
+    color: #000000;
+}
+
+.main-intro{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.main-spacer{
+    margin-top: 400px;
+}
+
+.main-minispacer{
+    margin-top: 80px;
+}
+
+.war-photo{
+    filter: grayscale(100%);
+    margin: 10px 10px 10px 0px;
+    opacity: 0.7;
 }

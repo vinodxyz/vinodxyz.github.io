@@ -59,21 +59,14 @@ var generateWarChart = function(){
                     .attr("x",0)
                     //.attr("y",function(d,i){return yScale(i);})
                     .attr("y",function(d){ return yScale(+d.Index);})
-                    .attr("width",680)
+                    .attr("width",690)
                     .attr("height",barHeight)
                     //.attr("fill",function(d){return colorScale(d.Origin);})
                     .attr("fill","#F5F5F5")
                     //.attr("opacity",0.5)
                     .style("cursor","pointer")
-                    .attr("class",function(d){ return d.Event.split(' ').join('').replace("&","")+"-parent";})
-//                    .on("mouseover",function(d){
-//                        var warClass = $(this).attr('class').replace("-parent","");
-//                        d3.selectAll("."+warClass).dispatch("mouseover");
-//                    })
-//                    .on("mouseout",function(d){
-//                        var warClass = $(this).attr('class').replace("-parent","");
-//                        d3.selectAll("."+warClass).dispatch("mouseout");
-//                    })
+                    .attr("class",function(d){ return d.Origin.replace(/\s+/g, '').replace(/\./g,'')+"-bkg";})
+                    //.attr("class",function(d){ return d.Event.split(' ').join('').replace("&","")+"-parent";})
     
     warwrapper.append("g").attr("class","gaxis").attr("transform","translate(0,460)").call(xAxis);
     //warwrapper.append("g").attr("class","gaxis").attr("transform","translate(100,-10)").call(yAxis);
@@ -91,10 +84,15 @@ var generateWarChart = function(){
                     .attr("fill",function(d){return colorScale(d.Origin);})
                     .attr("opacity",0.7)
                     .style("cursor","pointer")
-                    .attr("class",function(d){ return d.Event.split(' ').join('').replace("&","");})
+                    .attr("class",function(d){ 
+                        return d.Event.split(' ').join('').replace("&","")+" "+d.Origin.replace(/\s+/g, '').replace(/\./g,'')+"-bar"+" warbar";
+                    })
                     .on("mouseover",function(d){
                         var warRect = $(this);
                         var warClass = $(this).attr('class');
+                        warClass = warClass.split(' ');
+                        warClass = warClass[0];
+                        
                         var warX = parseInt($(this).attr('x'));
                         var warY = parseInt($(this).attr('y'));
                         var warData = data.filter(function(d){ return (d.Event.split(' ').join('').replace("&","") == warClass);})
@@ -201,45 +199,9 @@ var generateWarChart = function(){
                     .attr("fill",function(d){return colorScale(d.Origin);})
                     .style("pointer-events","none")
                     .style("text-anchor","start")
-    
-    
+                    .attr("class",function(d){ 
+                        return d.Origin.replace(/\s+/g, '').replace(/\./g,'')+"-wartext"+" wartextbar";
+                    });
+      
 });  
 };
-
-//Scrollytelling xD 
-var waypoint = new Waypoint({
-  element: document.getElementById('wc-text-title'),
-  handler: function(direction) {
-      if (direction === 'down') {
-          $('#warchart-wrapper').addClass('graph-fixed');
-      }
-      else{
-          $('#warchart-wrapper').removeClass('graph-fixed');
-      }
-  },
-    offset: "2%"
-});
-
-var waypoint = new Waypoint({
-  element: document.getElementById('afghan-war'),
-  handler: function(direction) {
-      if (direction === 'down') {
-          d3.selectAll(".WarinAfghanistan").dispatch("mouseover");
-      }
-      else{
-          d3.selectAll(".WarinAfghanistan").dispatch("mouseout");
-      }
-  }
-});
-
-var waypoint = new Waypoint({
-  element: document.getElementById('last-para'),
-  handler: function(direction) {
-      if (direction === 'down') {
-        $('#warchart-wrapper').addClass('graph-not-fixed');
-      }
-      else{
-          $('#warchart-wrapper').removeClass('graph-not-fixed');
-      }
-  }
-});

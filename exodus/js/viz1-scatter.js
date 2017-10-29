@@ -42,7 +42,8 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
 //        .attr("transform", "translate(" + w + "," + (h - 10) + ")")
 //        .text("Years");
     
-    var refugeeFilter = 450000;
+    //var refugeeFilter = 300000;
+    var refugeeFilter = 0;
     
     //Set up y axis label
     wrapper.append("g")
@@ -53,8 +54,27 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
         .attr("transform", "translate(70,60) rotate(-90)")
         .text("# of Refugees");
     
-    //a line chart connecting trends
+    var nodataLine = d3.line().x(function(d){return xScale(new Date("1960"));}).y(function(d){ return yScale(d.refugees);});
+    var nodataGroup = wrapper.append("g").attr("class", "nodataWrapper");
+    nodataGroup.append("rect")
+                .attr("class","nodatarect")
+                .attr("x",xScale(new Date("1945")))
+                .attr("y",yScale(6350000))
+                .attr("width",xScale(new Date("1961"))-xScale(new Date("1945")))
+                .attr("height",yScale(0)-yScale(6350000))
+                .attr("fill","#F5F5F5");
     
+    nodataGroup.append("text")
+                .text("No data before 1961")
+                .attr("x",xScale(new Date("1953")))
+                .attr("y",yScale(3000000))
+                .attr("width",xScale(new Date("1961"))-xScale(new Date("1945")))
+                .attr("height",yScale(0)-yScale(6350000))
+                .attr("fill","#868687")
+                .attr("text-anchor","middle")
+                .attr("class","nodatatext");
+    
+    //a line chart connecting trend of refugee movements
     var line = d3.line().x(function(d){return xScale(d.date);}).y(function(d){ return yScale(d.refugees);});
     var lineGroup = wrapper.append("g").attr("class", "lineWrapper"); 
     
@@ -115,15 +135,21 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
         })
         .attr("cx",function(d){return xScale(d.date);})
         .attr("cy",function(d){return yScale(d.refugees);})
-        .attr("r", function(d) {return rScale(d.dead);})
+        .attr("r", function(d) {
+            if(d.dead == 0){
+                return 0;
+            }else{
+                return rScale(d.dead);
+            }
+        })
         .attr("fill",function(d){ return color(d.origin);})
         .attr("opacity",opacityCircles);
     
     var xAxis = d3.axisBottom().scale(xScale);
-    var yAxis = d3.axisLeft().scale(yScale).ticks(5);
+    var yAxis = d3.axisLeft().scale(yScale).ticks(3);
     
     wrapper.append("g").attr("class","x axis").attr("transform","translate(0,"+(h-padding)+")").call(xAxis);
-    //wrapper.append("g").attr("class","y axis").attr("transform","translate("+padding+",0)").call(yAxis);
+    //wrapper.append("g").attr("class","y axis").attr("transform","translate(165,0)").call(yAxis);
     
     //Hide the tooltip when the mouse moves away
     function removeTooltip (d, i) {
@@ -149,6 +175,10 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
             .transition().duration(200)
             .style("opacity",  0)
             .remove();
+        
+        d3.selectAll(".warbar").attr("opacity",0.7);
+        d3.selectAll(".wartextbar").attr("opacity",1);
+        
     }
 
     //Show the tooltip on the hovered over slice
@@ -182,6 +212,12 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
         d3.selectAll(".countries").style("opacity", 0.02);
         d3.selectAll(".countries."+country).style("opacity", opacityCircles);
         
+        //Hide other wars
+        d3.selectAll(".warbar").attr("opacity",0.2);
+        d3.selectAll(".wartextbar").attr("opacity",0);
+        d3.selectAll("."+country+"-bar").attr("opacity",0.7);
+        d3.selectAll("."+country+"-wartext").attr("opacity",1);
+        
         //Make chosen circle more visible
         element.style("opacity", 1);
         
@@ -201,7 +237,7 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
             .attr("x1", x)
             .attr("x2", x)
             .attr("y1", y)
-            .attr("y2", ((h-padding)+30))
+            .attr("y2", (h-padding))
             .style("stroke", color)
             .style("opacity",  0)
             .transition().duration(200)
@@ -211,20 +247,22 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
             .append("text")
             .attr("class", "guide")
             .attr("x", x)
-            .attr("y", ((h-padding)+30))
+            .attr("y", (h-padding))
             .style("fill", color)
             .style("opacity",  0)
             .style("text-anchor", "middle")
             .text(formatTime(d.date).toString())
             .transition().duration(200)
-            .style("opacity", 0.5);
+            .style("opacity", 0.5)
+            .style("font-family","Inconsolata,monospace")
+            .style("font-size","12px");	
 
         //horizontal line
         wrapper
             .append("line")
             .attr("class", "guide")
             .attr("x1", x)
-            .attr("x2", -20)
+            .attr("x2", 146)
             .attr("y1", y)
             .attr("y2", y)
             .style("stroke", color)
@@ -235,15 +273,18 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
         wrapper
             .append("text")
             .attr("class", "guide")
-            .attr("x", padding+3)
+            //.attr("x", padding+3)
+            .attr("x", 155)
             .attr("y", y-(padding)/3)
             .attr("dy", "0.35em")
             .style("fill", color)
             .style("opacity",  0)
-            .style("text-anchor", "end")
+            .style("text-anchor", "start")
             .text((d.refugees).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
             .transition().duration(200)
-            .style("opacity", 0.5);			
+            .style("opacity", 0.5)
+            .style("font-family","Inconsolata,monospace")
+            .style("font-size","12px");	
     }
 
     function selectLegend(mode) {
@@ -281,6 +322,16 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
             var country = chosen.replace(/\s+/g, '').replace(/\./g,'');
             var chosenLine = d3.select(".line."+country);
             chosenLine.style("opacity", opacityChosenLine);
+            
+            if(mode == 0){
+                d3.selectAll(".warbar").attr("opacity",0.2);
+                d3.selectAll(".wartextbar").attr("opacity",0);
+                d3.selectAll("."+country+"-bar").attr("opacity",0.7);
+                d3.selectAll("."+country+"-wartext").attr("opacity",1);
+            }else{
+                d3.selectAll(".warbar").attr("opacity",0.7);
+                d3.selectAll(".wartextbar").attr("opacity",1);
+            }
           };
     }
     
@@ -311,7 +362,10 @@ d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
         var legend = legendWrapper.selectAll('.legendSquare')  	
                   .data(color.range())                              
                   .enter().append('g')   
-                  .attr('class', 'legendSquare') 
+                  //.attr('class', 'legendSquare') 
+                  .attr('class', function(d,i){
+                      return "legendSquare"+" legendSquare"+color.domain()[i].replace(/\s+/g, '').replace(/\./g,'');
+                  }) 
                   //.attr("transform", function(d,i) { return "translate(" + 0 + "," + (i * rowHeight) + ")"; })
                   .attr("transform", function(d,i) { return "translate("+(i * colHeight)+",0)"; })
                   .style("cursor", "pointer")
