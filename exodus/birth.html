@@ -85,18 +85,20 @@
         </div>
         <div class="col-lg-4 right-section">
             <div id=story-section>
-                <div id="humanize"></div>
-                <div id="story-Afghanistan"></div>
-                <div id="story-Syria"></div>
-                <div id="story-Iraq"></div>
-                <div id="story-Congo"></div>
-                <div id="story-Rwanda"></div>
-                <div id="story-Ethiopia"></div>
-                <div id="story-Somalia"></div>
-                <div id="story-Sudan"></div>
-                <div id="story-Vietnam"></div>
-                <div id="story-Myanmmar"></div>
-                <div id="story-Burundi"></div>
+                <div id="humanize"></div><br>
+                <div class="story-section">
+                    <div id="story-Afghanistan"></div>
+                    <div id="story-Syria"></div>
+                    <div id="story-Iraq"></div>
+                    <div id="story-Congo"></div>
+                    <div id="story-Rwanda"></div>
+                    <div id="story-Ethiopia"></div>
+                    <div id="story-Somalia"></div>
+                    <div id="story-Sudan"></div>
+                    <div id="story-Vietnam"></div>
+                    <div id="story-Myanmmar"></div>
+                    <div id="story-Burundi"></div><br>
+                </div>
             </div>
         </div>
     </div>
@@ -227,11 +229,11 @@
                     var humanizePic="";
                     
                     if(urlExists("images/countries/Image"+year+".jpg"))
-                        humanizePic = "<img class=\"war-photo\" width=\"435px\" src=\"images/countries/Image"+year+".jpg\">";
+                        humanizePic = "<img class=\"war-photo\"  width=\"435px\" src=\"images/countries/Image"+year+".jpg\">";
                     else if(urlExists("images/countries/Image"+year+".jpeg"))
-                        humanizePic = "<img class=\"war-photo\" width=\"435px\" src=\"images/countries/Image"+year+".jpeg\">";
+                        humanizePic = "<img class=\"war-photo\"  width=\"435px\" src=\"images/countries/Image"+year+".jpeg\">";
                     else if(urlExists("images/countries/Image"+year+".png"))
-                        humanizePic = "<img class=\"war-photo\" width=\"435px\" src=\"images/countries/Image"+year+".png\">";
+                        humanizePic = "<img class=\"war-photo\"  width=\"435px\" src=\"images/countries/Image"+year+".png\">";
                     else
                         humanizePic = "<img class=\"war-photo\" width=\"435px\" src=\"images/countries/Image"+year+".gif\">";
                     

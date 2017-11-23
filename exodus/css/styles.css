@@ -450,8 +450,15 @@ span.dotline {
 
 .war-photo{
     filter: grayscale(100%);
-    margin: 10px 10px 10px 0px;
     opacity: 0.8;
+}
+
+#humanize{
+/*
+    position: absolute;
+    clip: rect(0px,435px,200px,0px);
+*/
+/*    clip-path: polygon(0 18%, 100% 18%, 100% 85%, 0 85%);*/
 }
 
 
