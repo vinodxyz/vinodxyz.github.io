@@ -103,7 +103,7 @@
 #year-label{
     font-size: 60px;
     text-align: left;
-    color: #212121;
+    color: #BDBDBD;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -191,7 +191,7 @@
 }
 
 #flow-area-chart{
-    background-color: #F9F9F9;
+    background-color: #FFFFFF;
     width: 93%;
 }
 
@@ -526,5 +526,16 @@ span.dotline {
 }
 
 .right-section{
-    background: #DCDCDC;
+    background: #F9F9F9;
+}
+
+.anime-path{
+    stroke-dasharray: 20;
+/*    animation: dash 5s linear;*/
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 1000;
+  }
 }

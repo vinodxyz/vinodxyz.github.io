@@ -20,89 +20,90 @@
 </head>
 
 <body>
-    <div class="container-fluid dark-bkg">
-        <div class="col-lg-8">
-            <h3>
-                <span class="title">Birth of Refugees</span>
-<!--
-                <button id="btnPrev" onclick="Prev();" class="btn btn-default btn-xs">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </button>
-                <button id="btnNext" onclick="Next();" class="btn btn-default btn-xs">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                </button>
--->
-                
-<!--
-                <div class="speed-slider">
-                    <input type="range" class="slider-speed" min="1000" max="10000" step="1000" value="4000" id="speedSlider">
+    <div class="">
+        <div class="container-fluid dark-bkg">
+            <div class="col-lg-8">
+                <h3>
+                    <span class="title">Birth of Refugees</span>
+    <!--
+                    <button id="btnPrev" onclick="Prev();" class="btn btn-default btn-xs">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </button>
+                    <button id="btnNext" onclick="Next();" class="btn btn-default btn-xs">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </button>
+    -->
+
+    <!--
+                    <div class="speed-slider">
+                        <input type="range" class="slider-speed" min="1000" max="10000" step="1000" value="4000" id="speedSlider">
+                    </div><br>
+    -->
+                </h3>
+                <div>
+                    Witness the events that caused the mass-movement of people across these countries, over 50 years. <br>
+                    A country's story cannot be viewed in isolation.<br>
+                    Events that transpired across the world helps put things in perspective.
                 </div><br>
--->
-            </h3>
-            <div>
-                Witness the events that led up to the movement of people across these countries. <br>
-                A country's story cannot be viewed in isolation.<br>
-                Events that transpired across the world helps put things in perspective.
-            </div><br>
-            <div class="disclaimer">
-                <span class="glyphicon glyphicon-asterisk"></span>
-                Only showing countries with more than 20,000 refugees in a given year.
-            </div><br>
-        </div>
-        <div class="col-lg-4">
-            <div id="how-to">
-                <span class="how-to-heading">How to read</span><br>
-                1. Select year on the slider. If needed, you can
-                <button id="btnPause" class="btn btn-default btn-xs">
-                    <span id="spanPause" class="glyphicon glyphicon-pause"></span>
-                </button>
-                <br>
-                2. For chosen year, no. of refugees that moved across countries are shown.
-                (Hover the visualization, to reveal the exact count)<br>
-                3. Events that caused these movements are listed, on the right.
+                <div class="disclaimer">
+                    <span class="glyphicon glyphicon-asterisk"></span>
+                    Only showing countries with more than 20,000 refugees in a given year.
+                </div><br>
             </div>
-        </div>
-    </div>
-    
-    <div class="container-fluid year-panel">
-        <div class="col-lg-8">
-            <div></div>
-            <div id="flow-area-chart"></div>
-            <div id="slidecontainer">
-                <input type="range" min="1961" max="2016" step="1" value="1961" class="slider" id="yearSlider">
-            </div>
-        </div>
-        <div class="col-lg-4 right-section">
-            <div id="year-label"></div>
-        </div>
-    </div>
-    
-    
-    
-    <div class="container-fluid">
-        <div class="col-lg-8">
-            <div id="flow-story-chart"></div>
-        </div>
-        <div class="col-lg-4 right-section">
-            <div id=story-section>
-                <div id="humanize"></div><br>
-                <div class="story-section">
-                    <div id="story-Afghanistan"></div>
-                    <div id="story-Syria"></div>
-                    <div id="story-Iraq"></div>
-                    <div id="story-Congo"></div>
-                    <div id="story-Rwanda"></div>
-                    <div id="story-Ethiopia"></div>
-                    <div id="story-Somalia"></div>
-                    <div id="story-Sudan"></div>
-                    <div id="story-Vietnam"></div>
-                    <div id="story-Myanmmar"></div>
-                    <div id="story-Burundi"></div><br>
+            <div class="col-lg-4">
+                <div id="how-to">
+                    <span class="how-to-heading">How to read</span><br>
+                    1. Select year on the slider. If needed, you can
+                    <button id="btnPause" class="btn btn-default btn-xs">
+                        <span id="spanPause" class="glyphicon glyphicon-pause"></span>
+                    </button>
+                    <br>
+                    2. For chosen year, no. of refugees that moved across countries are shown.
+                    (Hover the visualization, to reveal the exact count)<br>
+                    3. Events that caused these movements are listed, on the right.
                 </div>
             </div>
         </div>
-    </div>
-    
+
+        <div class="container-fluid year-panel">
+            <div class="col-lg-8">
+                <div></div>
+                <div id="flow-area-chart"></div>
+                <div id="slidecontainer">
+                    <input type="range" min="1961" max="2016" step="1" value="1961" class="slider" id="yearSlider">
+                </div>
+            </div>
+            <div class="col-lg-4 right-section">
+                <div id="year-label"></div>
+            </div>
+        </div>
+
+
+
+        <div class="container-fluid">
+            <div class="col-lg-8">
+                <div id="flow-story-chart"></div>
+            </div>
+            <div class="col-lg-4 right-section">
+                <div id=story-section>
+                    <div id="humanize"></div><br>
+                    <div class="story-section">
+                        <div id="story-Afghanistan"></div>
+                        <div id="story-Syria"></div>
+                        <div id="story-Iraq"></div>
+                        <div id="story-Congo"></div>
+                        <div id="story-Rwanda"></div>
+                        <div id="story-Ethiopia"></div>
+                        <div id="story-Somalia"></div>
+                        <div id="story-Sudan"></div>
+                        <div id="story-Vietnam"></div>
+                        <div id="story-Myanmmar"></div>
+                        <div id="story-Burundi"></div><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div> 
     
     
     <div id="desktop-only" style="display:none;">
@@ -757,6 +758,14 @@
 					.attr("class", "xaxis")
 					.attr("transform", "translate(0," + (60) + ")")
 					.call(xAxis);
+                
+                svg.append("text")
+                    .attr("x", 710)             
+                    .attr("y", 20)
+                    .attr("text-anchor", "middle")  
+                    .style("font-size", "12px")
+                    .style("fill","#CECECE")
+                    .text("# of refugees, over years");
                 
             });
             
