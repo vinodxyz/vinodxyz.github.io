@@ -132,7 +132,7 @@
         const circularLinkGap = 2;
 
         var renderChart = function() {
-
+            
             var scaleSankey = 1.2;
             var extentY = 300;
             //var align = d3.sankeyJustify;
@@ -173,6 +173,33 @@
                 var svg = d3.select("#flow-story-chart").append("svg")
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom);
+                
+                //The zoom visual element:
+                var lineData = [ { "x": 0,  "y": 5},
+                                { "x": 25,  "y": 5},
+                                { "x": 835,  "y": 106},
+                                { "x": 835,  "y": 500},
+                                { "x": 0,  "y": 500},
+                                { "x": 0,  "y": 106}
+                               ];
+                
+                var xValue = (year-1960) * 14.3;
+                
+                lineData[0].x += xValue;
+                lineData[1].x += xValue;
+                
+                var zoomLineGen = d3.line().x(function(d){return d.x;}).y(function(d){return d.y;});
+                svg.append("path")
+                    .attr("fill", "#F9F9F9")
+                    .attr("class","test")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("stroke-width", 3)
+                    .attr("opacity",1)
+                    .attr("d", zoomLineGen(lineData));
+
+
+                //ends
 
                 var g = svg.append("g")
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
@@ -311,7 +338,6 @@
                         return (d.x1 - d.x0);
                     })
                     .style("fill", function(d) {
-
                         var isDestination = $.inArray(d.name, countries);
 
                         if (+isDestination != -1)
@@ -380,11 +406,12 @@
                         d3.selectAll(".destination").style("opacity", 0.5);
                         d3.selectAll(".sankey-link").style("opacity", 0.7);
                         d3.selectAll("text").style("opacity", 1).attr("fill", function(d) {
-                            var isDestination = $.inArray(d.name, countries);
+                            
+                            var isDestination = (d == undefined) ? -1 : $.inArray(d.name, countries);
 
                             if (+isDestination != -1)
                                 return nodeColour(d.name);
-                            else if(+d.value < 200000){
+                            else if((d != undefined)&&(+d.value < 200000)){
                                 var currYear = $("#yearSlider").val();
                                 if((+currYear == 1994) || (+currYear >= 2000)){
                                     return "#FFFFFF";
@@ -482,11 +509,12 @@
                         d3.selectAll("rect").style("opacity", 0.5);
                         d3.selectAll(".sankey-link").style("opacity", 0.7);
                         d3.selectAll("text").style("opacity", 1).attr("fill", function(d) {
-                            var isDestination = $.inArray(d.name, countries);
+                            //var isDestination = $.inArray(d.name, countries);
+                            var isDestination = (d == undefined) ? -1 : $.inArray(d.name, countries);
 
                             if (+isDestination != -1)
                                 return nodeColour(d.name);
-                            else if(+d.value < 200000){
+                            else if((d != undefined)&&(+d.value < 200000)){
                                 var currYear = $("#yearSlider").val();
                                 if((+currYear == 1994) || (+currYear >= 2000)){
                                     return "#FFFFFF";
@@ -520,7 +548,7 @@
                     .style("opacity", 0.7)
                     .style("cursor", "pointer")
                     .style("stroke", function(link, i) {
-                        return link.circular ? "red" : "black";
+                        return link.circular ? "black" : "black";
                         //return nodeColour(link.source.name);
                     })
 
@@ -543,7 +571,7 @@
 
                 arrowsG.selectAll("path")
                     .style("stroke-width", "2")
-                    .style("stroke-dasharray", "5,5")
+                    .style("stroke-dasharray", "1,6").style("stroke-linecap","round")
 
                 arrowsG.selectAll(".arrow-head").remove()
 
@@ -772,6 +800,8 @@
         };
         
         renderAreaChart();
+        
+        
         
     </script>
     
