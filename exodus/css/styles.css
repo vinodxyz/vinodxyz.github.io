@@ -441,7 +441,7 @@ span.dotline {
 }
 
 .main-minispacer{
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .main-sectionspacer{
@@ -512,7 +512,7 @@ span.dotline {
 }
 
 .how-to-heading{
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
 }
 
@@ -538,4 +538,37 @@ span.dotline {
   to {
     stroke-dashoffset: 1000;
   }
+}
+
+.war-title{
+    font-family: 'PT Serif', serif;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.war-subtitle{
+    font-family: 'PT Serif', serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 30px;
+}
+
+.navspacer{
+    margin-top: 50px;
+}
+
+.nav-texts{
+    font-family: 'PT Serif', serif;
+    font-size: 14px;
+}
+
+.nav-brandtext{
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.birth-body{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
 }

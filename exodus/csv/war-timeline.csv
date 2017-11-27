@@ -1,0 +1,25 @@
+Year,Event,Type,Country,Magnitude
+1945,Cold war starts between US and USSR,Coldwar,both,1
+1946,US spreads Capitalism in France and Japan,Coldwar,US,2
+1948,USSR invades Germany,Coldwar,USSR,2
+1950,Korea and China turn Communist,Coldwar,USSR,3
+1953,US stages a coup in Iran,Coldwar,US,3
+1955,US & USSR clash in Vietnam war,Coldwar,both,4
+1962,Cuban missile crisis,Coldwar,both,5
+1980,Cold war ends with liberalization in USSR,Coldwar,both,1
+1950,Saudi Arabia forges an alliance with USA,Middleeast,,1
+1953,US stages a coup in Iran,Middleeast,,3
+1979,Iranian revolution,Middleeast,,4
+1980,Iran Iraq war,Middleeast,,5
+2003,US invades Iraq,Middleeast,,5
+2010,Arab Spring,Middleeast,,4
+2011,Saudi arabia and Iran clash in Proxy wars,Middleeast,,5
+1980,Mujahideen is formed,Terrorism,,4
+1989,Al Qaeda is formed in Afghanistan,Terrorism,,5
+2001,World trade center attack,Terrorism,,5
+2003,Iraq war,Terrorism,,5
+2004,Al Qaeda in Iraq is formed,Terrorism,,4
+2006,US attack & weaken AQI,Terrorism,,5
+2011,US withdraws from Iraq,Terrorism,,3
+2011,ISIS is formed,Terrorism,,4
+2014,ISIS expands to Syria,Terrorism,,5
