@@ -282,7 +282,7 @@
 
 span.thinbar {
     font-family: spark-bar-thin;
-    font-size: 18px;
+    font-size: 24px;
 }
 
 span.narrowbar {
@@ -383,22 +383,22 @@ span.dotline {
 
 #war-timeline{
     font-family: 'Inconsolata', monospace;
-    font-size: 11px;
+    font-size: 12px;
     position: absolute;
-    top: 530px;
-    left: -40px;
+    top: 380px;
+    left: -30px;
     transform: rotate(-90deg);
-    color: #949494;
+    color: #212121;
 }
 
 #refugee-years{
     font-family: 'Inconsolata', monospace;
-    font-size: 11px;
+    font-size: 12px;
     position: absolute;
-    top: 220px;
-    left: -100px;
+    top: 150px;
+    left: -88px;
     transform: rotate(-90deg);
-    color: #949494;
+    color: #212121;
 }
 
 .nodataline {
@@ -412,6 +412,14 @@ span.dotline {
 
 .atf-syria{
     color: #E58903;
+}
+
+.atf-afghan{
+    color: #DD1F2E;
+}
+
+.atf-ethiopia{
+    color: #20A570;
 }
 
 .main-body{
@@ -571,4 +579,21 @@ span.dotline {
 .birth-body{
     font-family: 'Open Sans', sans-serif;
     font-size: 13px;
+}
+
+.wars-statics{
+    margin-top:10px;
+    width: 115%;
+}
+
+.wars-banner{
+    padding-left:15px;
+    color: #898989;
+}
+
+.war-key{
+    width: 20%;
+    float: right;
+    margin-right: 20px;
+    margin-top: 10px;
 }
