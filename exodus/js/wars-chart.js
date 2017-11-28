@@ -24,20 +24,20 @@ var warsvg = d3.select("#war-chart").append("svg").attr("width",w).attr("height"
 //var warwrapper = warsvg.append("g").attr("class", "warWrapper").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 var warwrapper = warsvg.append("g").attr("class", "warWrapper").attr("transform", "translate(" + margin.left + ",-260)");
 
-d3.csv("../csv/flag-data.csv",function(data){
+d3.csv("../exodus/csv/flag-data.csv",function(data){
     flagdata = data;    
     getCountryData();
 });
 
 var getCountryData = function(){
-  d3.csv("../csv/countries-involved.csv",function(data){
+  d3.csv("../exodus/csv/countries-involved.csv",function(data){
         countryData = data;
         generateWarChart();
     });  
 };
 
 var generateWarChart = function(){
-  d3.csv("../csv/war-data.csv",warConverter,function(data){
+  d3.csv("../exodus/csv/war-data.csv",warConverter,function(data){
     
 //    var xScale = d3.scaleTime().domain([d3.min(data,function(d){ return d.Startdate;}),d3.max(data,function(d){ return d.Enddate;})]).range([0,w-padding*1.5]);
       

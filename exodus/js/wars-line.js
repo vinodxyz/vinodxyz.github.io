@@ -9,7 +9,7 @@ var rowConverter = function(d){
 
 var mobileScreen = ($( window ).innerWidth() < 500 ? true : false);
 
-d3.csv("../csv/viz1-scatter-death.csv",rowConverter, function(data){
+d3.csv("../exodus/csv/viz1-scatter-death.csv",rowConverter, function(data){
     
     var padding=50;
     var margin = {left: 10, top: 30, right: 20, bottom: 0};
