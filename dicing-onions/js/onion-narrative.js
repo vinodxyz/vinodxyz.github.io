@@ -23,12 +23,17 @@ $(window).resize(function(){
     screenCheckResize();
     var location = window.location.href;
 });
+
+function modifySpacing(){
+    $("#scrolly-section").css("max-height","20px");
+    $(".scrolly-spacer").css("margin-top","100px");
+};
         
 function screenCheckResize(){
     
     location = window.location.href;
     
-    if (($(window).width() < 1400) || ($(window).height() < 800)) {
+    if (($(window).width() < 1200) || ($(window).height() < 700)) {
         $.scrollify.disable();
         $(".core").hide();
         
@@ -47,7 +52,7 @@ function screenCheckResize(){
 }
 
 function screenCheck(){
-    if (($(window).width() < 1400) || ($(window).height() < 800)) {
+    if (($(window).width() < 1200) || ($(window).height() < 700)) {
         $.scrollify.disable();
         $(".core").hide();
         
@@ -64,9 +69,7 @@ var idleTime = 0;
 
 $(document).ready(
 function(){
-    
     screenCheck();
-    
     //Some people might need to know that it's time to scroll ;D
     $("#scroll-pliss").velocity({"opacity": "0"});
     
