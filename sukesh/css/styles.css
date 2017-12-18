@@ -1,0 +1,65 @@
+.everything{
+    font-family: 'Karla', sans-serif;
+    font-size: 16px;
+    color: #D4D3D9;
+}
+
+.intro-image{
+    width: 60%;
+}
+
+.spacer{
+    margin-top: 8%;
+}
+
+.intro-heading{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 72px;
+    color: #F96166;
+}
+
+.intro-body{
+    font-size: 26px;
+    color: #4A4D52;
+}
+
+.intro-text{
+    margin-top: 15%;
+    text-align: right;
+    margin-right: 10%;
+}
+
+.navbar-default{
+    background-color: #ffffff !important;
+    border-color: #ffffff !important;
+}
+
+
+@media screen and (max-width: 500px){
+    
+    #navbar-top{
+        display: none;
+    }
+    
+    .spacer{
+        margin-top: 4%;
+    }
+    
+    .intro-image{
+        margin-top: 5%;
+        margin-left: 4%;
+        width: 90%;
+    }
+    
+    .intro-text{
+        margin-top: 0%;
+        text-align: center;
+        margin-right: 0%;
+    }
+    
+    .intro-body{
+        font-size: 18px;
+        color: #4A4D52;
+    }
+    
+}
