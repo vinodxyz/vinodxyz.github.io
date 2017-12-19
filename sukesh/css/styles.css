@@ -35,7 +35,7 @@
 }
 
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 980px){
     
     #navbar-top{
         display: none;
@@ -63,3 +63,52 @@
     }
     
 }
+
+@media screen and (max-width: 736px){
+    
+    #sukesh-logo{
+        display: none;
+    }
+    
+    .spacer{
+        margin-top: -30px;
+    }
+    
+    .intro-image{
+        margin-top: 5%;
+        margin-left: 4%;
+        width: 90%;
+    }
+    
+    .intro-text{
+        margin-top: 0%;
+        text-align: center;
+        margin-right: 0%;
+    }
+    
+    .intro-body{
+        font-size: 18px;
+        color: #4A4D52;
+    }
+    
+    .navbar-toggle{
+        margin-right: -20px !important;
+        margin-bottom: 0px !important;
+        margin-top: 30px !important;
+        z-index: 99;
+    }
+    
+    .navbar-collapse{
+        border-color: #ffffff !important;
+        text-align: center !important;
+        background: #DDDDDD;
+    }
+    
+    
+}
+
+@media all and (max-width: 1690px) { ...}
+@media all and (max-width: 1280px) { ...}
+@media all and (max-width: 980px) { ... }
+@media all and (max-width: 736px) { ... }
+@media all and (max-width: 480px) { ... }
