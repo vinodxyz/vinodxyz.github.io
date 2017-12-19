@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="css/react-logo.css">
         
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
         
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.js"></script>
@@ -18,6 +18,7 @@
     </head>
     <body class="everything">
         
+        <!-- Navigation bar -->
         <nav class="navbar navbar-default">
             <div class="container-fluid ">
                 <div class="col-lg-1">
@@ -38,7 +39,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="">Works</a></li>
                             <li><a href="http://blog.suke.sh/" target="_blank">Blog</a></li>
-                            <li><a href="">Contact</a></li>
+                            <li><a href="index.html#contact">Contact</a></li>
                         </ul>
                     </div>
                 </div>
@@ -46,8 +47,9 @@
             </div>
         </nav>
         
-        
         <div class="spacer"></div>
+        
+        <!-- Introduction -->
         <div class="container-fluid">
             <div class="col-lg-6">
                 <div class="intro-text">
@@ -71,5 +73,69 @@
                 </div>
             </div>
         </div>
+        
+        <div class="section-spacer"></div>
+        
+        <!-- Works section -->
+        <div class="container-fluid">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8"></div>
+            <div class="col-lg-2"></div>
+        </div>
+        
+        <!-- Contact-form -->
+        <div id="contact" class="cross-pattern">
+            <div class="container-fluid section-intro">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-7">
+                    <div class="all-headings">Reach out</div>
+                    <div class="all-subheadings">
+                        Want to work on something awesome or catch up, over coffee ?<br>
+                        Send me a note.
+                    </div>
+                    <div class="col-lg-3"></div>
+                </div>
+            </div>
+
+            <div class="container-fluid section-body">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <form action="https://formspree.io/sukesh1989@gmail.com" method="POST" class="contact-form">
+                        <div><input name="Name" type="text" placeholder="Name" class="form-control"></div>
+                        <div><input name="Email" type="email" placeholder="Email" class="form-control"></div>
+                        <div><textarea name="Note" placeholder="Note" class="form-control"></textarea></div>
+                        <div><input type="submit" value="Send" class="btn btn-lg btn-send"></div>
+                    </form>
+                </div>
+                <div class="col-lg-3"></div>
+            </div>
+        </div>
+        
+        <!-- Social media & Footer -->
+        <div class="container-fluid footer">
+            <div class="col-lg-12">
+                <div class="col-lg-3 mini-spacer">
+                    <a href="https://github.com/sukesh1989" target="_blank">
+                        <img src="images/footer/github.png" class="footer-image">
+                    </a>
+                </div>
+                <div class="col-lg-3 mini-spacer">
+                    <a href="https://www.facebook.com/sukesh.salian.1614" target="_blank">
+                        <img src="images/footer/facebook.png" class="footer-image">
+                    </a>
+                </div>
+                <div class="col-lg-3 mini-spacer">
+                    <a href="https://twitter.com/fatindiancoder" target="_blank">
+                        <img src="images/footer/twitter.png" class="footer-image">
+                    </a>
+                </div>
+                <div class="col-lg-3 mini-spacer">
+                    <a href="https://www.linkedin.com/in/sukeshsalian/" target="_blank">
+                        <img src="images/footer/linkedin.png" class="footer-image">
+                    </a>
+                </div>
+            </div>
+        </div>
+        
     </body>
 </html>

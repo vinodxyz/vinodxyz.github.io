@@ -1,5 +1,5 @@
 .everything{
-    font-family: 'Karla', sans-serif;
+    font-family: 'Work Sans', sans-serif;
     font-size: 16px;
     color: #D4D3D9;
 }
@@ -10,6 +10,10 @@
 
 .spacer{
     margin-top: 8%;
+}
+
+.section-spacer{
+    margin-top: 10%;
 }
 
 .intro-heading{
@@ -32,6 +36,58 @@
 .navbar-default{
     background-color: #ffffff !important;
     border-color: #ffffff !important;
+}
+
+.all-headings{
+    color: #212121;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+}
+
+.all-subheadings{
+    color: #3F3F3F;
+    font-size: 16px;
+}
+
+.cross-pattern{
+    background-image: url(../images/cross-pattern.png);
+}
+
+.footer-image{
+    height: 14px;
+}
+
+.footer{
+    background: #212121;
+    text-align: center;
+    padding: 10px;
+}
+
+.contact-form div{
+    margin: 20px;
+}
+
+.footer-image:hover{
+    -webkit-filter: opacity(.75);
+    filter: opacity(.75);
+}
+
+.section-intro{
+    padding-top: 50px;
+}
+
+.section-body{
+    padding-bottom: 100px;
+}
+
+.btn-send{
+    background-color: #F96166;
+    color: #ffffff;
+}
+
+.btn-send:hover{
+    background-color: #AD1F2A;
+    color: #ffffff !important;
 }
 
 
@@ -59,7 +115,7 @@
     
     .intro-body{
         font-size: 18px;
-        color: #4A4D52;
+        color: #C9C9C9;
     }
     
 }
@@ -102,6 +158,11 @@
         border-color: #ffffff !important;
         text-align: center !important;
         background: #DDDDDD;
+    }
+    
+    .mini-spacer{
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
     
     
