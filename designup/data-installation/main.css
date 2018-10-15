@@ -1,0 +1,23 @@
+body{
+    background-color: #212121;
+}
+
+.links line {
+    stroke: #999;
+    stroke-opacity: 0.4;
+}
+
+.nodes circle {
+    stroke: #fff;
+    stroke-width: 1px;
+}
+
+text{  
+    font-family: sans-serif;
+    text-anchor:middle;
+    font-size:8px;  
+}
+
+.nodelabel{
+    fill: white;
+}
