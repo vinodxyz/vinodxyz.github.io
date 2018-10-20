@@ -19,6 +19,7 @@ getData();
 
         var width = $(window).width();
         var height = $(window).height();
+        var radius = -10;
 
         var svg = d3.select("body")
             .append("svg")
@@ -41,11 +42,12 @@ getData();
 
         var simulation = d3.forceSimulation(nodes)
             .force("charge", d3.forceManyBody().strength(-1000))
-            .force("link", d3.forceLink(links).distance(100).strength(1))
-            .force("x", d3.forceX())
-            .force("y", d3.forceY()).force("center", d3.forceCenter())
-            .force("r", d3.forceRadial(200))
-            .alphaTarget(0.3)
+            .force("link", d3.forceLink(links).distance(50).strength(1))
+            .force("x", d3.forceX()).force("center", d3.forceCenter(0,0))
+            .force("y", d3.forceY()).force("center", d3.forceCenter(0,0))
+            .force("collide", d3.forceCollide().strength(1))
+            .force("r", d3.forceRadial(100).strength(0.5))
+            .alphaTarget(0.2)
             .on("tick", ticked);
 
         let g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")"),
@@ -75,7 +77,7 @@ getData();
 
 
 function runViz() {
-
+    //console.log(databackup);
     // Apply the general update pattern to the nodes.
     node = node.data(nodes, function(d) { return d.name;});
 
@@ -85,7 +87,20 @@ function runViz() {
 
     node = node.enter().append("circle")
             .attr("fill", function(d) { if(d.type == "user"){ return "#0B24FB"} else { return "#FC0D1B"}})
-                .call(function(node) { node.transition().attr("r", 8); })
+                .call(function(node) { node.transition().attr("r", function(d){
+                    if(d.type == "user") { 
+                        return 5;
+                    }
+                    else {
+                        var radius = 0;
+                        for(var i=0; i<links.length; i++){
+                            if(links[i].target.name == d.name){
+                                radius++;
+                            }
+                        }
+                        return radius*4;
+                    }
+                }); })
                 .merge(node)
                 .call(d3.drag()
                 .on("start", dragStarted)
@@ -130,6 +145,8 @@ function runViz() {
     function ticked() {
     node.attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; })
+    // node.attr("cx", function(d) { return d.x = Math.max(Math.max(-1*width/2 - radius, d.x), Math.min(width/2 - radius, d.x)); })
+    //     .attr("cy", function(d) { return d.y = Math.max(Math.max(-1*height/2 - radius, d.y), Math.min(height/2 - radius, d.y)); });
 
     link.attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return d.source.y; })
@@ -155,7 +172,6 @@ function runViz() {
     // node.attr("fy",function(d){ if(d.name == "chocolates"){ return 0;}});
 
     }
-
 
 
 function updateData(){
@@ -217,40 +233,41 @@ function updateData(){
 
     if(existingUser == undefined)
     {
+
         if(existingHave == undefined)
         {
-            newLinks.push({source: userIndex, target: haveIndex});
-            redrawLinks.push({source: user, target: have});
+            newLinks.push({source: userIndex, target: haveIndex, status: "have"});
+            redrawLinks.push({source: user, target: have, status: "have"});
         }else{
-            links.push({source: userIndex, target: existingHaveIndex});
-            redrawLinks.push({source: user, target: existingHave});
+            newLinks.push({source: userIndex, target: existingHaveIndex, status: "have"});
+            redrawLinks.push({source: user, target: existingHave, status: "have"});
         }
 
         if(existingNeed == undefined)
         {
-            newLinks.push({source: userIndex, target: needIndex});
-            redrawLinks.push({source: user, target: need});
+            newLinks.push({source: userIndex, target: needIndex, status: "need"});
+            redrawLinks.push({source: user, target: need, status: "need"});
         }else{
-            newLinks.push({source: userIndex, target: existingNeedIndex});
-            redrawLinks.push({source: user, target: existingNeed});
+            newLinks.push({source: userIndex, target: existingNeedIndex, status: "need"});
+            redrawLinks.push({source: user, target: existingNeed, status: "need"});
         }
     }else{
         if(existingHave == undefined)
         {
-            newLinks.push({source: existingUserIndex, target: haveIndex});
-            redrawLinks.push({source: existingUser, target: have});
+            newLinks.push({source: existingUserIndex, target: haveIndex, status: "have"});
+            redrawLinks.push({source: existingUser, target: have, status: "have"});
         }else{
-            newLinks.push({source: existingUserIndex, target: existingHaveIndex});
-            redrawLinks.push({source: existingUser, target: existingHave});
+            newLinks.push({source: existingUserIndex, target: existingHaveIndex, status: "have"});
+            redrawLinks.push({source: existingUser, target: existingHave, status: "have"});
         }
 
         if(existingNeed == undefined)
         {
-            newLinks.push({source: existingUserIndex, target: needIndex});
-            redrawLinks.push({source: existingUser, target: need});
+            newLinks.push({source: existingUserIndex, target: needIndex, status: "need"});
+            redrawLinks.push({source: existingUser, target: need, status: "need"});
         }else{
-            newLinks.push({source: existingUserIndex, target: existingNeedIndex});
-            redrawLinks.push({source: existingUser, target: existingNeed});
+            newLinks.push({source: existingUserIndex, target: existingNeedIndex, status: "need"});
+            redrawLinks.push({source: existingUser, target: existingNeed, status: "need"});
         }
     }
 
@@ -266,12 +283,17 @@ function updateData(){
         data:JSON.stringify(databackup),
         contentType:"application/json; charset=utf-8",
         dataType:"json",
-        success: function(data, textStatus, jqXHR){
+        success: function(){
             runViz(); 
+            moveSelectedBubbles(user.name)
+
+            setTimeout( function(){
+                moveSelectedBubbles("")
+            },10000);
         }
     });
 
-    moveSelectedBubbles(user);
+    
 
       
 }
@@ -279,56 +301,50 @@ function updateData(){
 
 function moveSelectedBubbles(name) {
 
-    var w = $("#network-viz").width();
-    var h = $("#network-viz").height();
+    for(var i=0; i<links.length; i++){
+        if(links[i].source.name == name){
+
+            console.log(links[i]);
+            if(links[i].status == "have"){
+                simulation.force("have", isolate(d3.forceX(-width/2), function(d) { return d.name === links[i].target.name; }))
+            }
+
+            if(links[i].status == "need"){
+                simulation.force("need", isolate(d3.forceX(width/2), function(d) { return d.name === links[i].target.name; }))
+            }
+            
+
+        }
+    }
 
     simulation.force('x', d3.forceX().strength(function(d){
         if(d.name == name){
-            return 0.8;
+            return 1;
         }  else{
             return 0.1;
-        }
-    }).x(function(d){
-        if(d.name == name){
-            return 0;
-        }  else{
-            return 100;
         }
     }));
 
     simulation.force('y', d3.forceY().strength(function(d){
         if(d.name == name){
-            return 0.8;
+            return 1;
         }  else{
             return 0.1;
         }
-    }).y(function(d){
-        if(d.name == name){
-            return 0;
-        }  else{
-            return 100;
-        }
     }));
 
-    //simulation.force("x", d3.forceX()).force("center", d3.forceCenter());
-    //simulation.force("y", d3.forceY()).force("center", d3.forceCenter());
-
-    // simulation.force('r2', d3.forceRadial(10).x(function(d){
-    //     if(d.name == name){
-    //         return 0;
-    //     }  else{
-    //         return 1000;
-    //     }
-    // }).y(
-    //     function(d){
-    //         if(d.name == name){
-    //             return 0;
-    //         }  else{
-    //             return 1000;
-    //         }
-    //     }
-    // ));
-
-  simulation.alpha(1).restart();
+    //simulation.force("have", isolate(d3.forceX(-width/2), function(d) { return d.type === "user"; }))
+    //simulation.force("need", isolate(d3.forceX(width/2), function(d) { return d.type === "thing"; }))
+    //simulation.force("steelblue", isolate(d3.forceX(width / 6), function(d) { return d.color === "steelblue"; }))
+    simulation.alpha(0.1).restart();
 
   }
+
+
+  function isolate(force, filter) {
+    var initialize = force.initialize;
+    force.initialize = function() { initialize.call(force, nodes.filter(filter)); };
+    return force;
+  }
+
+  setTimeout(function(){setInterval(function(){simulation.alpha(0.1).restart()}, 20000)},20000);
