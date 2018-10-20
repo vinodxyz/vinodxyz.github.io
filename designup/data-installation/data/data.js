@@ -11,10 +11,10 @@
 //         {"name" : "Rajshree", "type" : "user"}
 //     ],
 //     "edges":[
-//         {"source": 0, "target": 1},
-//         {"source": 2, "target": 3},
-//         {"source": 4, "target": 1},
-//         {"source": 2, "target": 1}
+//         {"source": 0, "target": 1, "status": "have"},
+//         {"source": 2, "target": 3, "status": "need"},
+//         {"source": 4, "target": 1, "status": "have"},
+//         {"source": 2, "target": 1, "status": "need"}
 //     ]
 // }
 
