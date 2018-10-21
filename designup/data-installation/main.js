@@ -51,8 +51,8 @@ getData();
             .on("tick", ticked);
 
         let g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")"),
-            link = g.append("g").attr("stroke", "#000").attr("stroke-width", 1.5).selectAll(".link"),
-            node = g.append("g").attr("stroke", "#fff").attr("stroke-width", 1.5).selectAll(".node");
+            link = g.append("g").selectAll(".link"),
+            node = g.append("g").selectAll(".node");
             label = g.append("g").attr("fill", "black").selectAll(".label");
 
         function dragStarted(d) {
@@ -77,7 +77,6 @@ getData();
 
 
 function runViz() {
-    //console.log(databackup);
     // Apply the general update pattern to the nodes.
     node = node.data(nodes, function(d) { return d.name;});
 
@@ -86,7 +85,8 @@ function runViz() {
         .remove();
 
     node = node.enter().append("circle")
-            .attr("fill", function(d) { if(d.type == "user"){ return "#0B24FB"} else { return "#FC0D1B"}})
+            .attr("fill", function(d) { if(d.type == "user"){ return "#FFC802"} else { return "#C8037D"}})
+            .attr("class", function(d) { return d.type; })
                 .call(function(node) { node.transition().attr("r", function(d){
                     if(d.type == "user") { 
                         return 5;
@@ -132,7 +132,10 @@ function runViz() {
         .attrTween("y2", function(d) { return function() { return d.target.y; }; })
         .remove();
 
-    link = link.enter().append("line")
+    link = link.enter()
+                .append("line")
+                .attr("stroke", "#000")
+                .attr("stroke-width", 1.5)
                 .call(function(link) { link.transition().attr("stroke-opacity", 1); })
                 .merge(link);
 
@@ -157,7 +160,6 @@ function runViz() {
     label.attr("x", function(d) { return d.x; })
         .attr("y", function(d) { return d.y+15; });
 
-    // console.log(node.length);
     // node.each(function(d) { 
     //     if(d.name == "chocolates"){
     //         d.x = 48;
@@ -231,6 +233,8 @@ function updateData(){
         needIndex = newNodes.length-1;
     }
 
+
+    //This code logic is quite unoptimised. Wrote it during the first few days, to test a few things.
     if(existingUser == undefined)
     {
 
@@ -285,10 +289,10 @@ function updateData(){
         dataType:"json",
         success: function(){
             runViz(); 
-            moveSelectedBubbles(user.name)
+            moveUserToCenter(user.name)
 
             setTimeout( function(){
-                moveSelectedBubbles("")
+                moveUserToCenter("")
             },10000);
         }
     });
@@ -299,12 +303,11 @@ function updateData(){
 }
 
 
-function moveSelectedBubbles(name) {
+function moveUserToCenter(name) {
 
     for(var i=0; i<links.length; i++){
         if(links[i].source.name == name){
 
-            console.log(links[i]);
             if(links[i].status == "have"){
                 simulation.force("have", isolate(d3.forceX(-width/2), function(d) { return d.name === links[i].target.name; }))
             }
@@ -333,9 +336,6 @@ function moveSelectedBubbles(name) {
         }
     }));
 
-    //simulation.force("have", isolate(d3.forceX(-width/2), function(d) { return d.type === "user"; }))
-    //simulation.force("need", isolate(d3.forceX(width/2), function(d) { return d.type === "thing"; }))
-    //simulation.force("steelblue", isolate(d3.forceX(width / 6), function(d) { return d.color === "steelblue"; }))
     simulation.alpha(0.1).restart();
 
   }
@@ -347,4 +347,91 @@ function moveSelectedBubbles(name) {
     return force;
   }
 
-  setTimeout(function(){setInterval(function(){simulation.alpha(0.1).restart()}, 20000)},20000);
+  setTimeout(function(){setInterval(function(){simulation.alpha(0.5).restart()}, 10000)},10000);
+
+
+  //To help with autocomplete of a user
+  //btw refer to: http://easyautocomplete.com/guide
+  var searchUserOptions = [];
+
+  for(var k=0; k<nodes.length; k++){
+      if(nodes[k].type == "user"){
+        searchUserOptions.push(nodes[k].name);
+      }
+  } 
+
+
+  var options = {
+    data: searchUserOptions,
+    list: {
+        match: {
+			enabled: true
+		},
+		onClickEvent: function() {
+			moveUserToCenter($("#txtSearchUser").val());
+		}	
+	}
+};
+
+$("#txtSearchUser").easyAutocomplete(options);
+
+
+//Add a bit of visuals: Thanks to Nadieh's code
+//source: https://www.visualcinnamon.com/2016/06/glow-filter-d3-visualization
+var defs = svg.append("defs");
+var filter = defs.append("filter")
+    .attr("id","glow");
+filter.append("feGaussianBlur")
+    .attr("stdDeviation","1.5")
+    .attr("result","coloredBlur");
+
+var feMerge = filter.append("feMerge");
+feMerge.append("feMergeNode")
+    .attr("in","coloredBlur");
+feMerge.append("feMergeNode")
+    .attr("in","SourceGraphic");
+
+d3.selectAll("circle").style("filter", "url(#glow)");
+
+//Gradients for nodes
+
+var lgUser = defs.append("linearGradient")
+    .attr("id", "linear-gradient-user");
+
+lgUser
+    .attr("x1", "30%")
+    .attr("y1", "30%")
+    .attr("x2", "70%")
+    .attr("y2", "70%");
+
+lgUser.append("stop")
+.attr("offset", "0%")
+.attr("stop-color", "#FFC802");
+
+lgUser.append("stop")
+.attr("offset", "100%")
+.attr("stop-color", "#CE9E06");
+
+var lgThing = defs.append("linearGradient")
+    .attr("id", "linear-gradient-thing");
+
+lgThing
+    .attr("x1", "30%")
+    .attr("y1", "30%")
+    .attr("x2", "70%")
+    .attr("y2", "70%");
+
+    //Set the color for the start (0%)
+lgThing.append("stop")
+.attr("offset", "0%")
+.attr("stop-color", "#C8037D"); //light blue
+
+//Set the color for the end (100%)
+lgThing.append("stop")
+.attr("offset", "100%")
+.attr("stop-color", "#931168"); //dark blue
+
+d3.selectAll(".user").style("fill", "url(#linear-gradient-user)");
+d3.selectAll(".thing").style("fill", "url(#linear-gradient-thing)");
+
+

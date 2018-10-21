@@ -1,5 +1,5 @@
 body{
-    background-color: #212121;
+    background-color: #05151E;
 }
 
 .links line {
@@ -8,8 +8,7 @@ body{
 }
 
 .nodes circle {
-    stroke: #fff;
-    stroke-width: 1px;
+    /* fill: black!important; */
 }
 
 text{  
