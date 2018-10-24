@@ -20,3 +20,8 @@ text{
 .nodelabel{
     fill: white;
 }
+
+
+.easy-autocomplete{
+    all: initial!important;
+}

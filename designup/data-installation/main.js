@@ -1,6 +1,6 @@
 var dataset;
 var databackup;
-var jsonID = "tawq0"
+var jsonID = "rw6es"
 
 function getData(){
     $.ajax({
@@ -17,11 +17,11 @@ function getData(){
 
 getData();
 
-        var width = $(window).width();
+        var width = $("#network-viz").width();
         var height = $(window).height();
         var radius = -10;
 
-        var svg = d3.select("body")
+        var svg = d3.select("#network-viz")
             .append("svg")
             .attr("width", width)
             .attr("height", height)
@@ -42,11 +42,11 @@ getData();
 
         var simulation = d3.forceSimulation(nodes)
             .force("charge", d3.forceManyBody().strength(-1000))
-            .force("link", d3.forceLink(links).distance(50).strength(1))
+            .force("link", d3.forceLink(links).distance(20).strength(1))
             .force("x", d3.forceX()).force("center", d3.forceCenter(0,0))
             .force("y", d3.forceY()).force("center", d3.forceCenter(0,0))
             .force("collide", d3.forceCollide().strength(1))
-            .force("r", d3.forceRadial(100).strength(0.5))
+            .force("r", d3.forceRadial(100).strength(0.3))
             .alphaTarget(0.2)
             .on("tick", ticked);
 
@@ -134,10 +134,13 @@ function runViz() {
 
     link = link.enter()
                 .append("line")
-                .attr("stroke", "#000")
-                .attr("stroke-width", 1.5)
-                .call(function(link) { link.transition().attr("stroke-opacity", 1); })
-                .merge(link);
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 1)
+                .attr("class", function(d) { return "link-"+d.status; })
+                .attr("stroke-dasharray",function(d){ if(d.status == "need"){ return 2;}})
+                .call(function(link) { 
+                    link.transition().attr("stroke-opacity", 0.75); 
+                }).merge(link);
 
     // Update and restart the simulation.
     simulation.nodes(nodes);
@@ -146,16 +149,15 @@ function runViz() {
     }
 
     function ticked() {
-    node.attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; })
-    // node.attr("cx", function(d) { return d.x = Math.max(Math.max(-1*width/2 - radius, d.x), Math.min(width/2 - radius, d.x)); })
-    //     .attr("cy", function(d) { return d.y = Math.max(Math.max(-1*height/2 - radius, d.y), Math.min(height/2 - radius, d.y)); });
+    // node.attr("cx", function(d) { return d.x; })
+    //     .attr("cy", function(d) { return d.y; });
+    node.attr("cx", function(d) { return d.x = Math.max(Math.max(-1*width/2 - radius*4, d.x), Math.min(width/2 - radius, d.x)); })
+        .attr("cy", function(d) { return d.y = Math.max(Math.max(-1*height/2 - radius, d.y), Math.min(height/2 - radius, d.y)); });
 
     link.attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return d.source.y; })
         .attr("x2", function(d) { return d.target.x; })
-        .attr("y2", function(d) { return d.target.y; })
-        .attr("stroke-dasharray",function(d){ if(d.status == "need"){ return 2;}});
+        .attr("y2", function(d) { return d.target.y; });
 
     label.attr("x", function(d) { return d.x; })
         .attr("y", function(d) { return d.y+15; });
@@ -176,6 +178,7 @@ function runViz() {
     }
 
 
+
 function updateData(){
 
     var newNodes = databackup.nodes;
@@ -184,7 +187,7 @@ function updateData(){
     var redrawNodes = dataset.nodes;
     var redrawLinks = dataset.edges;
 
-    var userExists = 0;
+var userExists = 0;
     var haveExists = 0;
     var needExists = 0;
 
@@ -304,25 +307,21 @@ function updateData(){
 
 
 function moveUserToCenter(name) {
-
+    
     for(var i=0; i<links.length; i++){
         if(links[i].source.name == name){
-
             if(links[i].status == "have"){
                 simulation.force("have", isolate(d3.forceX(-width/2), function(d) { return d.name === links[i].target.name; }))
             }
-
             if(links[i].status == "need"){
                 simulation.force("need", isolate(d3.forceX(width/2), function(d) { return d.name === links[i].target.name; }))
             }
-            
-
         }
     }
 
     simulation.force('x', d3.forceX().strength(function(d){
         if(d.name == name){
-            return 1;
+            return 2.5;
         }  else{
             return 0.1;
         }
@@ -330,12 +329,13 @@ function moveUserToCenter(name) {
 
     simulation.force('y', d3.forceY().strength(function(d){
         if(d.name == name){
-            return 1;
+            return 2.5;
         }  else{
             return 0.1;
         }
     }));
 
+    listViz(name);
     simulation.alpha(0.1).restart();
 
   }
@@ -347,7 +347,7 @@ function moveUserToCenter(name) {
     return force;
   }
 
-  setTimeout(function(){setInterval(function(){simulation.alpha(0.5).restart()}, 10000)},10000);
+  //setTimeout(function(){setInterval(function(){simulation.alpha(0.5).restart()}, 10000)},10000);
 
 
   //To help with autocomplete of a user
@@ -382,7 +382,7 @@ var defs = svg.append("defs");
 var filter = defs.append("filter")
     .attr("id","glow");
 filter.append("feGaussianBlur")
-    .attr("stdDeviation","1.5")
+    .attr("stdDeviation","1.8")
     .attr("result","coloredBlur");
 
 var feMerge = filter.append("feMerge");
@@ -421,17 +421,89 @@ lgThing
     .attr("x2", "70%")
     .attr("y2", "70%");
 
-    //Set the color for the start (0%)
 lgThing.append("stop")
 .attr("offset", "0%")
-.attr("stop-color", "#C8037D"); //light blue
+.attr("stop-color", "#C8037D");
 
-//Set the color for the end (100%)
 lgThing.append("stop")
 .attr("offset", "100%")
-.attr("stop-color", "#931168"); //dark blue
+.attr("stop-color", "#931168");
 
 d3.selectAll(".user").style("fill", "url(#linear-gradient-user)");
 d3.selectAll(".thing").style("fill", "url(#linear-gradient-thing)");
 
+//Moving gradient for links:
+//Four different colors
+var lgcolours = ["#FFC802", "#F9D667", "#F964C7", "#C8037D"];
+var lgAnimate = defs.append("linearGradient")
+    .attr("id","animate-gradient")
+    .attr("x1","0%")
+    .attr("y1","0%")
+    .attr("x2","100%")
+    .attr("y2","0")
+    .attr("spreadMethod", "reflect");
 
+lgAnimate.selectAll(".stop")
+    .data(lgcolours)
+    .enter().append("stop")
+    .attr("offset", function(d,i) { return i/(lgcolours.length-1); })
+    .attr("stop-color", function(d) { return d; });
+
+lgAnimate.append("animate")
+    .attr("attributeName","x1")
+    .attr("values","0%;200%") //let x1 run to 200% instead of 100%
+    .attr("dur","7s")
+    .attr("repeatCount","indefinite");
+
+lgAnimate.append("animate")
+    .attr("attributeName","x2")
+    .attr("values","100%;300%") //let x2 run to 300% instead of 200%
+    .attr("dur","7s")
+    .attr("repeatCount","indefinite");
+
+d3.selectAll(".link-have").style("stroke", "url(#animate-gradient)");
+d3.selectAll(".link-need").style("stroke", "url(#animate-gradient)");
+
+//Generate need and have list for a user's name:
+function listViz(name){
+
+    var have, need;
+    var havelist = [];
+    var needlist = [];
+
+    for(var i=0; i<links.length; i++){
+        if(links[i].source.name == name){
+            if(links[i].status == "have"){
+                have = links[i].target.name;
+            }
+            if(links[i].status == "need"){
+                need = links[i].target.name;
+            }
+        }
+    }
+
+    for(var i=0; i<links.length; i++){
+        if((links[i].target.name == have) && (links[i].status == "need")){
+            havelist.push(links[i].source.name);
+        }
+        if((links[i].target.name == need) && (links[i].status == "have")){
+            needlist.push(links[i].source.name);
+        }
+    }
+
+    var havePeople="", needPeople="";
+
+    for(var i=0; i<havelist.length; i++){
+        havePeople = havePeople + "<li>"+havelist[i]+"</li>";
+    }
+
+    for(var i=0; i<needlist.length; i++){
+        needPeople = needPeople + "<li>"+needlist[i]+"</li>";
+    }
+
+    console.log(havePeople);
+    console.log(needPeople);
+    
+    d3.select("#have-list").html(havePeople);
+    d3.select("#need-list").html(needPeople);
+}
