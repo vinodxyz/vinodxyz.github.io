@@ -18,6 +18,7 @@
     <link href="main.css" rel="stylesheet" type="text/css" media="all">
     <script src="scripts/jquery.easy-autocomplete.js"></script>
     <link href="styles/easy-autocomplete.css" rel="stylesheet" type="text/css" media="all">
+    <script src="scripts/to-title-case.js"></script>
      
 </head>
 
@@ -27,9 +28,9 @@
             <div class="col-lg-2">
                 <img src="images/dup-logo-new.png" width="50%">
 
-                <div class="intro">
+                <div class="intro" id="intro-text">
                     Want to meet interesting people who can help you with something?<br>
-                    Or, do you want to meet folks who need help with something that you're good at?<br>
+                    Or, do you want to meet folks who need help with something that you're good at?
                     Let's try to connect you.
                 </div>
 
@@ -57,20 +58,19 @@
                 </div>
 
                 <div id="list-view">
+                    <div class="list-header">What do we think?</div><hr class="list-line">
                     <div id="haves">
-                        <span id="have-header">People who can give thing to you:</span>
+                        <span id="have-header"></span>
                         <ul id="have-list"></ul>
                     </div>
                     <div id="needs">
-                        <span id="need-header">People who can take thing from you:</span>
+                        <span id="need-header"></span>
                         <ul id="need-list"></ul>
                     </div>
-                    <a id="btnReset" class="waves-effect waves-light btn pink white-text" onclick="location.reload();">
+                    <a id="btnReset" class="waves-effect waves-light btn-small pink white-text" onclick="location.reload();">
                         <i class="material-icons right">refresh</i>Clear
                     </a>
                 </div>
-
-                <img id="lower-banner" src="images/layer5.png">
 
             </div>
             <div class="col-lg-10">    
@@ -82,7 +82,8 @@
             </div>
         </div>
     </div>
-
+    
+    <img id="lower-banner" src="images/layer5.png">
     
     
 </body>

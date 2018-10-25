@@ -24,6 +24,8 @@ function getData(){
 function resetView(){
     $("#list-view").hide();
     $("#input-form").show();
+    $("#intro-text").show();
+
     $("#txtUsername").val("");
     $("#txtHave").val("");
     $("#txtNeed").val("");
@@ -66,7 +68,7 @@ getData();
             .force("x", d3.forceX()).force("center", d3.forceCenter(0,0))
             .force("y", d3.forceY()).force("center", d3.forceCenter(0,0))
             .force("collide", d3.forceCollide().strength(1))
-            .force("r", d3.forceRadial(100).strength(0.5))
+            .force("r", d3.forceRadial(100).strength(0.65))
             .alphaTarget(0.2)
             .on("tick", ticked);
 
@@ -166,7 +168,7 @@ function runViz() {
             .attr("class", "nodelabel")
             .attr("id", function(d) { return "label-"+d.name.replace(/\s/g,''); })
             .style("opacity","0.3")
-            .text(function(d) { return d.name; })
+            .text(function(d) { return d.name.toTitleCase(); })
             .merge(label)
             .call(d3.drag()
             .on("start", dragStarted)
@@ -207,12 +209,13 @@ function runViz() {
                     link.transition().attr("stroke-opacity", 0.75); 
                 }).merge(link);
 
-    // Update and restart the simulation.
-    simulation.nodes(nodes);
-    simulation.force("link").links(links);
-    simulation.alpha(1).restart();
+        // Update and restart the simulation.
+        simulation.nodes(nodes);
+        simulation.force("link").links(links);
+        simulation.alpha(1).restart();
 
-    autoCompleteUser();
+        autoCompleteUser();
+        AddVisuals();
     }
 
     function ticked() {
@@ -276,9 +279,9 @@ function updateData(){
         var existingHave, existingHaveIndex, haveIndex;
         var existingNeed, existingNeedIndex, needIndex;
 
-        var user = {name: $("#txtUsername").val(), type: "user"};
-        var have = {name: $("#txtHave").val(), type: "thing" };
-        var need = {name: $("#txtNeed").val(), type: "thing" };
+        var user = {name: $("#txtUsername").val().toLowerCase(), type: "user"};
+        var have = {name: $("#txtHave").val().toLowerCase(), type: "thing" };
+        var need = {name: $("#txtNeed").val().toLowerCase(), type: "thing" };
         
         for(var k=0; k<databackup.nodes.length; k++){
             if(user.name == databackup.nodes[k].name){
@@ -410,14 +413,16 @@ function moveUserToCenter(name) {
     }));
 
     $("#input-form").hide();
+    $("#intro-text").hide();
     $("#list-view").show();
 
     listViz(name);
-    highlightNode(name);
     simulation.alpha(0.1).restart();
+    highlightNode(name);
 
     setTimeout(function(){
         $("#input-form").show();
+        $("#intro-text").show();
         $("#list-view").hide();
         moveUserToCenter("");
         $("#txtSearchUser").val("");
@@ -493,92 +498,97 @@ function moveSkillToCenter(name) {
 
 //Add a bit of visuals: Thanks to Nadieh's code
 //source: https://www.visualcinnamon.com/2016/06/glow-filter-d3-visualization
-var defs = svg.append("defs");
+function AddVisuals(){
 
-var filter = defs.append("filter")
-    .attr("id","glow");
-filter.append("feGaussianBlur")
-    .attr("stdDeviation","1.8")
-    .attr("result","coloredBlur");
+    var defs = svg.append("defs");
 
-var feMerge = filter.append("feMerge");
-feMerge.append("feMergeNode")
-    .attr("in","coloredBlur");
-feMerge.append("feMergeNode")
-    .attr("in","SourceGraphic");
+    var filter = defs.append("filter")
+        .attr("id","glow");
+    filter.append("feGaussianBlur")
+        .attr("stdDeviation","1.8")
+        .attr("result","coloredBlur");
 
-d3.selectAll("circle").style("filter", "url(#glow)");
+    var feMerge = filter.append("feMerge");
+    feMerge.append("feMergeNode")
+        .attr("in","coloredBlur");
+    feMerge.append("feMergeNode")
+        .attr("in","SourceGraphic");
 
-//Gradients for nodes
+    d3.selectAll("circle").style("filter", "url(#glow)");
 
-var lgUser = defs.append("linearGradient")
-    .attr("id", "linear-gradient-user");
+    //Gradients for nodes
 
-lgUser
-    .attr("x1", "30%")
-    .attr("y1", "30%")
-    .attr("x2", "70%")
-    .attr("y2", "70%");
+    var lgUser = defs.append("linearGradient")
+        .attr("id", "linear-gradient-user");
 
-lgUser.append("stop")
-.attr("offset", "0%")
-.attr("stop-color", "#FFC802");
+    lgUser
+        .attr("x1", "30%")
+        .attr("y1", "30%")
+        .attr("x2", "70%")
+        .attr("y2", "70%");
 
-lgUser.append("stop")
-.attr("offset", "100%")
-.attr("stop-color", "#CE9E06");
+    lgUser.append("stop")
+    .attr("offset", "0%")
+    .attr("stop-color", "#FFC802");
 
-var lgThing = defs.append("linearGradient")
-    .attr("id", "linear-gradient-thing");
+    lgUser.append("stop")
+    .attr("offset", "100%")
+    .attr("stop-color", "#CE9E06");
 
-lgThing
-    .attr("x1", "30%")
-    .attr("y1", "30%")
-    .attr("x2", "70%")
-    .attr("y2", "70%");
+    var lgThing = defs.append("linearGradient")
+        .attr("id", "linear-gradient-thing");
 
-lgThing.append("stop")
-.attr("offset", "0%")
-.attr("stop-color", "#C8037D");
+    lgThing
+        .attr("x1", "30%")
+        .attr("y1", "30%")
+        .attr("x2", "70%")
+        .attr("y2", "70%");
 
-lgThing.append("stop")
-.attr("offset", "100%")
-.attr("stop-color", "#931168");
+    lgThing.append("stop")
+    .attr("offset", "0%")
+    .attr("stop-color", "#C8037D");
 
-d3.selectAll(".user").style("fill", "url(#linear-gradient-user)");
-d3.selectAll(".thing").style("fill", "url(#linear-gradient-thing)");
+    lgThing.append("stop")
+    .attr("offset", "100%")
+    .attr("stop-color", "#931168");
 
-//Moving gradient for links:
-//Four different colors
-var lgcolours = ["#FFC802", "#F9D667", "#F964C7", "#C8037D"];
-var lgAnimate = defs.append("linearGradient")
-    .attr("id","animate-gradient")
-    .attr("x1","0%")
-    .attr("y1","0%")
-    .attr("x2","100%")
-    .attr("y2","0")
-    .attr("spreadMethod", "reflect");
+    d3.selectAll(".user").style("fill", "url(#linear-gradient-user)");
+    d3.selectAll(".thing").style("fill", "url(#linear-gradient-thing)");
 
-lgAnimate.selectAll(".stop")
-    .data(lgcolours)
-    .enter().append("stop")
-    .attr("offset", function(d,i) { return i/(lgcolours.length-1); })
-    .attr("stop-color", function(d) { return d; });
+    //Moving gradient for links:
+    //Four different colors
+    var lgcolours = ["#FFC802", "#F9D667", "#F964C7", "#C8037D"];
+    var lgAnimate = defs.append("linearGradient")
+        .attr("id","animate-gradient")
+        .attr("x1","0%")
+        .attr("y1","0%")
+        .attr("x2","100%")
+        .attr("y2","0")
+        .attr("spreadMethod", "reflect");
 
-lgAnimate.append("animate")
-    .attr("attributeName","x1")
-    .attr("values","0%;200%") //let x1 run to 200% instead of 100%
-    .attr("dur","7s")
-    .attr("repeatCount","indefinite");
+    lgAnimate.selectAll(".stop")
+        .data(lgcolours)
+        .enter().append("stop")
+        .attr("offset", function(d,i) { return i/(lgcolours.length-1); })
+        .attr("stop-color", function(d) { return d; });
 
-lgAnimate.append("animate")
-    .attr("attributeName","x2")
-    .attr("values","100%;300%") //let x2 run to 300% instead of 200%
-    .attr("dur","7s")
-    .attr("repeatCount","indefinite");
+    lgAnimate.append("animate")
+        .attr("attributeName","x1")
+        .attr("values","0%;200%") //let x1 run to 200% instead of 100%
+        .attr("dur","7s")
+        .attr("repeatCount","indefinite");
 
-d3.selectAll(".link-have").style("stroke", "url(#animate-gradient)");
-d3.selectAll(".link-need").style("stroke", "url(#animate-gradient)");
+    lgAnimate.append("animate")
+        .attr("attributeName","x2")
+        .attr("values","100%;300%") //let x2 run to 300% instead of 200%
+        .attr("dur","7s")
+        .attr("repeatCount","indefinite");
+
+    d3.selectAll(".link-have").style("stroke", "url(#animate-gradient)");
+    d3.selectAll(".link-need").style("stroke", "url(#animate-gradient)");
+
+}
+
 
 //Generate need and have list for a user's name:
 function listViz(name){
@@ -609,23 +619,23 @@ function listViz(name){
     var havePeople="", needPeople="";
 
     for(var i=0; i<havelist.length; i++){
-        havePeople = havePeople + "<li>"+havelist[i]+"</li>";
+        havePeople = havePeople + "<li class=\"user-in-list\">"+havelist[i]+"</li>";
     }
 
     for(var i=0; i<needlist.length; i++){
-        needPeople = needPeople + "<li>"+needlist[i]+"</li>";
+        needPeople = needPeople + "<li class=\"user-in-list\">"+needlist[i]+"</li>";
     }
     
     if(needlist.length != 0){
-        d3.select("#have-header").html(needlist.length+" folk(s) can help "+name+" with "+need+":");
+        d3.select("#have-header").html(needlist.length+" folk(s) can help <span class=\"user-in-list\">"+name+"</span> with <span class=\"skill-in-list\">"+need+"</span>:");
     }else{
-        d3.select("#have-header").html("Apologies! Looks like no one here can help with "+need+".");
+        d3.select("#have-header").html("Apologies! Looks like no one here can help with <span class=\"skill-in-list\">"+need+"</span>.");
     }
 
     if(havelist.length != 0){
-        d3.select("#need-header").html("Also, "+havelist.length+" folk(s) would love to get help with "+have+" from "+name+":");
+        d3.select("#need-header").html("Also, "+havelist.length+" folk(s) would love to get help with <span class=\"skill-in-list\">"+have+"</span> from <span class=\"user-in-list\">"+name+"</span>:");
     }else{
-        d3.select("#need-header").html("Apologies! Looks like no one here is looking for help with "+have+".");
+        d3.select("#need-header").html("Apologies! Looks like no one here is looking for help with <span class=\"skill-in-list\">"+have+"</span>.");
     }
     
     d3.select("#have-list").html(needPeople);
@@ -685,7 +695,7 @@ function autoCompleteSkills(){
     path.attr("stroke-dasharray", totalLength + " " + totalLength)
         .attr("stroke-dashoffset", totalLength)
         .transition()
-        .delay(2000)
+        .delay(4000)
         .duration(1500)
         .ease(d3.easeLinear)
         .attr("stroke-dashoffset", 0);
