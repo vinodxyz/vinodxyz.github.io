@@ -4,6 +4,10 @@ var dataset;
 var databackup;
 var jsonID = "rw6es"
 
+var havelist = [];
+var needlist = [];
+var have, need;
+
 function getData(){
     $.ajax({
         async: false,
@@ -25,12 +29,9 @@ function resetView(){
     $("#txtNeed").val("");
     $("#txtSearchUser").val("");
 
-    d3.selectAll(".user").attr("opacity","1");
-    d3.selectAll(".thing").attr("opacity","0.3");
-    d3.selectAll(".link-have").attr("opacity","0.3");
-    d3.selectAll(".link-need").attr("opacity","0.3");
-    d3.selectAll(".link-need").attr("opacity","0.3");
-    d3.selectAll(".nodelabel").attr("opacity","0.3");
+    d3.selectAll("circle").attr("opacity","1");
+    d3.selectAll("line").attr("opacity","1");
+    d3.selectAll(".nodelabel").attr("opacity","1");
 }
 
 getData();
@@ -105,6 +106,7 @@ function runViz() {
     node = node.enter().append("circle")
             .attr("fill", function(d) { if(d.type == "user"){ return "#FFC802"} else { return "#C8037D"}})
             .attr("class", function(d) { return d.type; })
+            .attr("id", function(d) { return d.name.replace(/\s/g,''); })
                 .call(function(node) { node.transition().attr("r", function(d){
                     if(d.type == "user") { 
                         return 5;
@@ -130,6 +132,7 @@ function runViz() {
         label = label
             .enter().append("text")
             .attr("class","nodelabel")
+            .attr("id", function(d) { return "label-"+d.name.replace(/\s/g,''); })
             .text(function(d) { return d.name; })
             .merge(label)
             .call(d3.drag()
@@ -155,6 +158,7 @@ function runViz() {
                 .attr("stroke", "#fff")
                 .attr("stroke-width", 1)
                 .attr("class", function(d) { return "link-"+d.status; })
+                .attr("id", function(d) { return d.source.name.replace(/\s/g,'')+"-"+d.target.name.replace(/\s/g,''); })
                 .attr("stroke-dasharray",function(d){ if(d.status == "need"){ return 2;}})
                 .call(function(link) { 
                     link.transition().attr("stroke-opacity", 0.75); 
@@ -360,6 +364,7 @@ function moveUserToCenter(name) {
     $("#list-view").show();
 
     listViz(name);
+    highlightNode(name);
     simulation.alpha(0.1).restart();
 
     setTimeout(function(){
@@ -440,6 +445,7 @@ function moveSkillToCenter(name) {
 //Add a bit of visuals: Thanks to Nadieh's code
 //source: https://www.visualcinnamon.com/2016/06/glow-filter-d3-visualization
 var defs = svg.append("defs");
+
 var filter = defs.append("filter")
     .attr("id","glow");
 filter.append("feGaussianBlur")
@@ -528,9 +534,8 @@ d3.selectAll(".link-need").style("stroke", "url(#animate-gradient)");
 //Generate need and have list for a user's name:
 function listViz(name){
 
-    var have, need;
-    var havelist = [];
-    var needlist = [];
+    havelist = [];
+    needlist = [];
 
     for(var i=0; i<links.length; i++){
         if(links[i].source.name == name){
@@ -563,13 +568,13 @@ function listViz(name){
     }
     
     if(needlist.length != 0){
-        d3.select("#have-header").html(needlist.length+" folks can help "+name+" with "+need+":");
+        d3.select("#have-header").html(needlist.length+" folk(s) can help "+name+" with "+need+":");
     }else{
         d3.select("#have-header").html("Apologies! Looks like no one here can help with "+need+".");
     }
 
     if(havelist.length != 0){
-        d3.select("#need-header").html("While, "+havelist.length+" folks would love to get help with "+have+" from "+name+":");
+        d3.select("#need-header").html("While, "+havelist.length+" folk(s) would love to get help with "+have+" from "+name+":");
     }else{
         d3.select("#need-header").html("Apologies! Looks like no one here can help with "+have+".");
     }
@@ -609,13 +614,41 @@ function autoCompleteSkills(){
   //Function to highlight nodes:
   function highlightNode(name){
 
-    d3.selectAll(".user").attr("opacity","0.3");
-    d3.selectAll(".thing").attr("opacity","0.3");
-    d3.selectAll(".link-have").attr("opacity","0.3");
-    d3.selectAll(".link-need").attr("opacity","0.3");
-    d3.selectAll(".link-need").attr("opacity","0.3");
-    d3.selectAll(".nodelabel").attr("opacity","0.3");
+    d3.selectAll(".user").attr("opacity","0.2");
+    d3.selectAll(".thing").attr("opacity","0.2");
+    d3.selectAll(".link-have").attr("opacity","0.2");
+    d3.selectAll(".link-need").attr("opacity","0.2");
+    d3.selectAll(".link-need").attr("opacity","0.2");
+    d3.selectAll(".nodelabel").attr("opacity","0.2");
 
-    d3.selectAll("#"+name).attr("opacity","1");
+    nameID = name.replace(/\s/g,'');
+    needID = need.replace(/\s/g,'');
+    haveID = have.replace(/\s/g,'');
+    console.log(needID);
 
+    d3.select("#"+nameID).attr("opacity","1");
+    d3.select("#label-"+nameID).attr("opacity","1");
+    d3.select("#"+needID).attr("opacity","1");
+    d3.select("#label-"+needID).attr("opacity","1");
+    d3.select("#"+haveID).attr("opacity","1");
+    d3.select("#label-"+haveID).attr("opacity","1");
+
+    d3.select("#"+nameID+"-"+haveID).attr("opacity","1");
+    d3.select("#"+nameID+"-"+needID).attr("opacity","1");
+
+
+    needlist.forEach(function(item,index){
+        item = item.replace(/\s/g,'');
+        d3.select("#"+item).attr("opacity","1");
+        d3.select("#"+item+"-"+needID).attr("opacity","1");
+        d3.select("#label-"+item).attr("opacity","1");
+    });
+
+    havelist.forEach(function(item,index){
+        item = item.replace(/\s/g,'');
+        d3.select("#"+item).attr("opacity","1");
+        d3.select("#"+item+"-"+haveID).attr("opacity","1");
+        d3.select("#label-"+item).attr("opacity","1");
+    });
+    
   }
