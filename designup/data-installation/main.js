@@ -32,6 +32,7 @@ function resetView(){
     d3.selectAll("circle").attr("opacity","1");
     d3.selectAll("line").attr("opacity","1");
     d3.selectAll(".nodelabel").attr("opacity","1");
+    d3.selectAll(".dotnodes").attr("opacity","0.5");
 }
 
 getData();
@@ -72,6 +73,7 @@ getData();
         let g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")"),
             link = g.append("g").selectAll(".link"),
             node = g.append("g").selectAll(".node");
+            dotted = g.append("g").selectAll(".dotted");
             label = g.append("g").attr("fill", "black").selectAll(".label");
 
         function dragStarted(d) {
@@ -127,6 +129,36 @@ function runViz() {
                 .on("drag", dragging)
                 .on("end", dragEnded));
 
+    
+    //dotted-circles:
+    dotted = dotted.data(nodes, function(d) { return d.name;});
+    dotted = dotted.enter().append("circle")
+                .attr("stroke", function(d) { if(d.type == "user"){ return "#FFC802"} else { return "#C8037D"}})
+                .attr("stroke-dasharray","2")
+                .attr("fill", "none")
+                .attr("class","dotnodes")
+                .attr("opacity","0.4")
+                .attr("id", function(d) { return "dotnode-"+d.name.replace(/\s/g,''); })
+                    .call(function(dotted) { dotted.transition().attr("r", function(d){
+                        if(d.type == "user") { 
+                            return 10;
+                        }
+                        else {
+                            var radius = 0;
+                            for(var i=0; i<links.length; i++){
+                                if(links[i].target.name == d.name){
+                                    radius++;
+                                }
+                            }
+                            return radius*6;
+                        }
+                    }); })
+                    .merge(dotted)
+                    .call(d3.drag()
+                    .on("start", dragStarted)
+                    .on("drag", dragging)
+                    .on("end", dragEnded));
+
         label = label.data(nodes, function(d) { return d.name;});
 
         label = label
@@ -176,6 +208,9 @@ function runViz() {
     // node.attr("cx", function(d) { return d.x; })
     //     .attr("cy", function(d) { return d.y; });
     node.attr("cx", function(d) { return d.x = Math.max(Math.max(-1*width/2 - radius*4, d.x), Math.min(width/2 - radius, d.x)); })
+        .attr("cy", function(d) { return d.y = Math.max(Math.max(-1*height/2 - radius, d.y), Math.min(height/2 - radius, d.y)); });
+
+    dotted.attr("cx", function(d) { return d.x = Math.max(Math.max(-1*width/2 - radius*4, d.x), Math.min(width/2 - radius, d.x)); })
         .attr("cy", function(d) { return d.y = Math.max(Math.max(-1*height/2 - radius, d.y), Math.min(height/2 - radius, d.y)); });
 
     link.attr("x1", function(d) { return d.source.x; })
@@ -620,14 +655,15 @@ function autoCompleteSkills(){
     d3.selectAll(".link-need").attr("opacity","0.2");
     d3.selectAll(".link-need").attr("opacity","0.2");
     d3.selectAll(".nodelabel").attr("opacity","0.2");
+    d3.selectAll(".dotnodes").attr("opacity","0.1");
 
     nameID = name.replace(/\s/g,'');
     needID = need.replace(/\s/g,'');
     haveID = have.replace(/\s/g,'');
-    console.log(needID);
 
     d3.select("#"+nameID).attr("opacity","1");
     d3.select("#label-"+nameID).attr("opacity","1");
+    d3.select("#dotnode-"+nameID).attr("opacity","1");
     d3.select("#"+needID).attr("opacity","1");
     d3.select("#label-"+needID).attr("opacity","1");
     d3.select("#"+haveID).attr("opacity","1");
@@ -650,5 +686,6 @@ function autoCompleteSkills(){
         d3.select("#"+item+"-"+haveID).attr("opacity","1");
         d3.select("#label-"+item).attr("opacity","1");
     });
+    
     
   }
