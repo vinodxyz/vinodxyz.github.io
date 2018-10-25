@@ -2,7 +2,7 @@ $("#list-view").hide();
 
 var dataset;
 var databackup;
-var jsonID = "rw6es"
+var jsonID = "rw6es";
 
 var havelist = [];
 var needlist = [];
@@ -31,8 +31,8 @@ function resetView(){
 
     d3.selectAll("circle").attr("opacity","1");
     d3.selectAll("line").attr("opacity","1");
-    d3.selectAll(".nodelabel").attr("opacity","1");
-    d3.selectAll(".dotnodes").attr("opacity","0.5");
+    d3.selectAll(".nodelabel").style("opacity","0.3");
+    d3.selectAll(".dotnodes").attr("stroke-width","1").attr("stroke-dasharray","2").attr("opacity","0.5");
 }
 
 getData();
@@ -66,7 +66,7 @@ getData();
             .force("x", d3.forceX()).force("center", d3.forceCenter(0,0))
             .force("y", d3.forceY()).force("center", d3.forceCenter(0,0))
             .force("collide", d3.forceCollide().strength(1))
-            .force("r", d3.forceRadial(100).strength(0.3))
+            .force("r", d3.forceRadial(100).strength(0.5))
             .alphaTarget(0.2)
             .on("tick", ticked);
 
@@ -163,8 +163,9 @@ function runViz() {
 
         label = label
             .enter().append("text")
-            .attr("class","nodelabel")
+            .attr("class", "nodelabel")
             .attr("id", function(d) { return "label-"+d.name.replace(/\s/g,''); })
+            .style("opacity","0.3")
             .text(function(d) { return d.name; })
             .merge(label)
             .call(d3.drag()
@@ -184,13 +185,23 @@ function runViz() {
         .attrTween("y1", function(d) { return function() { return d.source.y; }; })
         .attrTween("y2", function(d) { return function() { return d.target.y; }; })
         .remove();
+        
+    
 
     link = link.enter()
                 .append("line")
                 .attr("stroke", "#fff")
                 .attr("stroke-width", 1)
                 .attr("class", function(d) { return "link-"+d.status; })
-                .attr("id", function(d) { return d.source.name.replace(/\s/g,'')+"-"+d.target.name.replace(/\s/g,''); })
+                .attr("id", function(d) {
+                    if( typeof d.source != "number"){
+                        return d.source.name.replace(/\s/g,'')+"-"+d.target.name.replace(/\s/g,''); 
+                    }else{
+                        console.log("YES");
+                        return nodes[d.source].name.replace(/\s/g,'')+"-"+nodes[d.target].name.replace(/\s/g,''); 
+                    }
+                    
+                })
                 .attr("stroke-dasharray",function(d){ if(d.status == "need"){ return 2;}})
                 .call(function(link) { 
                     link.transition().attr("stroke-opacity", 0.75); 
@@ -219,7 +230,7 @@ function runViz() {
         .attr("y2", function(d) { return d.target.y; });
 
     label.attr("x", function(d) { return d.x; })
-        .attr("y", function(d) { return d.y+15; });
+        .attr("y", function(d) { return d.y+20; });
 
     // node.each(function(d) { 
     //     if(d.name == "chocolates"){
@@ -247,122 +258,125 @@ function runViz() {
 
 function updateData(){
 
-    $("#btnAddUser").addClass("disabled");
-    var newNodes = databackup.nodes;
-    var newLinks = databackup.edges;
-
-    var redrawNodes = dataset.nodes;
-    var redrawLinks = dataset.edges;
-
-var userExists = 0;
-    var haveExists = 0;
-    var needExists = 0;
-
-    var existingUser, existingUserIndex, userIndex;
-    var existingHave, existingHaveIndex, haveIndex;
-    var existingNeed, existingNeedIndex, needIndex;
-
-    var user = {name: $("#txtUsername").val(), type: "user"};
-    var have = {name: $("#txtHave").val(), type: "thing" };
-    var need = {name: $("#txtNeed").val(), type: "thing" };
-    
-    for(var k=0; k<databackup.nodes.length; k++){
-        if(user.name == databackup.nodes[k].name){
-            userExists = 1; 
-            //Changed to dataset 
-            existingUser = dataset.nodes[k];
-            existingUserIndex = k;
-        }
-
-        if(have.name == databackup.nodes[k].name){
-            haveExists = 1;
-            existingHave = dataset.nodes[k];
-            existingHaveIndex = k;
-        }
-
-        if(need.name == databackup.nodes[k].name){
-            needExists = 1;
-            existingNeed = dataset.nodes[k];
-            existingNeedIndex = k;
-        }
-    }
-
-    if(userExists != 1){
-        newNodes.push(user);
-        redrawNodes.push(user);
-        userIndex = newNodes.length-1;
-    }
-    if(haveExists != 1){
-        newNodes.push(have);
-        redrawNodes.push(have);
-        haveIndex = newNodes.length-1;
-    }
-    if(needExists != 1){
-        newNodes.push(need);
-        redrawNodes.push(need);
-        needIndex = newNodes.length-1;
-    }
-
-
-    //This code logic is quite unoptimised. Wrote it during the first few days, to test a few things.
-    if(existingUser == undefined)
+    if(($("#txtUsername").val() != "") && ($("#txtHave").val() != "") && ($("#txtNeed").val() != ""))
     {
+        
+        $("#btnAddUser").addClass("disabled");
+        var newNodes = databackup.nodes;
+        var newLinks = databackup.edges;
 
-        if(existingHave == undefined)
-        {
-            newLinks.push({source: userIndex, target: haveIndex, status: "have"});
-            redrawLinks.push({source: user, target: have, status: "have"});
-        }else{
-            newLinks.push({source: userIndex, target: existingHaveIndex, status: "have"});
-            redrawLinks.push({source: user, target: existingHave, status: "have"});
+        var redrawNodes = dataset.nodes;
+        var redrawLinks = dataset.edges;
+
+        var userExists = 0;
+        var haveExists = 0;
+        var needExists = 0;
+
+        var existingUser, existingUserIndex, userIndex;
+        var existingHave, existingHaveIndex, haveIndex;
+        var existingNeed, existingNeedIndex, needIndex;
+
+        var user = {name: $("#txtUsername").val(), type: "user"};
+        var have = {name: $("#txtHave").val(), type: "thing" };
+        var need = {name: $("#txtNeed").val(), type: "thing" };
+        
+        for(var k=0; k<databackup.nodes.length; k++){
+            if(user.name == databackup.nodes[k].name){
+                userExists = 1; 
+                //Changed to dataset 
+                existingUser = dataset.nodes[k];
+                existingUserIndex = k;
+            }
+
+            if(have.name == databackup.nodes[k].name){
+                haveExists = 1;
+                existingHave = dataset.nodes[k];
+                existingHaveIndex = k;
+            }
+
+            if(need.name == databackup.nodes[k].name){
+                needExists = 1;
+                existingNeed = dataset.nodes[k];
+                existingNeedIndex = k;
+            }
         }
 
-        if(existingNeed == undefined)
-        {
-            newLinks.push({source: userIndex, target: needIndex, status: "need"});
-            redrawLinks.push({source: user, target: need, status: "need"});
-        }else{
-            newLinks.push({source: userIndex, target: existingNeedIndex, status: "need"});
-            redrawLinks.push({source: user, target: existingNeed, status: "need"});
+        if(userExists != 1){
+            newNodes.push(user);
+            redrawNodes.push(user);
+            userIndex = newNodes.length-1;
         }
-    }else{
-        if(existingHave == undefined)
-        {
-            newLinks.push({source: existingUserIndex, target: haveIndex, status: "have"});
-            redrawLinks.push({source: existingUser, target: have, status: "have"});
-        }else{
-            newLinks.push({source: existingUserIndex, target: existingHaveIndex, status: "have"});
-            redrawLinks.push({source: existingUser, target: existingHave, status: "have"});
+        if(haveExists != 1){
+            newNodes.push(have);
+            redrawNodes.push(have);
+            haveIndex = newNodes.length-1;
+        }
+        if(needExists != 1){
+            newNodes.push(need);
+            redrawNodes.push(need);
+            needIndex = newNodes.length-1;
         }
 
-        if(existingNeed == undefined)
+
+        //This code logic is quite unoptimised. Wrote it during the first few days, to test a few things.
+        if(existingUser == undefined)
         {
-            newLinks.push({source: existingUserIndex, target: needIndex, status: "need"});
-            redrawLinks.push({source: existingUser, target: need, status: "need"});
+
+            if(existingHave == undefined)
+            {
+                newLinks.push({source: userIndex, target: haveIndex, status: "have"});
+                redrawLinks.push({source: user, target: have, status: "have"});
+            }else{
+                newLinks.push({source: userIndex, target: existingHaveIndex, status: "have"});
+                redrawLinks.push({source: user, target: existingHave, status: "have"});
+            }
+
+            if(existingNeed == undefined)
+            {
+                newLinks.push({source: userIndex, target: needIndex, status: "need"});
+                redrawLinks.push({source: user, target: need, status: "need"});
+            }else{
+                newLinks.push({source: userIndex, target: existingNeedIndex, status: "need"});
+                redrawLinks.push({source: user, target: existingNeed, status: "need"});
+            }
         }else{
-            newLinks.push({source: existingUserIndex, target: existingNeedIndex, status: "need"});
-            redrawLinks.push({source: existingUser, target: existingNeed, status: "need"});
+            if(existingHave == undefined)
+            {
+                newLinks.push({source: existingUserIndex, target: haveIndex, status: "have"});
+                redrawLinks.push({source: existingUser, target: have, status: "have"});
+            }else{
+                newLinks.push({source: existingUserIndex, target: existingHaveIndex, status: "have"});
+                redrawLinks.push({source: existingUser, target: existingHave, status: "have"});
+            }
+
+            if(existingNeed == undefined)
+            {
+                newLinks.push({source: existingUserIndex, target: needIndex, status: "need"});
+                redrawLinks.push({source: existingUser, target: need, status: "need"});
+            }else{
+                newLinks.push({source: existingUserIndex, target: existingNeedIndex, status: "need"});
+                redrawLinks.push({source: existingUser, target: existingNeed, status: "need"});
+            }
         }
+
+        databackup.nodes = newNodes;
+        databackup.edges = newLinks;
+
+        nodes = redrawNodes;
+        links = redrawLinks;
+
+        $.ajax({
+            url:"https://api.myjson.com/bins/"+jsonID,
+            type:"PUT",
+            data:JSON.stringify(databackup),
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+            success: function(){
+                runViz(); 
+                moveUserToCenter(user.name);
+            }
+        });
     }
-
-    databackup.nodes = newNodes;
-    databackup.edges = newLinks;
-
-    nodes = redrawNodes;
-    links = redrawLinks;
-
-    $.ajax({
-        url:"https://api.myjson.com/bins/"+jsonID,
-        type:"PUT",
-        data:JSON.stringify(databackup),
-        contentType:"application/json; charset=utf-8",
-        dataType:"json",
-        success: function(){
-            runViz(); 
-            moveUserToCenter(user.name);
-        }
-    });
-      
 }
 
 
@@ -609,9 +623,9 @@ function listViz(name){
     }
 
     if(havelist.length != 0){
-        d3.select("#need-header").html("While, "+havelist.length+" folk(s) would love to get help with "+have+" from "+name+":");
+        d3.select("#need-header").html("Also, "+havelist.length+" folk(s) would love to get help with "+have+" from "+name+":");
     }else{
-        d3.select("#need-header").html("Apologies! Looks like no one here can help with "+have+".");
+        d3.select("#need-header").html("Apologies! Looks like no one here is looking for help with "+have+".");
     }
     
     d3.select("#have-list").html(needPeople);
@@ -635,16 +649,15 @@ function autoCompleteSkills(){
       list: {
           match: {
               enabled: true
-          },
-          onClickEvent: function() {
-              //add code here to highlight the respective skill in the diagram: moving bubble around + opacity changes
-          }	
+          }
       }
   };
   
     $("#txtHave").easyAutocomplete(options);
+    $("#txtNeed").easyAutocomplete(options);
   }
 
+  autoCompleteSkills();
 
   //Function to highlight nodes:
   function highlightNode(name){
@@ -654,7 +667,7 @@ function autoCompleteSkills(){
     d3.selectAll(".link-have").attr("opacity","0.2");
     d3.selectAll(".link-need").attr("opacity","0.2");
     d3.selectAll(".link-need").attr("opacity","0.2");
-    d3.selectAll(".nodelabel").attr("opacity","0.2");
+    d3.selectAll(".nodelabel").style("opacity","0.2");
     d3.selectAll(".dotnodes").attr("opacity","0.1");
 
     nameID = name.replace(/\s/g,'');
@@ -662,12 +675,24 @@ function autoCompleteSkills(){
     haveID = have.replace(/\s/g,'');
 
     d3.select("#"+nameID).attr("opacity","1");
-    d3.select("#label-"+nameID).attr("opacity","1");
+    d3.select("#label-"+nameID).style("opacity","1");
     d3.select("#dotnode-"+nameID).attr("opacity","1");
     d3.select("#"+needID).attr("opacity","1");
+
+    var path = d3.select("#dotnode-"+nameID);
+    path.attr("stroke-width","3");
+    var totalLength = path.node().getTotalLength();
+    path.attr("stroke-dasharray", totalLength + " " + totalLength)
+        .attr("stroke-dashoffset", totalLength)
+        .transition()
+        .delay(2000)
+        .duration(1500)
+        .ease(d3.easeLinear)
+        .attr("stroke-dashoffset", 0);
+
     d3.select("#label-"+needID).attr("opacity","1");
     d3.select("#"+haveID).attr("opacity","1");
-    d3.select("#label-"+haveID).attr("opacity","1");
+    d3.select("#label-"+haveID).style("opacity","1");
 
     d3.select("#"+nameID+"-"+haveID).attr("opacity","1");
     d3.select("#"+nameID+"-"+needID).attr("opacity","1");
@@ -677,15 +702,16 @@ function autoCompleteSkills(){
         item = item.replace(/\s/g,'');
         d3.select("#"+item).attr("opacity","1");
         d3.select("#"+item+"-"+needID).attr("opacity","1");
-        d3.select("#label-"+item).attr("opacity","1");
+        d3.select("#label-"+item).style("opacity","1");
     });
 
     havelist.forEach(function(item,index){
         item = item.replace(/\s/g,'');
         d3.select("#"+item).attr("opacity","1");
         d3.select("#"+item+"-"+haveID).attr("opacity","1");
-        d3.select("#label-"+item).attr("opacity","1");
+        d3.select("#label-"+item).style("opacity","1");
     });
+    
     
     
   }
