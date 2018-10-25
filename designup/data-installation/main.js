@@ -1,3 +1,5 @@
+$("#list-view").hide();
+
 var dataset;
 var databackup;
 var jsonID = "rw6es"
@@ -14,6 +16,22 @@ function getData(){
     });
 }
 
+//Should be similar to a hard reset:
+function resetView(){
+    $("#list-view").hide();
+    $("#input-form").show();
+    $("#txtUsername").val("");
+    $("#txtHave").val("");
+    $("#txtNeed").val("");
+    $("#txtSearchUser").val("");
+
+    d3.selectAll(".user").attr("opacity","1");
+    d3.selectAll(".thing").attr("opacity","0.3");
+    d3.selectAll(".link-have").attr("opacity","0.3");
+    d3.selectAll(".link-need").attr("opacity","0.3");
+    d3.selectAll(".link-need").attr("opacity","0.3");
+    d3.selectAll(".nodelabel").attr("opacity","0.3");
+}
 
 getData();
 
@@ -302,16 +320,9 @@ var userExists = 0;
         dataType:"json",
         success: function(){
             runViz(); 
-            moveUserToCenter(user.name)
-
-            setTimeout( function(){
-                moveUserToCenter("")
-            },10000);
+            moveUserToCenter(user.name);
         }
     });
-
-    
-
       
 }
 
@@ -345,13 +356,18 @@ function moveUserToCenter(name) {
         }
     }));
 
+    $("#input-form").hide();
+    $("#list-view").show();
+
     listViz(name);
     simulation.alpha(0.1).restart();
 
     setTimeout(function(){
+        $("#input-form").show();
+        $("#list-view").hide();
         moveUserToCenter("");
         $("#txtSearchUser").val("");
-    },15000);
+    },1500000);//change this: remove 2 zeroes
 
   }
 
@@ -545,12 +561,21 @@ function listViz(name){
     for(var i=0; i<needlist.length; i++){
         needPeople = needPeople + "<li>"+needlist[i]+"</li>";
     }
-
-    console.log(havePeople);
-    console.log(needPeople);
     
-    d3.select("#have-list").html(havePeople);
-    d3.select("#need-list").html(needPeople);
+    if(needlist.length != 0){
+        d3.select("#have-header").html(needlist.length+" folks can help "+name+" with "+need+":");
+    }else{
+        d3.select("#have-header").html("Apologies! Looks like no one here can help with "+need+".");
+    }
+
+    if(havelist.length != 0){
+        d3.select("#need-header").html("While, "+havelist.length+" folks would love to get help with "+have+" from "+name+":");
+    }else{
+        d3.select("#need-header").html("Apologies! Looks like no one here can help with "+have+".");
+    }
+    
+    d3.select("#have-list").html(needPeople);
+    d3.select("#need-list").html(havePeople);
 }
 
 
@@ -578,4 +603,19 @@ function autoCompleteSkills(){
   };
   
     $("#txtHave").easyAutocomplete(options);
+  }
+
+
+  //Function to highlight nodes:
+  function highlightNode(name){
+
+    d3.selectAll(".user").attr("opacity","0.3");
+    d3.selectAll(".thing").attr("opacity","0.3");
+    d3.selectAll(".link-have").attr("opacity","0.3");
+    d3.selectAll(".link-need").attr("opacity","0.3");
+    d3.selectAll(".link-need").attr("opacity","0.3");
+    d3.selectAll(".nodelabel").attr("opacity","0.3");
+
+    d3.selectAll("#"+name).attr("opacity","1");
+
   }
