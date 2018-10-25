@@ -1,5 +1,38 @@
 body{
     background-color: #05151E;
+    font-family: 'Open Sans', sans-serif;
+}
+
+input{
+    color: white;
+}
+
+#installation-section{
+    margin-top:2%;
+}
+
+.intro{
+    font-family: 'Montserrat', sans-serif;
+    margin-top:10%;
+    color: #2E398E;
+    opacity: 0.75;
+}
+
+label{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    color: #C4167C !important;
+    font-size: 12px !important;
+}
+
+.pink{
+    background-color: #C4167C !important;
+}
+
+#input-form{
+    margin-top: 20%;
+    color: #C4167C !important;
+    /* display: none; */
 }
 
 .links line {
@@ -24,4 +57,29 @@ text{
 
 .easy-autocomplete{
     all: initial!important;
+}
+
+.search-pane{
+    position: absolute;
+    top: 10px;
+}
+
+input[type=text]{
+    border-bottom: 1px solid #9B1568!important;
+}
+
+input.valid[type=text]{
+    border-bottom: 1px solid #C4167C !important;
+    -webkit-box-shadow: 0 1px 0 0 #C4167C !important;
+    box-shadow: 0 1px 0 0 #C4167C !important;
+}
+
+#btnAddUser{
+    background-image: linear-gradient(250deg, #2cffd1, #0679c3)!important;
+}
+
+#list-view{
+    /* display: none; */
+    margin-top: 20%;
+    color: white;
 }

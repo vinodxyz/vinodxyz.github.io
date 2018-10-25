@@ -146,6 +146,8 @@ function runViz() {
     simulation.nodes(nodes);
     simulation.force("link").links(links);
     simulation.alpha(1).restart();
+
+    autoCompleteUser();
     }
 
     function ticked() {
@@ -175,12 +177,20 @@ function runViz() {
     // node.attr("fx",function(d){ if(d.name == "chocolates"){ return 0;}});
     // node.attr("fy",function(d){ if(d.name == "chocolates"){ return 0;}});
 
-    }
+    $("#btnAddUser").removeClass("disabled");
+
+    // $("#txtUsername").val("");
+    // $("#txtHave").val("");
+    // $("#txtNeed").val("");
+
+
+}
 
 
 
 function updateData(){
 
+    $("#btnAddUser").addClass("disabled");
     var newNodes = databackup.nodes;
     var newLinks = databackup.edges;
 
@@ -338,6 +348,37 @@ function moveUserToCenter(name) {
     listViz(name);
     simulation.alpha(0.1).restart();
 
+    setTimeout(function(){
+        moveUserToCenter("");
+        $("#txtSearchUser").val("");
+    },15000);
+
+  }
+
+
+
+function moveSkillToCenter(name) {
+
+    simulation.force('x', d3.forceX().strength(function(d){
+        if(d.name == name){
+            return 2.5;
+        }  else{
+            return 0.1;
+        }
+    }));
+
+    simulation.force('y', d3.forceY().strength(function(d){
+        if(d.name == name){
+            return 2.5;
+        }  else{
+            return 0.1;
+        }
+    }));
+
+    //listViz(name);
+    simulation.alpha(0.1).restart();
+    setTimeout(function(){moveSkillToCenter("")},15000);
+
   }
 
 
@@ -352,28 +393,32 @@ function moveUserToCenter(name) {
 
   //To help with autocomplete of a user
   //btw refer to: http://easyautocomplete.com/guide
-  var searchUserOptions = [];
+  function autoCompleteUser(){
+    var searchUserOptions = [];
 
-  for(var k=0; k<nodes.length; k++){
-      if(nodes[k].type == "user"){
-        searchUserOptions.push(nodes[k].name);
+    for(var k=0; k<nodes.length; k++){
+        if(nodes[k].type == "user"){
+          searchUserOptions.push(nodes[k].name);
+        }
+    } 
+  
+  
+    var options = {
+      data: searchUserOptions,
+      list: {
+          match: {
+              enabled: true
+          },
+          onClickEvent: function() {
+              moveUserToCenter($("#txtSearchUser").val());
+          }	
       }
-  } 
+  };
+  
+    $("#txtSearchUser").easyAutocomplete(options);
+  }
 
-
-  var options = {
-    data: searchUserOptions,
-    list: {
-        match: {
-			enabled: true
-		},
-		onClickEvent: function() {
-			moveUserToCenter($("#txtSearchUser").val());
-		}	
-	}
-};
-
-$("#txtSearchUser").easyAutocomplete(options);
+  autoCompleteUser();
 
 
 //Add a bit of visuals: Thanks to Nadieh's code
@@ -507,3 +552,30 @@ function listViz(name){
     d3.select("#have-list").html(havePeople);
     d3.select("#need-list").html(needPeople);
 }
+
+
+//Let's autocomplete needs and haves:
+function autoCompleteSkills(){
+    var searchSkillOptions = [];
+
+    for(var k=0; k<nodes.length; k++){
+        if(nodes[k].type == "thing"){
+            searchSkillOptions.push(nodes[k].name);
+        }
+    } 
+  
+  
+    var options = {
+      data: searchSkillOptions,
+      list: {
+          match: {
+              enabled: true
+          },
+          onClickEvent: function() {
+              //add code here to highlight the respective skill in the diagram: moving bubble around + opacity changes
+          }	
+      }
+  };
+  
+    $("#txtHave").easyAutocomplete(options);
+  }

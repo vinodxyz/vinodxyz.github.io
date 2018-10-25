@@ -7,44 +7,74 @@
     <script src="data/data.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans" rel="stylesheet">
+
     <meta charset="utf-8">
     <link href="main.css" rel="stylesheet" type="text/css" media="all">
     <script src="scripts/jquery.easy-autocomplete.js"></script>
-    <link href="styles/easy-autocomplete.css" rel="stylesheet" type="text/css" media="all"> 
-
+    <link href="styles/easy-autocomplete.css" rel="stylesheet" type="text/css" media="all">
+     
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div id="installation-section" class="container-fluid">
         <div class="row">
             <div class="col-lg-2">
+                <img src="images/dup-logo.png" width="50%">
+
+                <div class="intro">
+                    Want to meet interesting people who can help you with something that you 
+                    always wanted to learn. Or, do you want to collaborate with someone.
+                    Let's try connecting you.
+                </div>
+
                 <div id="input-form">
-                    <div>What's your name?</div>
-                    <input id="txtUsername" type="text">
-                    <div>What do you have?</div>
-                    <input id="txtHave" type="text">
-                    <div>What do you need?</div>
-                    <input id="txtNeed" type="text">
-                    <button onclick="getData();updateData();">Submit</button>
-                    <input id="txtSearchUser"/>
+
+                    <div class="input-field">
+                        <input id="txtUsername" type="text" class="validate">
+                        <label for="txtUsername" class="labels">What's your name?</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input id="txtHave" type="text" class="validate">
+                        <label for="txtHave">One thing that you're really good at</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input id="txtNeed" type="text" class="validate">
+                        <label for="txtNeed">One thing you want to learn</label>
+                    </div>
+
+                    <a class="waves-effect waves-light btn pink white-text" onclick="getData();updateData();">
+                        <i class="material-icons right">send</i>Connect!
+                    </a>
+
                 </div>
 
                 <div id="list-view">
-                        People who can give thing to you:
                     <div id="haves">
-                        <ul id="have-list">
-                            
-                        </ul>
+                        <span id="have-header">People who can give thing to you:</span>
+                        <ul id="have-list"></ul>
                     </div>
-                    <br>
-                    People who can take thing from you:
-                    <div id="need-list">
-                            
+                    <div id="needs">
+                        <span id="need-header">People who can take thing from you:</span>
+                        <ul id="need-list"></ul>
                     </div>
+                    
                 </div>
+                
+                <!-- <img src="images/layer5.png" width="100%"> -->
+
             </div>
-            <div id="network-viz" class="col-lg-10">
+            <div class="col-lg-10">    
+                <div id="network-viz"></div>
+                <div class="search-pane offset-lg-9 col-lg-3">
+                    <label for="txtSearchUser">Search for someone</label>
+                    <input id="txtSearchUser" type="text" class="validate"/>
+                </div>
             </div>
         </div>
     </div>
