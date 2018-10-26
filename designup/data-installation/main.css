@@ -118,11 +118,13 @@ input.valid[type=text]{
     color: #C6167D;
 }
 
+#legend-section{
+    margin-top: -10%;
+    margin-bottom: 20%;
+}
 
 #legend{
-    width: 17%;
-    margin-top: -22%;
-    margin-left: 1%;
+    width: 130%;
 }
 
 .easy-autocomplete-container {
