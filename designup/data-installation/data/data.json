@@ -1,8 +1,8 @@
 {
     "nodes":[
-        {"name" : "Vinod Kumar", "type" : "user"},
-        {"name" : "chocolates", "type" : "thing"},
-        {"name" : "macbook", "type" : "thing"}
+        {"name" : "vinod kumar", "type" : "user"},
+        {"name" : "illustrations", "type" : "thing"},
+        {"name" : "coding", "type" : "thing"}
     ],
     "edges":[
         {"source": 0, "target": 1, "status": "need"},

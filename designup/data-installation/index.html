@@ -37,17 +37,17 @@
                     <div class="input-header">3 Quick questions</div>
                     <div class="input-field">
                         <input id="txtUsername" type="text" class="validate">
-                        <label for="txtUsername" class="labels">What's your name?</label>
+                        <label id="lblUsername" for="txtUsername" class="labels">What's your name?</label>
                     </div>
 
                     <div class="input-field">
                         <input id="txtHave" type="text" class="validate">
-                        <label for="txtHave">One thing that you're really good at</label>
+                        <label id="lblHave" for="txtHave">Something that you enjoy doing and are good at? (eg: painting) </label>
                     </div>
 
                     <div class="input-field">
                         <input id="txtNeed" type="text" class="validate">
-                        <label for="txtNeed">One thing you want to learn</label>
+                        <label id="lblNeed" for="txtNeed">Anything that you want to get really good at? (eg: UX) </label>
                     </div>
 
                     <a id="btnConnect" class="waves-effect waves-light btn pink white-text" onclick="disableForm();getData();updateData();">
@@ -69,7 +69,7 @@
                     </div>
                     <div id="check-back">Don't forget to check back in a while, if you did not find any matches.</div>
                     <a id="btnReset" class="waves-effect waves-light btn-small pink white-text" onclick="location.reload();">
-                        <i class="material-icons right">refresh</i>Clear
+                        <i class="material-icons right">refresh</i>Go back
                     </a>                    
                 </div>
 
@@ -77,7 +77,12 @@
             <div class="col-lg-10">    
                 <div id="network-viz"></div>
                 <div class="search-pane offset-lg-9 col-lg-3">
-                    <label id="lblSearchUser" for="txtSearchUser">Search for someone</label>
+                    <div class="search-header">Search for someone</div>
+                    <div class="search-body">
+                         Enter your name or the names of anyone you know to find connections. <br>
+                         P.S: You cannot search for a skill, yet :(
+                    </div>
+                    <!-- <label id="lblSearchUser" for="txtSearchUser">Search for someone</label> -->
                     <input id="txtSearchUser" type="text" class="validate"/>
                 </div>
             </div>

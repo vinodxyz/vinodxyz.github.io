@@ -1,9 +1,9 @@
-$("#list-view").hide();
-$("#legend").hide();
+// $("#list-view").hide();
+// $("#legend").hide();
 
 var dataset;
 var databackup;
-var jsonID = "rw6es";
+var jsonID = "n19cc";
 
 var havelist = [];
 var needlist = [];
@@ -433,7 +433,11 @@ function moveUserToCenter(name) {
         $("#list-view").hide();
         moveUserToCenter("");
         $("#txtSearchUser").val("");
-    },1500000);//change this: remove 2 zeroes
+    },30000);
+
+    setTimeout(function(){
+        location.reload();
+    }, 45000);
 
   }
 
@@ -674,13 +678,13 @@ function autoCompleteSkills(){
     $('#txtHave').autocomplete({
         data: searchSkillOptions,
         limit: 5,
-        minLength: 0
+        minLength: 3
     });
 
     $('#txtNeed').autocomplete({
         data: searchSkillOptions,
         limit: 5,
-        minLength: 0
+        minLength: 3
     });
   
     // $("#txtHave").easyAutocomplete(options);

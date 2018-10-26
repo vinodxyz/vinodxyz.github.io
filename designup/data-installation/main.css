@@ -40,6 +40,7 @@ label{
     color: #2642BE;
     font-size: 20px;
     font-weight: 900;
+    margin-bottom: 2%;
 }
 
 .links line {
@@ -71,7 +72,7 @@ text{
 
 .search-pane{
     position: absolute;
-    top: 10px;
+    bottom: 100px;
     background-color: rgb(8, 28, 41, 0.75);
 }
 
@@ -124,7 +125,7 @@ input.valid[type=text]{
 }
 
 #legend{
-    width: 130%;
+    width: 140%;
 }
 
 .easy-autocomplete-container {
@@ -135,7 +136,7 @@ input.valid[type=text]{
 }
 
 #txtSearchUser{
-    margin-top: -5%;
+    margin-top: 5%;
     color: white;
 }
 
@@ -153,4 +154,31 @@ input.valid[type=text]{
 
 .autocomplete-content li span .highlight{
     color: #C6167D !important;
+}
+
+.search-header{
+    color: #C21F7C;
+    margin-top: 5%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.search-body{
+    font-family: 'Montserrat', sans-serif;
+    color: #2E398E;
+    opacity: 0.75;   
+    margin-top: 5%;
+}
+
+#list-view,#legend{
+    display: none;
+}
+
+#txtUsername,#txtHave,#txtNeed{
+    margin-bottom: 20%;
+}
+
+#lblHave, #lblNeed{
+    margin-top: -15%;
 }
