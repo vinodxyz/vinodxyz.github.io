@@ -13,9 +13,9 @@ input{
 
 .intro{
     font-family: 'Montserrat', sans-serif;
-    margin-top:10%;
-    color: #2E398E;
-    opacity: 0.75;
+    margin-top:30%;
+    color: rgb(48, 64, 182);
+    opacity: 1;
 }
 
 label{
@@ -38,6 +38,14 @@ label{
 .input-header{
     font-family: 'Montserrat', sans-serif;
     color: #2642BE;
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 2%;
+}
+
+.intro-header{
+    font-family: 'Montserrat', sans-serif;
+    color: white;
     font-size: 20px;
     font-weight: 900;
     margin-bottom: 2%;
@@ -72,7 +80,7 @@ text{
 
 .search-pane{
     position: absolute;
-    bottom: 100px;
+    top: 10px;
     background-color: rgb(8, 28, 41, 0.75);
 }
 
@@ -181,4 +189,39 @@ input.valid[type=text]{
 
 #lblHave, #lblNeed{
     margin-top: -15%;
+}
+
+#credit{
+    /* text-align: center; */
+    /* font-family: 'Acme', sans-serif; */
+    color: #131d47;
+    position: absolute;
+    bottom: 60px;
+    right: 10px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.handles{
+    color: #C2167C;
+    opacity: 0.5;
+}
+
+
+#laptop-direction{
+    width: 10%;
+    text-align: right;
+    /* opacity: 0.55; */
+}
+
+.input-body{
+    color: #2440B3;
+}
+
+.tweet-with{
+    margin-top: 50%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: #C21F7C;
+    opacity: 0.5;
 }

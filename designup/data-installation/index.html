@@ -12,7 +12,9 @@
 
     <link rel="stylesheet" href="styles/materialize.min.css">
     <script src="scripts/materialize.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Acme" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Acme|Fascinate+Inline" rel="stylesheet"> -->
 
     <meta charset="utf-8">
     <link href="main.css" rel="stylesheet" type="text/css" media="all">
@@ -29,12 +31,21 @@
                 <img src="images/dup-logo-new.png" width="50%">
 
                 <div class="intro" id="intro-text">
-                    Want to meet people who can help you with something?<br>
-                    Or, do you want to meet folks who need help with what you're good at?
+                    <div class="intro-header">Hey There!</div>
+                    Want to connect with similar minded folks at this conference ? <br>
+                    We can help !
+                    
                 </div>
 
                 <div id="input-form">
-                    <div class="input-header">3 Quick questions</div>
+                    <div class="input-header">
+                        Quick questions   
+                        <img id="laptop-direction" src="images/laptop-direction.png">
+                    </div>
+                    <div class="input-body">
+                        Please head over to the laptop to answer these questions.<br>
+                        And, watch your info pop over on the visualization :))
+                    </div>
                     <div class="input-field">
                         <input id="txtUsername" type="text" class="validate">
                         <label id="lblUsername" for="txtUsername" class="labels">What's your name?</label>
@@ -42,12 +53,12 @@
 
                     <div class="input-field">
                         <input id="txtHave" type="text" class="validate">
-                        <label id="lblHave" for="txtHave">Something that you enjoy doing and are good at? (eg: painting) </label>
+                        <label id="lblHave" for="txtHave">Something that you really enjoy doing? (eg: painting) </label>
                     </div>
 
                     <div class="input-field">
                         <input id="txtNeed" type="text" class="validate">
-                        <label id="lblNeed" for="txtNeed">Anything that you want to get really good at? (eg: UX) </label>
+                        <label id="lblNeed" for="txtNeed">Anything that you want to get good at? (eg: UX) </label>
                     </div>
 
                     <a id="btnConnect" class="waves-effect waves-light btn pink white-text" onclick="disableForm();getData();updateData();">
@@ -70,7 +81,8 @@
                     <div id="check-back">Don't forget to check back in a while, if you did not find any matches.</div>
                     <a id="btnReset" class="waves-effect waves-light btn-small pink white-text" onclick="location.reload();">
                         <i class="material-icons right">refresh</i>Go back
-                    </a>                    
+                    </a>
+                    <div class="tweet-with">Tweet with #DUP2018 #installation</div>    
                 </div>
 
             </div>
@@ -84,6 +96,12 @@
                     </div>
                     <!-- <label id="lblSearchUser" for="txtSearchUser">Search for someone</label> -->
                     <input id="txtSearchUser" type="text" class="validate"/>
+                </div>
+                <div id="credit">
+                    Made with d3.js<br>
+                    Spotted a bug? Please shoutout to Vinod :)) <br>
+                    Find me on twitter: <span class="handles">@vinodabcd</span><br>
+                    Or, shoot an email to: <span class="handles">vinod.k@nid.edu</span>
                 </div>
             </div>
         </div>

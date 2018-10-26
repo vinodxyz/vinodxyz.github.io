@@ -433,11 +433,11 @@ function moveUserToCenter(name) {
         $("#list-view").hide();
         moveUserToCenter("");
         $("#txtSearchUser").val("");
-    },30000);
+    },3000000);
 
     setTimeout(function(){
         location.reload();
-    }, 45000);
+    }, 4500000);
 
   }
 
@@ -464,7 +464,7 @@ function moveSkillToCenter(name) {
     //listViz(name);
     //highlightNode(name);
     simulation.alpha(0.1).restart();
-    setTimeout(function(){moveSkillToCenter("")},15000);
+    setTimeout(function(){moveSkillToCenter("")},30000);
 
   }
 
