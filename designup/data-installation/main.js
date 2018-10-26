@@ -1,4 +1,5 @@
 $("#list-view").hide();
+$("#legend").hide();
 
 var dataset;
 var databackup;
@@ -68,7 +69,7 @@ getData();
             .force("x", d3.forceX()).force("center", d3.forceCenter(0,0))
             .force("y", d3.forceY()).force("center", d3.forceCenter(0,0))
             .force("collide", d3.forceCollide().strength(1))
-            .force("r", d3.forceRadial(100).strength(0.65))
+            .force("r", d3.forceRadial(100).strength(0.75))
             .alphaTarget(0.2)
             .on("tick", ticked);
 
@@ -122,7 +123,7 @@ function runViz() {
                                 radius++;
                             }
                         }
-                        return radius*4;
+                        return radius*2;
                     }
                 }); })
                 .merge(node)
@@ -152,7 +153,7 @@ function runViz() {
                                     radius++;
                                 }
                             }
-                            return radius*6;
+                            return radius*3;
                         }
                     }); })
                     .merge(dotted)
@@ -248,7 +249,7 @@ function runViz() {
     // node.attr("fx",function(d){ if(d.name == "chocolates"){ return 0;}});
     // node.attr("fy",function(d){ if(d.name == "chocolates"){ return 0;}});
 
-    $("#btnAddUser").removeClass("disabled");
+    //$("#btnAddUser").removeClass("disabled");
 
     // $("#txtUsername").val("");
     // $("#txtHave").val("");
@@ -257,14 +258,19 @@ function runViz() {
 
 }
 
+function disableForm(){
+    if(($("#txtUsername").val() != "") && ($("#txtHave").val() != "") && ($("#txtNeed").val() != "")){
+        d3.select("#input-form").style("opacity","0.5");
+        $("#btnConnect").addClass("disabled");
+    }
+}
 
 
 function updateData(){
 
     if(($("#txtUsername").val() != "") && ($("#txtHave").val() != "") && ($("#txtNeed").val() != ""))
     {
-        
-        $("#btnAddUser").addClass("disabled");
+
         var newNodes = databackup.nodes;
         var newLinks = databackup.edges;
 
@@ -419,6 +425,7 @@ function moveUserToCenter(name) {
     listViz(name);
     simulation.alpha(0.1).restart();
     highlightNode(name);
+    $("#legend").show();
 
     setTimeout(function(){
         $("#input-form").show();
@@ -451,6 +458,7 @@ function moveSkillToCenter(name) {
     }));
 
     //listViz(name);
+    //highlightNode(name);
     simulation.alpha(0.1).restart();
     setTimeout(function(){moveSkillToCenter("")},15000);
 
@@ -619,23 +627,23 @@ function listViz(name){
     var havePeople="", needPeople="";
 
     for(var i=0; i<havelist.length; i++){
-        havePeople = havePeople + "<li class=\"user-in-list\">"+havelist[i]+"</li>";
+        havePeople = havePeople + "<li class=\"user-in-list\">"+havelist[i].toTitleCase()+"</li>";
     }
 
     for(var i=0; i<needlist.length; i++){
-        needPeople = needPeople + "<li class=\"user-in-list\">"+needlist[i]+"</li>";
+        needPeople = needPeople + "<li class=\"user-in-list\">"+needlist[i].toTitleCase()+"</li>";
     }
     
     if(needlist.length != 0){
-        d3.select("#have-header").html(needlist.length+" folk(s) can help <span class=\"user-in-list\">"+name+"</span> with <span class=\"skill-in-list\">"+need+"</span>:");
+        d3.select("#have-header").html(needlist.length+" folk(s) can help <span class=\"user-in-list\">"+name.toTitleCase()+"</span> with <span class=\"skill-in-list\">"+need.toTitleCase()+"</span>:");
     }else{
-        d3.select("#have-header").html("Apologies! Looks like no one here can help with <span class=\"skill-in-list\">"+need+"</span>.");
+        d3.select("#have-header").html("Uh oh! Seems that no one here can help with <span class=\"skill-in-list\">"+need.toTitleCase()+"</span> yet.");
     }
 
     if(havelist.length != 0){
-        d3.select("#need-header").html("Also, "+havelist.length+" folk(s) would love to get help with <span class=\"skill-in-list\">"+have+"</span> from <span class=\"user-in-list\">"+name+"</span>:");
+        d3.select("#need-header").html("Also, "+havelist.length+" folk(s) would love to get help with <span class=\"skill-in-list\">"+have.toTitleCase()+"</span> from <span class=\"user-in-list\">"+name.toTitleCase()+"</span>:");
     }else{
-        d3.select("#need-header").html("Apologies! Looks like no one here is looking for help with <span class=\"skill-in-list\">"+have+"</span>.");
+        d3.select("#need-header").html("Oops! Looks like there's not anybody yet who's looking for help with <span class=\"skill-in-list\">"+have.toTitleCase()+"</span>.");
     }
     
     d3.select("#have-list").html(needPeople);
@@ -645,26 +653,38 @@ function listViz(name){
 
 //Let's autocomplete needs and haves:
 function autoCompleteSkills(){
-    var searchSkillOptions = [];
+    var searchSkillOptions = {};
 
     for(var k=0; k<nodes.length; k++){
         if(nodes[k].type == "thing"){
-            searchSkillOptions.push(nodes[k].name);
+            //searchSkillOptions.push(nodes[k].name);
+            searchSkillOptions[nodes[k].name] = "";
         }
     } 
   
+    // var options = {
+    //   data: searchSkillOptions,
+    //   list: {
+    //       match: {
+    //           enabled: true
+    //       }
+    //     }
+    // };
+
+    $('#txtHave').autocomplete({
+        data: searchSkillOptions,
+        limit: 5,
+        minLength: 0
+    });
+
+    $('#txtNeed').autocomplete({
+        data: searchSkillOptions,
+        limit: 5,
+        minLength: 0
+    });
   
-    var options = {
-      data: searchSkillOptions,
-      list: {
-          match: {
-              enabled: true
-          }
-      }
-  };
-  
-    $("#txtHave").easyAutocomplete(options);
-    $("#txtNeed").easyAutocomplete(options);
+    // $("#txtHave").easyAutocomplete(options);
+    // $("#txtNeed").easyAutocomplete(options);
   }
 
   autoCompleteSkills();
@@ -676,7 +696,6 @@ function autoCompleteSkills(){
     d3.selectAll(".thing").attr("opacity","0.2");
     d3.selectAll(".link-have").attr("opacity","0.2");
     d3.selectAll(".link-need").attr("opacity","0.2");
-    d3.selectAll(".link-need").attr("opacity","0.2");
     d3.selectAll(".nodelabel").style("opacity","0.2");
     d3.selectAll(".dotnodes").attr("opacity","0.1");
 
@@ -687,7 +706,6 @@ function autoCompleteSkills(){
     d3.select("#"+nameID).attr("opacity","1");
     d3.select("#label-"+nameID).style("opacity","1");
     d3.select("#dotnode-"+nameID).attr("opacity","1");
-    d3.select("#"+needID).attr("opacity","1");
 
     var path = d3.select("#dotnode-"+nameID);
     path.attr("stroke-width","3");
@@ -695,11 +713,12 @@ function autoCompleteSkills(){
     path.attr("stroke-dasharray", totalLength + " " + totalLength)
         .attr("stroke-dashoffset", totalLength)
         .transition()
-        .delay(4000)
+        .delay(2500)
         .duration(1500)
         .ease(d3.easeLinear)
         .attr("stroke-dashoffset", 0);
 
+    d3.select("#"+needID).attr("opacity","1");
     d3.select("#label-"+needID).attr("opacity","1");
     d3.select("#"+haveID).attr("opacity","1");
     d3.select("#label-"+haveID).style("opacity","1");
@@ -707,15 +726,27 @@ function autoCompleteSkills(){
     d3.select("#"+nameID+"-"+haveID).attr("opacity","1");
     d3.select("#"+nameID+"-"+needID).attr("opacity","1");
 
+    var havelistie = [];
+    var needlistie = [];
 
-    needlist.forEach(function(item,index){
+    for(var i=0; i<links.length; i++){
+        if((links[i].target.name == have) && (links[i].status == "need")){
+            havelistie.push(links[i].source.name);
+        }
+        if((links[i].target.name == need) && (links[i].status == "have")){
+            needlistie.push(links[i].source.name);
+        }
+    }
+
+    needlistie.forEach(function(item,index){
         item = item.replace(/\s/g,'');
         d3.select("#"+item).attr("opacity","1");
         d3.select("#"+item+"-"+needID).attr("opacity","1");
         d3.select("#label-"+item).style("opacity","1");
+        console.log("#"+item+"-"+needID);
     });
 
-    havelist.forEach(function(item,index){
+    havelistie.forEach(function(item,index){
         item = item.replace(/\s/g,'');
         d3.select("#"+item).attr("opacity","1");
         d3.select("#"+item+"-"+haveID).attr("opacity","1");

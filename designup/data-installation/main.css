@@ -35,6 +35,13 @@ label{
     /* display: none; */
 }
 
+.input-header{
+    font-family: 'Montserrat', sans-serif;
+    color: #2642BE;
+    font-size: 20px;
+    font-weight: 900;
+}
+
 .links line {
     stroke: #999;
     stroke-opacity: 0.4;
@@ -65,6 +72,7 @@ text{
 .search-pane{
     position: absolute;
     top: 10px;
+    background-color: rgb(8, 28, 41, 0.75);
 }
 
 input[type=text]{
@@ -82,24 +90,24 @@ input.valid[type=text]{
 }
 
 #list-view{
-    margin-top: 20%;
+    margin-top: 40%;
     color: white;
     font-size: 14px;
 }
 
-.list-line{
-    border-top: 1px solid #2E398E;
-    opacity: 0.5;
-}
-
-.list-header, #have-header, #need-header{
+.list-header, #have-header, #need-header, #check-back{
     font-family: 'Montserrat', sans-serif;
     color: #2E398E;
 }
 
+#check-back{
+    margin-bottom: 20%;
+}
+
 .list-header{
+    color: #C21F7C;
     font-size: 20px;
-    opacity: 0.5;
+    margin-bottom: 8%;
 }
 
 .user-in-list{
@@ -111,20 +119,36 @@ input.valid[type=text]{
 }
 
 
-#lower-banner{
-    opacity: 0.2;
-    width: 20%;
-    margin-top: -25%;
+#legend{
+    width: 17%;
+    margin-top: -22%;
+    margin-left: 1%;
 }
 
 .easy-autocomplete-container {
     width: 90% !important;
     margin-left: 5% !important;
     margin-top: -2% !important;
-    opacity: 0.5;
+    opacity: 0.75;
 }
 
 #txtSearchUser{
     margin-top: -5%;
     color: white;
+}
+
+#lblSearchUser{
+    color: white!important;
+}
+
+.autocomplete-content{
+    opacity: 0.65!important;
+}
+
+.autocomplete-content li span{
+    color: rgb(151, 150, 150) !important;
+}
+
+.autocomplete-content li span .highlight{
+    color: #C6167D !important;
 }

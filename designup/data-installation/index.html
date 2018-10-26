@@ -29,13 +29,12 @@
                 <img src="images/dup-logo-new.png" width="50%">
 
                 <div class="intro" id="intro-text">
-                    Want to meet interesting people who can help you with something?<br>
-                    Or, do you want to meet folks who need help with something that you're good at?
-                    Let's try to connect you.
+                    Want to meet people who can help you with something?<br>
+                    Or, do you want to meet folks who need help with what you're good at?
                 </div>
 
                 <div id="input-form">
-
+                    <div class="input-header">3 Quick questions</div>
                     <div class="input-field">
                         <input id="txtUsername" type="text" class="validate">
                         <label for="txtUsername" class="labels">What's your name?</label>
@@ -51,22 +50,23 @@
                         <label for="txtNeed">One thing you want to learn</label>
                     </div>
 
-                    <a class="waves-effect waves-light btn pink white-text" onclick="getData();updateData();">
+                    <a id="btnConnect" class="waves-effect waves-light btn pink white-text" onclick="disableForm();getData();updateData();">
                         <i class="material-icons right">send</i>Connect!
                     </a>
 
                 </div>
 
                 <div id="list-view">
-                    <div class="list-header">What do we think?</div><hr class="list-line">
+                    <div class="list-header">What do we think?</div>
                     <div id="haves">
                         <span id="have-header"></span>
-                        <ul id="have-list"></ul>
+                        <ol id="have-list"></ol>
                     </div>
                     <div id="needs">
                         <span id="need-header"></span>
-                        <ul id="need-list"></ul>
+                        <ol id="need-list"></ol>
                     </div>
+                    <div id="check-back">Don't forget to check back in a while, if you did not find any matches.</div>
                     <a id="btnReset" class="waves-effect waves-light btn-small pink white-text" onclick="location.reload();">
                         <i class="material-icons right">refresh</i>Clear
                     </a>
@@ -76,14 +76,15 @@
             <div class="col-lg-10">    
                 <div id="network-viz"></div>
                 <div class="search-pane offset-lg-9 col-lg-3">
-                    <label for="txtSearchUser">Search for someone</label>
+                    <label id="lblSearchUser" for="txtSearchUser">Search for someone</label>
                     <input id="txtSearchUser" type="text" class="validate"/>
                 </div>
             </div>
         </div>
     </div>
-    
-    <img id="lower-banner" src="images/layer5.png">
+
+    <!-- <img id="lower-banner" src="images/layer5.png"> -->
+    <img id="legend" src="images/legend.png">
     
     
 </body>
