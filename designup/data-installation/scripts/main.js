@@ -65,11 +65,11 @@ getData();
 
         var simulation = d3.forceSimulation(nodes)
             .force("charge", d3.forceManyBody().strength(-1000))
-            .force("link", d3.forceLink(links).distance(20).strength(1))
+            .force("link", d3.forceLink(links).distance(10).strength(1))
             .force("x", d3.forceX()).force("center", d3.forceCenter(0,0))
             .force("y", d3.forceY()).force("center", d3.forceCenter(0,0))
             .force("collide", d3.forceCollide().strength(1))
-            .force("r", d3.forceRadial(100).strength(0.75))
+            .force("r", d3.forceRadial(100).strength(1.0))
             .alphaTarget(0.2)
             .on("tick", ticked);
 
