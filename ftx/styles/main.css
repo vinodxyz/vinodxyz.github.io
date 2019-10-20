@@ -1,0 +1,38 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background: #0F1028;
+}
+
+.wrapper{
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    grid-template-rows: 1fr 10fr;
+    color: white;
+}
+
+.header{
+    grid-column-start: 1;
+    grid-column-end:  3;
+    padding: 20px;
+}
+
+.ftx-grid{
+    padding: 20px;
+}
+
+.footer{
+    grid-column-start: 1;
+    grid-column-end:  3;
+    padding: 20px;
+}
+
+.links {
+    stroke: red;
+    stroke-opacity: 0.2;
+}

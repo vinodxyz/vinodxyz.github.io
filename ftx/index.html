@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<head>
+    <title>FTX Data Exhibit</title>
+    <meta charset="utf-8">
+    <link href="styles/main.css" rel="stylesheet" type="text/css" media="all">
+    <script src="scripts/d3.v5.min.js"></script>
+    <script src="scripts/d3-force.v2.min.js"></script>
+    <script src="data/data.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">FTX visualization</div>
+        <div id="ftx-viz" class="ftx-grid">
+
+        </div>
+        <div id="ftx-ui" class="ftx-grid">
+                Name<input type="text" id="user_name"><br>
+                <input type="submit" value="Submit" onclick="addEntry()">
+        </div>
+        <div class="footer">By Razorpay</div>
+    </div>
+</body>
+
+<script src="scripts/network.js"></script>
+
+</html>
