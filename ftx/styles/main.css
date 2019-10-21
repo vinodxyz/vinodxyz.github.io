@@ -31,8 +31,3 @@ body{
     grid-column-end:  3;
     padding: 20px;
 }
-
-.links {
-    stroke: red;
-    stroke-opacity: 0.2;
-}

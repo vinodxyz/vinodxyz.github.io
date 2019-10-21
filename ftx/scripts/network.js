@@ -104,7 +104,7 @@ function ticked() {
 }
 
 var simulateReasons = d3.forceSimulation(reasons)
-                            .force("x2", d3.forceX()).force("center", d3.forceCenter(-width,0))
+                            .force("x2", d3.forceX()).force("center", d3.forceCenter(-width+200,0))
                             .force("charge", d3.forceManyBody().strength(-80))
                             .alpha(0.01)
                             .alphaTarget(1)
