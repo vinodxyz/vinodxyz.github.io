@@ -33,7 +33,7 @@ let dataset = {
         {
             attendee_id: 0,
             name: "vinod",
-            photo: "images/vinod.png",
+            photo: "data/images/vinod.jpg",
             designation: "Product designer",
             company: 0,
             experience: 6,
@@ -42,7 +42,7 @@ let dataset = {
         {
             attendee_id: 1,
             name: "shinde",
-            photo: "images/shinde.png",
+            photo: "data/images/snehal.jpg",
             designation: "UX designer",
             company: 1,
             experience: 5,
@@ -51,7 +51,7 @@ let dataset = {
         {
             attendee_id: 2,
             name: "chetty",
-            photo: "images/chetty.png",
+            photo: "data/images/chetty.jpg",
             designation: "Design lead",
             company: 0,
             experience: 6,
@@ -60,7 +60,7 @@ let dataset = {
         {
             attendee_id: 3,
             name: "prajna",
-            photo: "images/prajna.png",
+            photo: "data/images/prajna.jpg",
             designation: "Interaction designer",
             company: 2,
             experience: 1.5,
@@ -69,11 +69,20 @@ let dataset = {
         {
             attendee_id: 4,
             name: "modi",
-            photo: "images/modi.png",
+            photo: "data/images/modi.jpg",
             designation: "Some designer",
             company: 1,
             experience: 1.5,
             reasons: [0,5]
+        },
+        {
+            attendee_id: 5,
+            name: "prasanta",
+            photo: "data/images/prasanta.jpg",
+            designation: "Info designer",
+            company: 3,
+            experience: 3.5,
+            reasons: [1,2,5]
         }
     ]
 }

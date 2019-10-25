@@ -10,6 +10,7 @@ var linkDistance = 20;
 // 1. Load data
 var nodes = dataset.nodes;
 var links = [];
+var bilinks = [];
 
 //Generate link data recursively for each node ;)
 
@@ -25,10 +26,11 @@ function computeLinkData(){
                     break;
                 }
             }
-    
-            links.push({source: nodes[i].attendee_id, target: current_reason});
+
+            links.push({source: nodes[i], target: current_reason});
         }
     }
+
 }
 
 computeLinkData();
@@ -44,6 +46,8 @@ let g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + heigh
     link = g.append("g").selectAll(".link"),
     node = g.append("g").selectAll(".node"),
     reason = g.append("g").selectAll(".reason");
+
+let line;
 
 
 var simulatePeople = d3.forceSimulation(nodes)
@@ -71,14 +75,18 @@ function computeNodes(){
 computeNodes();
 
 function computeLinks(){
+
     link = link.data(links, function(d) { return d; })
                 .join(
                     enter => enter.append("line")
-                    .attr("stroke", "#fff")
+                    .attr("fill", "none")
+                    .attr("stroke", "white")
                     .attr("stroke-width", 1)
+                    //.style("mix-blend-mode", "multiply")
                     .call(function(link) { 
                         link.transition().attr("stroke-opacity", 0.2); 
                     }),
+                    //.attr("d", line),
                     
                     update => update
                         .attr("stroke", "gray")
@@ -87,21 +95,29 @@ function computeLinks(){
 computeLinks();
 simulatePeople.force("link").links(links);
 
+function positionLink(d) {
+    return "M" + d[0].x + "," + d[0].y
+         + "S" + d[1].x + "," + d[1].y
+         + " " + d[2].x + "," + d[2].y;
+  }
 
 function ticked() {
-    node.attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; });
-    // node.attr("cx", function(d) { return d.x = Math.max(Math.max(-1*width/2 - radius*4, d.x), Math.min(width/2 - radius, d.x)); })
-    //     .attr("cy", function(d) { return d.y = Math.max(Math.max(-1*height/2 - radius, d.y), Math.min(height/2 - radius, d.y)); });
+    
+    // node.attr("cx", function(d) { return d.x; })
+    //     .attr("cy", function(d) { return d.y; });
+    node.attr("cx", function(d) { return d.x = Math.max(Math.max(-1*width/2 - radius*4, d.x), Math.min(width/2 - radius, d.x)); })
+        .attr("cy", function(d) { return d.y = Math.max(Math.max(-1*height/2 - radius, d.y), Math.min(height/2 - radius, d.y)); });
 
     link.attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return d.source.y; })
         .attr("x2", function(d) { return d.target.x + rectWidth/2; })
         .attr("y2", function(d) { return d.target.y + rectHeight/2; });
 
-    // reason.attr("cx", function(d) { return d.x = Math.max(Math.max(-1*width/2 - radius*4, d.x), Math.min(width/2 - radius, d.x)); })
-    //     .attr("cy", function(d) { return d.y = Math.max(Math.max(-1*height/2 - radius, d.y), Math.min(height/2 - radius, d.y)); });
+    reason.attr("cx", function(d) { return d.x = Math.max(Math.max(-1*width/2 - radius*4, d.x), Math.min(width/2 - radius, d.x)); })
+        .attr("cy", function(d) { return d.y = Math.max(Math.max(-1*height/2 - radius, d.y), Math.min(height/2 - radius, d.y)); });
 }
+
+
 
 var simulateReasons = d3.forceSimulation(reasons)
                             .force("x2", d3.forceX()).force("center", d3.forceCenter(-width+200,0))
@@ -148,7 +164,6 @@ function addEntry(){
     };
 
     nodes.push(newNode);
-    console.log(nodes);
 
     for(var j=0; j<user_reason_length; j++){
 
