@@ -1,27 +1,33 @@
 let reasons = [
     {
         reason_id: 0,
-        reason_name: "socializing"
+        reason_name: "socializing",
+        tag_id: "socialize"
     },
     {
         reason_id: 1,
-        reason_name: "growing startup"
+        reason_name: "growing startup",
+        tag_id: "startup"
     },
     {
         reason_id: 2,
-        reason_name: "need capital"
+        reason_name: "need capital",
+        tag_id: "capital"
     },
     {
         reason_id: 3,
-        reason_name: "misc"
+        reason_name: "misc",
+        tag_id: "misc"
     },
     {
         reason_id: 4,
-        reason_name: "invited to come"
+        reason_name: "invited to come",
+        tag_id: "invited"
     },
     {
         reason_id: 5,
-        reason_name: "attending talks"
+        reason_name: "attending talks",
+        tag_id: "talks"
     }
 ];
 

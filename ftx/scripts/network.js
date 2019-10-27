@@ -45,7 +45,9 @@ var svg = d3.select("#ftx-viz")
 let g = svg.append("g").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")"),
     link = g.append("g").selectAll(".link"),
     node = g.append("g").selectAll(".node"),
-    reason = g.append("g").selectAll(".reason");
+    reason = g.append("g").selectAll(".reason"),
+    label = g.append("g").selectAll(".label"),
+    lblReason = g.append("g").selectAll(".label");
 
 let line;
 
@@ -74,6 +76,20 @@ function computeNodes(){
 }    
 computeNodes();
 
+function computePeopleLabels(){
+    label = label.data(nodes, function(d) { return d.name;})
+            .join(
+                enter => enter.append("text")
+                .attr("id", function(d) { return "label-"+d.name.replace(/\s/g,''); })
+                .attr("fill","white")
+                .text(function(d) { return d.name; }),
+                
+                update => update
+                    .attr("fill", "gray")
+            );
+}    
+computePeopleLabels();
+
 function computeLinks(){
 
     link = link.data(links, function(d) { return d; })
@@ -95,6 +111,20 @@ function computeLinks(){
 computeLinks();
 simulatePeople.force("link").links(links);
 
+function computeReasonLabels(){
+    lblReason = lblReason.data(reasons, function(d) { return d.reason_name;})
+                            .join(
+                                enter => enter.append("text")
+                                .attr("id", function(d) { return "label-"+d.reason_name.replace(/\s/g,''); })
+                                .attr("fill","white")
+                                .text(function(d) { return d.reason_name; }),
+                                
+                                update => update
+                                    .attr("fill", "gray")
+                            );
+}    
+computeReasonLabels();
+
 function positionLink(d) {
     return "M" + d[0].x + "," + d[0].y
          + "S" + d[1].x + "," + d[1].y
@@ -115,6 +145,12 @@ function ticked() {
 
     reason.attr("cx", function(d) { return d.x = Math.max(Math.max(-1*width/2 - radius*4, d.x), Math.min(width/2 - radius, d.x)); })
         .attr("cy", function(d) { return d.y = Math.max(Math.max(-1*height/2 - radius, d.y), Math.min(height/2 - radius, d.y)); });
+
+    label.attr("x", function(d) { return d.x; })
+        .attr("y", function(d) { return d.y+20; });
+
+    lblReason.attr("x", function(d) { return d.x; })
+            .attr("y", function(d) { return d.y+20; });
 }
 
 
@@ -145,12 +181,23 @@ function ticked_reasons() {
 }
 
 function addEntry(){
-    var user_name = document.getElementById("user_name").value;
-    var user_reason_length =  Math.ceil(Math.random() * 8);
+    var user_name = document.getElementById("txtName").value;
     var user_reasons = [];
 
-    for(var i=0; i<user_reason_length; i++){
-        user_reasons.push(Math.floor(Math.random() * reasons.length));
+    var pushToggles = document.getElementById("pushToggles");
+    var tags = [];
+    for (var i=0; i<pushToggles.childNodes.length; i++) {
+        var child = pushToggles.childNodes[i];
+        if ((child.type == "checkbox") && child.checked) {
+            tags.push(child.id);      
+        }
+    }
+
+    for(var i=0; i<reasons.length; i++){
+        if(tags.indexOf(reasons[i].tag_id.toString()) != -1){
+            user_reasons.push(reasons[i].reason_id);
+            //break;
+        }
     }
 
     var newNode = {
@@ -159,20 +206,20 @@ function addEntry(){
         photo: "images/"+user_name+".png",
         designation: "Product designer",
         company: 0,
-        experience: user_reason_length,
+        experience: 1,
         reasons: user_reasons
     };
 
     nodes.push(newNode);
 
-    for(var j=0; j<user_reason_length; j++){
+    for(var j=0; j<user_reasons.length; j++){
 
         var current_reason = "";
 
-        for(var x in reasons){
-            if(x == nodes[nodes.length-1].reasons[j]){
-                current_reason = reasons[x];
-                break;
+        for(var reason in reasons){
+            if(reason == user_reasons){
+                current_reason = reasons[reason];
+                //break;
             }
         }
 

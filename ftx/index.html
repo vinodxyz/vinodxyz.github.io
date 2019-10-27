@@ -14,11 +14,17 @@
     <div class="wrapper">
         <div class="header">FTX visualization</div>
         <div id="ftx-viz" class="ftx-grid">
-
+            
         </div>
         <div id="ftx-ui" class="ftx-grid">
-                Name<input type="text" id="user_name"><br>
+            <div id="groupName">
+                <label id="lblName">Name</label>
+                <input type="text" id="txtName"><br>
+            </div>
+            <div id="groupTags">
+                <div id="pushToggles"></div>
                 <input type="submit" value="Submit" onclick="addEntry()">
+            </div>
         </div>
         <div class="footer">By Razorpay</div>
     </div>
