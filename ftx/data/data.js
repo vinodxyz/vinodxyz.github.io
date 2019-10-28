@@ -43,7 +43,8 @@ let dataset = {
             designation: "Product designer",
             company: 0,
             experience: 6,
-            reasons: [0, 2, 3]
+            reasons: [0, 2, 3],
+            pair_freq: 0
         },
         {
             attendee_id: 1,
@@ -52,7 +53,8 @@ let dataset = {
             designation: "UX designer",
             company: 1,
             experience: 5,
-            reasons: [0, 4]
+            reasons: [0, 4],
+            pair_freq: 0
         },
         {
             attendee_id: 2,
@@ -61,7 +63,8 @@ let dataset = {
             designation: "Design lead",
             company: 0,
             experience: 6,
-            reasons: [1,4]
+            reasons: [1,4],
+            pair_freq: 0
         },
         {
             attendee_id: 3,
@@ -70,7 +73,8 @@ let dataset = {
             designation: "Interaction designer",
             company: 2,
             experience: 1.5,
-            reasons: [2,4]
+            reasons: [2,4],
+            pair_freq: 0
         },
         {
             attendee_id: 4,
@@ -79,7 +83,8 @@ let dataset = {
             designation: "Some designer",
             company: 1,
             experience: 1.5,
-            reasons: [0,5]
+            reasons: [0,5],
+            pair_freq: 0
         },
         {
             attendee_id: 5,
@@ -88,7 +93,8 @@ let dataset = {
             designation: "Info designer",
             company: 3,
             experience: 3.5,
-            reasons: [1,2,5]
+            reasons: [1,2,5],
+            pair_freq: 0
         }
     ]
 }

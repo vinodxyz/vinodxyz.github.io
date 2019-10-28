@@ -29,6 +29,10 @@
 
 //--------------------------------------------------------------
 
+// pairedUsers.forEach(function(element) {
+//     var reqdNode = nodes.filter(node => node.attendee_id ==element);
+//     console.log(reqdNode[0].name);
+//   });
 
 
 

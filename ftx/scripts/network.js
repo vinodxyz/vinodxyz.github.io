@@ -207,7 +207,8 @@ function addEntry(){
         designation: "Product designer",
         company: 0,
         experience: 1,
-        reasons: user_reasons
+        reasons: user_reasons,
+        pair_freq: 0
     };
 
     nodes.push(newNode);
@@ -234,5 +235,47 @@ function addEntry(){
     computePeopleLabels();
     simulatePeople.force("link", d3.forceLink(links).distance(80+linkDistance).strength(1));
     
+    pairingPeople();
+
+}
+
+
+function pairingPeople(){
+    var newestUser = nodes[nodes.length-1];
+    var newestReasons = newestUser.reasons;
+    var sortedUsers = nodes.sort(function(a, b){
+                            return a["pair_freq"]-b["pair_freq"];
+                        });
+    var pairedArr = [];
+    
+    for(var n=0; n<newestReasons.length; n++){
+        var newReason = newestReasons[n];
+        var reasonObj = reasons.filter(reasonobj => reasonobj.reason_id == newReason);
+        var newReasonName = reasonObj[0].reason_name;
+        console.log(newReasonName);
+
+        for(var p=0; p<sortedUsers.length; p++){
+            var person = sortedUsers[p];
+
+            if((person.reasons.indexOf(newReason) != -1) && 
+            (newestUser.attendee_id != person.attendee_id)){
+                person.pair_freq = person.pair_freq+1;
+                pairedArr.push({
+                    "paired_attendee_id": person.attendee_id,
+                    "paired_attendee_name": person.name,
+                    "paired_reason_id": newReason,
+                    "paired_reason_name": newReasonName
+                });
+
+                break;
+            }
+
+        }
+
+    }
+    
+    // pairedArr.forEach(function(pairedElem){
+    //     console.log("Paired with "+pairedElem.paired_attendee_name+" for "+pairedElem.paired_reason_name);
+    // })
 
 }
