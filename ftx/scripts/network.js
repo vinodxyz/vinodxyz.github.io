@@ -26,7 +26,7 @@ function computeLinkData(){
                     break;
                 }
             }
-
+            
             links.push({source: nodes[i], target: current_reason});
         }
     }
@@ -214,16 +214,16 @@ function addEntry(){
 
     for(var j=0; j<user_reasons.length; j++){
 
-        var current_reason = "";
+        var current_reason;
 
         for(var reason in reasons){
-            if(reason == user_reasons){
+            if(reason == user_reasons[j]){
                 current_reason = reasons[reason];
-                //break;
+                break;
             }
         }
 
-        links.push({source: nodes[nodes.length-1].attendee_id, target: current_reason});
+        links.push({source: nodes[nodes.length-1], target: current_reason});
     }
 
     
@@ -231,6 +231,7 @@ function addEntry(){
     simulatePeople.nodes(nodes);
     computeNodes();
     computeLinks();
+    computePeopleLabels();
     simulatePeople.force("link", d3.forceLink(links).distance(80+linkDistance).strength(1));
     
 
