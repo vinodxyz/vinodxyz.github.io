@@ -1,14 +1,20 @@
-FTX notes
+FTX To dos
 
-- Get data on random folks from RZP [later]
-- Keep this dormant [later]
-- Adding name and read only mode 
-- Multi select ui
-- Selection of multiple tags and adding to respective tags
-- Animating node addition to the parent viz
-- Styling parent viz
-- 
-- 
+- Data related
+    - Get data of RZP folks/attendees
+    - Keep this dormant and show when requested during name selection
+    - Saving values to database - Google Sheets API
+    
+- UI interactions and transitions:
+    - Adding name and read only mode 
+    - Multi select ui: Selection of multiple tags and adding to respective tags
+    - Required fields validation: What if user presses enter without entering anything?
 
-https://www.youtube.com/watch?v=aircAruvnKk
-https://www.youtube.com/watch?v=rA5qnZUXcqo
+- Viz interactions:
+    - Animating node addition to the parent viz
+    - Styling parent viz
+    - Click to reveal name, org and designation
+    - Tweak the forces
+
+- Testing the viz
+    - What border cases exists? Test with all RZP folks + bizops folks

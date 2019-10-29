@@ -252,7 +252,6 @@ function pairingPeople(){
         var newReason = newestReasons[n];
         var reasonObj = reasons.filter(reasonobj => reasonobj.reason_id == newReason);
         var newReasonName = reasonObj[0].reason_name;
-        console.log(newReasonName);
 
         for(var p=0; p<sortedUsers.length; p++){
             var person = sortedUsers[p];
@@ -274,6 +273,7 @@ function pairingPeople(){
 
     }
     
+    document.getElementById("lblPairMsg").innerHTML = "You've been paired with " + pairedArr[pairedArr.length-1].paired_attendee_name + " for " + pairedArr[pairedArr.length-1].paired_reason_name;
     // pairedArr.forEach(function(pairedElem){
     //     console.log("Paired with "+pairedElem.paired_attendee_name+" for "+pairedElem.paired_reason_name);
     // })
