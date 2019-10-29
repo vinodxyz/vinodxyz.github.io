@@ -4,7 +4,10 @@ FTX To dos
     - Get data of RZP folks/attendees
     - Keep this dormant and show when requested during name selection
     - Saving values to database - Google Sheets API
-    
+
+- Pairing logic
+    - Randomise pairing
+
 - UI interactions and transitions:
     - Adding name and read only mode 
     - Multi select ui: Selection of multiple tags and adding to respective tags
