@@ -36,7 +36,7 @@ body{
 #input-pane{
     margin-right: 50px;
     width: 420px;
-    height: 580px;
+    height: 600px;
     background: linear-gradient(214.63deg, rgba(58, 6, 125, 0.4) 10.07%, rgba(42, 8, 102, 0.4) 89.85%);
     box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.15);
     border-radius: 4px;
@@ -74,7 +74,7 @@ body{
     margin-top: -10px;
 }
 
-#input-pane div{
+#input-pane>div{
     margin-left:40px;
 }
 
@@ -112,6 +112,7 @@ body{
 #txtName:focus{
     background: #050940;
     border-bottom: 1px solid #9C20FF;
+    outline: none;
     transition: all 0.1s ease-out;
 }
 
@@ -128,4 +129,26 @@ body{
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.row-tag{
+    margin-bottom: 24px;
+}
+
+#btn-connect{
+    -webkit-appearance: none;
+    font-size: 16px;
+    color: white;
+    width: 120px;
+    height: 35px;
+    background-color: #491997;
+    border: 0;
+    margin-top: 20px;
+    border-radius: 1px;
+    cursor: pointer;
+}
+
+#btn-connect:hover{
+    background-color: #42148C;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
 }

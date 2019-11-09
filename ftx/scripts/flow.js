@@ -1,23 +1,26 @@
-/* <div id="ui-tags">
-    <label id="lblTags">and, you’re here in order to:</label>
-    <span id="group-tag1" class="cb-group-1st" onclick="highlightTags();">
-        <input type="checkbox" id="tag1" class="cb-1st" value="Boat" unchecked onclick="highlightTags();">
-        <span id="label-tag-1" class="cb-label-1st">socialize</span>
-    </span>
-</div> */
-
 function _initializeComponents(){
-    //For each reason, dynamically generate a multi-select tag component:
+
+    //For each reason, dynamically generate a custom styled checkbox:
     var tags = document.getElementById("ui-tags");
     var i = 1;
 
     for(var tag in reasons){
+        if([1,4].includes(i)){
+            var lastCount = i;
+            var div = document.createElement("div");
+            div.id = "row-tag-"+i;
+            tags.appendChild(div)
+            $("#row-tag-"+i).addClass("row-tag");
+        }else{
+            var div = document.getElementById("row-tag-"+lastCount);
+        }
+        
         var span = document.createElement("span");
         span.id = "group-tag"+i;
-        tags.appendChild(span);
+        div.appendChild(span);
         $("#group-tag"+i).addClass("cb-group-"+i);
         $("#group-tag"+i).attr('onclick', 'highlightTags(\"'+reasons[tag].tag_id+','+i+'\");');
-        
+
         var newlyCreatedSpan = document.getElementById("group-tag"+i);
         var checkbox = document.createElement("input");
         checkbox.type = "checkbox";

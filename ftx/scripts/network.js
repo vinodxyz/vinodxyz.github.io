@@ -181,22 +181,13 @@ function ticked_reasons() {
 }
 
 function addEntry(){
+    
     var user_name = document.getElementById("txtName").value;
     var user_reasons = [];
 
-    var pushToggles = document.getElementById("pushToggles");
-    var tags = [];
-    for (var i=0; i<pushToggles.childNodes.length; i++) {
-        var child = pushToggles.childNodes[i];
-        if ((child.type == "checkbox") && child.checked) {
-            tags.push(child.id);      
-        }
-    }
-
     for(var i=0; i<reasons.length; i++){
-        if(tags.indexOf(reasons[i].tag_id.toString()) != -1){
+        if(document.getElementById(reasons[i].tag_id).checked){
             user_reasons.push(reasons[i].reason_id);
-            //break;
         }
     }
 
