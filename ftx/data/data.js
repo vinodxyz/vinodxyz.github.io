@@ -43,7 +43,7 @@ let dataset = {
         },
         {
             attendee_id: 1,
-            name: "shinde",
+            name: "snehal",
             photo: "data/images/snehal.jpg",
             designation: "UX designer",
             company: 1,
@@ -93,7 +93,7 @@ let dataset = {
         },
         {
             attendee_id: 6,
-            name: "rahul chandh",
+            name: "rahulchandh",
             photo: "data/images/rahulchandh.jpg",
             designation: "Info designer",
             company: 3,
@@ -103,7 +103,7 @@ let dataset = {
         },
         {
             attendee_id: 7,
-            name: "sai kiran",
+            name: "saikiran",
             photo: "data/images/saikiran.jpg",
             designation: "Info designer",
             company: 3,

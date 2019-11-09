@@ -40,11 +40,16 @@ body{
     border-radius: 4px;
 }
 
-#input-pane.test{
+#input-pane.reduce-height{
     -webkit-transition: height 1s; /* For Safari 3.1 to 6.0 */
     transition: height 1s;
     height: 300px;
-    /* margin:  */
+}
+
+#input-pane.increase-height{
+    -webkit-transition: height 1s; /* For Safari 3.1 to 6.0 */
+    transition: height 1s;
+    height: 600px;
 }
 
 #ftx-sign{
@@ -201,4 +206,41 @@ body{
 
 #loading-msg{
     height: 80px;
+}
+
+#paired-msg{
+    height: 90px;
+}
+
+#paired-list{
+    padding-top: 30px;
+    padding-left: 20px;
+}
+
+.pair-img{
+    width:50px;
+    border-radius: 50%;
+    border: 2px solid #BA2E60;
+    margin-right: 12px;
+    float: left;
+}
+
+.pair-name{
+    font-size: 18px;
+    margin-right: 16px;
+}
+
+.pair-reason{
+    font-size: 12px;
+    background: #BA2E60;
+    border-radius: 1px;
+    padding: 4px;
+}
+
+.pair-role{
+    display: inline-block;
+    font-size: 14px;
+    opacity: 0.5;
+    margin-top: 10px;
+    margin-bottom: 40px;
 }

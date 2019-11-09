@@ -67,14 +67,16 @@ function autoComplete(){
     $("#txtName").easyAutocomplete(options);
 }
 
-function hideLoader(){
+function hideLoadernPaired(){
     $("#loading-msg").hide();
     $("#loading-cta").hide();
+    $("#paired-msg").hide();
+    $("#paired-list").hide();
 }
 
 function _initializeComponents(){
     _initializeChecboxes();
-    hideLoader();
+    hideLoadernPaired();
     autoComplete();
 }
 
@@ -94,5 +96,187 @@ function highlightTags(vals){
         $(".cb-group-"+count).addClass("cb-group-"+count+"-checked");
         $(".cb-label-"+count).addClass("cb-label-"+count+"-checked");
     }
+}
+
+
+
+function addEntry(){
+
+    showLoadingMessage();
+
+    var user_name = document.getElementById("txtName").value;
+    var user_reasons = [];
+
+    for(var i=0; i<reasons.length; i++){
+        if(document.getElementById(reasons[i].tag_id).checked){
+            user_reasons.push(reasons[i].reason_id);
+        }
+    }
+
+    var newNode = {
+        attendee_id: nodes.length,
+        name: user_name,
+        photo: "images/"+user_name+".png",
+        designation: "Product designer",
+        company: 0,
+        experience: 1,
+        reasons: user_reasons,
+        pair_freq: 0
+    };
+
+    nodes.push(newNode);
+
+    for(var j=0; j<user_reasons.length; j++){
+
+        var current_reason;
+
+        for(var reason in reasons){
+            if(reason == user_reasons[j]){
+                current_reason = reasons[reason];
+                break;
+            }
+        }
+
+        links.push({source: nodes[nodes.length-1], target: current_reason});
+    }
+
+    
+    
+    simulatePeople.nodes(nodes);
+    computeNodes();
+    computeLinks();
+    computePeopleLabels();
+    simulatePeople.force("link", d3.forceLink(links).distance(80+linkDistance).strength(1));
+    
+    setTimeout(function(){pairingPeople();}, 3000);
+
+}
+
+function showLoadingMessage(){
+    $("#welcome-ftx").hide();
+    $("#separator-line").hide();
+    $("#ui-name").hide();
+    $("#ui-tags").hide();
+    $("#ui-cta").hide();
+
+    $("#loading-msg").show();
+    $("#loading-cta").show();
+    $("#input-pane").addClass("reduce-height");
+}
+
+
+function pairingPeople(){
+
+    $("#input-pane").addClass("increase-height");
+    $("#loading-msg").hide();
+    $("#loading-cta").hide();
+
+    var newestUser = nodes[nodes.length-1];
+    var newestReasons = newestUser.reasons;
+    var sortedUsers = nodes.sort(function(a, b){
+                            return a["pair_freq"]-b["pair_freq"];
+                        });
+    var pairedArr = [];
+    
+    for(var n=0; n<newestReasons.length; n++){
+        var newReason = newestReasons[n];
+        var reasonObj = reasons.filter(reasonobj => reasonobj.reason_id == newReason);
+        var newReasonName = reasonObj[0].reason_name;
+
+        for(var p=0; p<sortedUsers.length; p++){
+            var person = sortedUsers[p];
+
+            if((person.reasons.indexOf(newReason) != -1) && 
+            (newestUser.attendee_id != person.attendee_id)){
+                person.pair_freq = person.pair_freq+1;
+                pairedArr.push({
+                    "paired_attendee_id": person.attendee_id,
+                    "paired_attendee_name": person.name,
+                    "paired_reason_id": newReason,
+                    "paired_reason_name": newReasonName
+                });
+
+                break;
+            }
+
+        }
+
+    }
+
+
+
+    // var span = document.createElement("span");
+    // span.id = "group-tag"+i;
+    // div.appendChild(span);
+    // $("#group-tag"+i).addClass("cb-group-"+i);
+    // $("#group-tag"+i).attr('onclick', 'highlightTags(\"'+reasons[tag].tag_id+','+i+'\");');
+
+    // var newlyCreatedSpan = document.getElementById("group-tag"+i);
+    // var checkbox = document.createElement("input");
+    // checkbox.type = "checkbox";
+    // checkbox.id = reasons[tag].tag_id;
+    // newlyCreatedSpan.appendChild(checkbox);
+    // $("#"+reasons[tag].tag_id).checked = false;
+    // $("#"+reasons[tag].tag_id).addClass("cb-"+i);
+    // $("#"+reasons[tag].tag_id).attr('onclick', 'highlightTags(\"'+reasons[tag].tag_id+','+i+'\");');
+
+    // DONE <div id="paired-list">
+    //     DONE <div id="pair-1">
+    //         DONE <img id="pair-img-1" class="pair-img" src="data/images/chetty.jpg">
+    //         DONE <span id="pair-name-1" class="pair-name">Chetty Arun</span>
+    //         DONE <span id="pair-reason-1" class="pair-reason">socialize</span><br>
+    //         <span id="pair-role-1" class="pair-role">Design lead, Razorpay</span>
+    //     </div>
+    // </div>
+
+    $("#paired-body").text(newestUser.name+", we’ve found "+pairedArr.length+" people whom you can connect with.");
+
+    var paired_list = document.getElementById("paired-list");
+    var p = 1;
+
+    pairedArr.forEach(function(pairedElem){
+
+        //console.log("Paired with "+pairedElem.paired_attendee_name+" for "+pairedElem.paired_reason_name);
+        
+        var p_div = document.createElement("div");
+        p_div.id = "pair-"+p;
+        paired_list.appendChild(p_div);
+
+        var newlyCreatedDiv = document.getElementById("pair-"+p);
+        var p_img = document.createElement("img");
+        p_img.id = "pair-img-"+p;
+        newlyCreatedDiv.appendChild(p_img);
+        $("#pair-img-"+p).addClass("pair-img");
+        $("#pair-img-"+p).attr("src","data/images/"+pairedElem.paired_attendee_name+".jpg");
+
+        var p_name = document.createElement("span");
+        p_name.id = "pair-name-"+p;
+        newlyCreatedDiv.appendChild(p_name);
+        $("#pair-name-"+p).addClass("pair-name");
+        $("#pair-name-"+p).text(pairedElem.paired_attendee_name);
+
+        var p_reason = document.createElement("span");
+        p_reason.id = "pair-reason-"+p;
+        newlyCreatedDiv.appendChild(p_reason);
+        $("#pair-reason-"+p).addClass("pair-reason");
+        $("#pair-reason-"+p).text(pairedElem.paired_reason_name);
+
+        newlyCreatedDiv.appendChild(document.createElement("br"));
+
+        var p_role = document.createElement("span");
+        p_role.id = "pair-role-"+p;
+        newlyCreatedDiv.appendChild(p_role);
+        $("#pair-role-"+p).addClass("pair-role");
+        $("#pair-role-"+p).text(pairedElem.paired_reason_name+", "+"Razorpay");
+
+        p++;
+    })
+
+
+    $("#paired-msg").show();
+    $("#paired-list").show();
+    
+    //document.getElementById("lblPairMsg").innerHTML = "You've been paired with " + pairedArr[pairedArr.length-1].paired_attendee_name + " for " + pairedArr[pairedArr.length-1].paired_reason_name;
+
 }
 
