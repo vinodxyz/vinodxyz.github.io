@@ -1,33 +1,28 @@
 let reasons = [
     {
         reason_id: 0,
-        reason_name: "socializing",
-        tag_id: "socialize"
+        reason_name: "socialize",
+        tag_id: "cb_socialize"
     },
     {
         reason_id: 1,
-        reason_name: "growing startup",
-        tag_id: "startup"
+        reason_name: "grow startup",
+        tag_id: "cb_startup"
     },
     {
         reason_id: 2,
-        reason_name: "need capital",
-        tag_id: "capital"
+        reason_name: "get capital",
+        tag_id: "cb_capital"
     },
     {
         reason_id: 3,
-        reason_name: "misc",
-        tag_id: "misc"
+        reason_name: "attend talks",
+        tag_id: "cb_talks"
     },
     {
         reason_id: 4,
-        reason_name: "invited to come",
-        tag_id: "invited"
-    },
-    {
-        reason_id: 5,
-        reason_name: "attending talks",
-        tag_id: "talks"
+        reason_name: "to have fun",
+        tag_id: "cb_fun"
     }
 ];
 
@@ -83,7 +78,7 @@ let dataset = {
             designation: "Some designer",
             company: 1,
             experience: 1.5,
-            reasons: [0,5],
+            reasons: [0,4],
             pair_freq: 0
         },
         {
@@ -93,7 +88,7 @@ let dataset = {
             designation: "Info designer",
             company: 3,
             experience: 3.5,
-            reasons: [1,2,5],
+            reasons: [1,2,4],
             pair_freq: 0
         }
     ]

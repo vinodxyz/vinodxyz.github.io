@@ -2,7 +2,9 @@
 <head>
     <title>FTX Data Exhibit</title>
     <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
     <link href="styles/main.css" rel="stylesheet" type="text/css" media="all">
+    <link href="styles/checkboxes.css" rel="stylesheet" type="text/css" media="all">
     <script src="scripts/jquery-3.4.1.min.js"></script>
     <script src="scripts/jquery.easy-autocomplete.min.js"></script>
     <link href="styles/easy-autocomplete.min.css" rel="stylesheet">
@@ -17,7 +19,8 @@
             
         </div>
         <div id="ftx-ui" class="ftx-grid">
-            <div id="groupName">
+            
+            <!-- <div id="groupName">
                 <label id="lblName">Name</label>
                 <input type="text" id="txtName"><br>
             </div>
@@ -27,9 +30,28 @@
             </div>
             <div id="groupPairs">
                 <div id="lblPairMsg"></div>
+            </div> -->
+
+            <div id="input-pane">
+                <div id="ftx-sign"><img src="svg/ftx-sign.svg"/></div>
+                <div class="welcome-msg">
+                    <span class="welcome-header">Welcome to FTX ! 👋</span><br>
+                    <span class="welcome-body">We’ve a lot of things planned for the day. Meanwhile, you can </span>
+                    <span class="welcome-highlight">network with other attendees.</span>
+                </div>
+                <div id="separator-line">
+                    <img src="svg/separator.svg">
+                </div>
+                <div id="ui-name">
+                    <label id="lblName">What's your name?</label><br>
+                    <input type="text" id="txtName">
+                </div>
+                <div id="ui-tags">
+                    <label id="lblTags">What are you here for?</label>
+                    <!-- <span id="group-tag1" class="cb-group-1st" onclick="highlightTags();"><input type="checkbox" id="tag1" class="cb-1st" value="Boat" unchecked onclick="highlightTags();"><span class="cb-label-1st">socialize</span></span> -->
+                </div>
             </div>
         </div>
-        <div class="footer">By Razorpay</div>
     </div>
 </body>
 

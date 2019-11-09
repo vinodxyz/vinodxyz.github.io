@@ -6,12 +6,13 @@ FTX To dos
     - Saving values to database - Google Sheets API
 
 - Pairing logic
-    - Randomise pairing
+    - Randomise pairing with 20 people window
 
 - UI interactions and transitions:
     - Adding name and read only mode 
     - Multi select ui: Selection of multiple tags and adding to respective tags
     - Required fields validation: What if user presses enter without entering anything?
+    - Check illustrations by Anuj
 
 - Viz interactions:
     - Animating node addition to the parent viz
