@@ -1,4 +1,4 @@
-function _initializeComponents(){
+function _initializeChecboxes(){
 
     //For each reason, dynamically generate a custom styled checkbox:
     var tags = document.getElementById("ui-tags");
@@ -41,31 +41,35 @@ function _initializeComponents(){
 
         i++;
     }
+    
+}
 
+function autoComplete(){
     //Load the options for the name to be autocompleted
-    // var options = {
-    //     data: dataset.nodes,
-    //     theme: "dark",
-    //     getValue: "name",
-    //     template: {
-    //         type: "iconRight",
-    //         fields: {
-    //             iconSrc: "photo"
-    //         }
-    //     },
-    //     list: {
-    //         maxNumberOfElements: 5,
-    //         match: {
-    //             enabled: true
-    //         }
-    //     }
-    // };
+    var options = {
+        data: dataset.nodes,
+        theme: "dark",
+        getValue: "name",
+        template: {
+            type: "iconLeft",
+            fields: {
+                iconSrc: "photo"
+            }
+        },
+        list: {
+            maxNumberOfElements: 5,
+            match: {
+                enabled: true
+            }
+        }
+    };
 
-    // $("#txtName").easyAutocomplete(options);
+    $("#txtName").easyAutocomplete(options);
+}
 
-    
-
-    
+function _initializeComponents(){
+    _initializeChecboxes();
+    autoComplete();
 }
 
 _initializeComponents();
