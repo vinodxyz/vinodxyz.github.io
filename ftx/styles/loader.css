@@ -1,0 +1,69 @@
+.loader {
+    position: relative;
+    width: 2em;
+    height: 2em;
+    perspective: 1200px;
+
+    margin-left: 125px;
+    margin-top: -25px;
+  }
+  
+  div[class^="atom"] {
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    border-width: 2px;
+    position: absolute;
+    box-sizing: border-box;
+    transform-style: preserve-3d;
+  }
+  
+  .atom-1 {
+    left: 0;
+    top: 0;
+    border-bottom-style: solid;
+    border-bottom-color: #9C20FF;
+    animation: spin1 1s linear infinite;
+  }
+  
+  .atom-2 {
+    right: 0;
+    top: 0;
+    border-right-style: solid;
+    border-right-color: #9C20FF;
+    animation: spin2 1.2s linear infinite;
+  }
+  
+  .atom-3 {
+    right: 0;
+    bottom: 0;
+    border-top-style: solid;
+    border-top-color: #9C20FF;
+    animation: spin3 1.4s linear infinite;
+  }
+  
+  @keyframes spin1 {
+    0% {
+      transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+    }
+    100% {
+      transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+    }
+  }
+  @keyframes spin2 {
+    0% {
+      transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+    }
+    100% {
+      transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+    }
+  }
+  @keyframes spin3 {
+    0% {
+      transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+    }
+    100% {
+      transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+    }
+  }
+  

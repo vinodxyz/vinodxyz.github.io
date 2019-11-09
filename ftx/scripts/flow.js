@@ -67,8 +67,14 @@ function autoComplete(){
     $("#txtName").easyAutocomplete(options);
 }
 
+function hideLoader(){
+    $("#loading-msg").hide();
+    $("#loading-cta").hide();
+}
+
 function _initializeComponents(){
     _initializeChecboxes();
+    hideLoader();
     autoComplete();
 }
 

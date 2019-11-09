@@ -181,7 +181,9 @@ function ticked_reasons() {
 }
 
 function addEntry(){
-    
+
+    showLoadingMessage();
+
     var user_name = document.getElementById("txtName").value;
     var user_reasons = [];
 
@@ -269,4 +271,21 @@ function pairingPeople(){
     //     console.log("Paired with "+pairedElem.paired_attendee_name+" for "+pairedElem.paired_reason_name);
     // })
 
+}
+
+function showLoadingMessage(){
+
+    $("#welcome-ftx").hide();
+    $("#separator-line").hide();
+    $("#ui-name").hide();
+    $("#ui-tags").hide();
+    $("#ui-cta").hide();
+
+    $("#loading-msg").show();
+    $("#loading-cta").show();
+    $("#input-pane").addClass("test");
+
+    
+
+    
 }
