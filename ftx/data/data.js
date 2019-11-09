@@ -90,6 +90,15 @@ let dataset = {
             experience: 3.5,
             reasons: [1,2,4],
             pair_freq: 0
+        },{
+            attendee_id: 6,
+            name: "rahul chandh",
+            photo: "data/images/rahulchandh.jpg",
+            designation: "Info designer",
+            company: 3,
+            experience: 3.5,
+            reasons: [0,1],
+            pair_freq: 0
         }
     ]
 }
