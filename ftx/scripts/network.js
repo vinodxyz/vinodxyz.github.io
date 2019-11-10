@@ -32,6 +32,7 @@ function computeLinkData(){
 
 }
 
+
 computeLinkData();
 
 
@@ -95,9 +96,11 @@ function computeLinks(){
                 .join(
                     enter => enter.append("line")
                     .attr("fill", "none")
-                    .attr("stroke", "white")
+                    .attr("stroke", function(d){ return returnColor(d.target.reason_id);})
                     .attr("stroke-width", 1)
-                    //.style("mix-blend-mode", "multiply")
+                    .attr("opacity", "1")
+                    .attr("stroke-dasharray","2,2")
+                    .style("mix-blend-mode", "multiply")
                     .call(function(link) { 
                         link.transition().attr("stroke-opacity", 0.2); 
                     }),
@@ -110,13 +113,16 @@ function computeLinks(){
 computeLinks();
 simulatePeople.force("link").links(links);
 
+
 function computeReasonLabels(){
     lblReason = lblReason.data(reasons, function(d) { return d.reason_name;})
                             .join(
                                 enter => enter.append("text")
                                 .attr("id", function(d) { return "label-"+d.reason_name.replace(/\s/g,''); })
-                                .attr("fill","white")
-                                .text(function(d) { return d.reason_name; }),
+                                .attr("fill", function(d){ return d.reason_color; })
+                                .attr("opacity","0.8")
+                                .text(function(d) { return properCase(d.reason_name); })
+                                .attr("font-size","12px"),
                                 
                                 update => update
                                     .attr("fill", "gray")
@@ -148,25 +154,27 @@ function ticked() {
     label.attr("x", function(d) { return d.x; })
         .attr("y", function(d) { return d.y+20; });
 
-    lblReason.attr("x", function(d) { return d.x; })
-            .attr("y", function(d) { return d.y+20; });
+    lblReason.attr("x", function(d) { return d.x - 25; })
+            .attr("y", function(d) { return d.y + 5; });
 }
 
 
 
 var simulateReasons = d3.forceSimulation(reasons)
                             .force("x2", d3.forceX()).force("center", d3.forceCenter(-width+200,0))
-                            .force("charge", d3.forceManyBody().strength(-80))
+                            .force("charge", d3.forceManyBody().strength(-700))
                             .alpha(0.01)
                             .alphaTarget(1)
                             .on("tick", ticked_reasons);
 
 reason = reason.data(reasons, function(d) { return d;})
                 .join(
-                    enter => enter.append("rect")
-                    .attr("fill", "white")
-                    .attr("height", rectHeight)
-                    .attr("width", rectWidth)
+                    enter => enter.append("circle")
+                    .attr("fill", function(d){ return d.reason_color; })
+                    .attr("fill-opacity", 0.1)
+                    .attr("stroke", function(d){ return d.reason_color; })
+                    .attr("stroke-dasharray","2,2")
+                    .attr("r", 50)
                     .attr("id", function(d){ return d.reason_name;}),
                     
                     update => update
@@ -175,6 +183,11 @@ reason = reason.data(reasons, function(d) { return d;})
             
 
 function ticked_reasons() {
-    reason.attr("x", function(d) { return d.x = Math.max(Math.max(-1*width/2 - radius*4, d.x), Math.min(width/2 - radius, d.x)); })
-            .attr("y", function(d) { return d.y = Math.max(Math.max(-1*height/2 - radius, d.y), Math.min(height/2 - radius, d.y)); });
+    reason.attr("cx", function(d) { return d.x = Math.max(Math.max(-1*width/2 - radius*4, d.x), Math.min(width/2 - radius, d.x)); })
+            .attr("cy", function(d) { return d.y = Math.max(Math.max(-1*height/2 - radius, d.y), Math.min(height/2 - radius, d.y)); });
 }
+
+
+function properCase(str) {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+};

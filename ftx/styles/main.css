@@ -175,7 +175,7 @@ body{
 /* more changes are made in autocomplete css */
 
 .easy-autocomplete-container{
-    padding-left: 12px;
+    /* padding-left: 12px; */
     width: 300px!important;
     padding-top:2px;
 }

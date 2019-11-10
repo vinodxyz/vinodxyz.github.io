@@ -358,7 +358,7 @@ function enableConnect(){
     
 }
 
-
+//hardcoding heights of the boxes as there's no time to add calculation logic
 function getPairedHeight(noOfPairs){
     switch(noOfPairs){
         case 1:
