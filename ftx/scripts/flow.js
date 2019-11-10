@@ -1,4 +1,4 @@
-function _initializeChecboxes(){
+function _initializeCheckboxes(){
 
     //For each reason, dynamically generate a custom styled checkbox:
     var tags = document.getElementById("ui-tags");
@@ -72,10 +72,11 @@ function hideLoadernPaired(){
     $("#loading-cta").hide();
     $("#paired-msg").hide();
     $("#paired-list").hide();
+    $("#paired-cta").hide();
 }
 
-function _initializeComponents(){
-    _initializeChecboxes();
+function _initializeComponents(){    
+    _initializeCheckboxes();
     hideLoadernPaired();
     autoComplete();
 }
@@ -171,6 +172,7 @@ function pairingPeople(){
     $("#input-pane").addClass("increase-height");
     $("#loading-msg").hide();
     $("#loading-cta").hide();
+    $("#input-pane").removeClass("reduce-height");
 
     var newestUser = nodes[nodes.length-1];
     var newestReasons = newestUser.reasons;
@@ -189,7 +191,8 @@ function pairingPeople(){
 
             if((person.reasons.indexOf(newReason) != -1) && 
             (newestUser.attendee_id != person.attendee_id)){
-                person.pair_freq = person.pair_freq+1;
+
+                person.pair_freq = person.pair_freq + 1;
                 pairedArr.push({
                     "paired_attendee_id": person.attendee_id,
                     "paired_attendee_name": person.name,
@@ -210,8 +213,6 @@ function pairingPeople(){
     var p = 1;
 
     pairedArr.forEach(function(pairedElem){
-
-        //console.log("Paired with "+pairedElem.paired_attendee_name+" for "+pairedElem.paired_reason_name);
         
         var p_div = document.createElement("div");
         p_div.id = "pair-"+p;
@@ -223,6 +224,7 @@ function pairingPeople(){
         newlyCreatedDiv.appendChild(p_img);
         $("#pair-img-"+p).addClass("pair-img");
         $("#pair-img-"+p).attr("src","data/images/"+pairedElem.paired_attendee_name+".jpg");
+        $("#pair-img-"+p).css("border","2px solid "+returnColor(pairedElem.paired_reason_id));
 
         var p_name = document.createElement("span");
         p_name.id = "pair-name-"+p;
@@ -235,6 +237,7 @@ function pairingPeople(){
         newlyCreatedDiv.appendChild(p_reason);
         $("#pair-reason-"+p).addClass("pair-reason");
         $("#pair-reason-"+p).text(pairedElem.paired_reason_name);
+        $("#pair-reason-"+p).css("background", returnColor(pairedElem.paired_reason_id));
 
         newlyCreatedDiv.appendChild(document.createElement("br"));
 
@@ -247,16 +250,63 @@ function pairingPeople(){
         p++;
     })
 
-    //\Varying result msg
+    //Varying paired header - basically add non-monotonous final msg here
     var paired_header_list = ["Woohoo 🎉", "Ta-da 🔆","✨ Shazam ✨","Yaay 🎊","Bazinga ❄️","Yipee-ka-yay 🎆", "Hooray 🥳", "Yahoooooo 🥳", "Ahaaa 🤩", "Matches found ✅" ];
     var paired_header = paired_header_list[Math.floor(Math.random() * paired_header_list.length)];
-    console.log(paired_header);
     $("#paired-header").text(paired_header);
     $("#paired-msg").show();
 
-    setTimeout(function(){$("#paired-list").show();}, 1000);
+    setTimeout(function(){
+        $("#paired-list").show();
+        $("#paired-cta").show();
+    }, 1000);
     
-    //document.getElementById("lblPairMsg").innerHTML = "You've been paired with " + pairedArr[pairedArr.length-1].paired_attendee_name + " for " + pairedArr[pairedArr.length-1].paired_reason_name;
+}
+
+//Reset the view after finishing the flow
+function restart(){
+
+    $("#input-pane").removeClass("increase-height");
+    $("#txtName").val("");
+
+    //Uncheck all checkboxes
+    var tags = $("#ui-tags").find("input");
+    for(var c=0; c<tags.length; c++){
+        tags[c].checked = false;
+
+        //(c+1) because of a screw-up. Checkboxe elements start with '1' (can be changed) but their css-styles are hardcoded (neither dynamic nor scss :/) 
+        //But, objs/arrays/~computing~ starts with 0 (duh). So, it's either add a dirty (c+1) below or go change css. I have no time :/
+        $("#group-tag"+(c+1)).removeClass("cb-group-"+(c+1)+"-checked");
+    }
+
+    $("#paired-header").text("");
+    $("#paired-body").text("");
+    $("#paired-list").empty();
+
+    hideLoadernPaired();
+
+    $("#paired-cta").hide();
+    $("#welcome-ftx").show();
+    $("#separator-line").show();
+    $("#ui-name").show();
+    $("#ui-tags").show();
+    $("#ui-cta").show();
+    
 
 }
 
+
+//Used to set colors based on reason for the img and reason-tag on the final paired list
+function returnColor(reasonid){
+
+    var color = "white";
+
+    for(var i=0; i<reasons.length; i++){
+        if(reasons[i].reason_id == reasonid){
+            color = reasons[i].reason_color;
+        }
+    }
+
+    return color;
+
+}

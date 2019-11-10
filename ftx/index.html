@@ -20,19 +20,8 @@
             
         </div>
         <div id="ftx-ui" class="ftx-grid">
-            
-            <!-- <div id="groupName">
-                <label id="lblName">Name</label>
-                <input type="text" id="txtName"><br>
-            </div>
-            <div id="groupTags">
-                <div id="pushToggles"></div>
-                <input type="submit" value="Submit" onclick="addEntry()">
-            </div>
-            <div id="groupPairs">
-                <div id="lblPairMsg"></div>
-            </div> -->
 
+            <!-- Step 1: Name and tags -->
             <div id="input-pane">
                 <div id="ftx-sign"><img src="svg/ftx-sign.svg"/></div>
                 <div id="welcome-ftx" class="welcome-msg">
@@ -49,12 +38,12 @@
                 </div>
                 <div id="ui-tags">
                     <label id="lblTags">What are you here for?</label>
-                    <!-- <span id="group-tag1" class="cb-group-1st" onclick="highlightTags();"><input type="checkbox" id="tag1" class="cb-1st" value="Boat" unchecked onclick="highlightTags();"><span class="cb-label-1st">socialize</span></span> -->
                 </div>
                 <div id="ui-cta">
                     <input type="button" id="btn-connect" value="Connect me" onclick="addEntry();">
                 </div>
-
+            
+            <!-- Step 2: Loading... -->
                 <div id="loading-msg" class="welcome-msg">
                     <span class="welcome-header">⏳ Please hold on for a second ...</span><br>
                     <span class="welcome-body">We’re finding people who’re here for similar reasons.</span>
@@ -69,28 +58,19 @@
                     </div>
                 </div>
 
+            <!-- Step 3: Paired with someone -->
                 <div id="paired-msg" class="welcome-msg">
                     <span id="paired-header" class="welcome-header"></span> <br>
                     <span id="paired-body" class="welcome-body"></span>
                 </div>
+                
+                <div id="paired-list"></div>
 
-                <div id="paired-list">
-                    <!-- <div id="pair-0">
-                        <img id="pair-img-0" class="pair-img" src="data/images/chetty.jpg">
-                        <span id="pair-name-0" class="pair-name">Chetty Arun</span>
-                        <span id="pair-reason-0" class="pair-reason">socialize</span><br>
-                        <span id="pair-role-0" class="pair-role">Design lead, Razorpay</span>
-                    </div> -->
+                <div id="paired-cta">
+                    <input type="button" id="btn-restart" value="Start again" onclick="restart();">
                 </div>
 
             </div>
-
-            
-
-
-            <!-- <div id="groupPairs">
-                    <div id="lblPairMsg"></div>
-            </div> -->
 
         </div>
     </div>

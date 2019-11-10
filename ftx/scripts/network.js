@@ -13,7 +13,6 @@ var links = [];
 var bilinks = [];
 
 //Generate link data recursively for each node ;)
-
 function computeLinkData(){
     for(var i=0; i<nodes.length; i++){
         for(var j=0; j<nodes[i].reasons.length; j++){

@@ -242,5 +242,27 @@ body{
     font-size: 14px;
     opacity: 0.5;
     margin-top: 10px;
-    margin-bottom: 35px;
+    margin-bottom: 30px;
+}
+
+#btn-restart{
+    -webkit-appearance: none;
+    font-size: 16px;
+    color: white;
+    width: 120px;
+    height: 35px;
+    background-color: #491997;
+    border: 0;
+    margin-top: 20px;
+    border-radius: 1px;
+    cursor: pointer;
+}
+
+#btn-restart:hover:not(:disabled){
+    background-color: #42148C;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+#btn-restart:disabled{
+    opacity: 0.5;
 }
