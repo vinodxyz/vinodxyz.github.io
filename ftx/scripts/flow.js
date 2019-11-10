@@ -152,6 +152,7 @@ function addEntry(){
 
 }
 
+
 function showLoadingMessage(){
     $("#welcome-ftx").hide();
     $("#separator-line").hide();
@@ -203,32 +204,6 @@ function pairingPeople(){
 
     }
 
-
-
-    // var span = document.createElement("span");
-    // span.id = "group-tag"+i;
-    // div.appendChild(span);
-    // $("#group-tag"+i).addClass("cb-group-"+i);
-    // $("#group-tag"+i).attr('onclick', 'highlightTags(\"'+reasons[tag].tag_id+','+i+'\");');
-
-    // var newlyCreatedSpan = document.getElementById("group-tag"+i);
-    // var checkbox = document.createElement("input");
-    // checkbox.type = "checkbox";
-    // checkbox.id = reasons[tag].tag_id;
-    // newlyCreatedSpan.appendChild(checkbox);
-    // $("#"+reasons[tag].tag_id).checked = false;
-    // $("#"+reasons[tag].tag_id).addClass("cb-"+i);
-    // $("#"+reasons[tag].tag_id).attr('onclick', 'highlightTags(\"'+reasons[tag].tag_id+','+i+'\");');
-
-    // DONE <div id="paired-list">
-    //     DONE <div id="pair-1">
-    //         DONE <img id="pair-img-1" class="pair-img" src="data/images/chetty.jpg">
-    //         DONE <span id="pair-name-1" class="pair-name">Chetty Arun</span>
-    //         DONE <span id="pair-reason-1" class="pair-reason">socialize</span><br>
-    //         <span id="pair-role-1" class="pair-role">Design lead, Razorpay</span>
-    //     </div>
-    // </div>
-
     $("#paired-body").text(newestUser.name+", we’ve found "+pairedArr.length+" people whom you can connect with.");
 
     var paired_list = document.getElementById("paired-list");
@@ -272,9 +247,14 @@ function pairingPeople(){
         p++;
     })
 
-
+    //\Varying result msg
+    var paired_header_list = ["Woohoo 🎉", "Ta-da 🔆","✨ Shazam ✨","Yaay 🎊","Bazinga ❄️","Yipee-ka-yay 🎆", "Hooray 🥳", "Yahoooooo 🥳", "Ahaaa 🤩", "Matches found ✅" ];
+    var paired_header = paired_header_list[Math.floor(Math.random() * paired_header_list.length)];
+    console.log(paired_header);
+    $("#paired-header").text(paired_header);
     $("#paired-msg").show();
-    $("#paired-list").show();
+
+    setTimeout(function(){$("#paired-list").show();}, 1000);
     
     //document.getElementById("lblPairMsg").innerHTML = "You've been paired with " + pairedArr[pairedArr.length-1].paired_attendee_name + " for " + pairedArr[pairedArr.length-1].paired_reason_name;
 
