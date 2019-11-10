@@ -31,7 +31,7 @@ let reasons = [
     }
 ];
 
-let companies = ["Razorpay", "Infosys", "Moonraft"];
+// let companies = ["Razorpay", "Infosys", "Moonraft", "NPCI"];
 
 
 let dataset = {
@@ -41,7 +41,7 @@ let dataset = {
             name: "vinod",
             photo: "data/images/vinod.jpg",
             designation: "Product designer",
-            company: 0,
+            company: "Razorpay",
             experience: 6,
             reasons: [0, 2, 3],
             pair_freq: 0
@@ -51,7 +51,7 @@ let dataset = {
             name: "snehal",
             photo: "data/images/snehal.jpg",
             designation: "UX designer",
-            company: 1,
+            company: "Infosys",
             experience: 5,
             reasons: [0, 4],
             pair_freq: 0
@@ -61,7 +61,7 @@ let dataset = {
             name: "chetty",
             photo: "data/images/chetty.jpg",
             designation: "Design lead",
-            company: 0,
+            company: "Razorpay",
             experience: 6,
             reasons: [1,4],
             pair_freq: 0
@@ -71,7 +71,7 @@ let dataset = {
             name: "prajna",
             photo: "data/images/prajna.jpg",
             designation: "Interaction designer",
-            company: 2,
+            company: "Moonraft",
             experience: 1.5,
             reasons: [2,4],
             pair_freq: 0
@@ -80,8 +80,8 @@ let dataset = {
             attendee_id: 4,
             name: "modi",
             photo: "data/images/modi.jpg",
-            designation: "Some designer",
-            company: 1,
+            designation: "UX designer",
+            company: "Senseforth",
             experience: 1.5,
             reasons: [0,4],
             pair_freq: 0
@@ -90,8 +90,8 @@ let dataset = {
             attendee_id: 5,
             name: "prasanta",
             photo: "data/images/prasanta.jpg",
-            designation: "Info designer",
-            company: 3,
+            designation: "Information designer",
+            company: "Thomson Reuters",
             experience: 3.5,
             reasons: [1,2,4],
             pair_freq: 0
@@ -100,8 +100,8 @@ let dataset = {
             attendee_id: 6,
             name: "rahulchandh",
             photo: "data/images/rahulchandh.jpg",
-            designation: "Info designer",
-            company: 3,
+            designation: "Senior Visual designer",
+            company: "Razorpay",
             experience: 3.5,
             reasons: [0,1],
             pair_freq: 0
@@ -110,10 +110,60 @@ let dataset = {
             attendee_id: 7,
             name: "saikiran",
             photo: "data/images/saikiran.jpg",
-            designation: "Info designer",
-            company: 3,
+            designation: "Front End Developer",
+            company: "Razorpay",
             experience: 3.5,
             reasons: [1,3],
+            pair_freq: 0
+        },
+        {
+            attendee_id: 8,
+            name: "anuj",
+            photo: "data/images/anuj.jpg",
+            designation: "Deputy Policy Maker",
+            company: "NPCI",
+            experience: 3.5,
+            reasons: [1,2,3,4],
+            pair_freq: 0
+        },
+        {
+            attendee_id: 9,
+            name: "Chandru Arum",
+            photo: "data/images/chandruarum.jpg",
+            designation: "Product designer",
+            company: "Swiggy",
+            experience: 3.5,
+            reasons: [1],
+            pair_freq: 0
+        },
+        {
+            attendee_id: 10,
+            name: "Anupriya",
+            photo: "data/images/anupriya.jpg",
+            designation: "Senior Visual Designer",
+            company: "Zomato",
+            experience: 3.5,
+            reasons: [2,3],
+            pair_freq: 0
+        },
+        {
+            attendee_id: 11,
+            name: "Sampada",
+            photo: "data/images/sampada.jpg",
+            designation: "Visual Designer",
+            company: "cure.fit",
+            experience: 3.5,
+            reasons: [3,4],
+            pair_freq: 0
+        },
+        {
+            attendee_id: 12,
+            name: "Muthu",
+            photo: "data/images/muthu.jpg",
+            designation: "Marketing",
+            company: "Razorpay",
+            experience: 3.5,
+            reasons: [1,2,3,4],
             pair_freq: 0
         }
     ]

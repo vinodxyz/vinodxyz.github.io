@@ -76,6 +76,10 @@ function hideLoadernPaired(){
 }
 
 function _initializeComponents(){    
+
+    $("#btn-connect").attr("disabled", true);
+    $("#ui-cta").attr("data-tooltip","Name & reason plis? 😛");
+
     _initializeCheckboxes();
     hideLoadernPaired();
     autoComplete();
@@ -97,6 +101,10 @@ function highlightTags(vals){
         $(".cb-group-"+count).addClass("cb-group-"+count+"-checked");
         $(".cb-label-"+count).addClass("cb-label-"+count+"-checked");
     }
+
+    //Trigger to check if connect-cta can be enabled when checkbox is touched. 
+    //Basically, if at least one checkbox is selected, cta is enabled.
+    enableConnect();
 }
 
 
@@ -169,11 +177,6 @@ function showLoadingMessage(){
 
 function pairingPeople(){
 
-    $("#input-pane").addClass("increase-height");
-    $("#loading-msg").hide();
-    $("#loading-cta").hide();
-    $("#input-pane").removeClass("reduce-height");
-
     var newestUser = nodes[nodes.length-1];
     var newestReasons = newestUser.reasons;
     var sortedUsers = nodes.sort(function(a, b){
@@ -197,7 +200,9 @@ function pairingPeople(){
                     "paired_attendee_id": person.attendee_id,
                     "paired_attendee_name": person.name,
                     "paired_reason_id": newReason,
-                    "paired_reason_name": newReasonName
+                    "paired_reason_name": newReasonName,
+                    "paired_role": person.designation,
+                    "paired_org": person.company
                 });
 
                 break;
@@ -245,10 +250,17 @@ function pairingPeople(){
         p_role.id = "pair-role-"+p;
         newlyCreatedDiv.appendChild(p_role);
         $("#pair-role-"+p).addClass("pair-role");
-        $("#pair-role-"+p).text(pairedElem.paired_reason_name+", "+"Razorpay");
+        $("#pair-role-"+p).text(pairedElem.paired_role+", "+pairedElem.paired_org);
 
         p++;
     })
+
+
+    $("#input-pane").css("height",getPairedHeight(pairedArr.length));
+    $("#input-pane").addClass("increase-height");
+    $("#loading-msg").hide();
+    $("#loading-cta").hide();
+    $("#input-pane").removeClass("reduce-height");
 
     //Varying paired header - basically add non-monotonous final msg here
     var paired_header_list = ["Woohoo 🎉", "Ta-da 🔆","✨ Shazam ✨","Yaay 🎊","Bazinga ❄️","Yipee-ka-yay 🎆", "Hooray 🥳", "Yahoooooo 🥳", "Ahaaa 🤩", "Matches found ✅" ];
@@ -266,7 +278,10 @@ function pairingPeople(){
 //Reset the view after finishing the flow
 function restart(){
 
+    // $("#input-pane").css("height","600px");
     $("#input-pane").removeClass("increase-height");
+    $("#input-pane").css("height","");
+    $("#input-pane").addClass("default-height");
     $("#txtName").val("");
 
     //Uncheck all checkboxes
@@ -292,6 +307,7 @@ function restart(){
     $("#ui-tags").show();
     $("#ui-cta").show();
     
+    enableConnect();
 
 }
 
@@ -309,4 +325,53 @@ function returnColor(reasonid){
 
     return color;
 
+}
+
+
+// Enable connect CTA when name is entered and tags are filled
+$("#txtName").on("keyup", function(){enableConnect();});
+$("#txtName").on("change", function(){enableConnect();});
+//Checkbox's trigger is in highlighttags()
+
+function enableConnect(){
+
+    var nameLength = $("#txtName").val().length;
+    var isTagSelected = false;
+
+    var tags = $("#ui-tags").find("input");
+    for(var c=0; c<tags.length; c++){
+        if(tags[c].checked){
+            isTagSelected = true;
+            break;
+        } else{
+            isTagSelected = false;
+        }
+    }
+
+    if((nameLength>=3) && (isTagSelected)){
+        $("#btn-connect").attr("disabled", false);
+        $("#ui-cta").removeAttr("data-tooltip");
+    }else{
+        $("#btn-connect").attr("disabled", true);
+        $("#ui-cta").attr("data-tooltip","Name & reason plis? 😛");
+    }
+    
+}
+
+
+function getPairedHeight(noOfPairs){
+    switch(noOfPairs){
+        case 1:
+            return "390px";
+        case 2:
+            return "470px";
+        case 3:
+            return "550px";
+        case 4:
+            return "630px";
+        case 5:
+            return "710px";
+        default:
+            return "600px";
+    }
 }

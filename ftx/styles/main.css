@@ -32,7 +32,7 @@ body{
 
 #input-pane{
     margin-right: 40px;
-    margin-top: 200px;
+    margin-top: 150px;
     width: 430px;
     height: 600px;
     background: linear-gradient(214.63deg, rgba(58, 6, 125, 0.4) 10.07%, rgba(42, 8, 102, 0.4) 89.85%);
@@ -49,6 +49,10 @@ body{
 #input-pane.increase-height{
     -webkit-transition: height 1s; /* For Safari 3.1 to 6.0 */
     transition: height 1s;
+    height: 600px;
+}
+
+.default-height{
     height: 600px;
 }
 
@@ -165,6 +169,7 @@ body{
 
 #btn-connect:disabled{
     opacity: 0.5;
+    cursor: not-allowed;
 }
 
 /* more changes are made in autocomplete css */
@@ -265,4 +270,62 @@ body{
 
 #btn-restart:disabled{
     opacity: 0.5;
+}
+
+
+
+[data-tooltip] {
+	position: relative;
+	z-index: 3;
+	cursor: pointer;
+}
+
+/* Hide the tooltip content by default */
+[data-tooltip]:before,
+[data-tooltip]:after {
+	visibility: hidden;
+	opacity: 0;
+	pointer-events: none;
+}
+
+/* Position tooltip above the element */
+[data-tooltip]:before {
+	position: absolute;
+	top: 23px;
+	left: 210px;
+	margin-bottom: 5px;
+	margin-left: -80px;
+	padding: 7px;
+	width: 130px;
+	border-radius: 2px;
+    background-color: rgb(25, 5, 63);
+    border: 1px solid rgba(67, 15, 130);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+	color: #fff;
+	content: attr(data-tooltip);
+	text-align: left;
+	font-size: 12px;
+	line-height: 1.2;
+}
+
+/* Triangle */
+[data-tooltip]:after {
+	position: absolute;
+	top: 35px;
+	left: 130px;
+	margin-left: -10px;
+    width: 0;
+	border-right: 10px solid rgba(67, 15, 130);
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    content: "";
+    font-size: 0;
+    line-height: 0;
+}
+
+/* Show tooltip content on hover */
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after {
+	visibility: visible;
+	opacity: 1;
 }
