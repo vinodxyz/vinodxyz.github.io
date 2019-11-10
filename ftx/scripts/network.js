@@ -56,19 +56,26 @@ var simulatePeople = d3.forceSimulation(nodes)
                     .force("charge", d3.forceManyBody().strength(-1000))
                     .force("collide", d3.forceCollide().strength(1))
                     .force("r", d3.forceRadial(100).strength(1))
-                    .force("link", d3.forceLink(links).distance(80).strength(1))
-                    .alpha(0.1)
-                    .alphaDecay(0.0001)
+                    .force("link", d3.forceLink(links).strength(1))
+                    .alpha(0.01)
+                    .alphaDecay(0.001)
                     .on("tick", ticked);
+
+
+
+function getRandomMark(){
+    var allMarks = [1,2,3];
+    return allMarks[Math.floor(Math.random() * allMarks.length)];
+};
 
 function computeNodes(){
     node = node.data(nodes, function(d) { return d.attendee_id;})
             .join(
-                enter => enter.append("circle")
-                .attr("fill", "#FFC802")
-                .attr("r", 10)
-                .attr("id", function(d){ return d.name;})
-                .attr("opacity", 0.3),
+                enter => enter.append("image")
+                // .attr("fill", "#FFC802")
+                // .attr("r", 10)
+                .attr("href", function(d){return "data/marks/mark-"+getRandomMark()+".svg"})
+                .attr("id", function(d){ return d.name;}),
                 
                 update => update
                     .attr("fill", "gray")
@@ -82,7 +89,9 @@ function computePeopleLabels(){
                 enter => enter.append("text")
                 .attr("id", function(d) { return "label-"+d.name.replace(/\s/g,''); })
                 .attr("fill","white")
-                .text(function(d) { return d.name; }),
+                .attr("font-size","12px")
+                .attr("opacity","0.5")
+                .text(function(d) { return properCase(d.name); }),
                 
                 update => update
                     .attr("fill", "gray")
@@ -100,7 +109,7 @@ function computeLinks(){
                     .attr("stroke-width", 1)
                     .attr("opacity", "1")
                     .attr("stroke-dasharray","2,2")
-                    .style("mix-blend-mode", "multiply")
+                    // .style("mix-blend-mode", "multiply")
                     .call(function(link) { 
                         link.transition().attr("stroke-opacity", 0.2); 
                     }),
@@ -130,29 +139,31 @@ function computeReasonLabels(){
 }    
 computeReasonLabels();
 
-function positionLink(d) {
-    return "M" + d[0].x + "," + d[0].y
-         + "S" + d[1].x + "," + d[1].y
-         + " " + d[2].x + "," + d[2].y;
-  }
+// function positionLink(d) {
+//     return "M" + d[0].x + "," + d[0].y
+//          + "S" + d[1].x + "," + d[1].y
+//          + " " + d[2].x + "," + d[2].y;
+//   }
 
 function ticked() {
     
-    // node.attr("cx", function(d) { return d.x; })
-    //     .attr("cy", function(d) { return d.y; });
-    node.attr("cx", function(d) { return d.x = Math.max(Math.max(-1*width/2 - radius*4, d.x), Math.min(width/2 - radius, d.x)); })
-        .attr("cy", function(d) { return d.y = Math.max(Math.max(-1*height/2 - radius, d.y), Math.min(height/2 - radius, d.y)); });
+    node.attr("x", function(d) { return d.x; })
+        .attr("y", function(d) { return d.y; })
+        .attr("transform",function(d) { return "rotate("+d.x+","+d.x+","+d.y+")"; });
+
+    // node.attr("x", function(d) { return d.x = Math.max(Math.max(-1*width/2 - radius*4, d.x), Math.min(width/2 - radius, d.x)); })
+    //     .attr("y", function(d) { return d.y = Math.max(Math.max(-1*height/2 - radius, d.y), Math.min(height/2 - radius, d.y)); });
 
     link.attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return d.source.y; })
-        .attr("x2", function(d) { return d.target.x + rectWidth/2; })
-        .attr("y2", function(d) { return d.target.y + rectHeight/2; });
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
 
     reason.attr("cx", function(d) { return d.x = Math.max(Math.max(-1*width/2 - radius*4, d.x), Math.min(width/2 - radius, d.x)); })
         .attr("cy", function(d) { return d.y = Math.max(Math.max(-1*height/2 - radius, d.y), Math.min(height/2 - radius, d.y)); });
 
     label.attr("x", function(d) { return d.x; })
-        .attr("y", function(d) { return d.y+20; });
+        .attr("y", function(d) { return d.y+10; });
 
     lblReason.attr("x", function(d) { return d.x - 25; })
             .attr("y", function(d) { return d.y + 5; });
@@ -162,8 +173,8 @@ function ticked() {
 
 var simulateReasons = d3.forceSimulation(reasons)
                             .force("x2", d3.forceX()).force("center", d3.forceCenter(-width+200,0))
-                            .force("charge", d3.forceManyBody().strength(-700))
-                            .alpha(0.01)
+                            .force("charge", d3.forceManyBody().strength(-100))
+                            .alpha(0.001)
                             .alphaTarget(1)
                             .on("tick", ticked_reasons);
 
@@ -182,9 +193,12 @@ reason = reason.data(reasons, function(d) { return d;})
                 );
             
 
+// console.log(width);
+// console.log(height);
+
 function ticked_reasons() {
     reason.attr("cx", function(d) { return d.x = Math.max(Math.max(-1*width/2 - radius*4, d.x), Math.min(width/2 - radius, d.x)); })
-            .attr("cy", function(d) { return d.y = Math.max(Math.max(-1*height/2 - radius, d.y), Math.min(height/2 - radius, d.y)); });
+            .attr("cy", function(d) { return d.y = Math.min(height/2.5 - radius, d.y + 80); });
 }
 
 
