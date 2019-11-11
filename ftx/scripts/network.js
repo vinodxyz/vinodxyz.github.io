@@ -79,9 +79,29 @@ function computeNodes(){
                 
                 update => update
                     .attr("fill", "gray")
-            );
+            ).call(d3.drag()
+            .on("start", dragStarted)
+            .on("drag", dragging)
+            .on("end", dragEnded));
 }    
 computeNodes();
+
+function dragStarted(d) {
+    if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+    d.fx = d.x;
+    d.fy = d.y;
+}
+
+function dragging(d) {
+    d.fx = d3.event.x;
+    d.fy = d3.event.y;
+}
+
+function dragEnded(d) {
+    if (!d3.event.active) simulation.alphaTarget(0);
+    d.fx = null;
+    d.fy = null;
+}
 
 function computePeopleLabels(){
     label = label.data(nodes, function(d) { return d.name;})

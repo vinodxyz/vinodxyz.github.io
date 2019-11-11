@@ -47,7 +47,8 @@ function _initializeCheckboxes(){
 function autoComplete(){
     //Load the options for the name to be autocompleted
     var options = {
-        data: dataset.nodes,
+        //data: dataset.nodes,
+        data: razorpay_staff,
         theme: "dark",
         getValue: "name",
         template: {
