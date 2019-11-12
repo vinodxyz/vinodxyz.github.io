@@ -6,8 +6,8 @@ var rectWidth = 10;
 var rectHeight = 20;
 var linkDistance = 20;
 
-
 // 1. Load data
+
 var nodes = dataset.nodes;
 var links = [];
 var bilinks = [];

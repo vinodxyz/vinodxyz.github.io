@@ -1,3 +1,6 @@
+var jsonID = "dxabm";
+let databackup;
+
 function _initializeCheckboxes(){
 
     //For each reason, dynamically generate a custom styled checkbox:
@@ -84,6 +87,7 @@ function _initializeComponents(){
     _initializeCheckboxes();
     hideLoadernPaired();
     autoComplete();
+    getData();
 }
 
 _initializeComponents();
@@ -108,6 +112,31 @@ function highlightTags(vals){
     enableConnect();
 }
 
+
+function getData(){
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'https://api.myjson.com/bins/'+jsonID,
+        success: function(data) {
+            dataset = data;
+            databackup = JSON.parse(JSON.stringify(data));
+        }
+    });
+}
+
+function saveData(){
+    $.ajax({
+        url:"https://api.myjson.com/bins/"+jsonID,
+        type:"PUT",
+        data:JSON.stringify(dataset),
+        contentType:"application/json; charset=utf-8",
+        dataType:"json",
+        success: function(){
+            //do nothing
+        }
+    });
+}
 
 
 function addEntry(){
@@ -157,6 +186,7 @@ function addEntry(){
     computeLinks();
     computePeopleLabels();
     simulatePeople.force("link", d3.forceLink(links).distance(80+linkDistance).strength(1));
+    saveData();
     
     setTimeout(function(){pairingPeople();}, 3000);
 
