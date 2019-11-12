@@ -1,4 +1,5 @@
 var jsonID = "dxabm";
+var person_img = "";
 let databackup;
 
 function _initializeCheckboxes(){
@@ -69,6 +70,10 @@ function autoComplete(){
     };
 
     $("#txtName").easyAutocomplete(options);
+    $("#eac-container-txtName").click(function(){
+        person_img = $("#eac-container-txtName").find(".selected").find(".eac-icon").attr("src").toString();
+        console.log(person_img);
+    })
 }
 
 function hideLoadernPaired(){
@@ -155,7 +160,7 @@ function addEntry(){
     var newNode = {
         attendee_id: nodes.length,
         name: user_name,
-        photo: "images/"+user_name+".png",
+        photo: person_img,
         designation: "Product designer",
         company: 0,
         experience: 1,
@@ -187,7 +192,7 @@ function addEntry(){
     computePeopleLabels();
     simulatePeople.force("link", d3.forceLink(links).distance(80+linkDistance).strength(1));
     saveData();
-    
+
     setTimeout(function(){pairingPeople();}, 3000);
 
 }
@@ -233,7 +238,8 @@ function pairingPeople(){
                     "paired_reason_id": newReason,
                     "paired_reason_name": newReasonName,
                     "paired_role": person.designation,
-                    "paired_org": person.company
+                    "paired_org": person.company,
+                    "paired_attendee_photo": person.photo
                 });
 
                 break;
@@ -259,7 +265,7 @@ function pairingPeople(){
         p_img.id = "pair-img-"+p;
         newlyCreatedDiv.appendChild(p_img);
         $("#pair-img-"+p).addClass("pair-img");
-        $("#pair-img-"+p).attr("src","data/images/"+pairedElem.paired_attendee_name+".jpg");
+        $("#pair-img-"+p).attr("src",pairedElem.paired_attendee_photo);
         $("#pair-img-"+p).css("border","2px solid "+returnColor(pairedElem.paired_reason_id));
 
         var p_name = document.createElement("span");
