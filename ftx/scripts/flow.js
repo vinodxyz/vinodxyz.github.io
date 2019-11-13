@@ -412,3 +412,22 @@ function getPairedHeight(noOfPairs){
             return "600px";
     }
 }
+
+
+//Display or close the about-modal
+function showAbout(){
+    var modal = document.getElementById("ftx-modal");
+    modal.style.display = "block";
+}
+
+function closeAbout(){
+    var modal = document.getElementById("ftx-modal");
+    modal.style.display = "none";
+}
+
+var modal = document.getElementById("ftx-modal");
+window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }

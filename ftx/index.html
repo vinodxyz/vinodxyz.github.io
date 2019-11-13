@@ -16,7 +16,11 @@
 </head>
 <body>
     <div class="wrapper">
-        <div class="header">FTX visualization</div>
+        <div class="header">
+            <div id="ftx-about" >
+                <img id="about-icon" src="svg/about.svg" onclick="showAbout();">
+            </div>
+        </div>
         <div id="ftx-viz" class="ftx-grid">
             
         </div>
@@ -75,6 +79,36 @@
 
         </div>
     </div>
+
+    <div id="ftx-modal" class="about-modal">
+
+        <div class="modal-content">
+            <div id="ftx-about-close" class="ftx-close-modal" onclick="closeAbout();">
+                <img src="svg/close-icon.svg">
+            </div>
+            <div class="about-header">
+                <img src="svg/accent-mark.svg">
+                <span id="about-title">Can we connect attendees at FTX?</span>
+            </div>
+            <img src="svg/separator.svg">
+            <div class="about-body">
+                <span>
+                        We asked ourselves if there is a way to add even more value to your time here. <br><br>
+                        We’ve created this experimental tool to give you a glimpse of who’s here as well as to help break the ice.<br><br>
+                        Have any suggestions or feedback or loved this? 
+                        <span class="tweet">Tweet with</span> 
+                        <span class="hashtag">#ftxconnect</span>.
+                        We read everything that you’ve to say and it means a lot to us.
+                </span>
+            </div>
+            <div class="about-footer">
+                <span>Made with lots of 😭 & 💖 by</span> 
+                <span id="makers-name">@vinodabcd</span>
+            </div>
+        </div>
+
+    </div>
+
 </body>
 
 <script src="scripts/flow.js"></script>
