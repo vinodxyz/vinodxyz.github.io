@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<head>
+    <title>Thirdwatch graphic</title>
+</head>
+
+<style>
+#tw-gif{
+    width: 500px;
+}
+</style>
+
+<body>
+    <div id="tw-gif"></div>
+</body>
+
+<script src="lottie.js"></script>
+
+<script>
+    var animation = bodymovin.loadAnimation({
+        container: document.getElementById("tw-gif"),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: 'tw.json'
+
+    });
+</script>
+</html>

@@ -1,3 +1,6 @@
+
+//This script mostly covers anything to do with the visualization
+
 var width = document.getElementById("ftx-viz").clientWidth;
 var height = document.getElementById("ftx-viz").clientHeight;
 var radius = -20;
@@ -7,7 +10,6 @@ var rectHeight = 20;
 var linkDistance = 20;
 
 // 1. Load data
-
 var nodes = dataset.nodes;
 var links = [];
 var bilinks = [];
@@ -212,9 +214,6 @@ reason = reason.data(reasons, function(d) { return d;})
                         .attr("fill", "gray")
                 );
             
-
-// console.log(width);
-// console.log(height);
 
 function ticked_reasons() {
     reason.attr("cx", function(d) { return d.x = Math.max(Math.max(-1*width/2 - radius*4, d.x), Math.min(width/2 - radius, d.x)); })

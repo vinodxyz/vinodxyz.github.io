@@ -1,4 +1,5 @@
 var jsonID = "dxabm";
+// var jsonID = "9r8e6";
 var person_img = "";
 let databackup;
 
@@ -302,6 +303,10 @@ function pairingPeople(){
     //Varying paired header - basically add non-monotonous final msg here
     var paired_header_list = ["Woohoo 🎉", "Ta-da 🔆","✨ Shazam ✨","Yaay 🎊","Bazinga ❄️","Yipee-ka-yay 🎆", "Hooray 🥳", "Yahoooooo 🥳", "Ahaaa 🤩", "Matches found ✅" ];
     var paired_header = paired_header_list[Math.floor(Math.random() * paired_header_list.length)];
+    
+    var no_paired_header_list = ["NOOOOO! ⛔", "What?! 🍁", "Not yet 😭", "You're early 🌟", ""]
+    var no_paired_header = no_paired_header_list[Math.floor(Math.random() * no_paired_header_list.length)];
+
     $("#paired-header").text(paired_header);
     $("#paired-msg").show();
 
@@ -326,7 +331,7 @@ function restart(){
     for(var c=0; c<tags.length; c++){
         tags[c].checked = false;
 
-        //(c+1) because of a screw-up. Checkboxe elements start with '1' (can be changed) but their css-styles are hardcoded (neither dynamic nor scss :/) 
+        //(c+1) because of a screw-up. Checkbox elements start with '1' (can be changed) but their css-styles are hardcoded (neither dynamic nor scss :/) 
         //But, objs/arrays/~computing~ starts with 0 (duh). So, it's either add a dirty (c+1) below or go change css. I have no time :/
         $("#group-tag"+(c+1)).removeClass("cb-group-"+(c+1)+"-checked");
     }
