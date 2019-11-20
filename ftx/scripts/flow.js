@@ -87,6 +87,7 @@ function hideLoadernPaired(){
 
 function _initializeComponents(){    
 
+    $("#viz-tooltip").hide();
     $("#btn-connect").attr("disabled", true);
     $("#ui-cta").attr("data-tooltip","Name & reason plis? 😛");
 
