@@ -1,6 +1,6 @@
-//var jsonID = "fi3b2";
+// var jsonID = "fi3b2";
  var jsonID = "mwoj2";
-// var jsonID = "9r8e6";
+//var jsonID = "9r8e6";
 var person_img = "";
 let databackup;
 
@@ -359,6 +359,7 @@ function pairingPeople(){
 //Reset the view after finishing the flow
 function restart(){
 
+    pairedArr = [];
     simulatePeople.alphaTarget(0.1).restart();
     simulateReasons.alphaTarget(0.1).restart();
 

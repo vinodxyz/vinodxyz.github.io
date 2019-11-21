@@ -66,10 +66,11 @@ var simulatePeople = d3.forceSimulation(nodes)
 
 simulatePeople.force("link").links(links);
 
+//d3.forceCollide(12).strength(1).iterations(100)
 var simulateReasons = d3.forceSimulation(reasons)
                             .force("x2", d3.forceX()).force("center2", d3.forceCenter(-width+200,0))
                             .force("charge2", d3.forceManyBody().strength(-1000))
-                            .force("collide2", d3.forceCollide().strength(200))
+                            .force("collide2", d3.forceCollide().strength(1).radius(function(d){ return 70; }))
                             .alphaTarget(0)
                             .on("tick", ticked_reasons);
 
@@ -83,11 +84,13 @@ function computeNodes(){
             .join(
                 enter => enter.append("image")
                 // .attr("fill", "#FFC802")
-                // .attr("r", 10)
                 .attr("href", function(d){return "data/marks/mark-"+getRandomMark()+".svg"})
+                .style("transform","translate(-10px,-20px)")
                 .attr("id", function(d){ return "nodeppl-"+d.attendee_id;})
                 .attr("class","people-node")
-                .style("cursor", "pointer")
+                .attr("width","50px")
+                .attr("height","50px")
+                //.style("cursor", "pointer")
                 ,
                 
                 update => update.attr("fill","gray")
@@ -116,7 +119,7 @@ function showWho() {
     $("#viz-tooltip").show();
     var tooltip = $("#viz-tooltip");
     tooltip.css("position","absolute");
-    tooltip.css("left",width/2 + this.x.animVal.value + 30);
+    tooltip.css("left",width/2 + this.x.animVal.value + 100);
     tooltip.css("top", height/2 + this.y.animVal.value + 60);
 
     var user = getUserbyId(this.id.replace("nodeppl-",""));
@@ -305,7 +308,10 @@ computeReasons();
 
 function ticked_reasons() {
     reason.attr("cx", function(d) { return d.x = Math.max(Math.max(-1*width/2 - radius*4, d.x), Math.min(width/2 - radius, d.x)); })
-            .attr("cy", function(d) { return d.y = Math.min(height/2.5 - radius, d.y + 80); });
+            .attr("cy", function(d) { return d.y; });
+
+    //reason.attr("cx", function(d) { return d.x = Math.max(Math.max(-1*width/2 - radius*4, d.x), Math.min(width/2 - radius, d.x)); })
+            //.attr("cy", function(d) { return d.y = Math.min(height/2.5 - radius, d.y + 80); });
 }
 
 
@@ -393,8 +399,8 @@ function highlightPeople(attendeeid){
     nodecircle.css("position","absolute");
 
     circledotted = setInterval(function(){
-                        nodecircle.css("left",width/2 + nodeppl[0].x.animVal.value);
-                        nodecircle.css("top", height/2 + nodeppl[0].y.animVal.value + 50);
+                        nodecircle.css("left",width/2 + nodeppl[0].x.animVal.value - 20);
+                        nodecircle.css("top", height/2 + nodeppl[0].y.animVal.value + 40);
                     }, 1);
 }
 
