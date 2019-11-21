@@ -258,7 +258,8 @@ function pairingPeople(){
 
             if((person.reasons.indexOf(newReason) != -1) && 
             (newestUser.attendee_id != person.attendee_id) &&
-            (pairedIds.indexOf(person.attendee_id) == -1)){
+            (pairedIds.indexOf(person.attendee_id) == -1) &&
+            (pairedArr.length<6)){
                 
                 person.pair_freq = person.pair_freq + 1;
                 pairedArr.push({

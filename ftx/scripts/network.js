@@ -412,8 +412,6 @@ function highlightPairs(attendeeid){
         $("#reason-"+pairedArr[z].paired_reason_id).attr("opacity","1");;
     }
 
-    $(".people-link").attr("opacity","0.2").attr("stroke-width","1");
-
     var pairedGuy = getUserbyId(attendeeid)[0].paired_with;
 
     for(var u=0; u<pairedGuy.length; u++ ){
