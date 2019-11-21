@@ -34,6 +34,11 @@ function computeLinkData(){
 
 }
 
+var voronoi = d3.voronoi()
+    .x(function(d) { return d.x; })
+    .y(function(d) { return d.y; })
+    .extent([[0, 0], [width, height]]);
+
 
 computeLinkData();
 
@@ -85,12 +90,12 @@ function computeNodes(){
                 enter => enter.append("image")
                 // .attr("fill", "#FFC802")
                 .attr("href", function(d){return "data/marks/mark-"+getRandomMark()+".svg"})
-                .style("transform","translate(-10px,-20px)")
+                .style("transform","translate(-22px,-24px)")
                 .attr("id", function(d){ return "nodeppl-"+d.attendee_id;})
                 .attr("class","people-node")
                 .attr("width","50px")
                 .attr("height","50px")
-                //.style("cursor", "pointer")
+                .style("cursor", "pointer")
                 ,
                 
                 update => update.attr("fill","gray")
@@ -114,6 +119,8 @@ function showWho() {
     //Hide all the rest:
     $(".people-label").attr("opacity","0.1");
     $(".people-node").attr("opacity","0.3");
+    $("#reason-"+reason).attr("opacity","1");
+    $(".reason-circle").attr("opacity","0.2");
     $("#"+this.id).attr("opacity","1");
 
     $("#viz-tooltip").show();
@@ -150,6 +157,8 @@ function showWho() {
         $("#vt-tag"+i).text(getReasonbyId(reason)[0].reason_name);
         $("#vt-tag"+i).attr("style","border-bottom: 2px solid "+ getReasonbyId(reason)[0].reason_color +";")
 
+        $("#reason-"+reason).attr("opacity","1");
+
         i++;
     }
 
@@ -160,6 +169,7 @@ function hideWho(){
 
     $(".people-label").attr("opacity","0.3");
     $(".people-node").attr("opacity","1");
+    $(".reason-circle").attr("opacity","1");
 
     $("#viz-tooltip").hide();
 
@@ -202,6 +212,7 @@ function computePeopleLabels(){
                 .attr("fill","white")
                 .attr("font-size","12px")
                 .attr("opacity","0.3")
+                .style("transform","translate(-10px,20px)")
                 .style("user-select","none")
                 .text(function(d) { return properCase(d.name).split(' ')[0]; }),
                 
@@ -222,12 +233,12 @@ function computeLinks(){
                     .attr("class", "people-link")
                     .attr("stroke", function(d){ return returnColor(d.target.reason_id);})
                     .attr("stroke-width", 1)
-                    .attr("opacity", "1")
+                    .attr("opacity", "0.1"),
                     //.attr("stroke-dasharray","2,2")
                     // .style("mix-blend-mode", "multiply")
-                    .call(function(link) { 
-                        link.transition().attr("stroke-opacity", 0.2); 
-                    }),
+                    // .call(function(link) { 
+                    //     link.transition().attr("stroke-opacity", 0.2); 
+                    // }),
                     //.attr("d", line),
                     
                     update => update
@@ -377,7 +388,7 @@ function highlightPeople(attendeeid){
     $(".reason-circle").attr("opacity","0.2");
     $(".people-node").attr("opacity","0.1");
     $(".people-label").attr("opacity","0");
-    $(".people-link").attr("opacity","0.2");
+    $(".people-link").attr("opacity","0.02");
         
     var nodeppl = $("#nodeppl-"+attendeeid);
     $("#nodeppl-"+attendeeid).attr("opacity","1");
@@ -386,8 +397,8 @@ function highlightPeople(attendeeid){
     for(var newreasonid in reasons){
         $("#link-ppl-"+attendeeid+"-reason-"+newreasonid)
                 //.attr("stroke","white")
-                .attr("stroke-width","3")
-                .attr("opacity","1")
+                .attr("stroke-width","2")
+                .attr("opacity","0.3")
                 .attr("stroke-dashoffset","1000")
                 .attr("stroke-dasharray","1000")
                 .css("animation","dash 3s linear forwards");
@@ -427,8 +438,8 @@ function highlightPairs(attendeeid){
         for(var z=0; z<pairedArr.length; z++){
             
             $("#link-ppl-"+pairedArr[z].paired_attendee_id+"-reason-"+pairedArr[z].paired_reason_id)
-                .attr("stroke-width","3")
-                .attr("opacity","1")
+                .attr("stroke-width","2")
+                .attr("opacity","0.3")
                 .attr("stroke-dashoffset","1000")
                 .attr("stroke-dasharray","1000")
                 .css("animation","dash 5s linear forwards");

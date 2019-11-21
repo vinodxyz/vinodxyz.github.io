@@ -360,8 +360,8 @@ function pairingPeople(){
 function restart(){
 
     pairedArr = [];
-    simulatePeople.alphaTarget(0.1).restart();
-    simulateReasons.alphaTarget(0.1).restart();
+    simulatePeople.alphaTarget(0).restart();
+    simulateReasons.alphaTarget(0).restart();
 
     resetHighlightPeople();
 
