@@ -332,6 +332,8 @@ function getReasonbyId(reasonid){
 }
 
 
+var circledotted;
+
 function highlightPeople(attendeeid){
 
 
@@ -340,9 +342,9 @@ function highlightPeople(attendeeid){
     //2. highlight the links + animate them, if possible
     //3. after a time-limit, kill this
     
-    $(".people-node").attr("opacity","0.3");
-    $(".people-label").attr("opacity","0.1");
-
+    $(".people-node").attr("opacity","0.1");
+    $(".people-label").attr("opacity","0");
+    
     var nodeppl = $("#nodeppl-"+attendeeid);
     $("#nodeppl-"+attendeeid).attr("opacity","1");
     $("#lblppl-"+attendeeid).attr("opacity","0.3");
@@ -351,9 +353,31 @@ function highlightPeople(attendeeid){
     nodecircle.show();
     nodecircle.css("position","absolute");
 
-    setInterval(function(){
-        nodecircle.css("left",width/2 + nodeppl[0].x.animVal.value);
-        nodecircle.css("top", height/2 + nodeppl[0].y.animVal.value + 50);
-    }, 1);
+    circledotted = setInterval(function(){
+                        nodecircle.css("left",width/2 + nodeppl[0].x.animVal.value);
+                        nodecircle.css("top", height/2 + nodeppl[0].y.animVal.value + 50);
+                    }, 1);
+
+    var newUser = getUserbyId(attendeeid)
+    var newUser_pairs = newUser[0].paired_with;
+
+    for(var i=0; i<newUser_pairs.length; i++){
+        $("#nodeppl-" + newUser_pairs[i]).attr("opacity","1");
+        $("#lblppl-" + newUser_pairs[i]).attr("opacity","0.3");
+    }
+
+    
+}
+
+
+
+function resetHighlightPeople(){
+    
+    var nodecircle = $("#node-circle");
+
+    nodecircle.hide();
+    $(".people-node").attr("opacity","1");
+    $(".people-label").attr("opacity","0.3");
+    clearInterval(circledotted);
 
 }

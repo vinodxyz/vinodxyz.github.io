@@ -275,7 +275,11 @@ function pairingPeople(){
 
     }
 
-    nodes[nodes.length-1].paired_with = pairedIds;
+    //Save paired_with data for this new person 
+    var latestPerson =  nodes.filter(function(item){
+                            return item.attendee_id ==  newestUser.attendee_id
+                        });
+    latestPerson[0].paired_with = pairedIds;
 
     $("#paired-body").text(newestUser.name+", we’ve found "+pairedArr.length+" people whom you can connect with.");
 
@@ -347,8 +351,10 @@ function pairingPeople(){
 //Reset the view after finishing the flow
 function restart(){
 
-    simulatePeople.alphaTarget(0);
-    simulateReasons.alphaTarget(0);
+    simulatePeople.alphaTarget(0).restart();
+    simulateReasons.alphaTarget(0).restart();
+
+    resetHighlightPeople();
 
     // $("#input-pane").css("height","600px");
     $("#input-pane").removeClass("increase-height");
