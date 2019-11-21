@@ -460,3 +460,33 @@ body{
       border-radius: 1px;
       margin-right: 10px;
   }
+
+  #node-circle {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    /* border: 2px solid #6536E2; */
+    display: inline-block;
+    z-index: -2;
+  }
+
+
+
+.node-circle-border {
+    position: absolute;
+    content: '';
+    border: 2px dashed rgb(106, 51, 255);
+    border-radius: inherit;
+    animation: spin 4s linear infinite;
+}
+
+@keyframes spin { 
+    100% { 
+      transform: rotateZ(360deg); 
+    }
+
+    0% { box-shadow: 0 0 -10px rgb(106, 51, 255, 0.4); }
+    40% { box-shadow: 0 0 60px rgb(106, 51, 255, 0.6); }
+    60% { box-shadow: 0 0 60px rgb(106, 51, 255, 0.6); }
+    100% { box-shadow: 0 0 -10px rgb(106, 51, 255, 0.4); }
+  }

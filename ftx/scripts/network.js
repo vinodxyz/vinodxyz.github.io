@@ -55,15 +55,23 @@ let line;
 
 
 var simulatePeople = d3.forceSimulation(nodes)
-                    .force("charge", d3.forceManyBody().strength(-1000))
-                    .force("collide", d3.forceCollide().strength(1))
-                    .force("r", d3.forceRadial(100).strength(1))
-                    .force("link", d3.forceLink(links).strength(1))
-                    .alpha(0.01)
-                    .alphaDecay(0.001)
-                    .on("tick", ticked);
+                        .force("charge", d3.forceManyBody().strength(-1000))
+                        .force("link", d3.forceLink(links).distance(10).strength(1))
+                        .force("x", d3.forceX()).force("center", d3.forceCenter(0,0))
+                        .force("y", d3.forceY()).force("center", d3.forceCenter(0,0))
+                        .force("collide", d3.forceCollide().strength(1))
+                        .force("r", d3.forceRadial(100).strength(1.0))
+                        .alphaTarget(0)
+                        .on("tick", ticked);
 
+simulatePeople.force("link").links(links);
 
+var simulateReasons = d3.forceSimulation(reasons)
+                            .force("x2", d3.forceX()).force("center2", d3.forceCenter(-width+200,0))
+                            .force("charge2", d3.forceManyBody().strength(-1000))
+                            .force("collide2", d3.forceCollide().strength(50))
+                            .alphaTarget(0)
+                            .on("tick", ticked_reasons);
 
 function getRandomMark(){
     var allMarks = [1,2,3];
@@ -77,7 +85,8 @@ function computeNodes(){
                 // .attr("fill", "#FFC802")
                 // .attr("r", 10)
                 .attr("href", function(d){return "data/marks/mark-"+getRandomMark()+".svg"})
-                .attr("id", function(d){ return d.attendee_id;})
+                .attr("id", function(d){ return "nodeppl-"+d.attendee_id;})
+                .attr("class","people-node")
                 .style("cursor", "pointer"),
                 
                 update => update
@@ -89,7 +98,7 @@ function computeNodes(){
             .on("mouseover", showWho)
             .on("mouseout", hideWho);
 }  
-  
+
 computeNodes();
 
 
@@ -97,17 +106,22 @@ computeNodes();
 
 function showWho() {
 
+    //Hide all the rest:
+    $(".people-label").attr("opacity","0.1");
+    $(".people-node").attr("opacity","0.3");
+    $("#"+this.id).attr("opacity","1");
+
     $("#viz-tooltip").show();
     var tooltip = $("#viz-tooltip");
     tooltip.css("position","absolute");
     tooltip.css("left",width/2 + this.x.animVal.value + 30);
     tooltip.css("top", height/2 + this.y.animVal.value + 60);
 
-    var user = getUserbyId(this.id);
+    var user = getUserbyId(this.id.replace("nodeppl-",""));
 
     $(".vt-photo").attr("src",user[0].photo);
     $(".vt-name").text(properCase(user[0].name));
-    $(".vt-role").text(properCase(user[0].designation) + " , " + user[0].company);
+    $(".vt-role").text(user[0].designation + " , " + user[0].company);
 
     var i = 1;
     var div = document.getElementById("vt-tags");
@@ -139,6 +153,9 @@ function showWho() {
 
 function hideWho(){
 
+    $(".people-label").attr("opacity","0.3");
+    $(".people-node").attr("opacity","1");
+
     $("#viz-tooltip").hide();
 
     $(".vt-photo").attr("src","");
@@ -149,7 +166,10 @@ function hideWho(){
 }
 
 function dragStarted(d) {
-    if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+    if (!d3.event.active){
+        simulatePeople.alphaTarget(0.3).restart();
+        simulateReasons.alphaTarget(0.3).restart();
+    } 
     d.fx = d.x;
     d.fy = d.y;
 }
@@ -160,7 +180,10 @@ function dragging(d) {
 }
 
 function dragEnded(d) {
-    if (!d3.event.active) simulation.alphaTarget(0);
+    if (!d3.event.active){
+        simulatePeople.alphaTarget(0);
+        simulateReasons.alphaTarget(0);
+    }
     d.fx = null;
     d.fy = null;
 }
@@ -169,12 +192,13 @@ function computePeopleLabels(){
     label = label.data(nodes, function(d) { return d.name;})
             .join(
                 enter => enter.append("text")
-                .attr("id", function(d) { return "label-"+d.name.replace(/\s/g,''); })
+                .attr("id", function(d) { return "lblppl-"+d.attendee_id; })
+                .attr("class","people-label")
                 .attr("fill","white")
                 .attr("font-size","12px")
-                .attr("opacity","0.5")
+                .attr("opacity","0.3")
                 .style("user-select","none")
-                .text(function(d) { return properCase(d.name); }),
+                .text(function(d) { return properCase(d.name).split(' ')[0]; }),
                 
                 update => update
                     .attr("fill", "gray")
@@ -203,8 +227,7 @@ function computeLinks(){
                         .attr("stroke", "gray")
                 );
 }
-computeLinks();
-simulatePeople.force("link").links(links);
+computeLinks();                          
 
 
 function computeReasonLabels(){
@@ -233,7 +256,7 @@ function ticked() {
     
     node.attr("x", function(d) { return d.x; })
         .attr("y", function(d) { return d.y; })
-        .attr("transform",function(d) { return "rotate("+d.x+","+d.x+","+d.y+")"; });
+        //.attr("transform",function(d) { return "rotate("+d.x+","+d.x+","+d.y+")"; });
 
     // node.attr("x", function(d) { return d.x = Math.max(Math.max(-1*width/2 - radius*4, d.x), Math.min(width/2 - radius, d.x)); })
     //     .attr("y", function(d) { return d.y = Math.max(Math.max(-1*height/2 - radius, d.y), Math.min(height/2 - radius, d.y)); });
@@ -255,12 +278,7 @@ function ticked() {
 
 
 
-var simulateReasons = d3.forceSimulation(reasons)
-                            .force("x2", d3.forceX()).force("center", d3.forceCenter(-width+200,0))
-                            .force("charge", d3.forceManyBody().strength(-100))
-                            .alpha(0.001)
-                            .alphaTarget(1)
-                            .on("tick", ticked_reasons);
+
 
 reason = reason.data(reasons, function(d) { return d;})
                 .join(
@@ -296,6 +314,14 @@ function getUserbyId(attendeeid){
     return user;
 }
 
+function getUserDesignation(name){
+    var user = razorpay_staff.filter(function(item){
+                                    return item.name.replace(/[^A-Z0-9]/ig, "_").toLowerCase().replace(" ","") == name.replace(/[^A-Z0-9]/ig, "_").toLowerCase().replace(" ","");
+                                });
+
+    return user[0].designation;
+}
+
 
 function getReasonbyId(reasonid){
     var reason = reasons.filter(function(item){
@@ -303,4 +329,31 @@ function getReasonbyId(reasonid){
                             });
 
     return reason;
+}
+
+
+function highlightPeople(attendeeid){
+
+
+    //0. add a circle around / very loudly callout the user who just interacted -- done
+    //1. highlight the user as well as the people paired with
+    //2. highlight the links + animate them, if possible
+    //3. after a time-limit, kill this
+    
+    $(".people-node").attr("opacity","0.3");
+    $(".people-label").attr("opacity","0.1");
+
+    var nodeppl = $("#nodeppl-"+attendeeid);
+    $("#nodeppl-"+attendeeid).attr("opacity","1");
+    $("#lblppl-"+attendeeid).attr("opacity","0.3");
+
+    var nodecircle = $("#node-circle");
+    nodecircle.show();
+    nodecircle.css("position","absolute");
+
+    setInterval(function(){
+        nodecircle.css("left",width/2 + nodeppl[0].x.animVal.value);
+        nodecircle.css("top", height/2 + nodeppl[0].y.animVal.value + 50);
+    }, 1);
+
 }

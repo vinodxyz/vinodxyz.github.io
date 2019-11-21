@@ -1,4 +1,4 @@
-var jsonID = "dxabm";
+var jsonID = "mwoj2";
 // var jsonID = "9r8e6";
 var person_img = "";
 let databackup;
@@ -73,7 +73,6 @@ function autoComplete(){
     $("#txtName").easyAutocomplete(options);
     $("#eac-container-txtName").click(function(){
         person_img = $("#eac-container-txtName").find(".selected").find(".eac-icon").attr("src").toString();
-        console.log(person_img);
     })
 }
 
@@ -88,6 +87,7 @@ function hideLoadernPaired(){
 function _initializeComponents(){    
 
     $("#viz-tooltip").hide();
+    $("#node-circle").hide();
     $("#btn-connect").attr("disabled", true);
     $("#ui-cta").attr("data-tooltip","Name & reason plis? 😛");
 
@@ -133,14 +133,25 @@ function getData(){
 }
 
 function saveData(){
+
+    var datasetCopy = JSON.parse(JSON.stringify(dataset));
+
+    for(var i = 0; i < datasetCopy.nodes.length; i++) {
+        delete datasetCopy.nodes[i]['x'];
+        delete datasetCopy.nodes[i]['y'];
+        delete datasetCopy.nodes[i]['vx'];
+        delete datasetCopy.nodes[i]['vy'];
+        delete datasetCopy.nodes[i]['fx'];
+        delete datasetCopy.nodes[i]['fy'];
+    }
+
     $.ajax({
         url:"https://api.myjson.com/bins/"+jsonID,
         type:"PUT",
-        data:JSON.stringify(dataset),
+        data:JSON.stringify(datasetCopy),
         contentType:"application/json; charset=utf-8",
         dataType:"json",
         success: function(){
-            //do nothing
         }
     });
 }
@@ -149,8 +160,11 @@ function saveData(){
 function addEntry(){
 
     showLoadingMessage();
+    simulatePeople.alphaTarget(0.6).restart();
+    simulateReasons.alphaTarget(0.6).restart();
 
     var user_name = document.getElementById("txtName").value;
+    var user_role = getUserDesignation(user_name);
     var user_reasons = [];
 
     for(var i=0; i<reasons.length; i++){
@@ -163,39 +177,46 @@ function addEntry(){
         attendee_id: nodes.length,
         name: user_name,
         photo: person_img,
-        designation: "Product designer",
+        designation: user_role,
         company: 0,
         experience: 1,
         reasons: user_reasons,
         pair_freq: 0
     };
 
-    nodes.push(newNode);
 
-    for(var j=0; j<user_reasons.length; j++){
+    setTimeout(function(){
 
-        var current_reason;
+        nodes.push(newNode);
 
-        for(var reason in reasons){
-            if(reason == user_reasons[j]){
-                current_reason = reasons[reason];
-                break;
+        for(var j=0; j<user_reasons.length; j++){
+
+            var current_reason;
+
+            for(var reason in reasons){
+                if(reason == user_reasons[j]){
+                    current_reason = reasons[reason];
+                    break;
+                }
             }
+
+            links.push({source: nodes[nodes.length-1], target: current_reason});
         }
 
-        links.push({source: nodes[nodes.length-1], target: current_reason});
-    }
+        simulatePeople.nodes(nodes);
+        computeNodes();
+        computeLinks();
+        computePeopleLabels();
+        simulatePeople.force("link", d3.forceLink(links).distance(80+linkDistance).strength(1));
 
-    
-    
-    simulatePeople.nodes(nodes);
-    computeNodes();
-    computeLinks();
-    computePeopleLabels();
-    simulatePeople.force("link", d3.forceLink(links).distance(80+linkDistance).strength(1));
-    saveData();
+        simulatePeople.alphaTarget(0);
+        simulateReasons.alphaTarget(0);
+        pairingPeople();
+        highlightPeople(newNode.attendee_id);
 
-    setTimeout(function(){pairingPeople();}, 3000);
+        saveData();
+        
+    }, 3000);
 
 }
 
@@ -221,6 +242,7 @@ function pairingPeople(){
                             return a["pair_freq"]-b["pair_freq"];
                         });
     var pairedArr = [];
+    var pairedIds = [];
     
     for(var n=0; n<newestReasons.length; n++){
         var newReason = newestReasons[n];
@@ -244,12 +266,16 @@ function pairingPeople(){
                     "paired_attendee_photo": person.photo
                 });
 
+                pairedIds[n] = person.attendee_id;
+
                 break;
             }
 
         }
 
     }
+
+    nodes[nodes.length-1].paired_with = pairedIds;
 
     $("#paired-body").text(newestUser.name+", we’ve found "+pairedArr.length+" people whom you can connect with.");
 
@@ -320,6 +346,9 @@ function pairingPeople(){
 
 //Reset the view after finishing the flow
 function restart(){
+
+    simulatePeople.alphaTarget(0);
+    simulateReasons.alphaTarget(0);
 
     // $("#input-pane").css("height","600px");
     $("#input-pane").removeClass("increase-height");
