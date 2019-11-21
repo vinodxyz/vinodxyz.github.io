@@ -490,3 +490,10 @@ body{
     60% { box-shadow: 0 0 60px rgb(106, 51, 255, 0.6); }
     100% { box-shadow: 0 0 -10px rgb(106, 51, 255, 0.4); }
   }
+
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}

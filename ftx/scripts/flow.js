@@ -1,4 +1,5 @@
-var jsonID = "mwoj2";
+//var jsonID = "fi3b2";
+ var jsonID = "mwoj2";
 // var jsonID = "9r8e6";
 var person_img = "";
 let databackup;
@@ -143,6 +144,7 @@ function saveData(){
         delete datasetCopy.nodes[i]['vy'];
         delete datasetCopy.nodes[i]['fx'];
         delete datasetCopy.nodes[i]['fy'];
+        delete datasetCopy.nodes[i]['index'];
     }
 
     $.ajax({
@@ -160,11 +162,12 @@ function saveData(){
 function addEntry(){
 
     showLoadingMessage();
-    simulatePeople.alphaTarget(0.6).restart();
-    simulateReasons.alphaTarget(0.6).restart();
+    simulatePeople.alphaTarget(0.1).restart();
+    simulateReasons.alphaTarget(0.1).restart();
 
     var user_name = document.getElementById("txtName").value;
     var user_role = getUserDesignation(user_name);
+    var user_org = getUserCompany(user_name)
     var user_reasons = [];
 
     for(var i=0; i<reasons.length; i++){
@@ -178,16 +181,13 @@ function addEntry(){
         name: user_name,
         photo: person_img,
         designation: user_role,
-        company: 0,
+        company: user_org,
         experience: 1,
         reasons: user_reasons,
         pair_freq: 0
     };
 
-
-    setTimeout(function(){
-
-        nodes.push(newNode);
+    nodes.push(newNode);
 
         for(var j=0; j<user_reasons.length; j++){
 
@@ -211,9 +211,11 @@ function addEntry(){
 
         simulatePeople.alphaTarget(0);
         simulateReasons.alphaTarget(0);
-        pairingPeople();
         highlightPeople(newNode.attendee_id);
 
+    setTimeout(function(){
+        pairingPeople();
+        highlightPairs(newNode.attendee_id);
         saveData();
         
     }, 3000);
@@ -233,6 +235,7 @@ function showLoadingMessage(){
     $("#input-pane").addClass("reduce-height");
 }
 
+var pairedArr = [];
 
 function pairingPeople(){
 
@@ -241,7 +244,7 @@ function pairingPeople(){
     var sortedUsers = nodes.sort(function(a, b){
                             return a["pair_freq"]-b["pair_freq"];
                         });
-    var pairedArr = [];
+    // var pairedArr = [];
     var pairedIds = [];
     
     for(var n=0; n<newestReasons.length; n++){
@@ -249,12 +252,14 @@ function pairingPeople(){
         var reasonObj = reasons.filter(reasonobj => reasonobj.reason_id == newReason);
         var newReasonName = reasonObj[0].reason_name;
 
-        for(var p=0; p<sortedUsers.length; p++){
-            var person = sortedUsers[p];
+        for(var j=Math.ceil(Math.random() * 5); j<sortedUsers.length; j++){
+            
+            var person = sortedUsers[j];
 
             if((person.reasons.indexOf(newReason) != -1) && 
-            (newestUser.attendee_id != person.attendee_id)){
-
+            (newestUser.attendee_id != person.attendee_id) &&
+            (pairedIds.indexOf(person.attendee_id) == -1)){
+                
                 person.pair_freq = person.pair_freq + 1;
                 pairedArr.push({
                     "paired_attendee_id": person.attendee_id,
@@ -319,7 +324,9 @@ function pairingPeople(){
         p_role.id = "pair-role-"+p;
         newlyCreatedDiv.appendChild(p_role);
         $("#pair-role-"+p).addClass("pair-role");
-        $("#pair-role-"+p).text(pairedElem.paired_role+", "+pairedElem.paired_org);
+
+        $("#pair-role-"+p).text(((pairedElem.paired_role == "") ? "" : pairedElem.paired_role)
+        +" " + ((pairedElem.paired_org == "") ? "" : "| "+pairedElem.paired_org));
 
         p++;
     })
@@ -351,8 +358,8 @@ function pairingPeople(){
 //Reset the view after finishing the flow
 function restart(){
 
-    simulatePeople.alphaTarget(0).restart();
-    simulateReasons.alphaTarget(0).restart();
+    simulatePeople.alphaTarget(0.1).restart();
+    simulateReasons.alphaTarget(0.1).restart();
 
     resetHighlightPeople();
 
