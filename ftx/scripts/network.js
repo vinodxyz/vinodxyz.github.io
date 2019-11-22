@@ -141,10 +141,11 @@ function showWho() {
     var div = document.getElementById("vt-tags");
     div.innerHTML = "";
 
-    for(var reason in user[0].reasons){
+    var reasonArr = user[0].reasons;
+
+    for(var x=0; x<reasonArr.length; x++){
         
-        // console.log("#link-ppl-"+this.id.replace("nodeppl-","")+"-reason-"+reason);
-        $("#link-ppl-"+this.id.replace("nodeppl-","")+"-reason-"+reason).attr("opacity","0.3");
+        $("#link-ppl-"+this.id.replace("nodeppl-","")+"-reason-"+reasonArr[x]).attr("opacity","0.3");
 
         if(i==4){
             var jug = document.createElement("div");
@@ -157,13 +158,13 @@ function showWho() {
         var span = document.createElement("span");
         span.id = "vt-tag"+i;
         div.appendChild(span);
-
+        
         $("#vt-tag"+i).addClass("vt-tag");
-        $("#vt-tag"+i).text(getReasonbyId(reason)[0].reason_name);
-        $("#vt-tag"+i).attr("style","border-bottom: 2px solid "+ getReasonbyId(reason)[0].reason_color +";")
+        $("#vt-tag"+i).text(getReasonbyId(reasonArr[x])[0].reason_name);
+        $("#vt-tag"+i).attr("style","border-bottom: 2px solid "+ getReasonbyId(reasonArr[x])[0].reason_color +";")
 
-        $("#reason-"+reason).attr("opacity","1");
-        $("#reason-label-"+reason).attr("opacity","1");
+        $("#reason-"+reasonArr[x]).attr("opacity","1");
+        $("#reason-label-"+reasonArr[x]).attr("opacity","1");
         
 
         i++;
