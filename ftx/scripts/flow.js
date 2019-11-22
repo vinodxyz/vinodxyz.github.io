@@ -1,6 +1,6 @@
-// var jsonID = "fi3b2";
- var jsonID = "mwoj2";
-//var jsonID = "9r8e6";
+var jsonID = "1eqzxu";
+// var jsonID = "mwoj2";
+
 var person_img = "";
 let databackup;
 
@@ -170,6 +170,12 @@ function addEntry(){
     var user_org = getUserCompany(user_name)
     var user_reasons = [];
 
+    person_img = razorpay_staff.filter(function(item){
+                        return item.name ==  user_name
+                    });
+    
+    person_img = (person_img.length >0) ? person_img[0].photo : "";
+
     for(var i=0; i<reasons.length; i++){
         if(document.getElementById(reasons[i].tag_id).checked){
             user_reasons.push(reasons[i].reason_id);
@@ -303,7 +309,10 @@ function pairingPeople(){
         p_img.id = "pair-img-"+p;
         newlyCreatedDiv.appendChild(p_img);
         $("#pair-img-"+p).addClass("pair-img");
-        $("#pair-img-"+p).attr("src",pairedElem.paired_attendee_photo);
+
+        
+        var final_img = (pairedElem.paired_attendee_photo == "") ? "data/avatars/"+(Math.floor(Math.random() * 21))+".png" : pairedElem.paired_attendee_photo;
+        $("#pair-img-"+p).attr("src",final_img);
         $("#pair-img-"+p).css("border","2px solid "+returnColor(pairedElem.paired_reason_id));
 
         var p_name = document.createElement("span");
@@ -316,7 +325,10 @@ function pairingPeople(){
         p_reason.id = "pair-reason-"+p;
         newlyCreatedDiv.appendChild(p_reason);
         $("#pair-reason-"+p).addClass("pair-reason");
-        $("#pair-reason-"+p).text(pairedElem.paired_reason_name);
+
+        var newLocation = getReasonbyId(pairedElem.paired_reason_id)[0].location;
+        // $("#pair-reason-"+p).text(pairedElem.paired_reason_name);
+        $("#pair-reason-"+p).text(newLocation);
         $("#pair-reason-"+p).css("background", returnColor(pairedElem.paired_reason_id));
 
         newlyCreatedDiv.appendChild(document.createElement("br"));
@@ -326,8 +338,10 @@ function pairingPeople(){
         newlyCreatedDiv.appendChild(p_role);
         $("#pair-role-"+p).addClass("pair-role");
 
-        $("#pair-role-"+p).text(((pairedElem.paired_role == "") ? "" : pairedElem.paired_role)
-        +" " + ((pairedElem.paired_org == "") ? "" : "| "+pairedElem.paired_org));
+        var the_role = (((pairedElem.paired_role == "") || (pairedElem.paired_role == undefined)) ? "" : pairedElem.paired_role);
+        var the_company = (((pairedElem.paired_org == "") || (pairedElem.paired_org == undefined)) ? "" : "| "+pairedElem.paired_org);
+        $("#pair-role-"+p).text(((the_role.length>20) ? the_role.substr(0.20)+".." : the_role)
+        +" " + ((the_company.length>15) ? the_company.substr(0.15)+".." : the_company));
 
         p++;
     })

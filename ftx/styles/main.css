@@ -9,6 +9,10 @@ body{
     background: linear-gradient(235.96deg, #0C0F30 4.89%, #0B0D23 98.36%);
 }
 
+#ftx-viz{
+    height: 900px;
+}
+
 .wrapper{
     margin: 0 auto;
     display: grid;
@@ -78,7 +82,7 @@ body{
 }
 
 .welcome-highlight{
-    color: #9282FD;
+    color: rgb(195, 173, 255);
 }
 
 .welcome-sidebar{

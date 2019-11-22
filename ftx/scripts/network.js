@@ -119,19 +119,21 @@ function showWho() {
     //Hide all the rest:
     $(".people-label").attr("opacity","0.1");
     $(".people-node").attr("opacity","0.3");
-    $("#reason-"+reason).attr("opacity","1");
     $(".reason-circle").attr("opacity","0.2");
+    $(".reason-label").attr("opacity","0.2");
+    $(".people-link").attr("opacity","0.02");
     $("#"+this.id).attr("opacity","1");
 
     $("#viz-tooltip").show();
     var tooltip = $("#viz-tooltip");
     tooltip.css("position","absolute");
-    tooltip.css("left",width/2 + this.x.animVal.value + 100);
+    tooltip.css("left",width/2 + this.x.animVal.value + 50);
     tooltip.css("top", height/2 + this.y.animVal.value + 60);
 
     var user = getUserbyId(this.id.replace("nodeppl-",""));
 
-    $(".vt-photo").attr("src",user[0].photo);
+    var final_img = (user[0].photo == "") ? "data/avatars/"+(Math.floor(Math.random() * 21))+".png" : user[0].photo;
+    $(".vt-photo").attr("src", final_img);
     $(".vt-name").text(properCase(user[0].name));
     $(".vt-role").text(user[0].designation + " | " + user[0].company);
 
@@ -141,6 +143,9 @@ function showWho() {
 
     for(var reason in user[0].reasons){
         
+        // console.log("#link-ppl-"+this.id.replace("nodeppl-","")+"-reason-"+reason);
+        $("#link-ppl-"+this.id.replace("nodeppl-","")+"-reason-"+reason).attr("opacity","0.3");
+
         if(i==4){
             var jug = document.createElement("div");
             jug.id = "jug"
@@ -158,6 +163,8 @@ function showWho() {
         $("#vt-tag"+i).attr("style","border-bottom: 2px solid "+ getReasonbyId(reason)[0].reason_color +";")
 
         $("#reason-"+reason).attr("opacity","1");
+        $("#reason-label-"+reason).attr("opacity","1");
+        
 
         i++;
     }
@@ -170,6 +177,8 @@ function hideWho(){
     $(".people-label").attr("opacity","0.3");
     $(".people-node").attr("opacity","1");
     $(".reason-circle").attr("opacity","1");
+    $(".reason-label").attr("opacity","1");
+    $(".people-link").attr("opacity","0.1");
 
     $("#viz-tooltip").hide();
 
@@ -214,7 +223,7 @@ function computePeopleLabels(){
                 .attr("opacity","0.3")
                 .style("transform","translate(-10px,20px)")
                 .style("user-select","none")
-                .text(function(d) { return properCase(d.name).split(' ')[0]; }),
+                .text(function(d) { return properCase(d.name); }),
                 
                 update => update
                     .attr("fill", "gray")
@@ -252,9 +261,10 @@ function computeReasonLabels(){
     lblReason = lblReason.data(reasons, function(d) { return d.reason_name;})
                             .join(
                                 enter => enter.append("text")
-                                .attr("id", function(d) { return "label-"+d.reason_name.replace(/\s/g,''); })
+                                .attr("id", function(d){ return "reason-label-"+d.reason_id;})
                                 .attr("fill", function(d){ return d.reason_color; })
                                 .attr("opacity","0.8")
+                                .attr("class","reason-label")
                                 .text(function(d) { return properCase(d.reason_name); })
                                 .attr("font-size","12px"),
                                 
@@ -290,8 +300,8 @@ function ticked() {
     label.attr("x", function(d) { return d.x; })
         .attr("y", function(d) { return d.y+10; });
 
-    lblReason.attr("x", function(d) { return d.x - 25; })
-            .attr("y", function(d) { return d.y + 5; });
+    lblReason.attr("x", function(d) { return d.x - 35; })
+            .attr("y", function(d) { return d.y - 55; });
 }
 
 
@@ -386,13 +396,14 @@ function highlightPeople(attendeeid){
     //3. after a time-limit, kill this
     
     $(".reason-circle").attr("opacity","0.2");
+    $(".reason-label").attr("opacity","0.2");
     $(".people-node").attr("opacity","0.1");
     $(".people-label").attr("opacity","0");
     $(".people-link").attr("opacity","0.02");
         
     var nodeppl = $("#nodeppl-"+attendeeid);
     $("#nodeppl-"+attendeeid).attr("opacity","1");
-    $("#lblppl-"+attendeeid).attr("opacity","0.3");
+    $("#lblppl-"+attendeeid).attr("opacity","1");
 
     for(var newreasonid in reasons){
         $("#link-ppl-"+attendeeid+"-reason-"+newreasonid)
@@ -422,11 +433,12 @@ function highlightPairs(attendeeid){
 
     for(var i=0; i<newUser_pairs.length; i++){
         $("#nodeppl-" + newUser_pairs[i]).attr("opacity","1");
-        $("#lblppl-" + newUser_pairs[i]).attr("opacity","0.3");
+        $("#lblppl-" + newUser_pairs[i]).attr("opacity","1");
     }
 
     for(var z=0; z<pairedArr.length; z++){
-        $("#reason-"+pairedArr[z].paired_reason_id).attr("opacity","1");;
+        $("#reason-"+pairedArr[z].paired_reason_id).attr("opacity","1");
+        $("#reason-label-"+pairedArr[z].paired_reason_id).attr("opacity","1");
     }
 
     var pairedGuy = getUserbyId(attendeeid)[0].paired_with;
@@ -439,7 +451,7 @@ function highlightPairs(attendeeid){
             
             $("#link-ppl-"+pairedArr[z].paired_attendee_id+"-reason-"+pairedArr[z].paired_reason_id)
                 .attr("stroke-width","2")
-                .attr("opacity","0.3")
+                .attr("opacity","0.2")
                 .attr("stroke-dashoffset","1000")
                 .attr("stroke-dasharray","1000")
                 .css("animation","dash 5s linear forwards");
@@ -462,4 +474,5 @@ function resetHighlightPeople(){
     $(".people-link").attr("opacity","0.2").attr("stroke-width","1");
     
     $(".reason-circle").attr("opacity","1");
+    $(".reason-label").attr("opacity","1");
 }
