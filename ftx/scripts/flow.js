@@ -1,5 +1,5 @@
-var jsonID = "ssbfm";
-// var jsonID = "mwoj2";
+// var jsonID = "ssbfm";
+var jsonID = "mwoj2";
 
 var person_img = "";
 let databackup;
@@ -327,8 +327,8 @@ function pairingPeople(){
         $("#pair-reason-"+p).addClass("pair-reason");
 
         var newLocation = getReasonbyId(pairedElem.paired_reason_id)[0].location;
-        // $("#pair-reason-"+p).text(pairedElem.paired_reason_name);
-        $("#pair-reason-"+p).text(newLocation);
+        $("#pair-reason-"+p).text(pairedElem.paired_reason_name);
+        // $("#pair-reason-"+p).text(newLocation);
         $("#pair-reason-"+p).css("background", returnColor(pairedElem.paired_reason_id));
 
         newlyCreatedDiv.appendChild(document.createElement("br"));
