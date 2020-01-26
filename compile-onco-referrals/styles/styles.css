@@ -1,0 +1,101 @@
+body{
+  font-family: 'Rubik', sans-serif;
+  color: #333333;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.intro{
+  background-color: rgb(255,255,255,0.5);
+  margin-top: 300px;
+  width: 450px;
+  margin-left: 500px;
+}
+
+.title{
+  font-family: 'Righteous', cursive;
+  font-size: 50px;
+  line-height: 62px;
+  color: #000000;
+}
+
+.subtitle{
+  margin-top: 15px;
+}
+
+.authors{
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.blue-rect{
+  background-color: #157FFB;
+  color: #157FFB;
+  max-width: 4px;
+  margin-right: 5px;
+}
+
+.gray-circle{
+  display:inline-block;
+  background-color: #858585;
+  width: 8px;
+  height: 8px;
+  border-radius: 50px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.note{
+  background-color: rgb(255,255,255,0.5);
+  margin-top: 800px;
+  width: 450px;
+  margin-left: 500px;
+}
+
+.fixed{
+  position: fixed;
+  top: 10px;
+  z-index: -999;
+}
+
+.land {
+  fill: #ddd;
+}
+
+.state-borders {
+  fill: none;
+  stroke: #fff;
+}
+
+.hospital-arc {
+  fill: none;
+}
+
+.hospital .hospital-arc {
+  stroke: #f00;
+  stroke-opacity: 0.1;
+}
+
+.hospital-cell {
+  fill: none;
+  /* stroke: #000; */
+  stroke-opacity: 0.1;
+  pointer-events: all;
+}
+
+
+
+/* gooey shit */
+/* body { margin:0;
+  position:fixed;
+  top:0;right:0;bottom:0;left:0; } */
+    
+    .big-circle {
+      fill: none;
+    }
+    
+    text {
+      fill: white;
+      font-family: sans-serif;
+      font-family: 'Rubik', sans-serif;
+		}

@@ -1,0 +1,120 @@
+<html>
+    <head>
+        <title>Map of Referrals</title>
+        <link rel="stylesheet" href="styles/styles.css">
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
+        <script src="https://d3js.org/d3-fetch.v1.min.js"></script> 
+        <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+        <script src="https://d3js.org/topojson.v1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="data/chord-data.js"></script>
+        <script src="scripts/noframework.waypoints.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <!-- <svg width="960" height="600"></svg> -->
+        <div id="intro-section" class="intro">
+            <div class="title">
+                Oncology Network
+            </div>
+            <div class="subtitle">
+                Analysis of referral patterns in oncology
+            </div>
+            <div class="authors">
+               <span class="blue-rect">..</span> 
+               By Shailesh Chitnis, Cyriac Thomas, Arjun and Vinod 
+               <div class="gray-circle"></div>
+               Feb 2020
+            </div>
+        </div>
+        <div id="classification-section">
+            <div id="note-0" class="note">
+                <div>
+                    US healthcare system comprises of Integrated Delivery Networks that streamlines cancer treatment 
+                    by leveraging the power of referrals. Based on the stage and type of cancer, physicians refer patients 
+                    to specific oncologists to get care and treatment. 
+                </div><br>
+                <div>
+                    Using our healthgraph data, we've uncovered patterns of referrals within this large network. 
+                    For this study, we've analyzed the referral patterns for the following set of specializations.
+                    
+                    For every physician in the network, whether referring or receiving a referral, 
+                    we have also identified their primary IDN or group practice.
+                </div>             
+            </div>
+            <div id="note-1" class="note">
+                In 20XX, for a period of 6 months, a total of XX million cancer cases 
+                were referred to oncologists (A patient could have multiple cases).
+            </div>
+            <div id="note-2" class="note">
+                Most of these referrals originated from physicians practicing Internal 
+                medicine (tooltip + link), Family medicine, Urology and other classifications.
+            </div>
+            <div id="note-3" class="note">
+                This is the total outbound referral volume
+            </div>
+            <div id="note-4" class="note">
+                All of these referrals were inbound to the oncology healthcare system
+            </div>
+            <div id="note-5" class="note">
+                Nearly 92% of all inbound referrals were for oncologists practising 
+                Internal medicine and Radiology.
+            </div>
+            <div id="note-6" class="note">
+                Referrals actually occur between specialists within each of these areas.
+            </div>
+            <div id="note-7" class="note">
+                For instance: If we look at Internal medicine, referrals occur from specialists 
+                in Gastroenterology, Pulmonary disease etc prominently to oncologists specializing 
+                in Hematology & Oncology and Medical Oncology.
+            </div>
+            <div id="note-8" class="note">
+                However, physicians refer based on an important criteria: The IDN that the 
+                oncologist belongs to. Patients are referred to specialists who belong to specific IDNs.
+            </div>
+            <div id="note-9" class="note">
+                Taking a closer look at Mayo Clinic - one of the IDNs that receives the highest referral 
+                volume. We can see that referrals for Mayo Clinic tends to occur across the breadth of US.
+            </div>
+            <div id="note-10" class="note">
+                This is the same for University of Pennsylvania ...
+            </div>
+            <div id="note-11" class="note">
+                ... and the Cleveland Clinic Foundation
+            </div>
+            <div id="note-12" class="note">
+                Instead, if we look at the top 100 oncologists based on their referral volume. 
+                Irrespective of the IDN that they belong to, we find that the same pattern persists.
+            </div>
+            <div id="note-13" class="note">
+                On a different note, at least 50% of referrals occur within the same IDN. 
+                This indicates that a physician is likely to refer an oncologist who belongs to the same IDN.
+            </div>
+        </div>
+        <div id="circle-charts" class="fixed"></div>
+        <!-- <div id="class-chord-chart" class="relative"></div> -->
+        <!-- <div>
+            <input type="button" value="separate-1" onclick="separateDots()">
+            <input type="button" value="cluster" onclick="clusterDots()">
+            <input type="button" value="rightside" onclick="moveToRight()">
+            <input type="button" value="separate-2" onclick="separateDotsAgain()">
+        </div>
+        <div>
+            <input type="button" value="separate-1-reverse" onclick="separateDotsReverse()">
+            <input type="button" value="cluster-reverse" onclick="clusterDotsReverse()">
+            <input type="button" value="rightside-reverse" onclick="moveToLeft()">
+            <input type="button" value="separate-2-reverse" onclick="separateDotsAgainReverse()">
+        </div> -->
+    </body>
+
+    
+    <!-- <script src="scripts/viz.js"></script> -->
+    <!-- <script src="scripts/circles.js"></script> -->
+    <script src="scripts/classifications.js"></script>
+    <!-- <script src="scripts/class-chord.js"></script> -->
+    <script src="scripts/scrollytelling.js"></script>
+    
+</html>
