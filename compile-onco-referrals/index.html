@@ -21,7 +21,7 @@
                 Oncology Network
             </div>
             <div class="subtitle">
-                Analysis of referral patterns in oncology
+                An analysis of referral patterns in oncology
             </div>
             <div class="authors">
                <span class="blue-rect">..</span> 
@@ -35,12 +35,17 @@
                 <div>
                     US healthcare system comprises of Integrated Delivery Networks that streamlines cancer treatment 
                     by leveraging the power of referrals. Based on the stage and type of cancer, physicians refer patients 
-                    to specific oncologists to get care and treatment. 
+                    to specific oncologists to get care and treatment.
                 </div><br>
                 <div>
-                    Using our healthgraph data, we've uncovered patterns of referrals within this large network. 
+                    Using our health graph data, we've uncovered patterns of referrals within this large network. 
                     For this study, we've analyzed the referral patterns for the following set of specializations.
                     
+                    <br><br>
+                    <div id="data-table"></div>
+                    <input type="button" value="view all" onclick="showAllRows()">
+                    <br><br>
+
                     For every physician in the network, whether referring or receiving a referral, 
                     we have also identified their primary IDN or group practice.
                 </div>             
@@ -116,5 +121,6 @@
     <script src="scripts/classifications.js"></script>
     <!-- <script src="scripts/class-chord.js"></script> -->
     <script src="scripts/scrollytelling.js"></script>
+    <script src="scripts/data-table.js"></script>
     
 </html>

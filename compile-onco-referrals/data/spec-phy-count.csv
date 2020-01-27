@@ -1,0 +1,61 @@
+N1_Primary_Classification,N1_Primary_Specialization,Oncologist_count
+Anesthesiology,Pain Medicine,1
+Dermatology,Procedural Dermatology,1
+Dermatology,Pediatric Dermatology,1
+Dermatology,,1
+Emergency Medicine,Pediatric Emergency Medicine,4
+Family Medicine,Addiction Medicine,2
+Internal Medicine,Transplant Hepatology,1
+Internal Medicine,Pulmonary Disease,4
+Internal Medicine,Nephrology,1
+Internal Medicine,Medical Oncology,"2,919"
+Internal Medicine,Infectious Disease,3
+Internal Medicine,Hospice And Palliative Medicine,44
+Internal Medicine,Hepatology,1
+Internal Medicine,Hematology & Oncology,"8,017"
+Internal Medicine,Hematology,734
+Internal Medicine,Geriatric Medicine,6
+Internal Medicine,Gastroenterology,9
+Internal Medicine,"Endocrinology, Diabetes & Metabolism",3
+Internal Medicine,Critical Care Medicine,2
+Internal Medicine,Cardiovascular Disease,3
+Internal Medicine,Allergy & Immunology,1
+Internal Medicine,Advanced Heart Failure And Transplant Cardiology,1
+Internal Medicine,,1
+Nuclear Medicine,In Vivo & In Vitro Nuclear Medicine,1
+Nurse Practitioner,Family,1
+Nurse Practitioner,Acute Care,1
+Obstetrics & Gynecology,Obstetrics,2
+Obstetrics & Gynecology,Maternal & Fetal Medicine,3
+Obstetrics & Gynecology,Gynecology,2
+Obstetrics & Gynecology,Gynecologic Oncology,"1,027"
+Obstetrics & Gynecology,Female Pelvic Medicine And Reconstructive Surgery,3
+Orthopaedic Surgery,Orthopaedic Surgery Of The Spine,1
+Orthopaedic Surgery,Adult Reconstructive Orthopaedic Surgery,2
+Otolaryngology,Plastic Surgery Within The Head & Neck,4
+Otolaryngology,Pediatric Otolaryngology,1
+Otolaryngology,Otolaryngology/Facial Plastic Surgery,5
+Pathology,Hematology,1
+Pathology,Blood Banking & Transfusion Medicine,3
+Pathology,Anatomic Pathology & Clinical Pathology,21
+Pediatrics,Pediatric Infectious Diseases,2
+Pediatrics,Pediatric Hematology-Oncology,"1,346"
+Pediatrics,Pediatric Emergency Medicine,1
+Pediatrics,Pediatric Critical Care Medicine,2
+Pediatrics,Hospice And Palliative Medicine,5
+Pediatrics,Adolescent Medicine,1
+Psychiatry & Neurology,Psychiatry,1
+Psychiatry & Neurology,Neurology,18
+Radiology,Vascular & Interventional Radiology,6
+Radiology,Therapeutic Radiology,1
+Radiology,Radiation Oncology,"4,018"
+Radiology,Nuclear Radiology,2
+Radiology,Hospice And Palliative Medicine,1
+Radiology,Diagnostic Radiology,129
+Surgery,Vascular Surgery,13
+Surgery,Trauma Surgery,2
+Surgery,Surgical Oncology,"1,171"
+Surgery,Surgical Critical Care,16
+Surgery,Plastic And Reconstructive Surgery,3
+Surgery,Pediatric Surgery,2
+Thoracic Surgery (Cardiothoracic Vascular Surgery),,1
