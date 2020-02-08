@@ -1,0 +1,37 @@
+N2_Primary_Classification,N2_Primary_Specialization,referral_percent
+Family Medicine,Adult Medicine,0.22
+Family Medicine,Geriatric Medicine,0.15
+Family Medicine,"Acute Care, Addiction (Substance Use Disorder), Addiction Medicine and 211 more",0.38
+Family Medicine,,15.16
+Internal Medicine,Infectious Disease,0.25
+Internal Medicine,"Endocrinology, Diabetes & Metabolism",0.36
+Internal Medicine,Rheumatology,0.39
+Internal Medicine,Nephrology,0.64
+Internal Medicine,Cardiovascular Disease,0.67
+Internal Medicine,Geriatric Medicine,0.94
+Internal Medicine,Pulmonary Disease,1.63
+Internal Medicine,Medical Oncology,4.12
+Internal Medicine,"Acute Care, Addiction (Substance Use Disorder), Addiction Medicine and 211 more",3.00
+Internal Medicine,Hematology & Oncology,11.83
+Internal Medicine,,15.03
+"Null, Acupuncturist, Advanced Practice Midwife and 108 more",Surgical Technologist,0.11
+"Null, Acupuncturist, Advanced Practice Midwife and 108 more",Mohs-Micrographic Surgery,0.11
+"Null, Acupuncturist, Advanced Practice Midwife and 108 more",Otolaryngology/Facial Plastic Surgery,0.20
+"Null, Acupuncturist, Advanced Practice Midwife and 108 more",Plastic Surgery Within The Head & Neck,0.25
+"Null, Acupuncturist, Advanced Practice Midwife and 108 more",Neurology,0.58
+"Null, Acupuncturist, Advanced Practice Midwife and 108 more",Medical,0.61
+"Null, Acupuncturist, Advanced Practice Midwife and 108 more",Pediatric Hematology-Oncology,0.64
+"Null, Acupuncturist, Advanced Practice Midwife and 108 more",Gynecologic Oncology,1.58
+"Null, Acupuncturist, Advanced Practice Midwife and 108 more",Family,2.20
+"Null, Acupuncturist, Advanced Practice Midwife and 108 more","Acute Care, Addiction (Substance Use Disorder), Addiction Medicine and 211 more",2.79
+"Null, Acupuncturist, Advanced Practice Midwife and 108 more",,13.35
+Radiology,Diagnostic Radiology,0.18
+Radiology,Radiation Oncology,2.96
+Radiology,"Acute Care, Addiction (Substance Use Disorder), Addiction Medicine and 211 more",0.05
+Surgery,Plastic And Reconstructive Surgery,0.27
+Surgery,Vascular Surgery,0.46
+Surgery,Surgical Oncology,2.33
+Surgery,"Acute Care, Addiction (Substance Use Disorder), Addiction Medicine and 211 more",0.16
+Surgery,,5.85
+Urology,"Acute Care, Addiction (Substance Use Disorder), Addiction Medicine and 211 more",0.10
+Urology,,10.44

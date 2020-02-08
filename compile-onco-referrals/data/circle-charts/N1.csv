@@ -1,0 +1,26 @@
+N1_Primary_Classification,N1_Primary_Specialization,referral_percent
+Anesthesiology,Pain Medicine,0.01
+Dermatology,"Null, Pediatric Dermatology, Procedural Dermatology",0.01
+Emergency Medicine,"Adolescent Medicine, Advanced Heart Failure And Transplant Cardiology, Allergy & Immunology and 17 more",0.00
+Family Medicine,Addiction Medicine,0.00
+Internal Medicine,"Null, Pediatric Dermatology, Procedural Dermatology",0.00
+Internal Medicine,Medical Oncology,11.53
+Internal Medicine,Hematology & Oncology,39.54
+Internal Medicine,"Anatomic Pathology & Clinical Pathology, Blood Banking & Transfusion Medicine, Hematology",2.12
+Internal Medicine,"Adolescent Medicine, Advanced Heart Failure And Transplant Cardiology, Allergy & Immunology and 17 more",0.24
+Nuclear Medicine,In Vivo & In Vitro Nuclear Medicine,0.00
+Nurse Practitioner,Acute Care & Family,0.01
+Obstetrics & Gynecology,Gynecologic Oncology,2.18
+Obstetrics & Gynecology,"Female Pelvic Medicine And Reconstructive Surgery, Gynecology, Maternal & Fetal Medicine and 1 more",0.16
+Orthopaedic Surgery,Adult Reconstructive Orthopaedic Surgery & Orthopaedic Surgery Of The Spine,0.00
+Otolaryngology,"Otolaryngology/Facial Plastic Surgery, Pediatric Otolaryngology, Plastic Surgery Within The Head & Neck",0.08
+Pathology,"Anatomic Pathology & Clinical Pathology, Blood Banking & Transfusion Medicine, Hematology",0.07
+Pediatrics,Pediatric Hematology-Oncology,2.43
+Pediatrics,"Adolescent Medicine, Advanced Heart Failure And Transplant Cardiology, Allergy & Immunology and 17 more",0.00
+Psychiatry & Neurology,Neurology & Psychiatry,0.03
+Radiology,Radiation Oncology,36.86
+Radiology,Diagnostic Radiology,2.45
+Radiology,"Adolescent Medicine, Advanced Heart Failure And Transplant Cardiology, Allergy & Immunology and 17 more",0.08
+Surgery,Surgical Oncology,2.06
+Surgery,"Pediatric Surgery, Plastic And Reconstructive Surgery, Surgical Critical Care and 2 more",0.12
+Thoracic Surgery (Cardiothoracic Vascular Surgery),"Null, Pediatric Dermatology, Procedural Dermatology",0.00

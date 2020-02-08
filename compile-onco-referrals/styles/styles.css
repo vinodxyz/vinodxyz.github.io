@@ -116,6 +116,7 @@ table th{
 
 table tr td p{
   padding-left: 8px;
+  color: #676767;
 }
 
 table tr{
@@ -128,4 +129,28 @@ table tr{
 }
 
 .row-show{
+}
+
+#btnShowSpecs{
+  width: 100%;
+  min-height: 22px;
+  border-radius: 2px;
+  margin-top: 10px;
+  background: #fbfbfb;
+  border: 1px solid #dcdcdc;
+  color: #212121;
+}
+
+#btnShowSpecs:hover{
+  background: #f3f3f3;
+  cursor: pointer;
+  color: #000000;
+}
+
+
+.fader{
+  height: 50px;
+  border-bottom: 0.5px solid #dcddda;
+  margin-top: -55px;
+  background-image: -webkit-linear-gradient(270deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 100));
 }
