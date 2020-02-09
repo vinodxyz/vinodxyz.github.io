@@ -1,10 +1,6 @@
 
 m=17
 //color = d3.scaleSequential(d3.interpolateSinebow).domain([0,m-1])
-d3.selectAll(".onco-spec").attr("opacity",1); d3.selectAll(".non-onco-spec").attr("opacity",0.2);
-
-colors = ["#C88EB3", "#AAC8CD", "#ED6F6C", "#C0A983", "#9F83C5", "#BF9899", "#EE5673", "#F3B0CE", "#F7AA96", "#B7B7B7", "#60AFC4", "#D19082", "#EFBFA1", "#61999A", "#28B4D4", "#F4E0E9"]
-color = d3.scaleOrdinal().range(colors).domain([0,m-1]);
 width = 1080
 height = 900
 
@@ -181,12 +177,50 @@ for(var z=0; z<outboundData.length; z++){
     outboundData[z].focusY = focusY;
 }
 
-var tooltip = d3.select("body")
-                .append("div")
-                .style("position", "absolute")
-                .style("z-index", "10")
-                .style("visibility", "hidden");
+// var tooltip = d3.select("body")
+//                 .append("div")
+//                 .style("position", "absolute")
+//                 .style("z-index", "10")
+//                 .style("visibility", "hidden");
 
+var textureGenerators = [
+    function(){
+    return textures.lines().size(5).strokeWidth(3);
+    }
+];
+
+var textureScale = d3.scaleOrdinal()
+                    .domain([0,m-1])
+                    .range(textureGenerators)
+
+
+var colors = ["#C88EB3", "#AAC8CD", "#ED6F6C", "#C0A983", "#9F83C5", "#BF9899", "#EE5673", "#F3B0CE", "#F7AA96", "#B7B7B7", "#60AFC4", "#D19082", "#EFBFA1", "#61999A", "#28B4D4", "#F4E0E9"]
+var colorScale = d3.scaleOrdinal().range(colors).domain([0,m-1]);
+
+var colorTextureScale = d3.scaleOrdinal()
+                        .domain(colorScale.domain())
+                        .range(colorScale.range().map(function(color){
+                            return d3.scaleOrdinal()
+                                .domain(textureScale.domain())
+                                .range(textureScale.range().map(function(generateTexture){
+
+                                // Generate a new texture for each (color, texture) pair.
+                                return colorizeTexture(generateTexture(), color);
+                                }))
+                            }));
+
+
+function colorizeTexture(texture, color){
+    var texture = texture.stroke(color);
+    if(texture.fill){
+        texture.fill(color);
+    }
+    return texture;
+}
+
+colorTextureScale.range().forEach(function(scale){
+    scale.range().forEach(svg.call, svg);
+});
 
 var area2radius = d3.scaleSqrt().domain([0, 100]).range([0, 200]);
 const node = g.append("g")
@@ -194,20 +228,135 @@ const node = g.append("g")
     .data(outboundData)
     .join("circle")
     .attr("r", d => area2radius(d.referral_percent))
-    .style("fill", d => color(d.cluster))
-    .style("fill", t.url())
+    .style("fill", function(d){
+        return colorTextureScale(d.cluster)(d.cluster).url();
+    })
     .attr("class", function(d){ 
         if(d.N1_Primary_Specialization.toLowerCase().includes("onco")) 
-            return "onco-spec"; 
+            return "bubble onco-spec"; 
         else 
-            return "non-onco-spec"  
-        })
+            return "bubble non-onco-spec"  
+    })
+    .style("cursor","pointer")
     //.attr("id", function(d){ return d.N1_Primary_Classification+" - "+d.N1_Primary_Specialization;})
-    .on("mouseover", function(d){return tooltip.text(d.N1_Primary_Classification+" - "+d.N1_Primary_Specialization).style("visibility", "visible");})
-	.on("mousemove", function(d){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
-	.on("mouseout", function(d){return tooltip.style("visibility", "hidden");});
+    .on("mouseover", function(d){ 
 
-    d3.selectAll(".onco-spec").attr("opacity",0);
+            d3.selectAll(".bubble").style("opacity",0.2);
+            d3.selectAll(".bubble-rect").style("opacity",0.2);
+            d3.selectAll(".bubble-text").style("opacity",0.2);
+            d3.selectAll(".bubble-percent").style("opacity",0.2);
+            d3.selectAll(".bubble-rect-hide").style("opacity",0);
+            d3.selectAll(".bubble-text-hide").style("opacity",0);
+            d3.selectAll(".bubble-percent-hide").style("opacity",0);
+
+            d3.select(this).style("opacity",1);
+
+            var classId = d.N1_Primary_Classification.toLowerCase().replace(" ","").substring(0,5);
+            var specId = d.N1_Primary_Specialization.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
+            d3.selectAll("#label-"+classId+"-"+specId).style("opacity",1);
+            d3.selectAll("#rect-"+classId+"-"+specId).style("opacity",1);
+            d3.selectAll("#percent-"+classId+"-"+specId).style("opacity",1);                
+    
+        })
+
+	.on("mouseout", function(d){
+
+        d3.selectAll(".bubble").style("opacity",1);
+        d3.selectAll(".bubble-rect").style("opacity",1);
+        d3.selectAll(".bubble-text").style("opacity",1);
+        d3.selectAll(".bubble-percent").style("opacity",1);
+        d3.selectAll(".bubble-rect-hide").style("opacity",0);
+        d3.selectAll(".bubble-text-hide").style("opacity",0);
+        d3.selectAll(".bubble-percent-hide").style("opacity",0);
+
+        var classId = d.N1_Primary_Classification.toLowerCase().replace(" ","").substring(0,5);
+        var specId = d.N1_Primary_Specialization.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
+
+        if (area2radius(d.referral_percent) < 20){
+            d3.selectAll("#label-"+classId+"-"+specId).style("opacity",0);
+            d3.selectAll("#rect-"+classId+"-"+specId).style("opacity",0);
+            d3.selectAll("#percent-"+classId+"-"+specId).style("opacity",0); 
+        }
+        else{
+            d3.selectAll("#label-"+classId+"-"+specId).style("opacity",1);
+            d3.selectAll("#rect-"+classId+"-"+specId).style("opacity",1); 
+            d3.selectAll("#percent-"+classId+"-"+specId).style("opacity",1); 
+        }
+
+    });
+
+   // d3.selectAll(".onco-spec").attr("opacity",0);
+
+//    d3.selectAll(".onco-spec").attr("opacity",1); 
+//    d3.selectAll(".non-onco-spec").attr("opacity",0.2);
+
+const nodeRects = g.append("g")
+   .selectAll("rect")
+   .data(outboundData)
+   .join("rect")
+   .style("fill", function(d){
+        return colorScale(d.cluster);
+   })
+   .attr("class", function(d){
+    if (area2radius(d.referral_percent) > 20)
+        return "bubble-rect"
+    else
+        return "bubble-rect bubble-rect-hide"
+   })
+   .attr("id",function(d){
+        var classId = d.N1_Primary_Classification.toLowerCase().replace(" ","").substring(0,5);
+        var specId = d.N1_Primary_Specialization.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
+        return "rect-"+classId+"-"+specId;
+    })
+   .attr("width", d => area2radius(d.referral_percent)+20)
+   .attr("height","15px")
+   .style("margin-top","-30px")
+
+const nodeLabels = g.append("g")
+   .selectAll("text")
+   .data(outboundData)
+   .join("text")
+   .style("fill", function(d){
+       return "black";
+   })
+   .attr("class", function(d){ 
+        if (area2radius(d.referral_percent) > 20)
+            return "bubble-text"
+        else
+            return "bubble-text bubble-text-hide"
+   })
+   .attr("id",function(d){
+        var classId = d.N1_Primary_Classification.toLowerCase().replace(" ","").substring(0,5);
+        var specId = d.N1_Primary_Specialization.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
+
+        return "label-"+classId+"-"+ specId ;
+   })
+   .html(function(d){ 
+        return "<tspan text-anchor='start'>"+(d.N1_Primary_Specialization.length>40) ? d.N1_Primary_Specialization.substring(0,40)+".." : d.N1_Primary_Specialization +"</tspan>"; 
+    })
+
+const nodePercents = g.append("g")
+    .selectAll("text")
+    .data(outboundData)
+    .join("text")
+    .style("fill", function(d){
+        return "black";
+    })
+    .attr("class", function(d){ 
+         if (area2radius(d.referral_percent) > 20)
+             return "bubble-percent"
+         else
+             return "bubble-percent bubble-percent-hide"
+    })
+    .attr("id",function(d){
+         var classId = d.N1_Primary_Classification.toLowerCase().replace(" ","").substring(0,5);
+         var specId = d.N1_Primary_Specialization.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
+ 
+         return "percent-"+classId+"-"+ specId ;
+    })
+    .html(function(d){ 
+         return d.referral_percent+" %"; 
+     })
 
 const simulation = d3.forceSimulation()
         .force("collide", forceClusterCollision()
@@ -220,10 +369,61 @@ const simulation = d3.forceSimulation()
     
 simulation.nodes(outboundData).on("tick", ticked)
 
+const simulationRects = d3.forceSimulation()
+        .force("collide", forceClusterCollision()
+                .radius(d => area2radius(d.referral_percent) + 5)
+                .strength(1)
+                .clusterPadding(10)
+        )
+        .force("x", d3.forceX().x(d => d.focusX).strength(0.02))
+        .force("y", d3.forceY().y(d => d.focusY).strength(0.02))
+
+simulationRects.nodes(outboundData).on("tick", tickedRects)
+
+const simulationLabels = d3.forceSimulation()
+        .force("collide", forceClusterCollision()
+                .radius(d => area2radius(d.referral_percent) + 5)
+                .strength(1)
+                .clusterPadding(10)
+        )
+        .force("x", d3.forceX().x(d => d.focusX).strength(0.02))
+        .force("y", d3.forceY().y(d => d.focusY).strength(0.02))
+
+simulationLabels.nodes(outboundData).on("tick", tickedLabels)
+
+const simulationPercents = d3.forceSimulation()
+        .force("collide", forceClusterCollision()
+                .radius(d => area2radius(d.referral_percent) + 5)
+                .strength(1)
+                .clusterPadding(10)
+        )
+        .force("x", d3.forceX().x(d => d.focusX).strength(0.02))
+        .force("y", d3.forceY().y(d => d.focusY).strength(0.02))
+
+simulationPercents.nodes(outboundData).on("tick", tickedPercents)
+
 function ticked() {
     node
         .attr("cx", d => d.x)
         .attr("cy", d => d.y)
+}
+
+function tickedLabels() {
+    nodeLabels
+        .attr("x", d => d.x - area2radius(d.referral_percent)/2)
+        .attr("y", d => d.y+10)
+}
+
+function tickedRects() {
+    nodeRects
+        .attr("x", d => d.x - area2radius(d.referral_percent)/2)
+        .attr("y", d => d.y)
+}
+
+function tickedPercents() {
+    nodePercents
+        .attr("x", d => d.x - area2radius(d.referral_percent)/2)
+        .attr("y", d => d.y-10)
 }
 
 function forceClusterCollision() {

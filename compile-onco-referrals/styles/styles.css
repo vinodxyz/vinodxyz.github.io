@@ -154,3 +154,21 @@ table tr{
   margin-top: -55px;
   background-image: -webkit-linear-gradient(270deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 100));
 }
+
+.bubble-text,.bubble-rect{
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.bubble-percent{
+  font-size: 16px;
+  font-weight: 500;
+  /* stroke: white; */
+  stroke-width: 0.2;
+  pointer-events: none;
+}
+
+.bubble-text-hide,.bubble-rect-hide,.bubble-percent-hide{
+  opacity: 0;
+  pointer-events: none;
+}
