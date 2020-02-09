@@ -3,10 +3,10 @@ var waypoint1 = new Waypoint({
     handler: function(direction) {
         if(direction=="down"){
             d3.select(".big-circle").transition().duration(800).attr("r",area2radius(100))
-            d3.select("#outbound-group").transition().delay(1000).attr("opacity",1)
+            // d3.select("#outbound-group").transition().delay(1000).attr("opacity",1)
         }else{
             d3.select(".big-circle").transition().duration(800).attr("r",0)
-            d3.select("#outbound-group").attr("opacity",0)
+            // d3.select("#outbound-group").attr("opacity",0)
         }
     },
     offset: '75%'
@@ -17,7 +17,7 @@ var waypoint2 = new Waypoint({
     element: document.getElementById('note-2'),
     handler: function(direction) {
         if(direction=="down"){
-            separateDots();
+            outboundCirclesEmerge();
         }else{
             separateDotsReverse();
         }
@@ -62,14 +62,14 @@ var waypoint5 = new Waypoint({
 })
 
 
-var waypoint7 = new Waypoint({
-    element: document.getElementById('note-7'),
-    handler: function(direction) {
-        if(direction=="down"){
+// var waypoint7 = new Waypoint({
+//     element: document.getElementById('note-7'),
+//     handler: function(direction) {
+//         if(direction=="down"){
             
-        }else{
-            separateDotsAgainReverse();
-        }
-    },
-    offset: '75%'
-})
+//         }else{
+//             separateDotsAgainReverse();
+//         }
+//     },
+//     offset: '75%'
+// })
