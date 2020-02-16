@@ -46,10 +46,12 @@ body{
 }
 
 .note{
-  background-color: rgb(255,255,255,0.5);
+  background-color: rgb(255,255,255,1.0);
+  border-radius: 1px;
   margin-top: 800px;
   width: 500px;
   margin-left: 500px;
+  padding: 20px;
 }
 
 .fixed{
@@ -171,4 +173,29 @@ table tr{
 .bubble-text-hide,.bubble-rect-hide,.bubble-percent-hide{
   opacity: 0;
   pointer-events: none;
+}
+
+
+.legend-family{
+  background-color: #C78FB3;
+  padding-left: 2px;
+  padding-right: 2px;
+  border-radius: 2px;
+  color: black;
+}
+
+.legend-internal{
+  background-color: #EC5875;
+  padding-left: 2px;
+  padding-right: 2px;
+  border-radius: 2px;
+  color: black;
+}
+
+.legend-urology{
+  background-color: #C0A985;
+  padding-left: 2px;
+  padding-right: 2px;
+  border-radius: 2px;
+  color: black;
 }
