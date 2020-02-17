@@ -77,7 +77,7 @@ var waypoint6 = new Waypoint({
     element: document.getElementById('note-6'),
     handler: function(direction) {
         if(direction=="down"){
-            
+
             d3.select(".big-circle").transition().duration(1400).attr("r", 0);  
             bigCirclePercent.transition().duration(300).attr("opacity",0);
             bigCircleRect.transition().duration(300).attr("opacity",0);
@@ -90,14 +90,30 @@ var waypoint6 = new Waypoint({
     offset: '75%'
 })
 
-// var waypoint7 = new Waypoint({
-//     element: document.getElementById('note-7'),
-//     handler: function(direction) {
-//         if(direction=="down"){
+var waypoint7 = new Waypoint({
+    element: document.getElementById('note-7'),
+    handler: function(direction) {
+        if(direction=="down"){
+            var positionY = document.getElementById("circle-charts").getBoundingClientRect().top + window.scrollY;
+            d3.select("#circle-charts").attr("class","unfixed").style("top",positionY+"px");
+        }else{
             
-//         }else{
-//             separateDotsAgainReverse();
-//         }
-//     },
-//     offset: '75%'
-// })
+        }
+    },
+    offset: '100%'
+})
+
+
+var waypoint8 = new Waypoint({
+    element: document.getElementById('map-note-1'),
+    handler: function(direction) {
+        if(direction=="down"){
+            //var positionY = document.getElementById("idn-map").getBoundingClientRect().top + window.scrollY;
+            d3.select("#idn-map").attr("class","fixed");//.style("top",positionY+"px");
+            loadIDNMap("HS:ZLLO5NZLNKQ5K");
+        }else{
+            
+        }
+    },
+    offset: '100%'
+})

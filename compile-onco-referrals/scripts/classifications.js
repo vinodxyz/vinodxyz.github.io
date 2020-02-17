@@ -499,14 +499,7 @@ var textureScale = d3.scaleOrdinal()
                     .range(textureGenerators)
 
 
-var inboundColors = ["#C88EB3", "#AAC8CD", "#ED6F6C", 
-                "#C0A983", "#9F83C5", "#BF9899", 
-                "#EE5673", "#F3B0CE", "#F7AA96", 
-                "#B7B7B7", "#60AFC4", "#D19082", 
-                "#EFBFA1", "#61999A", "#28B4D4", 
-                "#F4E0E9"]
-
-var outboundColors = ["#C0A983", "#AAC8CD", "#C88EB3", //"#ED6F6C", 
+var outboundColors = ["#C0A983", "#AAC8CD", "#C88EB3",
                 "#EC5875", "#9F83C5", "#BF9899"]
 
 var colorScale = d3.scaleOrdinal().range(outboundColors).domain([0,m-1]);
@@ -680,7 +673,7 @@ const nodeLabels = nodeLabelGroup
                             var totalClass = "";
                             var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
 
-                            if (area2radius(d.referral_percent) > 20)
+                            if (area2radius(d.referral_percent) > 10)
                                 totalClass += "bubble-text"
                             else
                                 totalClass += "bubble-text bubble-text-hide"
@@ -703,22 +696,27 @@ const nodeLabels = nodeLabelGroup
                             var classId = d.N2_Primary_Classification;
                             var spec = d.N2_Primary_Specialization;
 
-                            if(spec == ""){
-                                spec = "General"
-                            }
+                            var finalClass = "";
+                            var finalSpec = "";
+                            var finalLabel = "";
                             
                             if(classId.toLowerCase().includes("midwife")){
-                                classId = "Others"
-                            }
-                            
-                            var finalLabel = spec;
-
-                            if(finalLabel.length > 20){
-                                return "<tspan text-anchor='start'>"+finalLabel.substring(0,40)+".."+"</tspan>"; 
+                                finalClass = "Others"
                             }
                             else{
-                                return "<tspan text-anchor='start'>"+finalLabel+"</tspan>"; 
+                                finalClass = classId;
                             }
+                            
+                            if(finalLabel.length <20){
+                                var finalHTML = "<tspan text-anchor='start'>"+finalClass+"</tspan>"; 
+                                finalHTML += "<tspan text-anchor='start' dy='10' dx='-20'>"+spec+"</tspan>"; 
+
+                                return finalHTML;
+                            }
+                            else{
+                                return "<tspan text-anchor='start'>"+finalLabel.substring(0,20)+".."+"</tspan>"; 
+                            }
+
                         })
 
 var nodePercentGroup = allbubbleGroup.append("g").attr("id","bubble-percent-group").attr("opacity",0);
@@ -1181,14 +1179,13 @@ function outboundDisappear(){
         .attr("cx", 0)
         .attr("cy", 0);
 
-    d3.select("#bubble-group").transition().duration(1500).delay(500).attr("opacity",0)
+    d3.select("#bubble-group").transition().duration(1000).delay(500).attr("opacity",0)
         
     simulationBubbles.stop();
 
     d3.select(".big-circle")
       .transition()
         .duration(1500)
-        .delay(500)
         .attr("r", area2radius(100))
         .style("fill", bigTexture.url());
 
@@ -1262,7 +1259,8 @@ const nodeBubbleIN = nodeBubbleGroupIN
                     .attr("cx", d => d.x = 0)
                     .attr("cy", d => d.y = 0)
                     .style("fill", function(d){
-                        return colorTextureScaleIN(d.cluster)(d.cluster).url();
+                        //return colorTextureScaleIN(d.cluster)(d.cluster).url();
+                        return colorScaleIN(d.cluster);
                     })
                     .attr("class", function(d){ 
 
@@ -1376,7 +1374,8 @@ const nodeRectsIN = nodeRectGroupIN
                             var specId = d.N1_Primary_Specialization.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
                             return "rect-"+classId+"-"+specId;
                         })
-                    .attr("width", d => area2radius(d.referral_percent)+20)
+                    //.attr("width", d => area2radius(d.referral_percent)+20)
+                    .attr("width", "0px")
                     .attr("height","15px")
                     .style("margin-top","-30px")
 

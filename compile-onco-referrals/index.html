@@ -55,7 +55,7 @@
                 This is the net total of referrals that Oncologists in the US healthcare system received in 20XX.
             </div>
             <div id="note-2" class="note">
-                Referrals were given by Physicians from various specializations. 
+                Referrals were <b>given</b> by Physicians from various specializations. 
                 Note: "Others" includes all other 111 classifications
             </div>
             <div id="note-3" class="note">
@@ -63,33 +63,40 @@
                 <span class="legend-family">Family medicine</span>, 
                 <span class="legend-internal">Internal medicine</span> and 
                 <span class="legend-urology">Urology</span><br>
-                (together, a total of 49.37%)
+                Together, a total of 49.37%
             </div>
             <div id="note-4" class="note">
-                Oncologists were also referred to by oncologists from other specialities.
-                A majority of such referrals were given by oncologists specialising in 
-                <span class="legend-internal">Internal medicine - Hematology & Oncology</span>.
+                Oncologists from various specializations also referred other oncologists.
+                Majority of referrals were given by oncologists specialising 
+                <span class="legend-internal">Internal medicine</span> (Hematology & Oncology).
             </div>
             <div id="note-5" class="note">
-                On the other hand, looking at the Oncologists who received referrals.
+                But, on the other hand, looking at the Oncologists who <b>received</b> referrals.
             </div>
             <div id="note-6" class="note">
-                Those specializing in Internal Medicine - Hematology & Oncology (40%), Radiation Oncology (37%), 
-                Internal Medicine - Medical Oncology (12%) received the most referrals.
+                Oncologists specializing in 
+                <span class="legend-internal"> Internal medicine</span> (Hematology & oncology and Medical oncology) and
+                <span class="legend-radiology">Radiology</span> (Radiation oncology) <b>received</b> 89% of all referrals.
+            </div>
+            <div id="note-7" class="note">
+                Here is another look at the same data.
             </div>
         </div>
         <div id="circle-charts" class="fixed"></div>
         <div id="map-section">
             <div id="map-note-1" class="note">
                 However, physicians refer based on another important criteria: The IDN that the oncologist belongs 
-                to. Patients are referred to oncologists who belong to specific IDNs.
+                to. Patients are referred to oncologists who belong to specific IDNs. 
+                Let's have a look at the referral patterns across the globe.
             </div>
             <div id="map-note-2" class="note">
-                Taking a closer look at Mayo Clinic - one of the IDNs that receives the highest referral volume. 
-                We can see that referrals for Mayo Clinic tends to occur across the breadth of US.
+                The map shows referrals for Mayo Clinic - one of the IDNs that receives the highest referral volume. 
+                In this case, referrals tends to occur across the breadth of US.
             </div>
             <div id="map-note-3" class="note">
-                This is the same for University of Pennsylvania ...
+                Have a look at the referral-patterns yourself. Show referral patterns for
+                <select id="ddl-idn" onchange="loadIDNMap(this.value);"></select>
+                <!-- This is the same for University of Pennsylvania ... -->
             </div>
             <div id="map-note-4" class="note">
                 ... and the Cleveland Clinic Foundation
@@ -98,11 +105,12 @@
                 Instead, if we look at the top 100 oncologists based on their referral volume. Irrespective of 
                 the IDN that they belong to, we find that the same pattern persists.
             </div>
+            <div id="idn-map"></div>
         </div>
     </body>
 
     
-    <!-- <script src="scripts/viz.js"></script> -->
+    <script src="scripts/viz.js"></script>
     <!-- <script src="scripts/circles.js"></script> -->
     <script src="scripts/classifications.js"></script>
     <!-- <script src="scripts/class-chord.js"></script> -->
