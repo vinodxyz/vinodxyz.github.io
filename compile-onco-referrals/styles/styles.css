@@ -8,8 +8,7 @@ body{
 .intro{
   background-color: rgb(255,255,255,0.5);
   margin-top: 300px;
-  width: 500px;
-  margin-left: 500px;
+  padding: 20px;
 }
 
 .title{
@@ -37,28 +36,47 @@ body{
 
 .gray-circle{
   display:inline-block;
-  background-color: #858585;
-  width: 8px;
-  height: 8px;
+  background-color: #bfbfbf;
+  width: 6px;
+  height: 6px;
   border-radius: 50px;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-left: 4px;
+  margin-right: 4px;
+  margin-bottom: 2px;
 }
 
 .note{
   background-color: rgb(255,255,255,1.0);
   border-radius: 1px;
   margin-top: 800px;
-  width: 500px;
-  margin-left: 500px;
   padding: 20px;
   box-shadow: 0px 0px 2px #c7c7c7;
+}
+
+.note-others{
+  background-color: #f9f9f9;
+  font-size: 14px;
+  color: #687288;
+  border-radius: 2px;
+  border: 1px solid #e2e7f1;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.note-others-rect{
+  background-color: #c7d1e6;
+  border-radius: 0px 2px 2px 0px;
+  padding-right: 6px;
+}
+
+.note-others-text{
+  padding-left: 14px;
 }
 
 .fixed{
   position: fixed;
   top: 10px;
-  z-index: -999;
+  /* z-index: -999; */
 }
 
 .unfixed{
@@ -156,6 +174,20 @@ table tr{
   color: #000000;
 }
 
+#arrow-icon {
+  position: relative;
+}
+
+#arrow-icon:before {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: 4px;
+  bottom: 0;
+  width: 10px;
+  background: url("../svg/down.svg") center / contain no-repeat;
+}
+
 
 .fader{
   height: 50px;
@@ -188,7 +220,7 @@ table tr{
   padding-left: 2px;
   padding-right: 2px;
   border-radius: 2px;
-  color: black;
+  color: white;
 }
 
 .legend-internal{
@@ -196,7 +228,7 @@ table tr{
   padding-left: 2px;
   padding-right: 2px;
   border-radius: 2px;
-  color: black;
+  color: white;
 }
 
 .legend-urology{
@@ -204,7 +236,7 @@ table tr{
   padding-left: 2px;
   padding-right: 2px;
   border-radius: 2px;
-  color: black;
+  color: white;
 }
 
 .legend-radiology{
@@ -212,5 +244,56 @@ table tr{
   padding-left: 2px;
   padding-right: 2px;
   border-radius: 2px;
-  color: black;
+  color: white;
+}
+
+.legend-others{
+  background-color: #9F85C3;
+  padding-left: 2px;
+  padding-right: 2px;
+  border-radius: 2px;
+  color: white;
+}
+
+.wrapper{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+}
+
+.intro{
+  grid-column: 2/3;
+}
+
+.note{
+  grid-column: 2/3;
+}
+
+
+@media (min-width: 300px) and (max-width: 768px) {
+  .wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+  }
+  
+  .intro{
+    grid-column: 1/4;
+  }
+  
+  .note{
+    grid-column: 1/4;
+  }
+
+  .title{
+    font-size: 36px;
+    line-height: 42px;
+  }
+}
+
+.subtitle,.authors{
+  margin-left: 15px;
+  color: #636363;
 }

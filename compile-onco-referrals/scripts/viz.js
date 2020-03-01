@@ -71,6 +71,8 @@ function loadIDNMap(IDN){
       .translate([width / 2, height / 2])
       .scale(1280);
 
+  //var projection = d3.geoOrthographic().translate([width / 2, height / 2]).rotate(90).scale(1280);
+
 
   var path = d3.geoPath()
       .projection(projection)
@@ -121,10 +123,21 @@ function loadIDNMap(IDN){
         //         .text(function(d) { return d.zip + "\n" + d.arcs.coordinates.length + " hospitals"; });
         
         //console.log(hospitals);
-        hospital.append("path")
-            .attr("class", "hospital-arc")
-            .attr("d", function(d) { return path(d.arcs);})
+        var patha = hospital.append("path")
+                          .attr("class", "hospital-arc")
+                          .attr("d", function(d) { return path(d.arcs);})
             //.style("stroke-width", function(d) { return d.tc_6month; })
+
+
+        var totalLength = patha.node().getTotalLength();
+
+        patha
+          .attr("stroke-dasharray", totalLength + " " + totalLength)
+          .attr("stroke-dashoffset", totalLength)
+          .transition()
+            .duration(4000)
+            .ease(d3.easeLinear)
+            .attr("stroke-dashoffset", 0);
 
       });
     });

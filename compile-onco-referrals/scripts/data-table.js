@@ -32,6 +32,10 @@ function showAllRows(){
     hiddenRows.attr("class","row-show");
     d3.select("#btnShowSpecs").attr("value","view less").attr("onclick","hideAllRows()");
 
+    var styleElem = document.head.appendChild(document.createElement("style"));
+    styleElem.innerHTML = "#arrow-icon:before {background: url(\"../svg/up.svg\") center / contain no-repeat;}";
+    
+    Waypoint.refreshAll();
     // var shownRows = d3.selectAll(".row-show");
     // shownRows.attr("class","row-hide");
 }
@@ -42,5 +46,10 @@ function hideAllRows(){
     showRows.attr("class","row-hide");
     d3.select("#btnShowSpecs").attr("value","view all specializations").attr("onclick","showAllRows()");
     document.getElementById('data-table').scrollIntoView();
+
+    var styleElem = document.head.appendChild(document.createElement("style"));
+    styleElem.innerHTML = "#arrow-icon:before {background: url(\"../svg/down.svg\") center / contain no-repeat;}";
+
+    Waypoint.refreshAll();
 }
 

@@ -1,10 +1,14 @@
 var margin = {top: 50, right: 50, bottom: 50, left: 50}
-var width = window.innerWidth - margin.left - margin.right,
+var width = window.innerWidth - margin.right - margin.left,
     height = window.innerHeight - margin.top - margin.bottom; 
+var bubbleSize = 200;
 
+if(window.innerWidth < 768){
+    bubbleSize = 120;
+}
 
 var svg = d3.select("#circle-charts").append("svg")
-    .attr("width", width + margin.left + margin.right)
+    .attr("width", width + margin.right + margin.left)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate(" + [margin.left, margin.top] + ")")
@@ -409,14 +413,8 @@ var outboundData = [
 
 var area2radius = d3.scaleSqrt() // instead of scaleLinear()
   .domain([0, 100])
-  .range([0, 200])
+  .range([0, bubbleSize])
 
-
-var simulationOutbound = d3.forceSimulation(outboundData)
-    .force("x", d3.forceX(width / 2))
-    .force("y", d3.forceY(height / 2))
-    .force("collide", d3.forceCollide(config.radius + 1.5).iterations(2))
-    .stop()
 
 var circleGroup = svg.append("g").style("filter", "url(#gooey)");
 
@@ -589,7 +587,36 @@ const nodeBubble = nodeBubbleGroup
                                 return classId+" - "+spec;
                             });
                             d3.selectAll("#rect-"+classId+"-"+specId).style("opacity",1);
-                            d3.selectAll("#percent-"+classId+"-"+specId).style("opacity",1);                
+                            d3.selectAll("#percent-"+classId+"-"+specId).style("opacity",1);    
+                            
+                            
+                            //new: start
+                            var classId = d.N2_Primary_Classification;
+                            var spec = d.N2_Primary_Specialization;
+
+                            var finalClass = "";
+                            var finalSpec = "";
+                            
+                            if(classId.toLowerCase().includes("midwife")){
+                                finalClass = "Others"
+                            }
+                            else{
+                                finalClass = classId;
+                            }
+                            
+                            if(spec.length>20){
+                                finalSpec = spec.substring(0,20) + "...";
+                            }else{
+                                finalSpec = spec;
+                            }
+                            
+                            classWidth = getTextWidth(finalClass, "12px Rubik");
+                            
+                            var finalHTML = "<tspan opacity=0.5 text-anchor='start'>"+finalClass+"</tspan>"; 
+                            finalHTML += "<tspan text-anchor='start' dy='14' dx='-"+classWidth+"'>"+finalSpec+"</tspan>"; 
+                            return finalHTML;
+
+                            //new: end
                     
                         })
 
@@ -620,42 +647,42 @@ const nodeBubble = nodeBubbleGroup
                     });
 
 
-var nodeRectGroup = allbubbleGroup.append("g").attr("id","bubble-rect-group").attr("opacity",0);
-const nodeRects = nodeRectGroup
-                    .selectAll("rect")
-                    .data(outboundData)
-                    .join("rect")
-                    .style("fill", function(d){
-                            return colorScale(d.cluster);
-                    })
-                    .attr("x", d => d.x = 0)
-                    .attr("y", d => d.y = 0)
-                    .attr("class", function(d){
+// var nodeRectGroup = allbubbleGroup.append("g").attr("id","bubble-rect-group").attr("opacity",0);
+// const nodeRects = nodeRectGroup
+//                     .selectAll("rect")
+//                     .data(outboundData)
+//                     .join("rect")
+//                     .style("fill", function(d){
+//                             return colorScale(d.cluster);
+//                     })
+//                     .attr("x", d => d.x = 0)
+//                     .attr("y", d => d.y = 0)
+//                     .attr("class", function(d){
 
-                        var totalClass = "";
-                        var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
+//                         var totalClass = "";
+//                         var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
 
-                        if (area2radius(d.referral_percent) > 20)
-                            totalClass += "bubble-rect"
-                        else
-                            totalClass += "bubble-rect bubble-rect-hide"
+//                         if (area2radius(d.referral_percent) > 20)
+//                             totalClass += "bubble-rect"
+//                         else
+//                             totalClass += "bubble-rect bubble-rect-hide"
 
-                        if(d.N2_Primary_Specialization.toLowerCase().includes("onco")) 
-                            totalClass += " onco-spec "+classId;
-                        else 
-                            totalClass += " non-onco-spec "+classId;
+//                         if(d.N2_Primary_Specialization.toLowerCase().includes("onco")) 
+//                             totalClass += " onco-spec "+classId;
+//                         else 
+//                             totalClass += " non-onco-spec "+classId;
 
-                        return totalClass;
+//                         return totalClass;
 
-                    })
-                    .attr("id",function(d){
-                            var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").substring(0,5);
-                            var specId = d.N2_Primary_Specialization.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
-                            return "rect-"+classId+"-"+specId;
-                        })
-                    .attr("width", "0px")
-                    .attr("height","15px")
-                    .style("margin-top","-30px")
+//                     })
+//                     .attr("id",function(d){
+//                             var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").substring(0,5);
+//                             var specId = d.N2_Primary_Specialization.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
+//                             return "rect-"+classId+"-"+specId;
+//                         })
+//                     .attr("width", "0px")
+//                     .attr("height","15px")
+//                     .style("margin-top","-30px")
 
         
 var nodeLabelGroup = allbubbleGroup.append("g").attr("id","bubble-label-group").attr("opacity",0);
@@ -673,7 +700,7 @@ const nodeLabels = nodeLabelGroup
                             var totalClass = "";
                             var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
 
-                            if (area2radius(d.referral_percent) > 10)
+                            if (d.referral_percent > 2.3)
                                 totalClass += "bubble-text"
                             else
                                 totalClass += "bubble-text bubble-text-hide"
@@ -698,7 +725,6 @@ const nodeLabels = nodeLabelGroup
 
                             var finalClass = "";
                             var finalSpec = "";
-                            var finalLabel = "";
                             
                             if(classId.toLowerCase().includes("midwife")){
                                 finalClass = "Others"
@@ -706,17 +732,24 @@ const nodeLabels = nodeLabelGroup
                             else{
                                 finalClass = classId;
                             }
-                            
-                            if(finalLabel.length <20){
-                                var finalHTML = "<tspan text-anchor='start'>"+finalClass+"</tspan>"; 
-                                finalHTML += "<tspan text-anchor='start' dy='10' dx='-20'>"+spec+"</tspan>"; 
+                        
 
-                                return finalHTML;
+                            if(spec.length>20){
+                                finalSpec = spec.substring(0,20) + "...";
+                            }
+                            else if(spec == ""){
+                                finalSpec = "General";
                             }
                             else{
-                                return "<tspan text-anchor='start'>"+finalLabel.substring(0,20)+".."+"</tspan>"; 
+                                finalSpec = spec;
                             }
-
+                            
+                           var specWidth = getTextWidth(finalSpec, "12px Rubik");
+                            
+                            var finalHTML = "<tspan text-anchor='start'>"+finalSpec+"</tspan>"; 
+                            finalHTML += "<tspan opacity=0.5 fill='#333' text-anchor='start' dy='15' dx='-"+specWidth+"'>("+finalClass+")</tspan>";
+                            return finalHTML;
+                            
                         })
 
 var nodePercentGroup = allbubbleGroup.append("g").attr("id","bubble-percent-group").attr("opacity",0);
@@ -734,7 +767,7 @@ const nodePercents = nodePercentGroup
                             var totalClass = "";
                             var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
 
-                            if (area2radius(d.referral_percent) > 20)
+                            if (d.referral_percent > 2.3)
                                 totalClass += "bubble-percent"
                             else
                                 totalClass += "bubble-percent bubble-percent-hide"
@@ -771,16 +804,16 @@ const simulationBubbles = d3.forceSimulation(outboundData)
     
 // simulationBubbles.nodes(outboundData);
 
-const simulationRects = d3.forceSimulation()
-                            .force("collide", forceClusterCollision()
-                                    .radius(d => area2radius(d.referral_percent) + 5)
-                                    .strength(1)
-                                    .clusterPadding(10)
-                            )
-                            .force("x", d3.forceX().x(d => d.focusX).strength(0.02))
-                            .force("y", d3.forceY().y(d => d.focusY).strength(0.02));
+// const simulationRects = d3.forceSimulation()
+//                             .force("collide", forceClusterCollision()
+//                                     .radius(d => area2radius(d.referral_percent) + 5)
+//                                     .strength(1)
+//                                     .clusterPadding(10)
+//                             )
+//                             .force("x", d3.forceX().x(d => d.focusX).strength(0.02))
+//                             .force("y", d3.forceY().y(d => d.focusY).strength(0.02));
 
-simulationRects.nodes(outboundData).on("tick", tickedRects);
+// simulationRects.nodes(outboundData).on("tick", tickedRects);
 
 const simulationLabels = d3.forceSimulation()
                             .force("collide", forceClusterCollision()
@@ -816,11 +849,11 @@ function tickedLabels() {
         .attr("y", d => d.y+10)
 }
 
-function tickedRects() {
-    nodeRects
-        .attr("x", d => d.x - area2radius(d.referral_percent)/2)
-        .attr("y", d => d.y)
-}
+// function tickedRects() {
+//     nodeRects
+//         .attr("x", d => d.x - area2radius(d.referral_percent)/2)
+//         .attr("y", d => d.y)
+// }
 
 function tickedPercents() {
     nodePercents
@@ -1050,27 +1083,27 @@ function forceClusterCollision() {
             }
         }));
 
-        simulationRects.restart(0.01);
-        simulationRects.force('y', d3.forceY()
-        .y(function(d){
-            var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
-            //famil, inter, urolo
+        // simulationRects.restart(0.01);
+        // simulationRects.force('y', d3.forceY()
+        // .y(function(d){
+        //     var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
+        //     //famil, inter, urolo
 
-            if((classId == "famil") || (classId == "inter") || (classId == "urolo")){
-                return 100;
-            }else{
-                return d.focusY;
-            }
-        })
-        .strength(function(d){
-            var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
-            if((classId == "famil") || (classId == "inter") || (classId == "urolo")){
-                return 0.2;
-            }
-            else{
-                return 0.02;
-            }
-        }));
+        //     if((classId == "famil") || (classId == "inter") || (classId == "urolo")){
+        //         return 100;
+        //     }else{
+        //         return d.focusY;
+        //     }
+        // })
+        // .strength(function(d){
+        //     var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
+        //     if((classId == "famil") || (classId == "inter") || (classId == "urolo")){
+        //         return 0.2;
+        //     }
+        //     else{
+        //         return 0.02;
+        //     }
+        // }));
         
     }
 
@@ -1086,7 +1119,7 @@ function forceClusterCollision() {
 
         simulationBubbles.stop();
         simulationLabels.stop();
-        simulationRects.stop();
+        // simulationRects.stop();
         simulationPercents.stop();
 
         simulationBubbles.restart(0.01);
@@ -1125,23 +1158,23 @@ function forceClusterCollision() {
             }
         }));
 
-        simulationRects.restart(0.01);
-        simulationRects.force('y', d3.forceY()
-        .y(function(d){
-            if(d.N2_Primary_Specialization.toLowerCase().includes("onco")){
-                return 100;
-            }else{
-                return d.focusY;
-            }
-        })
-        .strength(function(d){
-            if(d.N2_Primary_Specialization.toLowerCase().includes("onco")){
-                return 0.2;
-            }
-            else{
-                return 0.02;
-            }
-        }));
+        // simulationRects.restart(0.01);
+        // simulationRects.force('y', d3.forceY()
+        // .y(function(d){
+        //     if(d.N2_Primary_Specialization.toLowerCase().includes("onco")){
+        //         return 100;
+        //     }else{
+        //         return d.focusY;
+        //     }
+        // })
+        // .strength(function(d){
+        //     if(d.N2_Primary_Specialization.toLowerCase().includes("onco")){
+        //         return 0.2;
+        //     }
+        //     else{
+        //         return 0.02;
+        //     }
+        // }));
 
         simulationPercents.restart(0.01);
         simulationPercents.force('y', d3.forceY()
@@ -1310,7 +1343,7 @@ const nodeBubbleIN = nodeBubbleGroupIN
                                 return classId+" - "+spec;
                             });
                             d3.selectAll("#rect-"+classId+"-"+specId).style("opacity",1);
-                            d3.selectAll("#percent-"+classId+"-"+specId).style("opacity",1);                
+                            d3.selectAll("#percent-"+classId+"-"+specId).style("opacity",1);    
                     
                         })
 
@@ -1341,43 +1374,43 @@ const nodeBubbleIN = nodeBubbleGroupIN
                     });
 
 
-var nodeRectGroupIN = allbubbleGroupIN.append("g").attr("id","bubble-rect-group-in").attr("opacity",0);
-const nodeRectsIN = nodeRectGroupIN
-                    .selectAll("rect")
-                    .data(inboundData)
-                    .join("rect")
-                    .style("fill", function(d){
-                            return colorScaleIN(d.cluster);
-                    })
-                    .attr("x", d => d.x = 0)
-                    .attr("y", d => d.y = 0)
-                    .attr("class", function(d){
+// var nodeRectGroupIN = allbubbleGroupIN.append("g").attr("id","bubble-rect-group-in").attr("opacity",0);
+// const nodeRectsIN = nodeRectGroupIN
+//                     .selectAll("rect")
+//                     .data(inboundData)
+//                     .join("rect")
+//                     .style("fill", function(d){
+//                             return colorScaleIN(d.cluster);
+//                     })
+//                     .attr("x", d => d.x = 0)
+//                     .attr("y", d => d.y = 0)
+//                     .attr("class", function(d){
 
-                        var totalClass = "";
-                        var classId = d.N1_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
+//                         var totalClass = "";
+//                         var classId = d.N1_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
 
-                        if (area2radius(d.referral_percent) > 20)
-                            totalClass += "bubble-rect"
-                        else
-                            totalClass += "bubble-rect bubble-rect-hide"
+//                         if (area2radius(d.referral_percent) > 20)
+//                             totalClass += "bubble-rect"
+//                         else
+//                             totalClass += "bubble-rect bubble-rect-hide"
 
-                        if(d.N1_Primary_Specialization.toLowerCase().includes("onco")) 
-                            totalClass += " onco-spec "+classId;
-                        else 
-                            totalClass += " non-onco-spec "+classId;
+//                         if(d.N1_Primary_Specialization.toLowerCase().includes("onco")) 
+//                             totalClass += " onco-spec "+classId;
+//                         else 
+//                             totalClass += " non-onco-spec "+classId;
 
-                        return totalClass;
+//                         return totalClass;
 
-                    })
-                    .attr("id",function(d){
-                            var classId = d.N1_Primary_Classification.toLowerCase().replace(" ","").substring(0,5);
-                            var specId = d.N1_Primary_Specialization.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
-                            return "rect-"+classId+"-"+specId;
-                        })
-                    //.attr("width", d => area2radius(d.referral_percent)+20)
-                    .attr("width", "0px")
-                    .attr("height","15px")
-                    .style("margin-top","-30px")
+//                     })
+//                     .attr("id",function(d){
+//                             var classId = d.N1_Primary_Classification.toLowerCase().replace(" ","").substring(0,5);
+//                             var specId = d.N1_Primary_Specialization.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
+//                             return "rect-"+classId+"-"+specId;
+//                         })
+//                     //.attr("width", d => area2radius(d.referral_percent)+20)
+//                     .attr(newFunction(), "0px")
+//                     .attr("height","15px")
+//                     .style("margin-top","-30px")
 
         
 var nodeLabelGroupIN = allbubbleGroupIN.append("g").attr("id","bubble-label-group-in").attr("opacity",0);
@@ -1485,16 +1518,16 @@ const simulationBubblesIN = d3.forceSimulation(inboundData)
                             .force("y", d3.forceY().y(d => d.focusY).strength(0.02))
                             .on("tick", tickedIN).stop()
 
-const simulationRectsIN = d3.forceSimulation()
-                            .force("collide", forceClusterCollision()
-                                    .radius(d => area2radius(d.referral_percent) + 5)
-                                    .strength(1)
-                                    .clusterPadding(10)
-                            )
-                            .force("x", d3.forceX().x(d => d.focusX).strength(0.02))
-                            .force("y", d3.forceY().y(d => d.focusY).strength(0.02));
+// const simulationRectsIN = d3.forceSimulation()
+//                             .force("collide", forceClusterCollision()
+//                                     .radius(d => area2radius(d.referral_percent) + 5)
+//                                     .strength(1)
+//                                     .clusterPadding(10)
+//                             )
+//                             .force("x", d3.forceX().x(d => d.focusX).strength(0.02))
+//                             .force("y", d3.forceY().y(d => d.focusY).strength(0.02));
 
-simulationRectsIN.nodes(inboundData).on("tick", tickedRectsIN);
+// simulationRectsIN.nodes(inboundData).on("tick", tickedRectsIN);
 
 const simulationLabelsIN = d3.forceSimulation()
                             .force("collide", forceClusterCollision()
@@ -1518,6 +1551,10 @@ const simulationPercentsIN = d3.forceSimulation()
 
 simulationPercentsIN.nodes(inboundData).on("tick", tickedPercentsIN);
 
+function newFunction() {
+    return "width";
+}
+
 function tickedIN() {
     nodeBubbleIN
         .attr("cx", d => d.x)
@@ -1530,11 +1567,11 @@ function tickedLabelsIN() {
         .attr("y", d => d.y+10)
 }
 
-function tickedRectsIN() {
-    nodeRectsIN
-        .attr("x", d => d.x - area2radius(d.referral_percent)/2)
-        .attr("y", d => d.y)
-}
+// function tickedRectsIN() {
+//     nodeRectsIN
+//         .attr("x", d => d.x - area2radius(d.referral_percent)/2)
+//         .attr("y", d => d.y)
+// }
 
 function tickedPercentsIN() {
     nodePercentsIN
@@ -1570,3 +1607,59 @@ function inboundCirclesEmerge(){
     //}
     
 }
+
+
+function getTextWidth(text, font = "500 12px sans-serif") {
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+    context.font = font;
+    return context.measureText(text).width;
+  }
+
+function breakString(word, maxWidth, hyphenCharacter='-') {
+    const characters = word.split("");
+    const lines = [];
+    let currentLine = "";
+    characters.forEach((character, index) => {
+      const nextLine = `${currentLine}${character}`;
+      const lineWidth = getTextWidth(nextLine);
+      if (lineWidth >= maxWidth) {
+        const currentCharacter = index + 1;
+        const isLastLine = characters.length === currentCharacter;
+        const hyphenatedNextLine = `${nextLine}${hyphenCharacter}`;
+        lines.push(isLastLine ? nextLine : hyphenatedNextLine);
+        currentLine = "";
+      } else {
+        currentLine = nextLine;
+      }
+    });
+    return { hyphenatedStrings: lines, remainingWord: currentLine };
+}
+
+function wrapLabel(label, maxWidth) {
+    const words = label.split(" ");
+    const completedLines = [];
+    let nextLine = "";
+    words.forEach((word, index) => {
+      const wordLength = getTextWidth(`${word} `);
+      const nextLineLength = getTextWidth(nextLine);
+      if (wordLength > maxWidth) {
+        const { hyphenatedStrings, remainingWord } = breakString(word, maxWidth);
+        completedLines.push(nextLine, ...hyphenatedStrings);
+        nextLine = remainingWord;
+      } else if (nextLineLength + wordLength >= maxWidth) {
+        completedLines.push(nextLine);
+        nextLine = word;
+      } else {
+        nextLine = [nextLine, word].filter(Boolean).join(" ");
+      }
+      const currentWord = index + 1;
+      const isLastWord = currentWord === words.length;
+      if (isLastWord) {
+        completedLines.push(nextLine);
+      }
+    });
+    return completedLines.filter(line => line !== "");
+}
+
+

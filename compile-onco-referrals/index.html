@@ -1,37 +1,44 @@
 <html>
     <head>
-        <title>Map of Referrals</title>
+        <title>Compile | Onco network</title>
+        <link rel="icon" href="svg/favicon2.svg">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles/styles.css">
+
         <script src="https://d3js.org/d3.v5.min.js"></script>
         <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
         <script src="https://d3js.org/d3-fetch.v1.min.js"></script> 
         <script src="https://d3js.org/d3-queue.v3.min.js"></script>
         <script src="https://d3js.org/topojson.v1.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="data/chord-data.js"></script>
+
         <script src="scripts/textures.js"></script>
         <script src="scripts/noframework.waypoints.min.js"></script>
+        
         <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
     </head>
 
     <body>
         <!-- <svg width="960" height="600"></svg> -->
-        <div id="intro-section" class="intro">
-            <div class="title">
-                Oncology Network
-            </div>
-            <div class="subtitle">
-                An analysis of referral patterns in oncology
-            </div>
-            <div class="authors">
-               <span class="blue-rect">..</span> 
-               By Shailesh Chitnis, Cyriac Thomas, Arjun and Vinod 
-               <div class="gray-circle"></div>
-               Feb 2020
+        <div class="wrapper">
+            <div id="intro-section" class="intro">
+                <div class="title">
+                    Oncology network
+                </div>
+                <div class="subtitle">
+                    An analysis of referral patterns in oncology care system
+                </div>
+                <div class="authors">
+                    <span class="blue-rect">.</span> 
+                    By Shailesh, Cyriac, Arjun and Vinod 
+                    <div class="gray-circle"></div>
+                    Feb 2020
+                </div>
             </div>
         </div>
-        <div id="classification-section">
+        <div id="classification-section" class="wrapper">
             <div id="note-0" class="note">
                 <div>
                     US healthcare system comprises of Integrated Delivery Networks that streamlines cancer 
@@ -44,7 +51,11 @@
                     
                     <br><br>
                     <div id="data-table"></div>
-                    <input type="button" id="btnShowSpecs" value="view all specializations" onclick="showAllRows()">
+
+                    <label id="arrow-icon">
+                        <input type="button" id="btnShowSpecs" value="view all specializations" onclick="showAllRows()">
+                    </label>
+
                     <br><br>
 
                     For every physician in the network, whether referring or receiving a referral, we have also 
@@ -55,8 +66,11 @@
                 This is the net total of referrals that Oncologists in the US healthcare system received in 20XX.
             </div>
             <div id="note-2" class="note">
-                Referrals were <b>given</b> by Physicians from various specializations. 
-                Note: "Others" includes all other 111 classifications
+                Referrals were <b>given</b> by Physicians from various specializations. <br><br>
+                <div class="note-others">
+                    <!-- <span class="note-others-rect"></span> -->
+                    <span class="note-others-text">Note: <span class="legend-others">Others</span> includes all other 111 classifications</span>
+                </div>
             </div>
             <div id="note-3" class="note">
                 A majority of referrals were given by Physicians practising<br> 
@@ -81,9 +95,10 @@
             <div id="note-7" class="note">
                 Here is another look at the same data.
             </div>
+            <div id="circle-charts" class="fixed"></div>
         </div>
-        <div id="circle-charts" class="fixed"></div>
-        <div id="map-section">
+        
+        <div id="map-section" class="wrapper">
             <div id="map-note-1" class="note">
                 However, physicians refer based on another important criteria: The IDN that the oncologist belongs 
                 to. Patients are referred to oncologists who belong to specific IDNs. 
@@ -109,9 +124,8 @@
         </div>
     </body>
 
-    
+    <script src="data/chord-data.js"></script>
     <script src="scripts/viz.js"></script>
-    <!-- <script src="scripts/circles.js"></script> -->
     <script src="scripts/classifications.js"></script>
     <!-- <script src="scripts/class-chord.js"></script> -->
     <script src="scripts/scrollytelling.js"></script>
