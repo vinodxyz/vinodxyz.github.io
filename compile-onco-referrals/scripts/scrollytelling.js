@@ -29,17 +29,31 @@ var waypoint2 = new Waypoint({
             outboundCirclesEmerge();
         }
         else{
-            
+            d3.select(".fixed").style("z-index",-999);
         }
     },
     offset: '75%'
   })
 
+var waypoint2hover = new Waypoint({
+    element: document.getElementById('note-2-hover'),
+    handler: function(direction) {
+        if(direction=="down"){
+            d3.select(".fixed").style("z-index",0);
+            d3.select("#note-2-hover").transition().duration(2000).style("opacity","0");
+        }
+        else{
+            
+        }
+    },
+    offset: '50%'
+});
 
 var waypoint3 = new Waypoint({
     element: document.getElementById('note-3'),
     handler: function(direction) {
         if(direction=="down"){
+            d3.select(".fixed").style("z-index",-999);
             highlightNononco();
         }
         else{

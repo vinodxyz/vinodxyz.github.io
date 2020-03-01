@@ -558,10 +558,8 @@ const nodeBubble = nodeBubbleGroup
                     .on("mouseover", function(d){ 
 
                             d3.selectAll(".bubble").style("opacity",0.2);
-                            d3.selectAll(".bubble-rect").style("opacity",0.2);
-                            d3.selectAll(".bubble-text").style("opacity",0.2);
-                            d3.selectAll(".bubble-percent").style("opacity",0.2);
-                            d3.selectAll(".bubble-rect-hide").style("opacity",0);
+                            d3.selectAll(".bubble-text").style("opacity",0);
+                            d3.selectAll(".bubble-percent").style("opacity",0);
                             d3.selectAll(".bubble-text-hide").style("opacity",0);
                             d3.selectAll(".bubble-percent-hide").style("opacity",0);
 
@@ -570,70 +568,58 @@ const nodeBubble = nodeBubbleGroup
                             var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
                             var specId = d.N2_Primary_Specialization.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
                             
+                            d3.selectAll("#percent-"+classId+"-"+specId).style("opacity",1);  
+
                             d3.selectAll("#label-"+classId+"-"+specId).style("opacity",1)
                             .html(function(d){ 
 
                                 var classId = d.N2_Primary_Classification;
                                 var spec = d.N2_Primary_Specialization;
 
-                                if(spec == ""){
-                                    spec = "General"
-                                }
+                                var finalClass = "";
+                                var finalSpec = "";
                                 
                                 if(classId.toLowerCase().includes("midwife")){
-                                    classId = "Others"
+                                    finalClass = "Others"
+                                }
+                                else{
+                                    finalClass = classId;
+                                }
+
+                                if(spec.length>20){
+                                    finalSpec = spec.substring(0,20) + "...";
+                                }
+                                else if(spec == ""){
+                                    finalSpec = "General";
+                                }
+                                else{
+                                    finalSpec = spec;
                                 }
                                 
-                                return classId+" - "+spec;
+                                specWidth = getTextWidth(finalSpec, "12px Rubik");
+                                
+                                var finalHTML = "<tspan text-anchor='start'>"+finalSpec+"</tspan>"; 
+                                finalHTML += "<tspan opacity=0.5 fill='#333' text-anchor='start' dy='15' dx='-"+specWidth+"'>("+finalClass+")</tspan>";
+                                return finalHTML;
+                                
                             });
-                            d3.selectAll("#rect-"+classId+"-"+specId).style("opacity",1);
-                            d3.selectAll("#percent-"+classId+"-"+specId).style("opacity",1);    
-                            
-                            
-                            //new: start
-                            var classId = d.N2_Primary_Classification;
-                            var spec = d.N2_Primary_Specialization;
 
-                            var finalClass = "";
-                            var finalSpec = "";
-                            
-                            if(classId.toLowerCase().includes("midwife")){
-                                finalClass = "Others"
-                            }
-                            else{
-                                finalClass = classId;
-                            }
-                            
-                            if(spec.length>20){
-                                finalSpec = spec.substring(0,20) + "...";
-                            }else{
-                                finalSpec = spec;
-                            }
-                            
-                            classWidth = getTextWidth(finalClass, "12px Rubik");
-                            
-                            var finalHTML = "<tspan opacity=0.5 text-anchor='start'>"+finalClass+"</tspan>"; 
-                            finalHTML += "<tspan text-anchor='start' dy='14' dx='-"+classWidth+"'>"+finalSpec+"</tspan>"; 
-                            return finalHTML;
-
-                            //new: end
+                              
                     
                         })
 
                     .on("mouseout", function(d){
 
                         d3.selectAll(".bubble").style("opacity",1);
-                        d3.selectAll(".bubble-rect").style("opacity",1);
                         d3.selectAll(".bubble-text").style("opacity",1);
                         d3.selectAll(".bubble-percent").style("opacity",1);
-                        d3.selectAll(".bubble-rect-hide").style("opacity",0);
                         d3.selectAll(".bubble-text-hide").style("opacity",0);
                         d3.selectAll(".bubble-percent-hide").style("opacity",0);
 
-                        var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").substring(0,5);
+                        var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
                         var specId = d.N2_Primary_Specialization.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
-
-                        if (area2radius(d.referral_percent) < 20){
+                            
+                        if (d.referral_percent < 2.3){
                             d3.selectAll("#label-"+classId+"-"+specId).style("opacity",0);
                             d3.selectAll("#rect-"+classId+"-"+specId).style("opacity",0);
                             d3.selectAll("#percent-"+classId+"-"+specId).style("opacity",0); 
@@ -645,44 +631,6 @@ const nodeBubble = nodeBubbleGroup
                         }
 
                     });
-
-
-// var nodeRectGroup = allbubbleGroup.append("g").attr("id","bubble-rect-group").attr("opacity",0);
-// const nodeRects = nodeRectGroup
-//                     .selectAll("rect")
-//                     .data(outboundData)
-//                     .join("rect")
-//                     .style("fill", function(d){
-//                             return colorScale(d.cluster);
-//                     })
-//                     .attr("x", d => d.x = 0)
-//                     .attr("y", d => d.y = 0)
-//                     .attr("class", function(d){
-
-//                         var totalClass = "";
-//                         var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
-
-//                         if (area2radius(d.referral_percent) > 20)
-//                             totalClass += "bubble-rect"
-//                         else
-//                             totalClass += "bubble-rect bubble-rect-hide"
-
-//                         if(d.N2_Primary_Specialization.toLowerCase().includes("onco")) 
-//                             totalClass += " onco-spec "+classId;
-//                         else 
-//                             totalClass += " non-onco-spec "+classId;
-
-//                         return totalClass;
-
-//                     })
-//                     .attr("id",function(d){
-//                             var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").substring(0,5);
-//                             var specId = d.N2_Primary_Specialization.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
-//                             return "rect-"+classId+"-"+specId;
-//                         })
-//                     .attr("width", "0px")
-//                     .attr("height","15px")
-//                     .style("margin-top","-30px")
 
         
 var nodeLabelGroup = allbubbleGroup.append("g").attr("id","bubble-label-group").attr("opacity",0);
@@ -781,7 +729,7 @@ const nodePercents = nodePercentGroup
                             
                         })
                         .attr("id",function(d){
-                            var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").substring(0,5);
+                            var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
                             var specId = d.N2_Primary_Specialization.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
 
                             return "percent-"+classId+"-"+ specId ;
@@ -800,22 +748,8 @@ const simulationBubbles = d3.forceSimulation(outboundData)
                             .force("x", d3.forceX().x(d => d.focusX).strength(0.02))
                             .force("y", d3.forceY().y(d => d.focusY).strength(0.02))
                             .on("tick", ticked).stop()
-                            
-    
-// simulationBubbles.nodes(outboundData);
 
-// const simulationRects = d3.forceSimulation()
-//                             .force("collide", forceClusterCollision()
-//                                     .radius(d => area2radius(d.referral_percent) + 5)
-//                                     .strength(1)
-//                                     .clusterPadding(10)
-//                             )
-//                             .force("x", d3.forceX().x(d => d.focusX).strength(0.02))
-//                             .force("y", d3.forceY().y(d => d.focusY).strength(0.02));
-
-// simulationRects.nodes(outboundData).on("tick", tickedRects);
-
-const simulationLabels = d3.forceSimulation()
+const simulationLabels = d3.forceSimulation(outboundData)
                             .force("collide", forceClusterCollision()
                                     .radius(d => area2radius(d.referral_percent) + 5)
                                     .strength(1)
@@ -823,10 +757,9 @@ const simulationLabels = d3.forceSimulation()
                             )
                             .force("x", d3.forceX().x(d => d.focusX).strength(0.02))
                             .force("y", d3.forceY().y(d => d.focusY).strength(0.02))
+                            .on("tick", tickedLabels)//.stop();
 
-simulationLabels.nodes(outboundData).on("tick", tickedLabels);
-
-const simulationPercents = d3.forceSimulation()
+const simulationPercents = d3.forceSimulation(outboundData)
                                 .force("collide", forceClusterCollision()
                                         .radius(d => area2radius(d.referral_percent) + 5)
                                         .strength(1)
@@ -834,8 +767,7 @@ const simulationPercents = d3.forceSimulation()
                                 )
                                 .force("x", d3.forceX().x(d => d.focusX).strength(0.02))
                                 .force("y", d3.forceY().y(d => d.focusY).strength(0.02))
-
-simulationPercents.nodes(outboundData).on("tick", tickedPercents);
+                                .on("tick", tickedPercents)//.stop();
 
 function ticked() {
     nodeBubble
@@ -848,12 +780,6 @@ function tickedLabels() {
         .attr("x", d => d.x - area2radius(d.referral_percent)/2)
         .attr("y", d => d.y+10)
 }
-
-// function tickedRects() {
-//     nodeRects
-//         .attr("x", d => d.x - area2radius(d.referral_percent)/2)
-//         .attr("y", d => d.y)
-// }
 
 function tickedPercents() {
     nodePercents
@@ -872,22 +798,15 @@ function outboundCirclesEmerge(){
     d3.select("#bubble-label-group").transition().delay(1000).attr("opacity",1);
     d3.select("#bubble-percent-group").transition().delay(1000).attr("opacity",1);
 
+    simulationBubbles.tick();
+    simulationLabels.tick();
+    simulationPercents.tick();
+
     d3.selectAll(".bubble")
         .transition()
         .duration(1500)
         .attr("cx", d => d.x)
-        .attr("cy", d => d.y)
-
-    // d3.selectAll(".onco-spec").attr("opacity",0);
-
-    //    d3.selectAll(".onco-spec").attr("opacity",1); 
-    //    d3.selectAll(".non-onco-spec").attr("opacity",0.2);
-
-    
-
-    // for (var i = 0; i < 120; ++i){
-        simulationBubbles.tick();
-    //}
+        .attr("cy", d => d.y);
     
 }
 
@@ -1008,102 +927,9 @@ function forceClusterCollision() {
         d3.selectAll(".inter").style("opacity",1);
         d3.selectAll(".urolo").style("opacity",1);
 
-        d3.selectAll(".bubble-rect-hide").style("opacity",0);
         d3.selectAll(".bubble-text-hide").style("opacity",0);
         d3.selectAll(".bubble-percent-hide").style("opacity",0);
-
-        // simulationBubbles.restart(0.1);
-        // simulationBubbles
-        //     .force("y", d3.forceY().y(d => 100).strength(0.5))
-        //     .force("x", d3.forceY().x((d,i) => 100).strength(0.5));
-
-        simulationBubbles.restart(0.01);
-        simulationBubbles.force('y', d3.forceY()
-        .y(function(d){
-            var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
-            //famil, inter, urolo
-
-            if((classId == "famil") || (classId == "inter") || (classId == "urolo")){
-                return 100;
-            }else{
-                return d.focusY;
-            }
-        })
-        .strength(function(d){
-            var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
-            if((classId == "famil") || (classId == "inter") || (classId == "urolo")){
-                return 0.2;
-            }
-            else{
-                return 0.02;
-            }
-        }));
-
-        simulationLabels.restart(0.01);
-        simulationLabels.force('y', d3.forceY()
-        .y(function(d){
-            var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
-            //famil, inter, urolo
-
-            if((classId == "famil") || (classId == "inter") || (classId == "urolo")){
-                return 100;
-            }else{
-                return d.focusY;
-            }
-        })
-        .strength(function(d){
-            var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
-            if((classId == "famil") || (classId == "inter") || (classId == "urolo")){
-                return 0.2;
-            }
-            else{
-                return 0.02;
-            }
-        }));
-
-        simulationPercents.restart(0.01);
-        simulationPercents.force('y', d3.forceY()
-        .y(function(d){
-            var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
-            //famil, inter, urolo
-
-            if((classId == "famil") || (classId == "inter") || (classId == "urolo")){
-                return 100;
-            }else{
-                return d.focusY;
-            }
-        })
-        .strength(function(d){
-            var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
-            if((classId == "famil") || (classId == "inter") || (classId == "urolo")){
-                return 0.2;
-            }
-            else{
-                return 0.02;
-            }
-        }));
-
-        // simulationRects.restart(0.01);
-        // simulationRects.force('y', d3.forceY()
-        // .y(function(d){
-        //     var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
-        //     //famil, inter, urolo
-
-        //     if((classId == "famil") || (classId == "inter") || (classId == "urolo")){
-        //         return 100;
-        //     }else{
-        //         return d.focusY;
-        //     }
-        // })
-        // .strength(function(d){
-        //     var classId = d.N2_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
-        //     if((classId == "famil") || (classId == "inter") || (classId == "urolo")){
-        //         return 0.2;
-        //     }
-        //     else{
-        //         return 0.02;
-        //     }
-        // }));
+        
         
     }
 
@@ -1117,47 +943,7 @@ function forceClusterCollision() {
         d3.selectAll(".bubble-text-hide").style("opacity",0);
         d3.selectAll(".bubble-percent-hide").style("opacity",0);
 
-        simulationBubbles.stop();
-        simulationLabels.stop();
-        // simulationRects.stop();
-        simulationPercents.stop();
-
-        simulationBubbles.restart(0.01);
-        simulationBubbles.force('y', d3.forceY()
-        .y(function(d){
-            if(d.N2_Primary_Specialization.toLowerCase().includes("onco")){
-                return 100;
-            }else{
-                return d.focusY;
-            }
-        })
-        .strength(function(d){
-            if(d.N2_Primary_Specialization.toLowerCase().includes("onco")){
-                return 0.2;
-            }
-            else{
-                return 0.02;
-            }
-        }));
-
-        simulationLabels.restart(0.01);
-        simulationLabels.force('y', d3.forceY()
-        .y(function(d){
-            if(d.N2_Primary_Specialization.toLowerCase().includes("onco")){
-                return 100;
-            }else{
-                return d.focusY;
-            }
-        })
-        .strength(function(d){
-            if(d.N2_Primary_Specialization.toLowerCase().includes("onco")){
-                return 0.2;
-            }
-            else{
-                return 0.02;
-            }
-        }));
-
+        //This code was removed because all that force moving around is irritating:
         // simulationRects.restart(0.01);
         // simulationRects.force('y', d3.forceY()
         // .y(function(d){
@@ -1176,23 +962,7 @@ function forceClusterCollision() {
         //     }
         // }));
 
-        simulationPercents.restart(0.01);
-        simulationPercents.force('y', d3.forceY()
-        .y(function(d){
-            if(d.N2_Primary_Specialization.toLowerCase().includes("onco")){
-                return 100;
-            }else{
-                return d.focusY;
-            }
-        })
-        .strength(function(d){
-            if(d.N2_Primary_Specialization.toLowerCase().includes("onco")){
-                return 0.2;
-            }
-            else{
-                return 0.02;
-            }
-        }));
+        
 
     }
 
@@ -1212,9 +982,13 @@ function outboundDisappear(){
         .attr("cx", 0)
         .attr("cy", 0);
 
-    d3.select("#bubble-group").transition().duration(1000).delay(500).attr("opacity",0)
+    d3.select("#bubble-group").transition().duration(1000).delay(500).attr("opacity",0);
+    d3.select("#bubble-label-group").transition().duration(1000).delay(500).attr("opacity",0);
+    d3.select("#bubble-percent-group").transition().duration(1000).delay(500).attr("opacity",0);
         
     simulationBubbles.stop();
+    simulationLabels.stop();
+    simulationPercents.stop();
 
     d3.select(".big-circle")
       .transition()
@@ -1224,11 +998,10 @@ function outboundDisappear(){
 
     bigCirclePercent.transition().duration(300).delay(1500).attr("opacity",1);
     bigCircleRect.transition().duration(300).delay(1500).attr("opacity",1);
-
 }
 
 
-//inboundzz: from here
+//inbound simulations: from here
 
 var mIN = 17;
 const allbubbleGroupIN = svg.append("g").attr("transform", `translate(${width/2},${height/2})`).style("filter", "url(#gooey)");
@@ -1302,115 +1075,14 @@ const nodeBubbleIN = nodeBubbleGroupIN
                         //famil, inter, urolo
 
                         if(d.N1_Primary_Specialization.toLowerCase().includes("onco")) 
-                            totalClass += "bubble onco-spec "+classId; 
+                            totalClass += "bubble onco-spec-in "+classId; 
                         else 
-                            totalClass += "bubble non-onco-spec "+classId;
+                            totalClass += "bubble non-onco-spec-in "+classId;
 
                         return totalClass;
 
                     })
-                    .style("cursor","pointer")
-                    //.attr("id", function(d){ return d.N2_Primary_Classification+" - "+d.N2_Primary_Specialization;})
-                    .on("mouseover", function(d){ 
-
-                            d3.selectAll(".bubble").style("opacity",0.2);
-                            d3.selectAll(".bubble-rect").style("opacity",0.2);
-                            d3.selectAll(".bubble-text").style("opacity",0.2);
-                            d3.selectAll(".bubble-percent").style("opacity",0.2);
-                            d3.selectAll(".bubble-rect-hide").style("opacity",0);
-                            d3.selectAll(".bubble-text-hide").style("opacity",0);
-                            d3.selectAll(".bubble-percent-hide").style("opacity",0);
-
-                            d3.select(this).style("opacity",1);
-
-                            var classId = d.N1_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
-                            var specId = d.N1_Primary_Specialization.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
-                            
-                            d3.selectAll("#label-"+classId+"-"+specId).style("opacity",1)
-                            .html(function(d){ 
-
-                                var classId = d.N1_Primary_Classification;
-                                var spec = d.N1_Primary_Specialization;
-
-                                if(spec == ""){
-                                    spec = "General"
-                                }
-                                
-                                if(classId.toLowerCase().includes("midwife")){
-                                    classId = "Others"
-                                }
-                                
-                                return classId+" - "+spec;
-                            });
-                            d3.selectAll("#rect-"+classId+"-"+specId).style("opacity",1);
-                            d3.selectAll("#percent-"+classId+"-"+specId).style("opacity",1);    
-                    
-                        })
-
-                    .on("mouseout", function(d){
-
-                        d3.selectAll(".bubble").style("opacity",1);
-                        d3.selectAll(".bubble-rect").style("opacity",1);
-                        d3.selectAll(".bubble-text").style("opacity",1);
-                        d3.selectAll(".bubble-percent").style("opacity",1);
-                        d3.selectAll(".bubble-rect-hide").style("opacity",0);
-                        d3.selectAll(".bubble-text-hide").style("opacity",0);
-                        d3.selectAll(".bubble-percent-hide").style("opacity",0);
-
-                        var classId = d.N1_Primary_Classification.toLowerCase().replace(" ","").substring(0,5);
-                        var specId = d.N1_Primary_Specialization.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
-
-                        if (area2radius(d.referral_percent) < 20){
-                            d3.selectAll("#label-"+classId+"-"+specId).style("opacity",0);
-                            d3.selectAll("#rect-"+classId+"-"+specId).style("opacity",0);
-                            d3.selectAll("#percent-"+classId+"-"+specId).style("opacity",0); 
-                        }
-                        else{
-                            d3.selectAll("#label-"+classId+"-"+specId).style("opacity",1);
-                            d3.selectAll("#rect-"+classId+"-"+specId).style("opacity",1); 
-                            d3.selectAll("#percent-"+classId+"-"+specId).style("opacity",1); 
-                        }
-
-                    });
-
-
-// var nodeRectGroupIN = allbubbleGroupIN.append("g").attr("id","bubble-rect-group-in").attr("opacity",0);
-// const nodeRectsIN = nodeRectGroupIN
-//                     .selectAll("rect")
-//                     .data(inboundData)
-//                     .join("rect")
-//                     .style("fill", function(d){
-//                             return colorScaleIN(d.cluster);
-//                     })
-//                     .attr("x", d => d.x = 0)
-//                     .attr("y", d => d.y = 0)
-//                     .attr("class", function(d){
-
-//                         var totalClass = "";
-//                         var classId = d.N1_Primary_Classification.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
-
-//                         if (area2radius(d.referral_percent) > 20)
-//                             totalClass += "bubble-rect"
-//                         else
-//                             totalClass += "bubble-rect bubble-rect-hide"
-
-//                         if(d.N1_Primary_Specialization.toLowerCase().includes("onco")) 
-//                             totalClass += " onco-spec "+classId;
-//                         else 
-//                             totalClass += " non-onco-spec "+classId;
-
-//                         return totalClass;
-
-//                     })
-//                     .attr("id",function(d){
-//                             var classId = d.N1_Primary_Classification.toLowerCase().replace(" ","").substring(0,5);
-//                             var specId = d.N1_Primary_Specialization.toLowerCase().replace(" ","").replace("null","").replace(",","").substring(0,5);
-//                             return "rect-"+classId+"-"+specId;
-//                         })
-//                     //.attr("width", d => area2radius(d.referral_percent)+20)
-//                     .attr(newFunction(), "0px")
-//                     .attr("height","15px")
-//                     .style("margin-top","-30px")
+                    .style("pointer-events","none");
 
         
 var nodeLabelGroupIN = allbubbleGroupIN.append("g").attr("id","bubble-label-group-in").attr("opacity",0);
@@ -1434,9 +1106,9 @@ const nodeLabelsIN = nodeLabelGroupIN
                                 totalClass += "bubble-text bubble-text-hide"
 
                             if(d.N1_Primary_Specialization.toLowerCase().includes("onco")) 
-                                totalClass += " onco-spec "+classId;
+                                totalClass += " onco-spec-in "+classId;
                             else 
-                                totalClass += " non-onco-spec "+classId;
+                                totalClass += " non-onco-spec-in "+classId;
 
                             return totalClass;
                     })
@@ -1451,22 +1123,33 @@ const nodeLabelsIN = nodeLabelGroupIN
                             var classId = d.N1_Primary_Classification;
                             var spec = d.N1_Primary_Specialization;
 
-                            if(spec == ""){
-                                spec = "General"
-                            }
+                            var finalClass = "";
+                            var finalSpec = "";
                             
                             if(classId.toLowerCase().includes("midwife")){
-                                classId = "Others"
-                            }
-                            
-                            var finalLabel = classId + " - " + spec;
-
-                            if(finalLabel.length > 20){
-                                return "<tspan text-anchor='start'>"+finalLabel.substring(0,40)+".."+"</tspan>"; 
+                                finalClass = "Others"
                             }
                             else{
-                                return "<tspan text-anchor='start'>"+finalLabel+"</tspan>"; 
+                                finalClass = classId;
                             }
+                        
+
+                            if(spec.length>20){
+                                finalSpec = spec.substring(0,20) + "...";
+                            }
+                            else if(spec == ""){
+                                finalSpec = "General";
+                            }
+                            else{
+                                finalSpec = spec;
+                            }
+                            
+                           var specWidth = getTextWidth(finalSpec, "12px Rubik");
+                            
+                            var finalHTML = "<tspan text-anchor='start'>"+finalSpec+"</tspan>"; 
+                            finalHTML += "<tspan opacity=0.5 fill='#333' text-anchor='start' dy='15' dx='-"+specWidth+"'>("+finalClass+")</tspan>";
+                            return finalHTML;
+                            
                         })
 
 var nodePercentGroupIN = allbubbleGroupIN.append("g").attr("id","bubble-percent-group-in").attr("opacity",0);
@@ -1490,9 +1173,9 @@ const nodePercentsIN = nodePercentGroupIN
                                 totalClass += "bubble-percent bubble-percent-hide"
 
                             if(d.N1_Primary_Specialization.toLowerCase().includes("onco")) 
-                                totalClass += " onco-spec "+classId; 
+                                totalClass += " onco-spec-in "+classId; 
                             else 
-                                totalClass += " non-onco-spec "+classId;
+                                totalClass += " non-onco-spec-in "+classId;
 
                             return totalClass;
                             

@@ -71,12 +71,13 @@ body{
 
 .note-others-text{
   padding-left: 14px;
+  padding-right: 10px;
 }
 
 .fixed{
   position: fixed;
   top: 10px;
-  /* z-index: -999; */
+  z-index: -999;
 }
 
 .unfixed{
