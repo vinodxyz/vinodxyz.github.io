@@ -1,17 +1,18 @@
 <head>
+  <style>@font-face { font-family: 'Inter'; src: url('../fonts/InterVariable.woff2') format('woff2'); font-weight: 100 900; font-display: block; }</style>
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <style>
     body { margin: 0; overflow: hidden; background: rgba(24,24,24,0); }
     #myDiv { width: 540px; height: 304px; position: relative; }
     #imgLoad { margin-top: 80px; margin-left: 200px; }
-    .axis text { fill: #ccc; font-size: 10px; }
+    .axis text { fill: #ccc; font-size: 10px; font-family: 'Inter', sans-serif; }
     .axis path, .axis line { stroke: #555; }
-    .axis-label { fill: #ccc; font-size: 12px; }
-    .legend text { fill: #ccc; font-size: 11px; }
+    .axis-label { fill: #ccc; font-size: 12px; font-family: 'Inter', sans-serif; }
+    .legend text { fill: #ccc; font-size: 11px; font-family: 'Inter', sans-serif; }
     .tooltip {
       position: absolute; pointer-events: none; display: none;
       background: rgba(0,0,0,0.85); color: #eee; padding: 6px 10px;
-      border-radius: 4px; font-size: 11px; font-family: sans-serif;
+      border-radius: 4px; font-size: 11px; font-family: 'Inter', sans-serif;
       line-height: 1.5; white-space: nowrap;
     }
     .tooltip span { font-weight: bold; }
