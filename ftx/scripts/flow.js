@@ -125,7 +125,7 @@ function getData(){
     $.ajax({
         async: false,
         type: 'GET',
-        url: 'https://api.myjson.com/bins/'+jsonID,
+        url: 'data-backups/ssbfm (2).json',
         success: function(data) {
             dataset = data;
             databackup = JSON.parse(JSON.stringify(data));
@@ -148,7 +148,7 @@ function saveData(){
     }
 
     $.ajax({
-        url:"https://api.myjson.com/bins/"+jsonID,
+        url:"data-backups/ssbfm (2).json",
         type:"PUT",
         data:JSON.stringify(datasetCopy),
         contentType:"application/json; charset=utf-8",
