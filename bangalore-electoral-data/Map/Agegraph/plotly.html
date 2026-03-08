@@ -2,7 +2,7 @@
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <style>
     body { margin: 0; overflow: hidden; background: rgba(24,24,24,0); }
-    #myDiv { width: 540px; height: 264px; position: relative; }
+    #myDiv { width: 540px; height: 304px; position: relative; }
     #imgLoad { margin-top: 80px; margin-left: 200px; }
     .axis text { fill: #ccc; font-size: 10px; }
     .axis path, .axis line { stroke: #555; }
@@ -64,8 +64,8 @@
       var otherBins = binGen(others);
 
       // Chart dimensions (height reduced 20%: 330 -> 264)
-      var totalHeight = 264;
-      var margin = {top: 12, right: 100, bottom: 40, left: 55};
+      var totalHeight = 304;
+      var margin = {top: 52, right: 100, bottom: 40, left: 55};
       var width = 540 - margin.left - margin.right;
       var height = totalHeight - margin.top - margin.bottom;
 
@@ -116,6 +116,7 @@
         g.selectAll(".bar-" + s.label)
           .data(s.bins)
           .enter().append("rect")
+          .attr("class", function(d) { return "bar bin-" + (d.x0 - 18); })
           .attr("x", function(d) { return x(d.x0) + 0.5; })
           .attr("width", function(d) { return Math.max(0, x(d.x1) - x(d.x0) - 1); })
           .attr("y", function(d) { return y(d.length); })
@@ -126,6 +127,9 @@
             var idx = d.x0 - 18;
             var info = binLookup[idx];
             if (!info) return;
+            // Dim all bars, then highlight the hovered age bin
+            g.selectAll(".bar").style("opacity", 0.15);
+            g.selectAll(".bin-" + idx).style("opacity", 1);
             tip.style("display", "block")
               .html(
                 "<span>Age " + info.age + "</span><br>" +
@@ -139,6 +143,7 @@
               .style("top", (event.pageY - 10) + "px");
           })
           .on("mouseout", function() {
+            g.selectAll(".bar").style("opacity", 1);
             tip.style("display", "none");
           });
       });
