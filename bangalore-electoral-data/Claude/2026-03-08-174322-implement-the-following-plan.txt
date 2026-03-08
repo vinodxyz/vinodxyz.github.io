@@ -1,0 +1,1032 @@
+
+╭─── Claude Code v2.1.63 ──────────────────────────────────────────────────────╮
+│                                                    │ Tips for getting        │
+│                 Welcome back Vinod!                │ started                 │
+│                                                    │ Run /init to create a … │
+│                      ▗ ▗   ▖ ▖                     │ ─────────────────────── │
+│                                                    │ Recent activity         │
+│                        ▘▘ ▝▝                       │ No recent activity      │
+│                                                    │                         │
+│    Opus 4.6 · API Usage Billing · Experiences +    │                         │
+│    Devices, Microsoft Corporation                  │                         │
+│   ~/…/vinodxyz.github.io/bangalore-electoral-data  │                         │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ Plan to implement                                                            │
+│                                                                              │
+│ Replace Plotly Age Graph with D3.js                                          │
+│                                                                              │
+│ Context                                                                      │
+│                                                                              │
+│ The sidebar age/gender distribution histogram currently uses Plotly.js       │
+│ (Map/Agegraph/plotly.html) which:                                            │
+│ - Loads the deprecated plotly-latest.min.js (v1.58.5, EOL July 2021)         │
+│ - Is heavyweight for a simple histogram                                      │
+│ - Shows a deprecation warning in console                                     │
+│                                                                              │
+│ Replace with a lightweight D3.js histogram that matches the existing look.   │
+│                                                                              │
+│ Data Flow (unchanged)                                                        │
+│                                                                              │
+│ 1. Geoplot10.html embeds Agegraph/plotly.html?ward=<name> in an <object> tag │
+│  (540x330px)                                                                 │
+│ 2. plotly.html parses ?ward= param, loads population.js (99MB JSON with raw  │
+│ age arrays per ward+gender)                                                  │
+│ 3. Uses population_arrays index to find the right arrays, bins them into a   │
+│ histogram                                                                    │
+│                                                                              │
+│ Changes                                                                      │
+│                                                                              │
+│ File: Map/Agegraph/plotly.html — full rewrite                                │
+│                                                                              │
+│ - Remove: Plotly.js CDN, jQuery                                              │
+│ - Add: D3.js v7 (https://d3js.org/d3.v7.min.js)                              │
+│ - Keep: Same population.js data source, same ward param parsing, same        │
+│ population_arrays lookup                                                     │
+│ - Chart: D3 grouped/overlaid histogram                                       │
+│   - Bin raw ages into 1-year bins (18–100), matching Plotly's default        │
+│   - 3 overlaid bar series: Males (rgba(255,255,255,1)), Females              │
+│ (rgba(150,150,150,1)), Others (rgba(71,71,72,1))                             │
+│   - Dark transparent background (rgba(24,24,24,0)), white axis text          │
+│   - X-axis: "Ages", Y-axis: "Population"                                     │
+│   - Dimensions: 540×330px                                                    │
+│   - Show ring.svg loading spinner until data loads, then hide it             │
+│                                                                              │
+│ Verification                                                                 │
+│                                                                              │
+│ 1. Serve: python3 -m http.server 8091 from Map dir                           │
+│ 2. Open http://localhost:8091/Geoplot10.html, click a ward bubble            │
+│ 3. Sidebar histogram should appear with same visual style                    │
+│ 4. Console: no Plotly deprecation warning, no errors                         │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+⏺ Let me start by reading the current plotly.html to understand the exact
+  implementation.
+
+⏺ Read 1 file (ctrl+o to expand)
+
+⏺ Now I have all the details. Let me write the D3.js replacement.
+
+⏺ Write(Map/Agegraph/plotly.html)
+  ⎿  Added 136 lines, removed 82 lines
+        1  <head>                                                        
+        2 -  <!-- Plotly.js -->                                          
+        3 -   <script                                                    
+          -src="https://cdn.plot.ly/plotly-latest.min.js"></script>      
+        4 -   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery 
+          -/3.2.1/jquery.min.js'></script>                               
+        5 -                                                              
+        6 -   <style>                                                    
+        7 -    #imgLoad{                                                 
+        8 -      margin-top: 100px;                                      
+        9 -      margin-left: 200px;                                     
+       10 -    }                                                         
+       11 -   </style>                                                   
+        2 +  <script src="https://d3js.org/d3.v7.min.js"></script>       
+        3 +  <style>                                                     
+        4 +    body { margin: 0; overflow: hidden; background:           
+          +rgba(24,24,24,0); }                                           
+        5 +    #myDiv { width: 540px; height: 330px; position: relative; 
+          + }                                                            
+        6 +    #imgLoad { margin-top: 100px; margin-left: 200px; }       
+        7 +    .axis text { fill: #ccc; font-size: 10px; }               
+        8 +    .axis path, .axis line { stroke: #555; }                  
+        9 +    .axis-label { fill: #ccc; font-size: 12px; }              
+       10 +    .legend text { fill: #ccc; font-size: 11px; }             
+       11 +  </style>                                                    
+       12  </head>                                                       
+       13 -                                                              
+       13  <body>                                                        
+       14 -  <div id="myDiv" style="width: 540px; height: 330px;">       
+       14 +  <div id="myDiv">                                            
+       15      <img id="imgLoad" src="ring.svg" alt="Loading...">        
+       16 -    <!-- Plotly chart will be drawn inside this DIV -->       
+       16 +    <svg id="chart" style="display:none;"></svg>              
+       17    </div>                                                      
+       18    <script>                                                    
+       19                                                                
+       20 -      //contains 594 items. i.e., 198(wards) x 3(genders):    
+       21 -                                                              
+          -var population_arrays = ['Kempegowda Ward_Female', 'Kempegowda
+          - Ward_Male', 'Kempegowda Ward_Trans', 'Chowdeshwari           
+          -Ward_Female', 'Chowdeshwari Ward_Male', 'Chowdeshwari         
+          -Ward_Trans', 'Attur_Female', 'Attur_Male', 'Attur_Trans',     
+          -'Yelahanka Satellite Town_Female', 'Yelahanka Satellite       
+          -Town_Male', 'Yelahanka Satellite Town_Trans', 'Jakkur_Female',
+          - 'Jakkur_Male', 'Jakkur_Trans', 'Thanisandra_Female',         
+          -'Thanisandra_Male', 'Thanisandra_Trans',                      
+          -'Bytarayanapura_Female', 'Bytarayanapura_Male',               
+          -'Bytarayanapura_Trans', 'Kodigehalli_Female',                 
+          -'Kodigehalli_Male', 'Kodigehalli_Trans',                      
+          -'Vidyaranyapura_Female', 'Vidyaranyapura_Male',               
+          -'Vidyaranyapura_Trans', 'Doddabommasandra_Female',            
+          -'Doddabommasandra_Male', 'Doddabommasandra_Trans',            
+          -'Kuvempunagara_Female', 'Kuvempunagara_Male',                 
+          -'Kuvempunagara_Trans', 'Shettyhalli_Female',                  
+          -'Shettyhalli_Male', 'Shettyhalli_Trans', 'Mallasandra_Female',
+          - 'Mallasandra_Male', 'Mallasandra_Trans',                     
+          -'Baagalakunte_Female', 'Baagalakunte_Male',                   
+          -'Baagalakunte_Trans', 'T.Dasarahalli_Female',                 
+          -'T.Dasarahalli_Male', 'T.Dasarahalli_Trans',                  
+          -'Chokkasandra_Female', 'Chokkasandra_Male',                   
+          -'Chokkasandra_Trans', 'Peenya Industrial Area_Female', 'Peenya
+          - Industrial Area_Male', 'Peenya Industrial Area_Trans',       
+          -'Rajagopalanagar_Female', 'Rajagopalanagar_Male',             
+          -'Rajagopalanagar_Trans', 'Heggenahalli_Female',               
+          -'Heggenahalli_Male', 'Heggenahalli_Trans', 'Jalahalli_Female',
+          - 'Jalahalli_Male', 'Jalahalli_Trans', 'J.P.Park_Female',      
+          -'J.P.Park_Male', 'J.P.Park_Trans', 'Yeshwanthpura_Female',    
+          -'Yeshwanthpura_Male', 'Yeshwanthpura_Trans', 'H.M.T_Female',  
+          -'H.M.T_Male', 'H.M.T_Trans', 'Lakshmidevinagar_Female',       
+          -'Lakshmidevinagar_Male', 'Lakshmidevinagar_Trans',            
+          -'Laggere_Female', 'Laggere_Male', 'Laggere_Trans',            
+          -'Kottegepalya_Female', 'Kottegepalya_Male',                   
+          -'Kottegepalya_Trans', 'Jnanabharathi_Female',                 
+          -'Jnanabharathi_Male', 'Jnanabharathi_Trans',                  
+          -'Rajarajeshwarinagar_Female', 'Rajarajeshwarinagar_Male',     
+          -'Rajarajeshwarinagar_Trans', 'Radhakrishna Temple             
+          -Ward_Female', 'Radhakrishna Temple Ward_Male', 'Radhakrishna  
+          -Temple Ward_Trans', 'Sanjaynagar_Female', 'Sanjaynagar_Male', 
+          -'Sanjaynagar_Trans', 'Ganganagar_Female', 'Ganganagar_Male',  
+          -'Ganganagar_Trans', 'Hebbala_Female', 'Hebbala_Male',         
+          -'Hebbala_Trans', 'Vishwanath Nagenahalli_Female', 'Vishwanath 
+          -Nagenahalli_Male', 'Vishwanath Nagenahalli_Trans',            
+          -'Manorayanapalya_Female', 'Manorayanapalya_Male',             
+          -'Manorayanapalya_Trans', 'Gangenahalli_Female',               
+          -'Gangenahalli_Male', 'Gangenahalli_Trans', 'Jayachamarajendra 
+          -Nagar_Female', 'Jayachamarajendra Nagar_Male',                
+          -'Jayachamarajendra Nagar_Trans', 'Nagavara_Female',           
+          -'Nagavara_Male', 'Nagavara_Trans', 'H.B.R Layout_Female',     
+          -'H.B.R Layout_Male', 'H.B.R Layout_Trans', 'Banaswadi_Female',
+          - 'Banaswadi_Male', 'Banaswadi_Trans', 'Kammanahalli_Female',  
+          -'Kammanahalli_Male', 'Kammanahalli_Trans',                    
+          -'Kacharakanahalli_Female', 'Kacharakanahalli_Male',           
+          -'Kacharakanahalli_Trans', 'Kadugondanahalli_Female',          
+          -'Kadugondanahalli_Male', 'Kadugondanahalli_Trans',            
+          -'Lingarajapura_Female', 'Lingarajapura_Male',                 
+          -'Lingarajapura_Trans', 'Maruthisevanagar_Female',             
+          -'Maruthisevanagar_Male', 'Maruthisevanagar_Trans',            
+          -'Horamavu_Female', 'Horamavu_Male', 'Horamavu_Trans',         
+          -'Rammurthynagar_Female', 'Rammurthynagar_Male',               
+          -'Rammurthynagar_Trans', 'Vijinapura_Female',                  
+          -'Vijinapura_Male', 'Vijinapura_Trans', 'K.R.Puram_Female',    
+          -'K.R.Puram_Male', 'K.R.Puram_Trans', 'Basavanapura_Female',   
+          -'Basavanapura_Male', 'Basavanapura_Trans',                    
+          -'Devasandra_Female', 'Devasandra_Male', 'Devasandra_Trans',   
+          -'A.Narayanapura_Female', 'A.Narayanapura_Male',               
+          -'A.Narayanapura_Trans', 'Vignanannagar_Female',               
+          -'Vignanannagar_Male', 'Vignanannagar_Trans', 'HAL             
+          -Airport_Female', 'HAL Airport_Male', 'HAL Airport_Trans',     
+          -'Kushalanagar_Female', 'Kushalanagar_Male',                   
+          -'Kushalanagar_Trans', 'Kavalbyrasandra_Female',               
+          -'Kavalbyrasandra_Male', 'Kavalbyrasandra_Trans',              
+          -'Devarajeevanahalli_Female', 'Devarajeevanahalli_Male',       
+          -'Devarajeevanahalli_Trans', 'Muneshwaranagar_Female',         
+          -'Muneshwaranagar_Male', 'Muneshwaranagar_Trans',              
+          -'Sagayapuram_Female', 'Sagayapuram_Male', 'Sagayapuram_Trans',
+          - 'S.K.Garden_Female', 'S.K.Garden_Male', 'S.K.Garden_Trans',  
+          -'Pulakeshinagar_Female', 'Pulakeshinagar_Male',               
+          -'Pulakeshinagar_Trans', 'Palace Nagar_Female', 'Palace        
+          -Nagar_Male', 'Palace Nagar_Trans', 'Mathikere_Female',        
+          -'Mathikere_Male', 'Mathikere_Trans', 'Malleshwaram_Female',   
+          -'Malleshwaram_Male', 'Malleshwaram_Trans', 'Rajamahal         
+          -Guttahalli_Female', 'Rajamahal Guttahalli_Male', 'Rajamahal   
+          -Guttahalli_Trans', 'Kadu Malleshwaram_Female', 'Kadu          
+          -Malleshwaram_Male', 'Kadu Malleshwaram_Trans',                
+          -'Subramanyanagar_Female', 'Subramanyanagar_Male',             
+          -'Subramanyanagar_Trans', 'Gayathrinagar_Female',              
+          -'Gayathrinagar_Male', 'Gayathrinagar_Trans',                  
+          -'Doddabidarakalu_Female', 'Doddabidarakalu_Male',             
+          -'Doddabidarakalu_Trans', 'Herohalli_Female', 'Herohalli_Male',
+          - 'Herohalli_Trans', 'Ullalu_Female', 'Ullalu_Male',           
+          -'Ullalu_Trans', 'Kengeri_Female', 'Kengeri_Male',             
+          -'Kengeri_Trans', 'Hemigepura_Female', 'Hemigepura_Male',      
+          -'Hemigepura_Trans', 'Nandini Layout_Female', 'Nandini         
+          -Layout_Male', 'Nandini Layout_Trans', 'Marappanapalya_Female',
+          - 'Marappanapalya_Male', 'Marappanapalya_Trans',               
+          -'Nagapura_Female', 'Nagapura_Male', 'Nagapura_Trans',         
+          -'Mahalakshmipuram_Female', 'Mahalakshmipuram_Male',           
+          -'Mahalakshmipuram_Trans', 'Shakti Ganapathiinagar_Female',    
+          -'Shakti Ganapathiinagar_Male', 'Shakti Ganapathiinagar_Trans',
+          - 'Shankaramatha_Female', 'Shankaramatha_Male',                
+          -'Shankaramatha_Trans', 'Vrishabha Nagar_Female', 'Vrishabha   
+          -Nagar_Male', 'Vrishabha Nagar_Trans', 'Benaganahalli_Female', 
+          -'Benaganahalli_Male', 'Benaganahalli_Trans',                  
+          -'C.V.Ramannagar_Female', 'C.V.Ramannagar_Male',               
+          -'C.V.Ramannagar_Trans', 'Hosa Thippasandra_Female', 'Hosa     
+          -Thippasandra_Male', 'Hosa Thippasandra_Trans',                
+          -'Sarvagnanagar_Female', 'Sarvagnanagar_Male',                 
+          -'Sarvagnanagar_Trans', 'Hoysalanagar_Female',                 
+          -'Hoysalanagar_Male', 'Hoysalanagar_Trans',                    
+          -'Jeevanbhimanagar_Female', 'Jeevanbhimanagar_Male',           
+          -'Jeevanbhimanagar_Trans', 'Konena Agrahara_Female', 'Konena   
+          -Agrahara_Male', 'Konena Agrahara_Trans', 'Hoodi_Female',      
+          -'Hoodi_Male', 'Hoodi_Trans', 'Garudacharpalya_Female',        
+          -'Garudacharpalya_Male', 'Garudacharpalya_Trans',              
+          -'Kadugodi_Female', 'Kadugodi_Male', 'Kadugodi_Trans',         
+          -'Hagadooru_Female', 'Hagadooru_Male', 'Hagadooru_Trans',      
+          -'Dodda Nekkundi_Female', 'Dodda Nekkundi_Male', 'Dodda        
+          -Nekkundi_Trans', 'Marathhalli_Female', 'Marathhalli_Male',    
+          -'Marathhalli_Trans', 'Varthur_Female', 'Varthur_Male',        
+          -'Varthur_Trans', 'Bellandur_Female', 'Bellandur_Male',        
+          -'Bellandur_Trans', 'Ramaswamy Palya_Female', 'Ramaswamy       
+          -Palya_Male', 'Ramaswamy Palya_Trans', 'Jayamahal_Female',     
+          -'Jayamahal_Male', 'Jayamahal_Trans', 'Halsur_Female',         
+          -'Halsur_Male', 'Halsur_Trans', 'Bharathinagar_Female',        
+          -'Bharathinagar_Male', 'Bharathinagar_Trans',                  
+          -'Shivajinagar_Female', 'Shivajinagar_Male',                   
+          -'Shivajinagar_Trans', 'Vasanthanagar_Female',                 
+          -'Vasanthanagar_Male', 'Vasanthanagar_Trans',                  
+          -'Sampangiramanagar_Female', 'Sampangiramanagar_Male',         
+          -'Sampangiramanagar_Trans', 'Dattatreya Temple_Female',        
+          -'Dattatreya Temple_Male', 'Dattatreya Temple_Trans',          
+          -'Gandhinagar_Female', 'Gandhinagar_Male', 'Gandhinagar_Trans',
+          - 'Subhashnagar_Female', 'Subhashnagar_Male',                  
+          -'Subhashnagar_Trans', 'Okalipuram_Female', 'Okalipuram_Male', 
+          -'Okalipuram_Trans', 'Chikpet_Female', 'Chikpet_Male',         
+          -'Chikpet_Trans', 'Cottonpet_Female', 'Cottonpet_Male',        
+          -'Cottonpet_Trans', 'Binnypet_Female', 'Binnypet_Male',        
+          -'Binnypet_Trans', 'Jogupalya_Female', 'Jogupalya_Male',       
+          -'Jogupalya_Trans', 'Shantalanagar_Female',                    
+          -'Shantalanagar_Male', 'Shantalanagar_Trans', 'Domlur_Female', 
+          -'Domlur_Male', 'Domlur_Trans', 'Agara_Female', 'Agara_Male',  
+          -'Agara_Trans', 'Vannarpet_Female', 'Vannarpet_Male',          
+          -'Vannarpet_Trans', 'Neelasandra_Female', 'Neelasandra_Male',  
+          -'Neelasandra_Trans', 'Shanthinagar_Female',                   
+          -'Shanthinagar_Male', 'Shanthinagar_Trans',                    
+          -'Dayanandanagar_Female', 'Dayanandanagar_Male',               
+          -'Dayanandanagar_Trans', 'Prakashnagar_Female',                
+          -'Prakashnagar_Male', 'Prakashnagar_Trans',                    
+          -'Rajajinagar_Female', 'Rajajinagar_Male', 'Rajajinagar_Trans',
+          - 'Basaveshwarnagar_Female', 'Basaveshwarnagar_Male',          
+          -'Basaveshwarnagar_Trans', 'Kamakshipalya_Female',             
+          -'Kamakshipalya_Male', 'Kamakshipalya_Trans',                  
+          -'Shivanagar_Female', 'Shivanagar_Male', 'Shivanagar_Trans',   
+          -'Sri Rama Mandir_Female', 'Sri Rama Mandir_Male', 'Sri Rama   
+          -Mandir_Trans', 'Kaveripura_Female', 'Kaveripura_Male',        
+          -'Kaveripura_Trans', 'Govindarajanagar_Female',                
+          -'Govindarajanagar_Male', 'Govindarajanagar_Trans', 'Agrahara  
+          -Dasarahalli_Female', 'Agrahara Dasarahalli_Male', 'Agrahara   
+          -Dasarahalli_Trans', 'Dr.Rajkumar Ward_Female', 'Dr.Rajkumar   
+          -Ward_Male', 'Dr.Rajkumar Ward_Trans', 'Marenahalli_Female',   
+          -'Marenahalli_Male', 'Marenahalli_Trans', 'Maruthi Mandira     
+          -Ward_Female', 'Maruthi Mandira Ward_Male', 'Maruthi Mandira   
+          -Ward_Trans', 'Moodalapalya_Female', 'Moodalapalya_Male',      
+          -'Moodalapalya_Trans', 'Nagarabhavi_Female',                   
+          -'Nagarabhavi_Male', 'Nagarabhavi_Trans',                      
+          -'Nayandahalli_Female', 'Nayandahalli_Male',                   
+          -'Nayandahalli_Trans', 'Sudhamanagar_Female',                  
+          -'Sudhamanagar_Male', 'Sudhamanagar_Trans', 'Dharmarayaswamy   
+          -Temple_Female', 'Dharmarayaswamy Temple_Male',                
+          -'Dharmarayaswamy Temple_Trans', 'Sukenahalli_Female',         
+          -'Sukenahalli_Male', 'Sukenahalli_Trans',                      
+          -'Vishveshwarapuram_Female', 'Vishveshwarapuram_Male',         
+          -'Vishveshwarapuram_Trans', 'Siddapura_Female',                
+          -'Siddapura_Male', 'Siddapura_Trans', 'Hombegowdanagar_Female',
+          - 'Hombegowdanagar_Male', 'Hombegowdanagar_Trans',             
+          -'Jayanagar_Female', 'Jayanagar_Male', 'Jayanagar_Trans',      
+          -'Kempapura Agrahara_Female', 'Kempapura Agrahara_Male',       
+          -'Kempapura Agrahara_Trans', 'Vijayanagar_Female',             
+          -'Vijayanagar_Male', 'Vijayanagar_Trans', 'Hosahalli_Female',  
+          -'Hosahalli_Male', 'Hosahalli_Trans', 'Athiguppe_Female',      
+          -'Athiguppe_Male', 'Athiguppe_Trans', 'Hampinagar_Female',     
+          -'Hampinagar_Male', 'Hampinagar_Trans', 'Bapujinagar_Female',  
+          -'Bapujinagar_Male', 'Bapujinagar_Trans', 'Gali Anjaneya       
+          -Temple_Female', 'Gali Anjaneya Temple_Male', 'Gali Anjaneya   
+          -Temple_Trans', 'Deepanjalinagar_Female',                      
+          -'Deepanjalinagar_Male', 'Deepanjalinagar_Trans',              
+          -'Padarayanapura_Female', 'Padarayanapura_Male',               
+          -'Padarayanapura_Trans', 'Jagajeevanramnagar_Female',          
+          -'Jagajeevanramnagar_Male', 'Jagajeevanramnagar_Trans',        
+          -'Rayapuram_Female', 'Rayapuram_Male', 'Rayapuram_Trans',      
+          -'Balavadhinagar_Female', 'Balavadhinagar_Male',               
+          -'Balavadhinagar_Trans', 'K.R.Market_Female',                  
+          -'K.R.Market_Male', 'K.R.Market_Trans', 'Chamajpet_Female',    
+          -'Chamajpet_Male', 'Chamajpet_Trans', 'Azadnagar_Female',      
+          -'Azadnagar_Male', 'Azadnagar_Trans', 'Lakkasandra_Female',    
+          -'Lakkasandra_Male', 'Lakkasandra_Trans', 'Adugodi_Female',    
+          -'Adugodi_Male', 'Adugodi_Trans', 'Ejipura_Female',            
+          -'Ejipura_Male', 'Ejipura_Trans', 'Koramangala_Female',        
+          -'Koramangala_Male', 'Koramangala_Trans',                      
+          -'Sudduguntepalya_Female', 'Sudduguntepalya_Male',             
+          -'Sudduguntepalya_Trans', 'Madivala_Female', 'Madivala_Male',  
+          -'Madivala_Trans', 'Jakkasandra_Female', 'Jakkasandra_Male',   
+          -'Jakkasandra_Trans', 'B.T.M Layout_Female', 'B.T.M            
+          -Layout_Male', 'B.T.M Layout_Trans', 'Basavanagudi_Female',    
+          -'Basavanagudi_Male', 'Basavanagudi_Trans',                    
+          -'Hanumanthanagar_Female', 'Hanumanthanagar_Male',             
+          -'Hanumanthanagar_Trans', 'Sriinagar_Female', 'Sriinagar_Male',
+          - 'Sriinagar_Trans', 'Girinagar_Female', 'Girinagar_Male',     
+          -'Girinagar_Trans', 'Kathriguppe_Female', 'Kathriguppe_Male',  
+          -'Kathriguppe_Trans', 'Vidyapeeta Ward_Female', 'Vidyapeeta    
+          -Ward_Male', 'Vidyapeeta Ward_Trans', 'Hosakerehalli_Female',  
+          -'Hosakerehalli_Male', 'Hosakerehalli_Trans', 'Ganesha Temple  
+          -Ward_Female', 'Ganesha Temple Ward_Male', 'Ganesha Temple     
+          -Ward_Trans', 'Karisandra_Female', 'Karisandra_Male',          
+          -'Karisandra_Trans', 'Yediyur_Female', 'Yediyur_Male',         
+          -'Yediyur_Trans', 'Banashankari Temple Ward_Female',           
+          -'Banashankari Temple Ward_Male', 'Banashankari Temple         
+          -Ward_Trans', 'Kumaraswamy Layout_Female', 'Kumaraswamy        
+          -Layout_Male', 'Kumaraswamy Layout_Trans',                     
+          -'Padmanabhanagar_Female', 'Padmanabhanagar_Male',             
+          -'Padmanabhanagar_Trans', 'Chikkalasandra_Female',             
+          -'Chikkalasandra_Male', 'Chikkalasandra_Trans',                
+          -'Patttabiramannagar_Female', 'Patttabiramannagar_Male',       
+          -'Patttabiramannagar_Trans', 'Byrasandra_Female',              
+          -'Byrasandra_Male', 'Byrasandra_Trans', 'Jayanagar             
+          -East_Female', 'Jayanagar East_Male', 'Jayanagar East_Trans',  
+          -'Gurappanapalya_Female', 'Gurappanapalya_Male',               
+          -'Gurappanapalya_Trans', 'J.P.Nagar_Female', 'J.P.Nagar_Male', 
+          -'J.P.Nagar_Trans', 'Sarakki_Female', 'Sarakki_Male',          
+          -'Sarakki_Trans', 'Shakambarinagar_Female',                    
+          -'Shakambarinagar_Male', 'Shakambarinagar_Trans',              
+          -'H.S.R.Layout_Female', 'H.S.R.Layout_Male',                   
+          -'H.S.R.Layout_Trans', 'Bommanahalli_Female',                  
+          -'Bommanahalli_Male', 'Bommanahalli_Trans',                    
+          -'Jaraganahalli_Female', 'Jaraganahalli_Male',                 
+          -'Jaraganahalli_Trans', 'Puttenahalli_Female',                 
+          -'Puttenahalli_Male', 'Puttenahalli_Trans',                    
+          -'Bilekahalli_Female', 'Bilekahalli_Male', 'Bilekahalli_Trans',
+          - 'Hongasandra_Female', 'Hongasandra_Male',                    
+          -'Hongasandra_Trans', 'Mangamanapalya_Female',                 
+          -'Mangamanapalya_Male', 'Mangamanapalya_Trans',                
+          -'Arakere_Female', 'Arakere_Male', 'Arakere_Trans',            
+          -'Uttarahalli_Female', 'Uttarahalli_Male', 'Uttarahalli_Trans',
+          - 'Yelachenahalli_Female', 'Yelachenahalli_Male',              
+          -'Yelachenahalli_Trans', 'Singasandra_Female',                 
+          -'Singasandra_Male', 'Singasandra_Trans', 'Begur_Female',      
+          -'Begur_Male', 'Begur_Trans', 'Gottigere_Female',              
+          -'Gottigere_Male', 'Gottigere_Trans', 'Konanakunte_Female',    
+          -'Konanakunte_Male', 'Konanakunte_Trans', 'Anjanapura_Female', 
+          -'Anjanapura_Male', 'Anjanapura_Trans', 'Vasanthapura_Female', 
+          -'Vasanthapura_Male', 'Vasanthapura_Trans'];                   
+       20 +    //contains 594 items. i.e., 198(wards) x 3(genders):      
+       21 +                                                              
+          +var population_arrays = ['Kempegowda Ward_Female', 'Kempegowda
+          + Ward_Male', 'Kempegowda Ward_Trans', 'Chowdeshwari           
+          +Ward_Female', 'Chowdeshwari Ward_Male', 'Chowdeshwari         
+          +Ward_Trans', 'Attur_Female', 'Attur_Male', 'Attur_Trans',     
+          +'Yelahanka Satellite Town_Female', 'Yelahanka Satellite       
+          +Town_Male', 'Yelahanka Satellite Town_Trans', 'Jakkur_Female',
+          + 'Jakkur_Male', 'Jakkur_Trans', 'Thanisandra_Female',         
+          +'Thanisandra_Male', 'Thanisandra_Trans',                      
+          +'Bytarayanapura_Female', 'Bytarayanapura_Male',               
+          +'Bytarayanapura_Trans', 'Kodigehalli_Female',                 
+          +'Kodigehalli_Male', 'Kodigehalli_Trans',                      
+          +'Vidyaranyapura_Female', 'Vidyaranyapura_Male',               
+          +'Vidyaranyapura_Trans', 'Doddabommasandra_Female',            
+          +'Doddabommasandra_Male', 'Doddabommasandra_Trans',            
+          +'Kuvempunagara_Female', 'Kuvempunagara_Male',                 
+          +'Kuvempunagara_Trans', 'Shettyhalli_Female',                  
+          +'Shettyhalli_Male', 'Shettyhalli_Trans', 'Mallasandra_Female',
+          + 'Mallasandra_Male', 'Mallasandra_Trans',                     
+          +'Baagalakunte_Female', 'Baagalakunte_Male',                   
+          +'Baagalakunte_Trans', 'T.Dasarahalli_Female',                 
+          +'T.Dasarahalli_Male', 'T.Dasarahalli_Trans',                  
+          +'Chokkasandra_Female', 'Chokkasandra_Male',                   
+          +'Chokkasandra_Trans', 'Peenya Industrial Area_Female', 'Peenya
+          + Industrial Area_Male', 'Peenya Industrial Area_Trans',       
+          +'Rajagopalanagar_Female', 'Rajagopalanagar_Male',             
+          +'Rajagopalanagar_Trans', 'Heggenahalli_Female',               
+          +'Heggenahalli_Male', 'Heggenahalli_Trans', 'Jalahalli_Female',
+          + 'Jalahalli_Male', 'Jalahalli_Trans', 'J.P.Park_Female',      
+          +'J.P.Park_Male', 'J.P.Park_Trans', 'Yeshwanthpura_Female',    
+          +'Yeshwanthpura_Male', 'Yeshwanthpura_Trans', 'H.M.T_Female',  
+          +'H.M.T_Male', 'H.M.T_Trans', 'Lakshmidevinagar_Female',       
+          +'Lakshmidevinagar_Male', 'Lakshmidevinagar_Trans',            
+          +'Laggere_Female', 'Laggere_Male', 'Laggere_Trans',            
+          +'Kottegepalya_Female', 'Kottegepalya_Male',                   
+          +'Kottegepalya_Trans', 'Jnanabharathi_Female',                 
+          +'Jnanabharathi_Male', 'Jnanabharathi_Trans',                  
+          +'Rajarajeshwarinagar_Female', 'Rajarajeshwarinagar_Male',     
+          +'Rajarajeshwarinagar_Trans', 'Radhakrishna Temple             
+          +Ward_Female', 'Radhakrishna Temple Ward_Male', 'Radhakrishna  
+          +Temple Ward_Trans', 'Sanjaynagar_Female', 'Sanjaynagar_Male', 
+          +'Sanjaynagar_Trans', 'Ganganagar_Female', 'Ganganagar_Male',  
+          +'Ganganagar_Trans', 'Hebbala_Female', 'Hebbala_Male',         
+          +'Hebbala_Trans', 'Vishwanath Nagenahalli_Female', 'Vishwanath 
+          +Nagenahalli_Male', 'Vishwanath Nagenahalli_Trans',            
+          +'Manorayanapalya_Female', 'Manorayanapalya_Male',             
+          +'Manorayanapalya_Trans', 'Gangenahalli_Female',               
+          +'Gangenahalli_Male', 'Gangenahalli_Trans', 'Jayachamarajendra 
+          +Nagar_Female', 'Jayachamarajendra Nagar_Male',                
+          +'Jayachamarajendra Nagar_Trans', 'Nagavara_Female',           
+          +'Nagavara_Male', 'Nagavara_Trans', 'H.B.R Layout_Female',     
+          +'H.B.R Layout_Male', 'H.B.R Layout_Trans', 'Banaswadi_Female',
+          + 'Banaswadi_Male', 'Banaswadi_Trans', 'Kammanahalli_Female',  
+          +'Kammanahalli_Male', 'Kammanahalli_Trans',                    
+          +'Kacharakanahalli_Female', 'Kacharakanahalli_Male',           
+          +'Kacharakanahalli_Trans', 'Kadugondanahalli_Female',          
+          +'Kadugondanahalli_Male', 'Kadugondanahalli_Trans',            
+          +'Lingarajapura_Female', 'Lingarajapura_Male',                 
+          +'Lingarajapura_Trans', 'Maruthisevanagar_Female',             
+          +'Maruthisevanagar_Male', 'Maruthisevanagar_Trans',            
+          +'Horamavu_Female', 'Horamavu_Male', 'Horamavu_Trans',         
+          +'Rammurthynagar_Female', 'Rammurthynagar_Male',               
+          +'Rammurthynagar_Trans', 'Vijinapura_Female',                  
+          +'Vijinapura_Male', 'Vijinapura_Trans', 'K.R.Puram_Female',    
+          +'K.R.Puram_Male', 'K.R.Puram_Trans', 'Basavanapura_Female',   
+          +'Basavanapura_Male', 'Basavanapura_Trans',                    
+          +'Devasandra_Female', 'Devasandra_Male', 'Devasandra_Trans',   
+          +'A.Narayanapura_Female', 'A.Narayanapura_Male',               
+          +'A.Narayanapura_Trans', 'Vignanannagar_Female',               
+          +'Vignanannagar_Male', 'Vignanannagar_Trans', 'HAL             
+          +Airport_Female', 'HAL Airport_Male', 'HAL Airport_Trans',     
+          +'Kushalanagar_Female', 'Kushalanagar_Male',                   
+          +'Kushalanagar_Trans', 'Kavalbyrasandra_Female',               
+          +'Kavalbyrasandra_Male', 'Kavalbyrasandra_Trans',              
+          +'Devarajeevanahalli_Female', 'Devarajeevanahalli_Male',       
+          +'Devarajeevanahalli_Trans', 'Muneshwaranagar_Female',         
+          +'Muneshwaranagar_Male', 'Muneshwaranagar_Trans',              
+          +'Sagayapuram_Female', 'Sagayapuram_Male', 'Sagayapuram_Trans',
+          + 'S.K.Garden_Female', 'S.K.Garden_Male', 'S.K.Garden_Trans',  
+          +'Pulakeshinagar_Female', 'Pulakeshinagar_Male',               
+          +'Pulakeshinagar_Trans', 'Palace Nagar_Female', 'Palace        
+          +Nagar_Male', 'Palace Nagar_Trans', 'Mathikere_Female',        
+          +'Mathikere_Male', 'Mathikere_Trans', 'Malleshwaram_Female',   
+          +'Malleshwaram_Male', 'Malleshwaram_Trans', 'Rajamahal         
+          +Guttahalli_Female', 'Rajamahal Guttahalli_Male', 'Rajamahal   
+          +Guttahalli_Trans', 'Kadu Malleshwaram_Female', 'Kadu          
+          +Malleshwaram_Male', 'Kadu Malleshwaram_Trans',                
+          +'Subramanyanagar_Female', 'Subramanyanagar_Male',             
+          +'Subramanyanagar_Trans', 'Gayathrinagar_Female',              
+          +'Gayathrinagar_Male', 'Gayathrinagar_Trans',                  
+          +'Doddabidarakalu_Female', 'Doddabidarakalu_Male',             
+          +'Doddabidarakalu_Trans', 'Herohalli_Female', 'Herohalli_Male',
+          + 'Herohalli_Trans', 'Ullalu_Female', 'Ullalu_Male',           
+          +'Ullalu_Trans', 'Kengeri_Female', 'Kengeri_Male',             
+          +'Kengeri_Trans', 'Hemigepura_Female', 'Hemigepura_Male',      
+          +'Hemigepura_Trans', 'Nandini Layout_Female', 'Nandini         
+          +Layout_Male', 'Nandini Layout_Trans', 'Marappanapalya_Female',
+          + 'Marappanapalya_Male', 'Marappanapalya_Trans',               
+          +'Nagapura_Female', 'Nagapura_Male', 'Nagapura_Trans',         
+          +'Mahalakshmipuram_Female', 'Mahalakshmipuram_Male',           
+          +'Mahalakshmipuram_Trans', 'Shakti Ganapathiinagar_Female',    
+          +'Shakti Ganapathiinagar_Male', 'Shakti Ganapathiinagar_Trans',
+          + 'Shankaramatha_Female', 'Shankaramatha_Male',                
+          +'Shankaramatha_Trans', 'Vrishabha Nagar_Female', 'Vrishabha   
+          +Nagar_Male', 'Vrishabha Nagar_Trans', 'Benaganahalli_Female', 
+          +'Benaganahalli_Male', 'Benaganahalli_Trans',                  
+          +'C.V.Ramannagar_Female', 'C.V.Ramannagar_Male',               
+          +'C.V.Ramannagar_Trans', 'Hosa Thippasandra_Female', 'Hosa     
+          +Thippasandra_Male', 'Hosa Thippasandra_Trans',                
+          +'Sarvagnanagar_Female', 'Sarvagnanagar_Male',                 
+          +'Sarvagnanagar_Trans', 'Hoysalanagar_Female',                 
+          +'Hoysalanagar_Male', 'Hoysalanagar_Trans',                    
+          +'Jeevanbhimanagar_Female', 'Jeevanbhimanagar_Male',           
+          +'Jeevanbhimanagar_Trans', 'Konena Agrahara_Female', 'Konena   
+          +Agrahara_Male', 'Konena Agrahara_Trans', 'Hoodi_Female',      
+          +'Hoodi_Male', 'Hoodi_Trans', 'Garudacharpalya_Female',        
+          +'Garudacharpalya_Male', 'Garudacharpalya_Trans',              
+          +'Kadugodi_Female', 'Kadugodi_Male', 'Kadugodi_Trans',         
+          +'Hagadooru_Female', 'Hagadooru_Male', 'Hagadooru_Trans',      
+          +'Dodda Nekkundi_Female', 'Dodda Nekkundi_Male', 'Dodda        
+          +Nekkundi_Trans', 'Marathhalli_Female', 'Marathhalli_Male',    
+          +'Marathhalli_Trans', 'Varthur_Female', 'Varthur_Male',        
+          +'Varthur_Trans', 'Bellandur_Female', 'Bellandur_Male',        
+          +'Bellandur_Trans', 'Ramaswamy Palya_Female', 'Ramaswamy       
+          +Palya_Male', 'Ramaswamy Palya_Trans', 'Jayamahal_Female',     
+          +'Jayamahal_Male', 'Jayamahal_Trans', 'Halsur_Female',         
+          +'Halsur_Male', 'Halsur_Trans', 'Bharathinagar_Female',        
+          +'Bharathinagar_Male', 'Bharathinagar_Trans',                  
+          +'Shivajinagar_Female', 'Shivajinagar_Male',                   
+          +'Shivajinagar_Trans', 'Vasanthanagar_Female',                 
+          +'Vasanthanagar_Male', 'Vasanthanagar_Trans',                  
+          +'Sampangiramanagar_Female', 'Sampangiramanagar_Male',         
+          +'Sampangiramanagar_Trans', 'Dattatreya Temple_Female',        
+          +'Dattatreya Temple_Male', 'Dattatreya Temple_Trans',          
+          +'Gandhinagar_Female', 'Gandhinagar_Male', 'Gandhinagar_Trans',
+          + 'Subhashnagar_Female', 'Subhashnagar_Male',                  
+          +'Subhashnagar_Trans', 'Okalipuram_Female', 'Okalipuram_Male', 
+          +'Okalipuram_Trans', 'Chikpet_Female', 'Chikpet_Male',         
+          +'Chikpet_Trans', 'Cottonpet_Female', 'Cottonpet_Male',        
+          +'Cottonpet_Trans', 'Binnypet_Female', 'Binnypet_Male',        
+          +'Binnypet_Trans', 'Jogupalya_Female', 'Jogupalya_Male',       
+          +'Jogupalya_Trans', 'Shantalanagar_Female',                    
+          +'Shantalanagar_Male', 'Shantalanagar_Trans', 'Domlur_Female', 
+          +'Domlur_Male', 'Domlur_Trans', 'Agara_Female', 'Agara_Male',  
+          +'Agara_Trans', 'Vannarpet_Female', 'Vannarpet_Male',          
+          +'Vannarpet_Trans', 'Neelasandra_Female', 'Neelasandra_Male',  
+          +'Neelasandra_Trans', 'Shanthinagar_Female',                   
+          +'Shanthinagar_Male', 'Shanthinagar_Trans',                    
+          +'Dayanandanagar_Female', 'Dayanandanagar_Male',               
+          +'Dayanandanagar_Trans', 'Prakashnagar_Female',                
+          +'Prakashnagar_Male', 'Prakashnagar_Trans',                    
+          +'Rajajinagar_Female', 'Rajajinagar_Male', 'Rajajinagar_Trans',
+          + 'Basaveshwarnagar_Female', 'Basaveshwarnagar_Male',          
+          +'Basaveshwarnagar_Trans', 'Kamakshipalya_Female',             
+          +'Kamakshipalya_Male', 'Kamakshipalya_Trans',                  
+          +'Shivanagar_Female', 'Shivanagar_Male', 'Shivanagar_Trans',   
+          +'Sri Rama Mandir_Female', 'Sri Rama Mandir_Male', 'Sri Rama   
+          +Mandir_Trans', 'Kaveripura_Female', 'Kaveripura_Male',        
+          +'Kaveripura_Trans', 'Govindarajanagar_Female',                
+          +'Govindarajanagar_Male', 'Govindarajanagar_Trans', 'Agrahara  
+          +Dasarahalli_Female', 'Agrahara Dasarahalli_Male', 'Agrahara   
+          +Dasarahalli_Trans', 'Dr.Rajkumar Ward_Female', 'Dr.Rajkumar   
+          +Ward_Male', 'Dr.Rajkumar Ward_Trans', 'Marenahalli_Female',   
+          +'Marenahalli_Male', 'Marenahalli_Trans', 'Maruthi Mandira     
+          +Ward_Female', 'Maruthi Mandira Ward_Male', 'Maruthi Mandira   
+          +Ward_Trans', 'Moodalapalya_Female', 'Moodalapalya_Male',      
+          +'Moodalapalya_Trans', 'Nagarabhavi_Female',                   
+          +'Nagarabhavi_Male', 'Nagarabhavi_Trans',                      
+          +'Nayandahalli_Female', 'Nayandahalli_Male',                   
+          +'Nayandahalli_Trans', 'Sudhamanagar_Female',                  
+          +'Sudhamanagar_Male', 'Sudhamanagar_Trans', 'Dharmarayaswamy   
+          +Temple_Female', 'Dharmarayaswamy Temple_Male',                
+          +'Dharmarayaswamy Temple_Trans', 'Sukenahalli_Female',         
+          +'Sukenahalli_Male', 'Sukenahalli_Trans',                      
+          +'Vishveshwarapuram_Female', 'Vishveshwarapuram_Male',         
+          +'Vishveshwarapuram_Trans', 'Siddapura_Female',                
+          +'Siddapura_Male', 'Siddapura_Trans', 'Hombegowdanagar_Female',
+          + 'Hombegowdanagar_Male', 'Hombegowdanagar_Trans',             
+          +'Jayanagar_Female', 'Jayanagar_Male', 'Jayanagar_Trans',      
+          +'Kempapura Agrahara_Female', 'Kempapura Agrahara_Male',       
+          +'Kempapura Agrahara_Trans', 'Vijayanagar_Female',             
+          +'Vijayanagar_Male', 'Vijayanagar_Trans', 'Hosahalli_Female',  
+          +'Hosahalli_Male', 'Hosahalli_Trans', 'Athiguppe_Female',      
+          +'Athiguppe_Male', 'Athiguppe_Trans', 'Hampinagar_Female',     
+          +'Hampinagar_Male', 'Hampinagar_Trans', 'Bapujinagar_Female',  
+          +'Bapujinagar_Male', 'Bapujinagar_Trans', 'Gali Anjaneya       
+          +Temple_Female', 'Gali Anjaneya Temple_Male', 'Gali Anjaneya   
+          +Temple_Trans', 'Deepanjalinagar_Female',                      
+          +'Deepanjalinagar_Male', 'Deepanjalinagar_Trans',              
+          +'Padarayanapura_Female', 'Padarayanapura_Male',               
+          +'Padarayanapura_Trans', 'Jagajeevanramnagar_Female',          
+          +'Jagajeevanramnagar_Male', 'Jagajeevanramnagar_Trans',        
+          +'Rayapuram_Female', 'Rayapuram_Male', 'Rayapuram_Trans',      
+          +'Balavadhinagar_Female', 'Balavadhinagar_Male',               
+          +'Balavadhinagar_Trans', 'K.R.Market_Female',                  
+          +'K.R.Market_Male', 'K.R.Market_Trans', 'Chamajpet_Female',    
+          +'Chamajpet_Male', 'Chamajpet_Trans', 'Azadnagar_Female',      
+          +'Azadnagar_Male', 'Azadnagar_Trans', 'Lakkasandra_Female',    
+          +'Lakkasandra_Male', 'Lakkasandra_Trans', 'Adugodi_Female',    
+          +'Adugodi_Male', 'Adugodi_Trans', 'Ejipura_Female',            
+          +'Ejipura_Male', 'Ejipura_Trans', 'Koramangala_Female',        
+          +'Koramangala_Male', 'Koramangala_Trans',                      
+          +'Sudduguntepalya_Female', 'Sudduguntepalya_Male',             
+          +'Sudduguntepalya_Trans', 'Madivala_Female', 'Madivala_Male',  
+          +'Madivala_Trans', 'Jakkasandra_Female', 'Jakkasandra_Male',   
+          +'Jakkasandra_Trans', 'B.T.M Layout_Female', 'B.T.M            
+          +Layout_Male', 'B.T.M Layout_Trans', 'Basavanagudi_Female',    
+          +'Basavanagudi_Male', 'Basavanagudi_Trans',                    
+          +'Hanumanthanagar_Female', 'Hanumanthanagar_Male',             
+          +'Hanumanthanagar_Trans', 'Sriinagar_Female', 'Sriinagar_Male',
+          + 'Sriinagar_Trans', 'Girinagar_Female', 'Girinagar_Male',     
+          +'Girinagar_Trans', 'Kathriguppe_Female', 'Kathriguppe_Male',  
+          +'Kathriguppe_Trans', 'Vidyapeeta Ward_Female', 'Vidyapeeta    
+          +Ward_Male', 'Vidyapeeta Ward_Trans', 'Hosakerehalli_Female',  
+          +'Hosakerehalli_Male', 'Hosakerehalli_Trans', 'Ganesha Temple  
+          +Ward_Female', 'Ganesha Temple Ward_Male', 'Ganesha Temple     
+          +Ward_Trans', 'Karisandra_Female', 'Karisandra_Male',          
+          +'Karisandra_Trans', 'Yediyur_Female', 'Yediyur_Male',         
+          +'Yediyur_Trans', 'Banashankari Temple Ward_Female',           
+          +'Banashankari Temple Ward_Male', 'Banashankari Temple         
+          +Ward_Trans', 'Kumaraswamy Layout_Female', 'Kumaraswamy        
+          +Layout_Male', 'Kumaraswamy Layout_Trans',                     
+          +'Padmanabhanagar_Female', 'Padmanabhanagar_Male',             
+          +'Padmanabhanagar_Trans', 'Chikkalasandra_Female',             
+          +'Chikkalasandra_Male', 'Chikkalasandra_Trans',                
+          +'Patttabiramannagar_Female', 'Patttabiramannagar_Male',       
+          +'Patttabiramannagar_Trans', 'Byrasandra_Female',              
+          +'Byrasandra_Male', 'Byrasandra_Trans', 'Jayanagar             
+          +East_Female', 'Jayanagar East_Male', 'Jayanagar East_Trans',  
+          +'Gurappanapalya_Female', 'Gurappanapalya_Male',               
+          +'Gurappanapalya_Trans', 'J.P.Nagar_Female', 'J.P.Nagar_Male', 
+          +'J.P.Nagar_Trans', 'Sarakki_Female', 'Sarakki_Male',          
+          +'Sarakki_Trans', 'Shakambarinagar_Female',                    
+          +'Shakambarinagar_Male', 'Shakambarinagar_Trans',              
+          +'H.S.R.Layout_Female', 'H.S.R.Layout_Male',                   
+          +'H.S.R.Layout_Trans', 'Bommanahalli_Female',                  
+          +'Bommanahalli_Male', 'Bommanahalli_Trans',                    
+          +'Jaraganahalli_Female', 'Jaraganahalli_Male',                 
+          +'Jaraganahalli_Trans', 'Puttenahalli_Female',                 
+          +'Puttenahalli_Male', 'Puttenahalli_Trans',                    
+          +'Bilekahalli_Female', 'Bilekahalli_Male', 'Bilekahalli_Trans',
+          + 'Hongasandra_Female', 'Hongasandra_Male',                    
+          +'Hongasandra_Trans', 'Mangamanapalya_Female',                 
+          +'Mangamanapalya_Male', 'Mangamanapalya_Trans',                
+          +'Arakere_Female', 'Arakere_Male', 'Arakere_Trans',            
+          +'Uttarahalli_Female', 'Uttarahalli_Male', 'Uttarahalli_Trans',
+          + 'Yelachenahalli_Female', 'Yelachenahalli_Male',              
+          +'Yelachenahalli_Trans', 'Singasandra_Female',                 
+          +'Singasandra_Male', 'Singasandra_Trans', 'Begur_Female',      
+          +'Begur_Male', 'Begur_Trans', 'Gottigere_Female',              
+          +'Gottigere_Male', 'Gottigere_Trans', 'Konanakunte_Female',    
+          +'Konanakunte_Male', 'Konanakunte_Trans', 'Anjanapura_Female', 
+          +'Anjanapura_Male', 'Anjanapura_Trans', 'Vasanthapura_Female', 
+          +'Vasanthapura_Male', 'Vasanthapura_Trans'];                   
+       22                                                                
+       23 -      var ward;                                               
+       24 -      var popJson;                                            
+       25 -      var query = window.location.search.substring(1);        
+       26 -      var vars = query.split("&amp;");                        
+       23 +    // Parse ward from URL query string                       
+       24 +    var ward;                                                 
+       25 +    var query = window.location.search.substring(1);          
+       26 +    var vars = query.split("&amp;");                          
+       27                                                                
+       28 -      for (var i=0;i<vars.length;i++) {                       
+       29 -          var pair = vars[i].split("=");                      
+       30 -           if (pair[0] == "ward") {                              
+
+
+       31 -           var ward = pair[1];                                   
+
+
+       32 -        }                                                     
+       28 +    for (var i = 0; i < vars.length; i++) {                   
+       29 +      var pair = vars[i].split("=");                          
+       30 +      if (pair[0] == "ward") {                                
+       31 +        ward = pair[1];                                       
+       32        }                                                       
+       33 +    }                                                         
+       34                                                                
+       35 -      String.prototype.replaceAll = function(target,          
+          -replacement) {                                                
+       36 -        return this.split(target).join(replacement);          
+       37 -      };                                                      
+       35 +    ward = ward.split("%20").join(" ");                       
+       36 +    var n0 = ward + "_Female";                                
+       37 +    var n1 = ward + "_Male";                                  
+       38 +    var n2 = ward + "_Trans";                                 
+       39                                                                
+       40 -      ward = ward.replaceAll("%20"," ");                      
+       41 -      var n0 = ward.concat("_Female");                        
+       42 -      var n1 = ward.concat("_Male");                          
+       43 -      var n2 = ward.concat("_Trans");                         
+       40 +    var i0 = population_arrays.indexOf(n0);                   
+       41 +    var i1 = population_arrays.indexOf(n1);                   
+       42 +    var i2 = population_arrays.indexOf(n2);                   
+       43                                                                
+       44 -      var i0 = population_arrays.indexOf(n0);                 
+       45 -      var i1 = population_arrays.indexOf(n1);                 
+       46 -      var i2 = population_arrays.indexOf(n2);                 
+       44 +    // Load population data                                   
+       45 +    d3.json("population.js").then(function(popjson) {         
+       46 +      var females = popjson.populations[i0][n0];              
+       47 +      var males = popjson.populations[i1][n1];                
+       48 +      var others = popjson.populations[i2][n2];               
+       49                                                                
+       50 -      // var popjson = localStorage.getItem('popjson');       
+       51 -      // popjson = JSON.parse(popjson);                       
+       52 -      // alert(popjson);                                      
+       53 -      $.getJSON("population.js", function(popjson) {          
+       54 -      //$.getJSON("https://raw.githubusercontent.com/HTMLdota 
+          -freak/Largefiles/master/population.js", function(popjson) {   
+       55 -      //$.getJSON(JSON.parse(window.popjson),                 
+          -function(popjson) {                                           
+       56 -      //popjson = JSON.parse(window.popjson);                 
+       57 -        x1 = popjson.populations[i0][n0];                     
+       58 -        x2 = popjson.populations[i1][n1];                     
+       59 -        x3 = popjson.populations[i2][n2];                     
+       50 +      // Create histogram bins (1-year bins, 18-100)          
+       51 +      var thresholds = d3.range(18, 101, 1);                  
+       52 +      var binGen = d3.bin().domain([18,                       
+          +100]).thresholds(thresholds);                                 
+       53                                                                
+       54 -      var data = [                                            
+       55 -        {                                                     
+       56 -          name : "Males",                                     
+       57 -          x: x2,                                              
+       58 -          type: 'histogram',                                  
+       59 -          marker: {                                           
+       60 -            color: 'rgba(255,255,255,1)',                     
+       61 -          },                                                  
+       62 -        },                                                    
+       63 -        {                                                     
+       64 -          name : "Females",                                   
+       65 -          x: x1,                                              
+       66 -          type: 'histogram',                                  
+       67 -          marker: {                                           
+       68 -            color: 'rgba(150,150,150,1)',                     
+       69 -          },                                                  
+       70 -        },                                                    
+       71 -        {                                                     
+       72 -          name : "Others",                                    
+       73 -          x: x3,                                              
+       74 -          type: 'histogram',                                  
+       75 -          marker: {                                           
+       76 -            color: 'rgba(71,71,72,1)',                        
+       77 -          },                                                  
+       78 -        }                                                     
+       54 +      var maleBins = binGen(males);                           
+       55 +      var femaleBins = binGen(females);                       
+       56 +      var otherBins = binGen(others);                         
+       57 +                                                              
+       58 +      // Chart dimensions                                     
+       59 +      var margin = {top: 15, right: 100, bottom: 45, left:    
+          +55};                                                          
+       60 +      var width = 540 - margin.left - margin.right;           
+       61 +      var height = 330 - margin.top - margin.bottom;          
+       62 +                                                              
+       63 +      var svg = d3.select("#chart")                           
+       64 +        .attr("width", 540)                                   
+       65 +        .attr("height", 330)                                  
+       66 +        .style("display", "block");                           
+       67 +                                                              
+       68 +      var g = svg.append("g")                                 
+       69 +        .attr("transform", "translate(" + margin.left + "," + 
+          + margin.top + ")");                                           
+       70 +                                                              
+       71 +      // Scales                                               
+       72 +      var x = d3.scaleLinear()                                
+       73 +        .domain([18, 100])                                    
+       74 +        .range([0, width]);                                   
+       75 +                                                              
+       76 +      var maxCount = d3.max([                                 
+       77 +        d3.max(maleBins, function(d) { return d.length; }),   
+       78 +        d3.max(femaleBins, function(d) { return d.length; }), 
+       79 +        d3.max(otherBins, function(d) { return d.length; })   
+       80 +      ]);                                                     
+       81 +                                                              
+       82 +      var y = d3.scaleLinear()                                
+       83 +        .domain([0, maxCount])                                
+       84 +        .nice()                                               
+       85 +        .range([height, 0]);                                  
+       86 +                                                              
+       87 +      // Draw bars - Males first (back), then Females, then   
+          +Others (front)                                                
+       88 +      var series = [                                          
+       89 +        {bins: maleBins, color: "rgba(255,255,255,1)", label: 
+          + "Males"},                                                    
+       90 +        {bins: femaleBins, color: "rgba(150,150,150,1)",      
+          +label: "Females"},                                            
+       91 +        {bins: otherBins, color: "rgba(71,71,72,1)", label:   
+          +"Others"}                                                     
+       92        ];                                                      
+       93                                                                
+       94 -      var layout = {                                          
+       95 -        // bargap: 0.05,                                      
+       96 -        // bargroupgap: 0.2,                                  
+       97 -        // barmode: "overlay",                                
+       98 -        //title: "Age & Gender distribution in "+ward,        
+       99 -        xaxis: {title: "Ages"},                               
+      100 -        yaxis: {title: "Population", linecolor:               
+          -'rgba(24,24,24,0)'},                                          
+      101 -        paper_bgcolor: 'rgba(24,24,24,0)',                    
+      102 -        plot_bgcolor: 'rgba(24,24,24,0)'                      
+      103 -      };                                                      
+      104 -      $("#imgLoad").hide();                                   
+      105 -      Plotly.newPlot('myDiv', data, layout);                  
+       94 +      series.forEach(function(s) {                            
+       95 +        g.selectAll(".bar-" + s.label)                        
+       96 +          .data(s.bins)                                       
+       97 +          .enter().append("rect")                             
+       98 +          .attr("x", function(d) { return x(d.x0) + 0.5; })   
+       99 +          .attr("width", function(d) { return Math.max(0,     
+          +x(d.x1) - x(d.x0) - 1); })                                    
+      100 +          .attr("y", function(d) { return y(d.length); })     
+      101 +          .attr("height", function(d) { return height -       
+          +y(d.length); })                                               
+      102 +          .attr("fill", s.color);                             
+      103 +      });                                                     
+      104                                                                
+      105 +      // X axis                                               
+      106 +      g.append("g")                                           
+      107 +        .attr("class", "axis")                                
+      108 +        .attr("transform", "translate(0," + height + ")")     
+      109 +        .call(d3.axisBottom(x).ticks(8));                     
+      110 +                                                              
+      111 +      // Y axis                                               
+      112 +      g.append("g")                                           
+      113 +        .attr("class", "axis")                                
+      114 +        .call(d3.axisLeft(y).ticks(6));                       
+      115 +                                                              
+      116 +      // X axis label                                         
+      117 +      g.append("text")                                        
+      118 +        .attr("class", "axis-label")                          
+      119 +        .attr("x", width / 2)                                 
+      120 +        .attr("y", height + 38)                               
+      121 +        .attr("text-anchor", "middle")                        
+      122 +        .text("Ages");                                        
+      123 +                                                              
+      124 +      // Y axis label                                         
+      125 +      g.append("text")                                        
+      126 +        .attr("class", "axis-label")                          
+      127 +        .attr("transform", "rotate(-90)")                     
+      128 +        .attr("x", -height / 2)                               
+      129 +        .attr("y", -42)                                       
+      130 +        .attr("text-anchor", "middle")                        
+      131 +        .text("Population");                                  
+      132 +                                                              
+      133 +      // Legend                                               
+      134 +      var legend = svg.append("g")                            
+      135 +        .attr("class", "legend")                              
+      136 +        .attr("transform", "translate(" + (540 - margin.right 
+          + + 10) + "," + margin.top + ")");                             
+      137 +                                                              
+      138 +      series.forEach(function(s, i) {                         
+      139 +        var row = legend.append("g")                          
+      140 +          .attr("transform", "translate(0," + (i * 20) +      
+          +")");                                                         
+      141 +        row.append("rect")                                    
+      142 +          .attr("width", 12)                                  
+      143 +          .attr("height", 12)                                 
+      144 +          .attr("fill", s.color)                              
+      145 +          .attr("stroke", "#888")                             
+      146 +          .attr("stroke-width", 0.5);                         
+      147 +        row.append("text")                                    
+      148 +          .attr("x", 16)                                      
+      149 +          .attr("y", 10)                                      
+      150 +          .text(s.label);                                     
+      151        });                                                     
+      152                                                                
+      153 -      $('.crisp').remove();                                   
+      153 +      // Hide loading spinner                                 
+      154 +      document.getElementById("imgLoad").style.display =      
+          +"none";                                                       
+      155 +    });                                                       
+      156 +                                                              
+      157    </script>                                                   
+      158  </body>                                                       
+
+⏺ Done. The file has been rewritten with D3.js v7 replacing Plotly.js and
+  jQuery. Key changes:
+
+  - Removed: plotly-latest.min.js (deprecated), jQuery
+  - Added: d3.v7.min.js (~260KB vs Plotly's ~3.5MB)
+  - Same: ward param parsing, population_arrays lookup, population.js data
+  loading, ring.svg spinner
+  - Chart: Overlaid histogram with 1-year bins (18-100), same 3 color series
+  (Males=white, Females=gray, Others=dark), dark transparent background, white
+  axis text/labels, legend on the right
+
+  To verify:
+  cd Map && python3 -m http.server 8091
+  Then open http://localhost:8091/Geoplot10.html and click a ward bubble — the
+  sidebar histogram should appear with no Plotly deprecation warnings.
+
+✻ Cooked for 2m 34s
+
+❯ Can you add tooltips on hover :) on this bar graph? Also can you reduce   
+  the height of the chart by 20% (of course, take care to ensure the data   
+  is properly calibrated and not warped haha)                               
+
+⏺ Read 1 file (ctrl+o to expand)
+
+⏺ Let me check the object tag dimensions in Geoplot10.html to make sure the
+  reduced height works.
+
+⏺ Searched for 1 pattern (ctrl+o to expand)
+
+⏺ The object container is 350px tall, so the reduced chart (264px) fits fine.
+  Let me apply both changes.
+
+⏺ Update(Map/Agegraph/plotly.html)
+  ⎿  Added 9 lines, removed 2 lines
+       2    <script src="https://d3js.org/d3.v7.min.js"></script>        
+       3    <style>                                                      
+       4      body { margin: 0; overflow: hidden; background:            
+          rgba(24,24,24,0); }                                            
+       5 -    #myDiv { width: 540px; height: 330px; position: relative; }
+       6 -    #imgLoad { margin-top: 100px; margin-left: 200px; }        
+       5 +    #myDiv { width: 540px; height: 264px; position: relative; }
+       6 +    #imgLoad { margin-top: 80px; margin-left: 200px; }         
+       7      .axis text { fill: #ccc; font-size: 10px; }                
+       8      .axis path, .axis line { stroke: #555; }                   
+       9      .axis-label { fill: #ccc; font-size: 12px; }               
+      10      .legend text { fill: #ccc; font-size: 11px; }              
+      11 +    .tooltip {                                                 
+      12 +      position: absolute; pointer-events: none; display: none; 
+      13 +      background: rgba(0,0,0,0.85); color: #eee; padding: 6px  
+         +10px;                                                          
+      14 +      border-radius: 4px; font-size: 11px; font-family:        
+         +sans-serif;                                                    
+      15 +      line-height: 1.5; white-space: nowrap;                   
+      16 +    }                                                          
+      17 +    .tooltip span { font-weight: bold; }                       
+      18    </style>                                                     
+      19  </head>                                                        
+      20  <body>                                                         
+
+⏺ Update(Map/Agegraph/plotly.html)
+  ⎿  Added 1 line
+      21    <div id="myDiv">                                             
+      22      <img id="imgLoad" src="ring.svg" alt="Loading...">         
+      23      <svg id="chart" style="display:none;"></svg>               
+      24 +    <div class="tooltip" id="tooltip"></div>                   
+      25    </div>                                                       
+      26    <script>                                                     
+      27                                                                 
+
+⏺ Now update the chart dimensions and add tooltip behavior.
+
+⏺ Update(Map/Agegraph/plotly.html)
+  ⎿  Added 5 lines, removed 4 lines
+      63        var femaleBins = binGen(females);                        
+      64        var otherBins = binGen(others);                          
+      65                                                                 
+      66 -      // Chart dimensions                                      
+      67 -      var margin = {top: 15, right: 100, bottom: 45, left:     
+         -55};                                                           
+      66 +      // Chart dimensions (height reduced 20%: 330 -> 264)     
+      67 +      var totalHeight = 264;                                   
+      68 +      var margin = {top: 12, right: 100, bottom: 40, left:     
+         +55};                                                           
+      69        var width = 540 - margin.left - margin.right;            
+      70 -      var height = 330 - margin.top - margin.bottom;           
+      70 +      var height = totalHeight - margin.top - margin.bottom;   
+      71                                                                 
+      72        var svg = d3.select("#chart")                            
+      73          .attr("width", 540)                                    
+      74 -        .attr("height", 330)                                   
+      74 +        .attr("height", totalHeight)                           
+      75          .style("display", "block");                            
+      76                                                                 
+      77        var g = svg.append("g")                                  
+
+⏺ Now replace the bar drawing and add tooltip interactivity.
+
+⏺ Update(Map/Agegraph/plotly.html)
+  ⎿  Added 33 lines, removed 1 line
+      100          {bins: otherBins, color: "rgba(71,71,72,1)", label:   
+           "Others"}                                                     
+      101        ];                                                      
+      102                                                                
+      103 +      // Build a lookup: binIndex -> {Males: n, Females: n,   
+          +Others: n}                                                    
+      104 +      var binLookup = maleBins.map(function(d, i) {           
+      105 +        return {                                              
+      106 +          age: d.x0,                                          
+      107 +          Males: maleBins[i].length,                          
+      108 +          Females: femaleBins[i].length,                      
+      109 +          Others: otherBins[i].length                         
+      110 +        };                                                    
+      111 +      });                                                     
+      112 +                                                              
+      113 +      var tip = d3.select("#tooltip");                        
+      114 +                                                              
+      115        series.forEach(function(s) {                            
+      116          g.selectAll(".bar-" + s.label)                        
+      117            .data(s.bins)                                       
+     ...
+      108            .attr("width", function(d) { return Math.max(0,     
+           x(d.x1) - x(d.x0) - 1); })                                    
+      109            .attr("y", function(d) { return y(d.length); })     
+      110            .attr("height", function(d) { return height -       
+           y(d.length); })                                               
+      111 -          .attr("fill", s.color);                             
+      111 +          .attr("fill", s.color)                              
+      112 +          .style("cursor", "crosshair")                       
+      113 +          .on("mouseover", function(event, d) {               
+      114 +            var idx = d.x0 - 18;                              
+      115 +            var info = binLookup[idx];                        
+      116 +            if (!info) return;                                
+      117 +            tip.style("display", "block")                     
+      118 +              .html(                                          
+      119 +                "<span>Age " + info.age + "</span><br>" +     
+      120 +                "Males: " + info.Males + "<br>" +             
+      121 +                "Females: " + info.Females + "<br>" +         
+      122 +                "Others: " + info.Others                      
+      123 +              );                                              
+      124 +          })                                                  
+      125 +          .on("mousemove", function(event) {                  
+      126 +            tip.style("left", (event.pageX + 12) + "px")      
+      127 +              .style("top", (event.pageY - 10) + "px");       
+      128 +          })                                                  
+      129 +          .on("mouseout", function() {                        
+      130 +            tip.style("display", "none");                     
+      131 +          });                                                 
+      132        });                                                     
+      133                                                                
+      134        // X axis                                               
+
+⏺ Now update the axis label y-positions for the reduced height.
+
+⏺ Update(Map/Agegraph/plotly.html)
+  ⎿  Added 1 line, removed 1 line
+      158        g.append("text")                                        
+      159          .attr("class", "axis-label")                          
+      160          .attr("x", width / 2)                                 
+      161 -        .attr("y", height + 38)                               
+      161 +        .attr("y", height + 34)                               
+      162          .attr("text-anchor", "middle")                        
+      163          .text("Ages");                                        
+      164                                                                
+
+⏺ Update the legend position to use the totalHeight variable.
+
+⏺ Update(Map/Agegraph/plotly.html)
+  ⎿  Added 1 line, removed 1 line
+      152        // Y axis                                               
+      153        g.append("g")                                           
+      154          .attr("class", "axis")                                
+      155 -        .call(d3.axisLeft(y).ticks(6));                       
+      155 +        .call(d3.axisLeft(y).ticks(5));                       
+      156                                                                
+      157        // X axis label                                         
+      158        g.append("text")                                        
+
+⏺ Done. Here's what changed:
+
+  - Height reduced 20%: 330px → 264px. Margins adjusted proportionally (top
+  15→12, bottom 45→40), Y-axis ticks reduced from 6→5 to avoid crowding. The
+  scales and data mapping are unchanged — D3's linear scale maps the same domain
+   to the shorter range automatically, so no data distortion.
+  - Tooltips on hover: Hovering over any bar shows a tooltip with the age and
+  counts for all three groups (Males, Females, Others) at that age. The tooltip
+  follows the cursor and has a dark semi-transparent background to match the
+  chart theme.
+
+✻ Churned for 1m 0s

@@ -5,15 +5,14 @@
     <title>Bangalore Voter data</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <link rel='shortcut icon' href='Images/favicon.png' type='image/x-icon'>
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.js'></script>
+    <script src='https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.34.0/mapbox-gl.css' rel='stylesheet' />
-    <link href='https://api.mapbox.com/mapbox-assembly/v0.12.0/assembly.min.css' rel='stylesheet'>
-    <script async defer src='https://api.mapbox.com/mapbox-assembly/v0.12.0/assembly.js'></script>
-    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.js'></script>
-    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.css' type='text/css' />
+    <link href='https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css' rel='stylesheet' />
+    <script src='https://unpkg.com/@maplibre/maplibre-gl-geocoder@1.9.4/dist/maplibre-gl-geocoder.js'></script>
+    <link rel='stylesheet' href='https://unpkg.com/@maplibre/maplibre-gl-geocoder@1.9.4/dist/maplibre-gl-geocoder.css' type='text/css' />
 
     <!-- <script src='Init.js'></script> -->
+    <script src='dataset.js'></script>
 
     <style>
         body { margin:0; padding:0; }
@@ -27,7 +26,7 @@
             padding: 0;
         }
 
-        .mapboxgl-popup {
+        .maplibregl-popup {
                 /*max-width: 100px;*/
                 font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
             }
@@ -84,34 +83,48 @@ $(document).ready(
   }
 );
 
-var geojson = (function () {
-    var json = null;
-    $.ajax({
-        'async': false,
-        'global': false,
-        'url': 'https://api.myjson.com/bins/i2tcf',
-        'dataType': "json",
-        'success': function (data) {
-            json = data;
-        }
-    });
-    return json;
-})();
+var geojson = dataset;
 
-mapboxgl.accessToken = 'pk.eyJ1Ijoidmlub2R4eXoiLCJhIjoiY2owczFscm1hMDAzbDM4bHIzeGZoZXg4cSJ9.OsBqNXFDc4SfyodyrGwHGw';
-
-
-var map = new mapboxgl.Map({
+var map = new maplibregl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/dark-v9',
+    style: 'https://tiles.openfreemap.org/styles/dark',
     center: [77.5712556, 12.97],
     zoom: 12
 });
 
-map.addControl(new MapboxGeocoder({
-    accessToken: mapboxgl.accessToken,
-    bbox: [73,10,80,20]
-}));
+var geocoderApi = {
+    forwardGeocode: async function(config) {
+        var features = [];
+        try {
+            var request = 'https://nominatim.openstreetmap.org/search?q=' +
+                encodeURIComponent(config.query) +
+                '&format=geojson&polygon_geojson=1&addressdetails=1&bounded=1&viewbox=73,10,80,20';
+            var response = await fetch(request);
+            var geojson = await response.json();
+            for (var feature of geojson.features) {
+                var center = [
+                    feature.bbox[0] + (feature.bbox[2] - feature.bbox[0]) / 2,
+                    feature.bbox[1] + (feature.bbox[3] - feature.bbox[1]) / 2
+                ];
+                var point = {
+                    type: 'Feature',
+                    geometry: { type: 'Point', coordinates: center },
+                    place_name: feature.properties.display_name,
+                    properties: feature.properties,
+                    text: feature.properties.display_name,
+                    place_type: ['place'],
+                    center: center
+                };
+                features.push(point);
+            }
+        } catch (e) {
+            console.error('Failed to forwardGeocode with error: ' + e);
+        }
+        return { features: features };
+    }
+};
+
+map.addControl(new MaplibreGeocoder(geocoderApi, { maplibregl: maplibregl }));
 
 // add markers to map
 geojson.features.forEach(function(marker) {
@@ -133,28 +146,24 @@ geojson.features.forEach(function(marker) {
     // var popupText = "<p><strong><h3>"+marker.properties.ward+"</h3></strong></p>"+"<a href=\"Agegraph/plotly.html?ward="+marker.properties.ward+"\" target=\"_blank\">Link</a>";
     var popupText = "<p><strong><h3>"+marker.properties.ward+"</h3></strong></p>";
     //var popupText = "<div id=\"ward_name\">"+marker.properties.ward+"</div>";
-    var popup = new mapboxgl.Popup({offset: 25}).setHTML(popupText);
+    var popup = new maplibregl.Popup({offset: 25}).setHTML(popupText);
 
     // add marker to map
-    new mapboxgl.Marker(el, {offset: [-10, -10]}).setLngLat(marker.geometry.coordinates).setPopup(popup).addTo(map);
-});
+    new maplibregl.Marker({element: el, offset: [-10, -10]}).setLngLat(marker.geometry.coordinates).setPopup(popup).addTo(map);
 
-  map.on('click', function(e){
-      $('#header').show();
-      var ward_name = document.getElementsByClassName("mapboxgl-popup-content");
-
-      if((ward_name.length-1) >= 0)
-      {
-        ward_name = ward_name[ward_name.length-1].textContent.toString().replace('×',"");
-        console.log(ward_name);
-
+    el.addEventListener('click', function() {
+        var ward_name = marker.properties.ward;
         $('#sidebar').show();
         document.getElementById('tooltip-name').innerHTML = "<object type=\"image/svg+xml\" data=\"sidebar.svg?ward="+ward_name+"\"></object>";
         document.getElementById('agegraph').innerHTML = "<object type=\"text/html\" data=\"Agegraph/plotly.html?ward="+ward_name+"\" width=\"640px\" height=\"350px\" style=\"overflow:auto;\"></object>";
+        $('#header').show();
         setTimeout(function(){$('#header').hide();}, 2000);
+    });
+});
 
-      }
-      else {
+  map.on('click', function(e){
+      // clicking empty map area closes the sidebar
+      if(document.getElementsByClassName("maplibregl-popup-content").length === 0) {
         $('#sidebar').hide();
         $('#header').show();
         document.getElementById('tooltip-name').innerHTML = "";
@@ -162,7 +171,7 @@ geojson.features.forEach(function(marker) {
       }
   });
 
-  // $('.mapboxgl-map').delegate(".mapboxgl-popup-close-button", "click", function() {
+  // $('.maplibregl-map').delegate(".maplibregl-popup-close-button", "click", function() {
   //     document.getElementById('tooltip-name').innerHTML = "";
   //     consolge.log("hi");
   // });
