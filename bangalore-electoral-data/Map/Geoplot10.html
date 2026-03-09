@@ -140,28 +140,31 @@
             position: fixed;
             inset: 0;
             z-index: 9999999;
-            background: #000;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             font-family: "Inter", sans-serif;
             color: #fff;
-            transition: opacity 0.6s ease;
         }
-        #splash.fade-out {
-            opacity: 0;
-            pointer-events: none;
+        #splash-bg {
+            position: absolute;
+            inset: 0;
+            background: #000;
+            transition: opacity 0.8s ease;
         }
         #splash-title {
+            position: relative;
             font-family: 'DM Serif Display', serif;
             font-size: 52px;
             font-weight: 400;
             letter-spacing: -0.5px;
             line-height: 1.1;
             text-align: center;
+            will-change: transform;
         }
         #splash-subtitle {
+            position: relative;
             font-size: 12px;
             font-weight: 600;
             color: rgba(255,255,255,0.45);
@@ -169,8 +172,10 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             text-align: center;
+            will-change: transform;
         }
         #splash-desc {
+            position: relative;
             font-size: 11px;
             font-weight: 400;
             color: rgba(255,255,255,0.4);
@@ -178,9 +183,12 @@
             margin-top: 16px;
             max-width: 420px;
             text-align: center;
+            will-change: transform, opacity;
         }
         #splash-faces {
+            position: relative;
             margin-top: 28px;
+            will-change: transform;
         }
         #splash-faces svg {
             width: 300px;
@@ -188,15 +196,12 @@
             display: block;
         }
 
-        /* Header — starts hidden, fades in */
+        /* Header — starts hidden, appears after splash */
         #header {
             opacity: 0;
-            transform: translateX(-50%) translateY(-10px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
         }
         #header.visible {
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
         }
 
         /* Voter face illustrations (now in header) */
@@ -277,7 +282,6 @@
                 padding: 14px 18px;
                 gap: 16px;
             }
-            #header.visible { transform: none; }
             #header-title { font-size: 24px; }
             #header-desc { display: none; }
             #header #voter-faces svg { width: 100px; }
@@ -340,7 +344,7 @@
 
         @media (max-width: 480px) {
             #splash-title { font-size: 28px; }
-            #splash-faces { display: none; }
+            #splash-faces svg { width: 150px; }
 
             #ward-header { font-size: 18px; padding: 6px 16px 10px; }
             #gender-section { padding: 0 16px 12px; }
@@ -369,6 +373,7 @@
 <body>
 
 <div id="splash">
+    <div id="splash-bg"></div>
     <div id="splash-title">Voter Doppler</div>
     <div id="splash-subtitle">Bangalore Electoral Analysis</div>
     <div id="splash-desc">Bangalore consists of 27 constituencies, and each constituency has wards that are visualized in the map. The purpose of this visualization is to analyze the electoral rolls in each ward across Bangalore.</div>
@@ -933,11 +938,67 @@ $('#close-btn').on('click', function(){
     });
 })();
 
-// Splash screen transition
+// Splash screen FLIP transition
 setTimeout(function() {
-    document.getElementById('splash').classList.add('fade-out');
-    document.getElementById('header').classList.add('visible');
-    setTimeout(function() { document.getElementById('splash').remove(); }, 700);
+    var splash = document.getElementById('splash');
+    var splashBg = document.getElementById('splash-bg');
+    var header = document.getElementById('header');
+
+    // Make header measurable (invisible but laid out)
+    header.style.visibility = 'hidden';
+    header.style.opacity = '1';
+    header.offsetHeight; // force layout
+
+    var pairs = [
+        { src: 'splash-title', dest: 'header-title' },
+        { src: 'splash-subtitle', dest: 'header-subtitle' },
+        { src: 'splash-desc', dest: 'header-desc' },
+        { src: 'splash-faces', dest: 'voter-faces' }
+    ];
+
+    var dur = '0.8s';
+    var ease = 'cubic-bezier(0.4, 0, 0.2, 1)';
+    var transition = 'transform ' + dur + ' ' + ease + ', opacity ' + dur + ' ' + ease;
+
+    pairs.forEach(function(pair) {
+        var srcEl = document.getElementById(pair.src);
+        var destEl = document.getElementById(pair.dest);
+        if (!srcEl) return;
+
+        var srcRect = srcEl.getBoundingClientRect();
+        var destRect = destEl ? destEl.getBoundingClientRect() : null;
+
+        // If dest is hidden (display:none or zero size), fade out
+        if (!destRect || destRect.width === 0 || destRect.height === 0) {
+            srcEl.style.transition = transition;
+            srcEl.style.opacity = '0';
+            return;
+        }
+
+        // FLIP: calculate delta from source center to dest center, plus scale
+        var scaleX = destRect.width / srcRect.width;
+        var scaleY = destRect.height / srcRect.height;
+        var dx = (destRect.left + destRect.width / 2) - (srcRect.left + srcRect.width / 2);
+        var dy = (destRect.top + destRect.height / 2) - (srcRect.top + srcRect.height / 2);
+
+        srcEl.style.transition = transition;
+        srcEl.style.transform = 'translate(' + dx + 'px, ' + dy + 'px) scale(' + scaleX + ', ' + scaleY + ')';
+    });
+
+    // Fade out black background to reveal map
+    splashBg.style.opacity = '0';
+
+    // Hide header again until animation finishes
+    header.style.opacity = '0';
+    header.style.visibility = '';
+
+    // After animation, show real header and remove splash
+    setTimeout(function() {
+        header.style.opacity = '';
+        header.style.visibility = '';
+        header.classList.add('visible');
+        splash.remove();
+    }, 850);
 }, 1500);
 
 </script>
